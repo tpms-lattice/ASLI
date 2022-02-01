@@ -1,0 +1,23 @@
+LICENSE
+===============================================================================
+
+ASLI is licensed under the GNU Affero General Public License (as published by 
+the Free Software Foundation; either version 3 of the License or (at your 
+option) any later version). The text of the license can be found in the file 
+LICENSE.AGPL.
+
+Distributed along with ASLI (for users convenience), but not part of ASLI, are 
+the following third-party libraries, available under their own licenses:
+   - AdaptTools, found in the directory "libs/AdaptTools", is licensed under 
+     the GPL.
+   - AlgLib, found in the directory "libs/alglib", is licensed under the GPL.
+   - Mmg, found in the directory "libs/mmg", is licensed under the LGPL.
+   - eigen, found in the directory "libs/eigen", is licensed under the MPL2.
+   - CGAL, found in the directory "libs/CGAL", is licensed under the GPL.
+   - mTT, found in the directory "libs/mTT", is licensed under the BSD3.
+   - TetGen, found in the directory "libs/tetgen", is licensed under the AGPL.
+   - yaml-cpp, found in the directory "libs/yaml", is licensed under the MIT 
+     License.
+
+The license of the included external libraries can be found in their respective
+folders.

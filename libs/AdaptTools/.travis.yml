@@ -1,0 +1,21 @@
+language: c
+
+compiler:
+  - gcc
+  - clang
+os:
+  - linux
+  - osx
+
+script:
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
+  - make install
+#  - cd ..
+#  - ./bin/mshint -h
+#  - ./bin/mshmet -h
+
+notifications:
+  email: false

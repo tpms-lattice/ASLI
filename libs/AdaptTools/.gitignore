@@ -1,0 +1,9 @@
+CMakeFiles/*
+Makefile
+cmake_install.cmake
+CMakeCache.txt
+
+build/*
+include/*
+bin/*
+sources/commonFiles/compil.date

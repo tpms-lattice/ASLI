@@ -1,0 +1,10 @@
+# 
+.vscode/*
+bin/*
+build/*
+dll/*
+libs/*
+
+# 
+*.lnk
+*.PRIVATE

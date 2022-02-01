@@ -1,0 +1,173 @@
+\documentclass[a4paper,fleqn,twoside]{article}
+
+\usepackage[pdftex]{graphicx,xcolor}
+\usepackage[font=small,skip=3pt]{caption}
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsfonts}
+
+%
+\usepackage{tocloft}
+
+% Turn off paragraph indentation 
+\usepackage{parskip}
+
+% Title page stuff
+\usepackage{eso-pic}
+\usepackage[absolute]{textpos}
+
+% Hide page number on empty pages
+\usepackage{emptypage}
+
+% Verbatim with support for line breaks
+\usepackage{fancyvrb}
+\usepackage{fvextra}
+
+% Support for sub-figures and tables
+\usepackage{subcaption}
+
+% Support for multirow tables
+\usepackage{multirow}
+
+% Support aplh. lists
+\usepackage{enumitem}
+
+%% Support for colored text box
+%\usepackage{mdframed}
+
+% Support for highlighted code
+\usepackage{listings}
+
+% Support keys
+\usepackage{menukeys}
+
+% Set used page surface
+%\usepackage[showframe]{geometry}
+%\usepackage[a4paper,left=3cm,right=2cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage[a4paper,inner=4.5cm,outer=3.5cm,top=4.0cm,bottom=4.5cm]{geometry}
+
+% imakeidx: Allows to create separate indexes for input parameters and other items
+\usepackage{imakeidx}
+\makeindex[name=prmindex, title={Index of input parameters\label{sec:index inputs}}]
+\makeindex[name=prmindexfull, title={Index of input parameters\label{sec:index inputs full}}]
+
+% hyperref: set the base for relative links to the top-level \dftfe directory so that we can link to files in the \dftfe tree without having to specify the location relative to the directory where the pdf actually resides
+\usepackage[colorlinks,linkcolor=blue,urlcolor=blue,citecolor=blue,baseurl=../]{hyperref}
+\newcommand{\whitehref}[3][white]{\href{#2}{\color{#1}{#3}}}%
+
+% Set \today command to display: month, year
+\renewcommand{\today}{\ifcase \month \or January\or February\or March\or April\or May\or June\or July\or August\or September\or October\or November\or December\fi, \number \year} 
+
+
+% Rounded 'menu' keys
+\renewmenumacro{\menu}[>]{roundedmenus}
+
+% Square 'tabmenu' keys
+\makeatletter
+\tw@declare@style*{mystyle}{% Fist item
+	\tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+		\node(tw@node)[tw@angularmenus@base,font=\relsize{-1}\normalfont\bfseries,signal to=east,fill=gray!30]%
+		{\strut\CurrentMenuElement};}%
+}[\hspace{-0.2em}\hspace{0em plus 0.1em minus 0.05em}]%
+{% Intermediate items
+	\tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+		\node(tw@node)[tw@angularmenus@base,font=\relsize{-1}\normalfont,signal from=west,signal to=east]%
+		{\strut\CurrentMenuElement};}%
+}{% Last item
+	\tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+		\node(tw@node)[tw@angularmenus@base,font=\relsize{-1}\normalfont,signal from=west]%
+		{\strut\CurrentMenuElement};}%
+}{% Other items
+	\tikz[baseline={($(tw@node.base)+(0,-0.2ex)$)}]{%
+		\node(tw@node)[tw@angularmenus@base,font=\relsize{-1}\normalfont\bfseries,fill=gray!30]{\strut\CurrentMenuElement};}%
+}{gray}
+\makeatother
+\newmenumacro{\tabmenu}[>]{mystyle}
+
+
+% Macro defining highlighting rules for YAML [listings]
+\makeatletter
+%
+\newcommand\language@yaml{yaml}
+% Define highlighting colors
+\definecolor{YAMLbackground}{rgb}{1,1,1} % white
+\definecolor{YAMLdefault}{RGB}{0,0,0} % black
+\definecolor{YAMLcomment}{RGB}{0,128,0} % green
+\definecolor{YAMLidentifier}{RGB}{0,0,128} % blue
+\definecolor{YAMLnumber}{RGB}{255,128,64} % orange
+\definecolor{YAMLtext}{RGB}{128,128,128} % grey
+% Expand macro
+\expandafter\expandafter\expandafter\lstdefinelanguage
+\expandafter{\language@yaml}
+{	identifierstyle=\ttfamily,
+	commentstyle=\color{YAMLcomment},
+	stringstyle=\color{YAMLtext},
+	basicstyle=\fontsize{8}{8}\selectfont\ttfamily\color{YAMLidentifier}, % Assuming a key comes first
+	numbers=none, % Position of the line numbers
+	%stepnumber=1,
+	%numbersep=10pt,
+	tabsize=2, % Default tabsize
+	breaklines=true, % Automatic line break
+	frame=single,
+	backgroundcolor=\color{YAMLbackground}, % Background color
+	sensitive=false,
+	comment=[l]{\#},
+	moredelim=**[il][\color{YAMLidentifier}{:}\color{YAMLdefault}]{:}, % Switch to value style at :
+	morestring=[b]',
+	morestring=[b]",
+}
+% Switch to key style at EOL
+\lst@AddToHook{EveryLine}{\ifx\lst@language\language@yaml\color{YAMLdefault}\fi}
+\makeatother
+
+% User defined commands
+\newcommand{\asli}{\textsc{ASLI}}
+\newcommand{\qasli}{\textsc{QASLI}}
+\newcommand{\mycirc}[1][black]{\small\textcolor{#1}{\ensuremath\bullet}} % Colored bullet point
+
+% Document user defined colors
+\definecolor{titlepagecolor}{rgb}{0.95,0.95,0.96}
+\definecolor{marineBlue}{RGB}{66,111,128}
+\definecolor{myColorA}{HTML}{7d1700}%125/23/0
+\definecolor{myColorB}{HTML}{a86000}%168/96/0
+\definecolor{myColorC}{HTML}{cebe36}%206/190/54
+\definecolor{myColorD}{HTML}{3dc8d6}%61/200/214
+\definecolor{myColorE}{HTML}{0070ba}%0/112/186
+\definecolor{myColorF}{HTML}{002f98}%0/47/152
+
+% 
+\begin{document}
+	\input{titlepage}
+	\clearpage%\cleardoublepage
+
+	\pagenumbering{roman} % Start roman numbering
+	
+	% Contents
+	\tableofcontents
+	\clearpage%\cleardoublepage
+	
+	\pagenumbering{arabic} % Switch to arabic numbers
+	
+	% Introduction
+	\input{introduction}
+	
+	% Installation
+	\input{installation}
+	
+	% Running ASLI
+	\input{run}
+	
+	% Support
+	\input{support}
+	\clearpage
+	
+	% Appendices
+	\appendix
+	\input{parameters}
+	\clearpage
+	
+	% Index of input parameters
+	\addcontentsline{toc}{section}{Index of input parameters}
+	\printindex[prmindexfull]
+\end{document}

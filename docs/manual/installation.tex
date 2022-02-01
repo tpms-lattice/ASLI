@@ -1,0 +1,126 @@
+\section{Getting started} \label{sec:installation}
+The easiest way to get started with \asli{} is to use its pre-build binaries. To this end, all you need to do is download the tarballs for your preferred platform (Linux or Windows) from the \href{https://github.com/tpms-lattice/ASLI/releases}{release page} of \href{https://github.com/tpms-lattice/ASLI}{\asli{} repository}, unpack them and if using Linux install oneTBB if not available on your system (only required by the parallel version of \asli{}). The tarball contains \asli{}, including its GUI. For more advanced advanced users, it may be more interesting to build \asli{} from scratch. Not only is this likely to increase performance since the program will get optimized for the platform in which it is going to be run, but it will also enable users to customize \asli{} in any way they need. The prerequisites to be able to build \asli{} are detailed in Section~\ref{sec:prerequisites}, while the procedure to build \asli{} is detailed in Section~\ref{sec:buildLin} and \ref{sec:buildWin}, for Linux and Windows respectively. 
+
+\subsection{Prerequisites} \label{sec:prerequisites}
+\asli{} makes use of \href{http://www.cmake.org}{CMake} and \href{https://www.gnu.org/software/make/}{GNU Make} to automate the building process. It also has a series of dependencies, which are listed below.
+\begin{itemize}
+	\item \href{https://github.com/ISCDtoolbox/AdaptTools}{AdaptTools}
+	\item \href{https://www.alglib.net}{ALGLIB}
+	\item \href{https://www.cgal.org}{CGAL}
+	\begin{itemize}
+		\item \href{https://gmplib.org}{GMP}
+		\item \href{https://www.mpfr.org}{MPFR}
+		\item \href{https://www.boost.org}{Boost}
+		\item \href{http://intel.com/oneTBB}{oneTBB} (optional, required for parallelization)
+	\end{itemize}
+	\item \href{http://eigen.tuxfamily.org}{Eigen}
+	\item \href{https://www.mmgtools.org}{MMG}
+	\item \href{http://tetgen.org}{TETGEN}
+	\item \href{https://github.com/jbeder/yaml-cpp}{Yaml-cpp}
+	\item \href{https://github.com/tpms-lattice/QASLI}{\qasli{}} (optional, the GUI of \asli{})
+	\begin{itemize}
+		\item \href{https://www.qt.io}{QT} (optional, required if compiling the GUI)
+	\end{itemize}
+\end{itemize}
+
+Most dependencies are included with \asli{} so that the user does not need to worry about them. Not included with \asli{} are GMP, MPFR, Boost and TBB (optional). QT, required to compile the GUI of \asli{} is not included either. To be able to compile \asli{}, depending on the compilation settings, users will need some or all of these libraries available on their system.
+
+\subsection{Building \asli{} in Linux}\label{sec:buildLin}
+
+If you are missing some required or optional dependencies they can be installed on Debian and Ubuntu with a couple of commands.
+
+\begin{itemize}
+	\item Install build tools:
+		\begin{verbatim}
+			$ sudo apt-get install git cmake
+		\end{verbatim}
+
+	\item Install compilers:
+		\begin{verbatim}
+			$ sudo apt-get install build-essential
+		\end{verbatim}
+
+	\item Install libraries (GMP, MPFR, Boost):
+	\begin{verbatim}
+		$ sudo apt-get install libgmp-dev libmpfr-dev libboost-all-dev
+	\end{verbatim}
+
+	\item Install libraries (oneTBB):
+	\begin{verbatim}
+		$ sudo apt-get install libtbb-dev
+	\end{verbatim}
+
+	\item Install libraries (QT):
+	\begin{verbatim}
+		$ sudo apt-get install qt3d5-dev
+	\end{verbatim}
+\end{itemize}
+
+Once the build tools, compilers and required dependencies are available on the system the main steps to build \asli{} in Linux are the following.
+\begin{enumerate}
+	\item Retrieve ASLI from the repository:
+		\begin{verbatim}
+			$ git clone https://github.com/tpms-lattice/ASLI.git
+		\end{verbatim}
+	\item Compile:
+		\begin{verbatim}
+			$ cd ASLI
+			$ mkdir build
+			$ cd build
+			$ cmake -DCMAKE_BUILD_TYPE=Release -DMARCH_NATIVE=ON ..
+			$ make
+		\end{verbatim}
+\end{enumerate}
+
+To clean up, simply delete the \texttt{build} and \texttt{bin} directories found in the source directory.
+
+\subsection{Building \asli{} in Windows}\label{sec:buildWin}
+Windows compilation is supported with \href{https://www.msys2.org/}{MSYS2}. Once you have \href{https://www.msys2.org/#installation}{installed MSYS2 in windows} the required and optional dependencies can be installed through the MSYS2 MinGW 64-bit terminal with a couple of commands.
+
+\begin{itemize}
+	\item Install build tools:  
+	\begin{verbatim}
+		$ pacman -S git mingw-w64-x86_64-cmake
+	\end{verbatim}
+
+	\item Install compilers, and libraries (GMP, MPFR, Boost):  
+	\begin{verbatim}
+		$ pacman -S --needed base-devel mingw-w64-x86_64-toolchain
+		$ pacman -S msys2-runtime-devel
+	\end{verbatim}
+
+	\item Install libraries (oneTBB):
+	\begin{verbatim}
+		$ pacman -S mingw-w64-x86_64-intel-tbb
+	\end{verbatim}
+	and add the location of \texttt{tbb.dll} and \texttt{tbbmalloc.tbb} to the windows environment variables.
+
+	\item Install libraries (QT):
+	\begin{verbatim}
+		$ pacman -S mingw-w64-x86_64-qt5
+	\end{verbatim}
+\end{itemize}
+
+Once the build tools, compilers and required dependencies have been installed the main steps to build \asli{} for Windows in MSYS2 are the following.
+\begin{enumerate}
+	\item Retrieve ASLI from the repository:
+		\begin{verbatim}
+			$ git clone https://github.com/tpms-lattice/ASLI.git
+		\end{verbatim}
+	\item Compile:
+		\begin{Verbatim}[breaklines=true, tabsize=0]
+			$ cd ASLI
+			$ mkdir build
+			$ cd build
+			$ cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Release -DMARCH_NATIVE=ON ..
+			$ make
+		\end{Verbatim}
+\end{enumerate}
+
+To clean up, simply delete the \texttt{build} and \texttt{bin} directories found in the source directory.
+
+\subsection{Parallel mode}
+To compile ASLI in parallel mode include the tag \verb|-DCGAL_|\hspace{0pt}\verb|ACTIVATE_|\hspace{0pt}\verb|CONCURRENT_|\hspace{0pt}\verb|MESH_3=ON| when calling cmake. Note that parallel mode is currently limited to the CGAL workflow.
+
+\subsection{Graphical user interface}
+To compile ASLI together with its GUI include the tag \verb|-DASLI_GUI=ON| when calling cmake.
