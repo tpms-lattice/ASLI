@@ -90,7 +90,17 @@ void MMG3D_set_reqBoundaries(MMG5_pMesh mesh) {
  * \param mesh pointer towarad the mesh structure.
  * \return 0 if fail, 1 otherwise.
  *
- * topology: set tria adjacency, detect Moebius, flip faces, count connected comp.
+ * topology: set tria adjacency, detect Moebius, flip faces, count connected
+ * comp.
+ *
+ * \remark: as all triangles are mesh boundaries, we do not need to mark their
+ * adges as MG_BDY so the MG_BDY tag may be used inside geometrical triangles
+ * (external non-parallel, or internal parallel) to tag edges on the
+ * intersection with purely parallel (non-geometrical) triangles.
+ * The MG_PARBDYBDY tag is also added, as it does not have a supporting triangle
+ * to inherit this tag from.
+ *
+ * \remark REQ, NOSURF, etc... tags are added only inside xtetra.
  *
  */
 int MMG5_setadj(MMG5_pMesh mesh){
@@ -118,6 +128,8 @@ int MMG5_setadj(MMG5_pMesh mesh){
 
       adja = &mesh->adjt[3*(k-1)+1];
       for (i=0; i<3; i++) {
+        if( ((pt->tag[i] & MG_PARBDY) && !(pt->tag[i] & MG_PARBDYBDY)) ||
+            (pt->tag[i] & MG_BDY) ) continue;
         i1  = MMG5_inxt2[i];
         i2  = MMG5_iprv2[i];
         ip1 = pt->v[i1];
@@ -145,6 +157,7 @@ int MMG5_setadj(MMG5_pMesh mesh){
         tag = MG_GEO;
         if ( mesh->info.opnbdy ) tag += MG_OPNBDY;
         if ( !adja[i] ) {
+          tag += MG_NOM;
           pt->tag[i] |= tag;
           mesh->point[ip1].tag |= tag;
           mesh->point[ip2].tag |= tag;
@@ -300,7 +313,8 @@ int MMG5_setdhd(MMG5_pMesh mesh) {
     MMG5_nortri(mesh,pt,n1);
     adja = &mesh->adjt[3*(k-1)+1];
     for (i=0; i<3; i++) {
-      if ( pt->tag[i] & MG_PARBDY ) continue;
+      if ( ((pt->tag[i] & MG_PARBDY) && !(pt->tag[i] & MG_PARBDYBDY)) ||
+           (pt->tag[i] & MG_BDY) ) continue;
 
       kk  = adja[i] / 3;
       ii  = adja[i] % 3;
@@ -530,7 +544,7 @@ int MMG5_norver(MMG5_pMesh mesh) {
         ppt->flag = mesh->base;
         if ( mesh->nc1 ) {
           if ( ppt->n[0]*ppt->n[0] + ppt->n[1]*ppt->n[1] + ppt->n[2]*ppt->n[2] > 0 ) {
-            if ( ppt->tag & MG_CRN || ppt->tag & MG_NOM || MG_EDG(ppt->tag) ) {
+            if ( ppt->tag & MG_PARBDY || ppt->tag & MG_CRN || ppt->tag & MG_NOM || MG_EDG(ppt->tag) ) {
               ++nnr;
               continue;
             }
@@ -558,7 +572,7 @@ int MMG5_norver(MMG5_pMesh mesh) {
     adja = &mesh->adjt[3*(k-1)+1];
     for (i=0; i<3; i++) {
       ppt = &mesh->point[pt->v[i]];
-      if ( ppt->tag & MG_CRN || ppt->tag & MG_NOM || ppt->flag == mesh->base )  continue;
+      if ( ppt->tag & MG_PARBDY || ppt->tag & MG_CRN || ppt->tag & MG_NOM || ppt->flag == mesh->base )  continue;
 
       /* C1 point */
       if ( !MG_EDG(ppt->tag) ) {
@@ -688,7 +702,7 @@ int MMG3D_nmgeom(MMG5_pMesh mesh){
         ip = MMG5_idir[i][j];
         p0 = &mesh->point[pt->v[ip]];
         if ( p0->flag == base )  continue;
-        else if ( !(p0->tag & MG_NOM) )  continue;
+        else if ( !(p0->tag & MG_NOM) || (p0->tag & MG_PARBDY) )  continue;
 
         p0->flag = base;
         ier = MMG5_boulenm(mesh,k,ip,i,n,t);
@@ -725,7 +739,8 @@ int MMG3D_nmgeom(MMG5_pMesh mesh){
     
     for (i=0; i<4; i++) {
       p0 = &mesh->point[pt->v[i]];
-      if ( p0->tag & MG_REQ || !(p0->tag & MG_NOM) || p0->xp ) continue;
+      if ( p0->tag & MG_REQ || !(p0->tag & MG_NOM) ||
+           p0->xp || (p0->tag & MG_PARBDY) ) continue;
       ier = MMG5_boulenmInt(mesh,k,i,t);
       if ( ier ) {
         ++mesh->xp;
@@ -756,6 +771,85 @@ int MMG3D_nmgeom(MMG5_pMesh mesh){
   
   return 1;
 }
+
+/**
+ * \param mesh pointer toward mesh structure
+ * \return 1 if success, 0 if fail
+ *
+ * Assign surface references demending on geometric features: portion of
+ * surfaces shared by non-manifold or ridge edges will have different
+ * references.
+ */
+int MMG3D_Set_faceColors(MMG5_pMesh mesh) {
+  MMG5_pTria   pt,pt1;
+  int          *adja,*pile,ipil;
+  int          k,kk,ncc=0;
+  int8_t       i;
+
+  MMG5_SAFE_MALLOC(pile,mesh->nt+1,int,return 0);
+
+  /* Reset flags */
+  for (kk=1; kk<=mesh->nt; kk++) {
+    mesh->tria[kk].flag = 0;
+  }
+
+  pile[1] = 1;
+  ipil    = 1;
+  while ( ipil > 0 ) {
+    ncc++;
+
+    /* Pile up triangles that can be seen from the initial one without crossing
+     * a ridge or non manifold edge. Change surface reference of stacked
+     * triangles */
+    do {
+      k  = pile[ipil--];
+      pt = &mesh->tria[k];
+      pt->flag = ncc;
+
+      /* Assign new reference to portion of surface */
+      pt->ref  = ncc;
+
+      if ( !MG_EOK(pt) )  continue;
+
+      adja = &mesh->adjt[3*(k-1)+1];
+      for (i=0; i<3; i++) {
+        /* Don't cross ridges or non-manifold edges */
+        if ( (pt->tag[i] & MG_GEO) || (pt->tag[i] & MG_NOM) ) continue;
+
+        /* store adjacent */
+        kk = adja[i] / 3;
+        pt1 = &mesh->tria[kk];
+        if ( !pt1->flag ) {
+          pt1->flag    = ncc;
+          pile[++ipil] = kk;
+        }
+      }
+    }
+    while ( ipil > 0 );
+
+    /* find next unmarked triangle */
+    ipil = 0;
+    for (kk=1; kk<=mesh->nt; kk++) {
+      pt = &mesh->tria[kk];
+      if ( MG_EOK(pt) && (pt->flag == 0) ) {
+        ipil = 1;
+        pile[ipil] = kk;
+        pt->flag   = ncc+1;
+        break;
+      }
+    }
+  }
+
+  /* bilan */
+  if ( abs(mesh->info.imprim) > 3 || mesh->info.ddebug ) {
+    fprintf(stdout,"     %d surface area detected: assign new references\n",ncc);
+  }
+
+  MMG5_SAFE_FREE(pile);
+  return 1;
+}
+
+
 
 /** preprocessing stage: mesh analysis */
 int MMG3D_analys(MMG5_pMesh mesh) {
@@ -858,6 +952,11 @@ int MMG3D_analys(MMG5_pMesh mesh) {
   if ( mesh->info.nreg && !MMG5_regnor(mesh) ) {
     fprintf(stderr,"\n  ## Normal regularization problem. Exit program.\n");
     return 0;
+  }
+
+  if ( getenv("MMG_COLOR_SURFAREA") ) {
+    if ( !MMG3D_Set_faceColors(mesh) )
+      return 0;
   }
 
   /* set bdry entities to tetra and fill the orientation field */

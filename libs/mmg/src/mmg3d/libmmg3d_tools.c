@@ -419,10 +419,10 @@ int MMG3D_parsar(int argc,char *argv[],MMG5_pMesh mesh,MMG5_pSol met,MMG5_pSol s
         }
         else if ( !strcmp(argv[i],"-rmcvoid") ) {
           if ( !MMG3D_Set_dparameter(mesh,met,MMG3D_DPARAM_rmcvoid,0) )
-            return 0;
+          return 0;
           if ( ++i < argc && (isdigit(argv[i][0]) ) ) {
-            if ( !MMG3D_Set_dparameter(mesh,met,MMG3D_DPARAM_rmcvoid,atof(argv[i])) )
-              return 0;
+          if ( !MMG3D_Set_dparameter(mesh,met,MMG3D_DPARAM_rmcvoid,atof(argv[i])) )
+            return 0;
           }
           else i--;
         }
@@ -925,12 +925,14 @@ int MMG3D_Get_nonBdyTriangle(MMG5_pMesh mesh,int* v0,int* v1,int* v2,
             " before the %s one and check that the number of internal"
             " triangles is non null.\n",
             __func__,__func__);
+    return 0;
   }
 
   if ( mesh->nt+idx > nt_tot ) {
     fprintf(stderr,"\n  ## Error: %s: Can't get the internal triangle of index %d."
             " Index must be between 1 and %zu.\n",
             __func__,idx,nt_tot-mesh->nt);
+    return 0;
   }
 
   ptt = &mesh->tria[mesh->nt+idx];

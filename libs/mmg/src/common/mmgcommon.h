@@ -34,13 +34,14 @@
 #include <float.h>
 #include <math.h>
 #include <complex.h>
+#include "mmgcmakedefines.h"
 
 #if (defined(__APPLE__) && defined(__MACH__))
 #include <sys/sysctl.h>
 #elif defined(__unix__) || defined(__unix) || defined(unix)
 #include <unistd.h>
 #elif defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(__TOS_WIN__) || defined(__WINDOWS__)
-#ifndef GNU
+#ifndef MMG_GNU
 #define _WIN32_WINNT 0x0500
 #endif
 
@@ -66,10 +67,6 @@ extern "C" {
 #define MMG5_MEMMAX  800        /**< Default mem if unable to compute memMax */
 #define MMG5_BITWIZE_MB_TO_B 20 /**< Bitwise convertion from Mo to O */
 #define MMG5_MEMPERCENT 0.5     /**< Percent of RAM used by default */
-
-/* Domain refs in iso mode */
-#define MG_PLUS    2
-#define MG_MINUS   3
 
 /* Macro for unset or unititialized mark */
 #define MMG5_UNSET -1
@@ -626,6 +623,7 @@ void           MMG5_check_hminhmax(MMG5_pMesh mesh, int8_t sethmin, int8_t sethm
  char         *MMG5_Remove_ext( char *path, char* );
  const char    *MMG5_Get_formatName(enum MMG5_Format fmt);
  int           MMG5_Get_format( char *ptr, int );
+ int           MMG5_hashFace(MMG5_pMesh,MMG5_Hash*,int,int,int,int);
  int           MMG5_hashEdge(MMG5_pMesh mesh,MMG5_Hash *hash,int a,int b,int k);
  int           MMG5_hashUpdate(MMG5_Hash *hash,int a,int b,int k);
  int           MMG5_hashEdgeTag(MMG5_pMesh mesh,MMG5_Hash *hash,int a,int b,int16_t k);
@@ -697,8 +695,12 @@ int             MMG5_loadSolHeader(const char*,int,FILE**,int*,int*,int*,int*,
 int             MMG5_chkMetricType(MMG5_pMesh mesh,int *type, FILE *inm);
 int             MMG5_readFloatSol3D(MMG5_pSol,FILE*,int,int,int);
 int             MMG5_readDoubleSol3D(MMG5_pSol,FILE*,int,int,int);
-int             MMG5_saveSolHeader( MMG5_pMesh,const char*,FILE**,int,int*,int,
-                                    int,int,int*,int*);
+int             MMG5_saveSolHeader( MMG5_pMesh,const char*,FILE**,int,int*,int*,int,
+                                    int,int,int*,int*,int*);
+int             MMG5_saveSolAtTrianglesHeader( MMG5_pMesh,FILE *,int,int,int*,int,
+                                               int,int*,int*,int*);
+int             MMG5_saveSolAtTetrahedraHeader( MMG5_pMesh,FILE *,int,int,int*,int,
+                                                int,int*,int*,int*);
 void            MMG5_writeDoubleSol3D(MMG5_pMesh,MMG5_pSol,FILE*,int,int,int);
 void            MMG5_printMetStats(MMG5_pMesh mesh,MMG5_pSol met);
 void            MMG5_printSolStats(MMG5_pMesh mesh,MMG5_pSol *sol);
@@ -721,8 +723,11 @@ int  MMG5_updatemetreq_ani(double *n,double dn[2],double vp[2][2]);
 int    MMG5_swapbin(int sbin);
 float  MMG5_swapf(float sbin);
 double MMG5_swapd(double sbin);
+int MMG5_MultiMat_init(MMG5_pMesh);
+int MMG5_isLevelSet(MMG5_pMesh,int,int);
 int MMG5_isSplit(MMG5_pMesh ,int ,int *,int *);
-int MMG5_getIniRef(MMG5_pMesh ,int );
+int MMG5_isNotSplit(MMG5_pMesh ,int);
+int MMG5_getStartRef(MMG5_pMesh ,int, int *);
 
 
 /* tools */

@@ -651,7 +651,7 @@ int  MMG3D_Set_tetrahedra(MMG5_pMesh mesh, int *tetra, int *refs) {
 
     vol = MMG5_orvol(mesh->point,pt->v);
 
-    if ( vol <= MMG5_EPSD2 ) {
+    if ( fabs(vol) <= MMG5_EPSD2 ) {
       fprintf(stderr,"\n  ## Error: %s: tetrahedron %d has volume null.\n",
               __func__,i);
 
@@ -1175,7 +1175,7 @@ int MMG3D_Set_edges(MMG5_pMesh mesh, int *edges, int *refs) {
     mesh->edge[i].a    = edges[j];
     mesh->edge[i].b    = edges[j+1];
     if ( refs != NULL )
-      mesh->edge[i].ref  = refs[i];
+      mesh->edge[i].ref  = refs[i-1];
     mesh->edge[i].tag |= MG_REF;
   }
 
@@ -2360,14 +2360,14 @@ int MMG3D_Set_dparameter(MMG5_pMesh mesh, MMG5_pSol sol, int dparam, double val)
     break;
   case MMG3D_DPARAM_hgrad :
     mesh->info.hgrad    = val;
-    if ( mesh->info.hgrad < 0.0 )
+    if ( mesh->info.hgrad <= 0.0 )
       mesh->info.hgrad = -1.0;
     else
       mesh->info.hgrad = log(mesh->info.hgrad);
     break;
   case MMG3D_DPARAM_hgradreq :
     mesh->info.hgradreq    = val;
-    if ( mesh->info.hgradreq < 0.0 )
+    if ( mesh->info.hgradreq <= 0.0 )
       mesh->info.hgradreq = -1.0;
     else
       mesh->info.hgradreq = log(mesh->info.hgradreq);
@@ -2396,14 +2396,15 @@ int MMG3D_Set_dparameter(MMG5_pMesh mesh, MMG5_pSol sol, int dparam, double val)
     break;
   case MMG3D_DPARAM_rmcvoid :
     if ( !val ) {
-      /* Default value */
-      mesh->info.rmcvoid      = MMG3D_VOLFRAC;
+    /* Default value */
+    mesh->info.rmcvoid      = MMG3D_VOLFRAC;
     }
     else {
-      /* User customized value */
-      mesh->info.rmcvoid      = val;
+    /* User customized value */
+    mesh->info.rmcvoid      = val;
     }
     break;
+
   default :
     fprintf(stderr,"\n  ## Error: %s: unknown type of parameter\n", __func__);
     return 0;
