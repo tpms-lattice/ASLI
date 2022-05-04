@@ -47,12 +47,13 @@
 
 struct meshSettings {
 	// General settings
-	std::string mesher; // Mesher to use
-	int n_threads;      // Number of parallel processes
-	std::string side;   // Side of scaffolds to mesh
+	std::string mesher; 	// Mesher to use
+	int n_threads;      	// Number of parallel processes
+	std::string side;   	// Side of scaffolds to mesh
 	bool volumeMesh; 
-	std::string output; // Output location
-	std::string STLFormat; // STL format: ASCII or Binary
+	std::string output; 	// Output location
+	std::string STLFormat;// STL format: ASCII or Binary
+	bool exportls; 				// If true only level-set sol data is computed and saved
 
 	// CGAL settings
 	double CGAL_facetAngle;

@@ -26,7 +26,9 @@
  * Author(s): F.P.B. (KU Leuven)
  */
 
-ASLI::ASLI(std::string configFile) {
+ASLI::ASLI(std::string configFile, bool exportls) {
+	me_settings.exportls = exportls;
+
 	SetUp(configFile);
 }
 

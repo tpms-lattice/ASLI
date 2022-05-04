@@ -318,6 +318,36 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 //		return(MMG5_STRONGFAILURE);
 //	}
 
+	// SAVE MESH AND LEVEL-SET SOL FILE TO USE DIRECTLY IN SOME OTHER PROGRAM (AND SKIP TO CLEANUP)
+	if (me_settings.exportls == true) {
+		fprintf(stdout,"\n  Exporting level-set sol file...\n");
+
+		char *outputFileLS;
+
+		time_t t;
+		char currentTime[50];
+		std::time(&t);
+		std::strftime(currentTime, sizeof(currentTime), "_%Y-%m-%d_%H%M", localtime(&t)); 
+
+		outputFile_string = me_settings.output + currentTime + "mmgLS.mesh";
+		outputFileLS = (char *) calloc(outputFile_string.string().size() + 1, sizeof(char));
+		strcpy(outputFileLS, outputFile_string.string().c_str());
+
+		if ( MMG3D_saveMesh(mmgMesh, outputFileLS) != 1 ) {
+			fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
+			return(MMG5_STRONGFAILURE);
+		}
+		if ( MMG3D_saveSol(mmgMesh, mmgLs, outputFileLS) != 1 ) {
+			fprintf(stdout, "UNABLE TO SAVE SOL\n");
+			return(MMG5_STRONGFAILURE);
+		}
+
+		free(outputFileLS);
+		outputFileLS = NULL;
+
+		goto cleanup;
+	}
+
 	// Set global meshing parameters
 	//if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_mem, 5000) != 1 )  exit(EXIT_FAILURE); // Set max. memory size in MB
 
@@ -388,9 +418,11 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 		return(MMG5_STRONGFAILURE);
 	}
 
-	// Delete temporary folder and its contents
-	std::filesystem::remove_all(temporaryFolder);
+	// Cleanup
+	free(outputFile);
+	outputFile = NULL;
 
+	cleanup:
 	// Free the MMG3D5 structures
 	MMG3D_Free_all(MMG5_ARG_start,
 	               MMG5_ARG_ppMesh, &mmgMesh,
@@ -398,12 +430,12 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 	               MMG5_ARG_ppMet,  &mmgMet,
 	               MMG5_ARG_end);
 
-	// Cleanup
-	free(outputFile);
-	outputFile = NULL;
-
+	// Free remaning pointers
 	free(tempFile);
 	tempFile = NULL;
+
+	// Delete temporary folder and its contents
+	std::filesystem::remove_all(temporaryFolder);
 
 	return(ierr);
 }

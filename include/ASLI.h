@@ -49,7 +49,7 @@
 class ASLI {
 public:
 	/* Constructors|Destructors */
-	ASLI(std::string configFile);
+	ASLI(std::string configFile, bool exportls);
 	ASLI(std::string _stlFile, std::string _tapFile, std::string _sapFile,
 	     std::string _fapFile, latticeType _lt_type, latticeSize _lt_size,
 	     latticeFeature _lt_feature, meshSettings _me_settings);
