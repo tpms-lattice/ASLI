@@ -1,5 +1,8 @@
-<h1 align="center"> ASLI (A Simple Lattice Infiller) </h1>
-<p> <h3 align="center"> An open source tool for creating lattice infills with varying unit cell type, size and/or feature</h3> &nbsp; </p>
+<div align="center">
+<img src="https://raw.githubusercontent.com/tpms-lattice/ASLI/master/docs/manual/figures/ASLI.png" height="142">
+</div>
+
+<p> <h3 align="center"> ASLI (A Simple Lattice Infiller) is an open source tool for creating lattice infills with varying unit cell type, size and/or feature</h3> &nbsp; </p>
 
 <div align="center" markdown="1">
 
@@ -23,6 +26,8 @@
 ---
 
 ## Getting started with ASLI ##
+The easiest way to get started with ASLI is to use the pre-build binaries found in [releases](https://github.com/tpms-lattice/ASLI/releases). For more advanced advanced users, it may be more interesting to build ASLI from scratch. The prerequisites and procedure to build ASLI are detailed below.
+
 ### Prerequisites ###
 ASLI is written in C++ and makes use of [CMake](http://www.cmake.org) and [GNU Make](https://www.gnu.org/software/make/) to automate the building process. ASLI also has the following dependencies:
   * [AdaptTools](https://github.com/ISCDtoolbox/AdaptTools)
