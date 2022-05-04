@@ -52,9 +52,9 @@ int main(int argc, char *argv[]) {
 			std::cout << "ASLI v" << ASLI_VERSION_MAJOR << "." << ASLI_VERSION_MINOR 
 			<< " (S)" << std::endl; // S = Serial
 		#endif
-		std::cout << "Copyright 2019-2021 KU Leuven" << std::endl;
-		std::cout << "ASLI is free software; see the source for copying conditions. There is NO\n" <<
-		"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n" << std::endl;
+				std::cout << "Copyright 2019-" << ASLI_RELEASE_YEAR << " KU Leuven" << std::endl;
+				std::cout << "ASLI is free software; see the source for copying conditions. There is NO\n" <<
+				"warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n" << std::endl;
 
 		return EXIT_SUCCESS;
 	}
