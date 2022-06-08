@@ -29,7 +29,7 @@
 
 #ifdef CGAL_MESH
   #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-	#include <CGAL/IO/Polyhedron_builder_from_STL.h>
+	#include <CGAL/IO/STL.h>
 
 	typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel_;
 	typedef Kernel_::Point_3 Point_3_;

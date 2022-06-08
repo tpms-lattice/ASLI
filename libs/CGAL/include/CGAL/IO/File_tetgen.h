@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/IO/File_tetgen.h $
-// $Id: File_tetgen.h 53d4c9b 2019-10-28T11:29:08+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/IO/File_tetgen.h $
+// $Id: File_tetgen.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,10 +17,11 @@
 
 #include <CGAL/Time_stamper.h>
 #include <CGAL/IO/File_medit.h>
+#include <CGAL/utility.h>
 
+#include <fstream>
 #include <iostream>
 #include <string>
-#include <CGAL/utility.h>
 
 namespace CGAL {
 
@@ -128,7 +129,7 @@ output_to_tetgen(std::string filename,
   // Elements
   //-------------------------------------------------------
 
-  std::string elem_filename = filename + ".elem";
+  std::string elem_filename = filename + ".ele";
   std::ofstream elem_stream(elem_filename.c_str());
 
   elem_stream << std::setprecision(17);
@@ -186,18 +187,8 @@ output_to_tetgen(std::string filename,
 
 } // end namespace Mesh_3
 
+namespace IO {
 
-
-
-/**
- * @brief outputs mesh to tetgen format
- * @param os the stream
- * @param c3t3 the mesh
- * @param rebind if true, labels of cells are rebinded into [1..nb_of_labels]
- * @param show_patches if true, patches are labeled with different labels than
- * cells. If false, each surface facet is written twice, using label of
- * each adjacent cell.
- */
 template <class C3T3>
 void
 output_to_tetgen(std::string filename,
@@ -220,6 +211,12 @@ output_to_tetgen(std::string filename,
       Mesh_3::output_to_tetgen<C3T3,false,true>(filename,c3t3);
   }
 }
+
+} // namespace IO
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+using IO::output_to_tetgen;
+#endif
 
 } // end namespace CGAL
 

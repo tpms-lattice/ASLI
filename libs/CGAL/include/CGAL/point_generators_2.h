@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Generator/include/CGAL/point_generators_2.h $
-// $Id: point_generators_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Generator/include/CGAL/point_generators_2.h $
+// $Id: point_generators_2.h d370326 2021-10-27T14:45:10+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@
 
 #include <CGAL/generators.h>
 #include <CGAL/number_type_basic.h>
-#include <CGAL/internal/Generic_random_point_generator.h>
+#include <CGAL/Generator/internal/Generic_random_point_generator.h>
 #include <CGAL/iterator.h>
 
 #include <iterator>
@@ -186,7 +186,7 @@ generate_point() {
         this->d_item = creator( T( this->d_range),        T(d));
         break;
     default:
-        CGAL_assume(false);
+        CGAL_unreachable();
     }
 }
 

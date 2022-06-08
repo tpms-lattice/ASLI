@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_subcurve.h $
-// $Id: Default_subcurve.h 107d77b3 2020-08-03T13:02:13+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_subcurve.h $
+// $Id: Default_subcurve.h a3d04af 2021-07-28T16:19:20+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,
@@ -70,6 +70,7 @@ public:
   typedef GeometryTraits_2                              Geometry_traits_2;
   typedef Subcurve_                                     Subcurve;
   typedef Event_                                        Event;
+  typedef Tag_true                                      Handle_overlaps;
 
 private:
   typedef Geometry_traits_2                             Gt2;

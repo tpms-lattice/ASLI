@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/frame.h $
-// $Id: frame.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/frame.h $
+// $Id: frame.h 9cd0d45 2021-02-09T11:31:34+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 #ifndef QGLVIEWER_FRAME_H
 #define QGLVIEWER_FRAME_H
@@ -425,14 +425,6 @@ public:
   }
   //@}
 
-  /*! @name XML representation */
-  //@{
-public:
-  virtual QDomElement domElement(const QString &name,
-                                 QDomDocument &document) const;
-public Q_SLOTS:
-  virtual void initFromDOMElement(const QDomElement &element);
-  //@}
 
 private:
   // P o s i t i o n   a n d   o r i e n t a t i o n

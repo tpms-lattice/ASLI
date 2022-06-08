@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation/include/CGAL/Delaunay_triangulation.h $
-// $Id: Delaunay_triangulation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/Delaunay_triangulation.h $
+// $Id: Delaunay_triangulation.h ec01356 2020-12-15T22:18:12+01:00 Marc Glisse
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -21,6 +21,7 @@
 #include <CGAL/Dimension.h>
 #include <CGAL/Default.h>
 
+#include <boost/container/small_vector.hpp>
 #include <CGAL/boost/iterator/transform_iterator.hpp>
 
 #include <algorithm>
@@ -792,7 +793,7 @@ Delaunay_triangulation<DCTraits, TDS>
 {
     CGAL_precondition_msg( ! is_infinite(s), "full cell must be finite");
     CGAL_expensive_precondition( POSITIVE == orientation(s) );
-    typedef std::vector<const Point *> Points;
+    typedef boost::container::small_vector<const Point *, 8> Points;
     Points points(current_dimension() + 2);
     int i(0);
     for( ; i <= current_dimension(); ++i )

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Gmp_coercion_traits.h $
-// $Id: Gmp_coercion_traits.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Gmp_coercion_traits.h $
+// $Id: Gmp_coercion_traits.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -12,7 +12,7 @@
 
 
 /*! \file NiX/Gmp/Coercion_traits.h
- *  \brief Provides specializations of Coercion_traits for the Gmp types.
+ *  \brief provides specializations of Coercion_traits for the Gmp types.
  */
 
 #ifndef CGAL_GMP_COERCION_TRAITS_H

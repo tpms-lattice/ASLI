@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
-// $Id: Arr_enums.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_enums.h $
+// $Id: Arr_enums.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -155,7 +155,7 @@ OutputStream& operator<<(
         OutputStream& os,
         const Arr_parameter_space& ps) {
 
-  switch (::CGAL::get_mode(os)) {
+  switch (::CGAL::IO::get_mode(os)) {
   case ::CGAL::IO::PRETTY:
     switch(ps) {
     case CGAL::ARR_LEFT_BOUNDARY:
@@ -195,7 +195,7 @@ InputStream& operator>>(
     InputStream& is,
     Arr_parameter_space& ps) {
 
-  CGAL_precondition(CGAL::is_ascii(is));
+  CGAL_precondition(CGAL::IO::is_ascii(is));
 
   int i;
   is >> i;

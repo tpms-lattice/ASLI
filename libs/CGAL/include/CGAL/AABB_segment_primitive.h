@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/AABB_tree/include/CGAL/AABB_segment_primitive.h $
-// $Id: AABB_segment_primitive.h 5ec5ad6 2020-04-22T16:23:57+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/AABB_tree/include/CGAL/AABB_segment_primitive.h $
+// $Id: AABB_segment_primitive.h 3127190 2020-12-08T12:48:04+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,6 @@
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/AABB_primitive.h>
-#include <CGAL/result_of.h>
 #include <iterator>
 
 namespace CGAL {
@@ -31,14 +30,17 @@ namespace internal {
     //classical typedefs
     typedef Iterator key_type;
     typedef typename GeomTraits::Point_3 value_type;
-    typedef typename cpp11::result_of<
-      typename GeomTraits::Construct_source_3(typename GeomTraits::Segment_3)
-    >::type reference;
+    // typedef decltype(
+    //   std::declval<typename GeomTraits::Construct_source_3>()(
+    //     std::declval<typename GeomTraits::Segment_3>())) reference;
+    typedef decltype(
+      typename GeomTraits::Construct_source_3()(
+        *std::declval<key_type&>())) reference;
     typedef boost::readable_property_map_tag category;
+    typedef Source_of_segment_3_iterator_property_map<GeomTraits, Iterator> Self;
 
-    inline friend
-    typename Source_of_segment_3_iterator_property_map<GeomTraits,Iterator>::reference
-    get(Source_of_segment_3_iterator_property_map<GeomTraits,Iterator>, Iterator it)
+    inline friend reference
+    get(Self, key_type it)
     {
       return typename GeomTraits::Construct_source_3()( *it );
     }
@@ -57,7 +59,6 @@ namespace internal {
  * \tparam GeomTraits is a traits class providing the nested type `Point_3` and `Segment_3`.
  *         It also provides the functor `Construct_source_3` that has an operator taking a `Segment_3`
  *         and returning its source as a type convertible to `Point_3`.
- *         In addition `Construct_source_3` must support the result_of protocol.
  * \tparam Iterator is a model of `ForwardIterator` with its value type convertible to `GeomTraits::Segment_3`
  * \tparam CacheDatum is either `CGAL::Tag_true` or `CGAL::Tag_false`. In the former case,
  *           the datum is stored in the primitive, while in the latter it is

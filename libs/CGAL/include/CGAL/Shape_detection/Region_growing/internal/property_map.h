@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Shape_detection/include/CGAL/Shape_detection/Region_growing/internal/property_map.h $
-// $Id: property_map.h 553d3c2 2020-04-10T13:03:50+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/Region_growing/internal/property_map.h $
+// $Id: property_map.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -57,10 +57,8 @@ namespace internal {
       return get(m_property_map, key);
     }
 
-    friend inline reference get(
-      const Item_property_map& item_map,
-      const key_type key) {
-
+    friend inline reference get(const Item_property_map& item_map,
+                                const key_type key) {
       return item_map[key];
     }
 
@@ -79,8 +77,9 @@ namespace internal {
     using Item = typename Iterator::value_type;
 
     using value_type = std::size_t;
+    using reference = std::size_t;
     using key_type = Item;
-    using category = boost::lvalue_property_map_tag;
+    using category = boost::readable_property_map_tag;
 
     using Item_map = std::map<key_type, value_type>;
 
@@ -105,10 +104,8 @@ namespace internal {
       return value->second;
     }
 
-    friend inline value_type get(
-      const Item_to_index_property_map& item_to_index_map,
-      const key_type& key) {
-
+    friend inline value_type get(const Item_to_index_property_map& item_to_index_map,
+                                 const key_type& key) {
       return item_to_index_map[key];
     }
 
@@ -122,21 +119,18 @@ namespace internal {
   public:
     using key_type = std::size_t;
     using value_type = std::size_t;
-    using category = boost::lvalue_property_map_tag;
+    using category = boost::readable_property_map_tag;
 
-    Seed_property_map(
-      const std::vector<std::size_t>& seeds) :
-    m_seeds(seeds)
+    Seed_property_map(const std::vector<std::size_t>& seeds)
+      : m_seeds(seeds)
     { }
 
     value_type operator[](const key_type key) const {
       return m_seeds[key];
     }
 
-    friend value_type get(
-      const Seed_property_map& seed_map,
-      const key_type key) {
-
+    friend value_type get(const Seed_property_map& seed_map,
+                          const key_type key) {
       return seed_map[key];
     }
 
@@ -159,20 +153,17 @@ namespace RG {
     Point_to_shape_index_map() { }
 
     template<typename PointRange>
-    Point_to_shape_index_map(
-      const PointRange& points,
-      const std::vector< std::vector<std::size_t> >& regions) :
-    m_indices(new std::vector<int>(points.size(), -1)) {
-
+    Point_to_shape_index_map(const PointRange& points,
+                             const std::vector< std::vector<std::size_t> >& regions)
+      : m_indices(new std::vector<int>(points.size(), -1))
+    {
       for (std::size_t i = 0; i < regions.size(); ++i)
         for (const std::size_t idx : regions[i])
           (*m_indices)[idx] = static_cast<int>(i);
     }
 
-    inline friend value_type get(
-      const Point_to_shape_index_map& point_to_shape_index_map,
-      const key_type key) {
-
+    inline friend value_type get(const Point_to_shape_index_map& point_to_shape_index_map,
+                                 const key_type key) {
       const auto& indices = *(point_to_shape_index_map.m_indices);
       return indices[key];
     }

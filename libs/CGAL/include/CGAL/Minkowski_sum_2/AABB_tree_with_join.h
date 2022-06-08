@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/AABB_tree_with_join.h $
-// $Id: AABB_tree_with_join.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/AABB_tree_with_join.h $
+// $Id: AABB_tree_with_join.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,9 +20,9 @@
 #include <iterator>
 #include <CGAL/Minkowski_sum_2/AABB_traversal_traits_with_join.h>
 #include <CGAL/Minkowski_sum_2/AABB_node_with_join.h>
-#include <CGAL/internal/AABB_tree/AABB_search_tree.h>
-#include <CGAL/internal/AABB_tree/Has_nested_type_Shared_data.h>
-#include <CGAL/internal/AABB_tree/Primitive_helper.h>
+#include <CGAL/AABB_tree/internal/AABB_search_tree.h>
+#include <CGAL/AABB_tree/internal/Has_nested_type_Shared_data.h>
+#include <CGAL/AABB_tree/internal/Primitive_helper.h>
 #include <boost/optional.hpp>
 
 #ifdef CGAL_HAS_THREADS

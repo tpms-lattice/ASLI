@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polytope_distance_d/include/CGAL/Polytope_distance_d.h $
-// $Id: Polytope_distance_d.h 2b61a99 2021-01-05T18:38:16+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polytope_distance_d/include/CGAL/Polytope_distance_d.h $
+// $Id: Polytope_distance_d.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -849,7 +849,7 @@ operator << ( std::ostream& os,
   typedef  typename Traits_::ET          ET;
   typedef  ostream_iterator<ET>          Et_it;
 
-  switch ( CGAL::get_mode( os)) {
+  switch ( CGAL::IO::get_mode( os)) {
 
   case CGAL::IO::PRETTY:
     os << "CGAL::Polytope_distance_d( |P+Q| = "
@@ -918,7 +918,7 @@ operator << ( std::ostream& os,
 
   default:
     CGAL_optimisation_assertion_msg( false,
-                                     "CGAL::get_mode( os) invalid!");
+                                     "CGAL::IO::get_mode( os) invalid!");
     break; }
 
   return( os);

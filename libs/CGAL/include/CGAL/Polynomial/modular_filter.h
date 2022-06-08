@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polynomial/include/CGAL/Polynomial/modular_filter.h $
-// $Id: modular_filter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Polynomial/modular_filter.h $
+// $Id: modular_filter.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -83,7 +83,7 @@ namespace internal {
                                  ::CGAL::Tag_false) {return true;}
 
 /*! \ingroup CGAL_polynomial_utils
- *  \brief Test whether \c P and \c Q may have a common factor.
+ *  \brief tests whether \c P and \c Q may have a common factor.
  *
  *  This function is based on a fast modular arithmetic and serves as a
  *  filter to avoid expensive exact computations to determine whether \c P
@@ -110,7 +110,7 @@ bool may_have_common_factor(const Polynomial<NT>& P,
 }
 
 /*! \ingroup CGAL_polynomial_utils
- *  \brief Test whether the polynomial \c P may has a multiple root.
+ *  \brief tests whether the polynomial \c P may has a multiple root.
  *
  *  This function is based on a fast modular arithmetic and serves as a
  *  filter to avoid expensive exact computations to determine whether \c P

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_hull_3/include/CGAL/Convex_hull_3/dual/halfspace_intersection_interior_point_3.h $
-// $Id: halfspace_intersection_interior_point_3.h d4fb400 2020-08-28T08:19:32+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/Convex_hull_3/dual/halfspace_intersection_interior_point_3.h $
+// $Id: halfspace_intersection_interior_point_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@
 #include <limits>
 #include <CGAL/number_utils.h>
 #include <CGAL/assertions.h>
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 
 // Description taken from http://www.qhull.org/html/qhalf.htm
 

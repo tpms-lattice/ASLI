@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/CORE_Expr.h $
-// $Id: CORE_Expr.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/CORE_Expr.h $
+// $Id: CORE_Expr.h 152a084 2021-09-21T13:34:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,7 +21,6 @@
 
 #include <CGAL/number_type_basic.h>
 #include <CGAL/CORE_coercion_traits.h>
-#include <CGAL/CORE/Expr.h>
 #include <utility>
 
 
@@ -177,7 +176,6 @@ template <> class Real_embeddable_traits< CORE::Expr >
 } //namespace CGAL
 
 //since types are included by CORE_coercion_traits.h:
-#include <CGAL/CORE_Expr.h>
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/CORE_BigRat.h>
 #include <CGAL/CORE_BigFloat.h>

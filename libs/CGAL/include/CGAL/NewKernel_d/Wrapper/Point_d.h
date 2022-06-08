@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Point_d.h $
-// $Id: Point_d.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Point_d.h $
+// $Id: Point_d.h cca0a19 2022-04-12T16:14:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -49,7 +49,7 @@ public:
   typedef Dimension_tag<0>  Feature_dimension;
 
   typedef typename Get_type<Kbase, Point_tag>::type      Rep;
-  //typedef typename CGAL::decay<typename boost::result_of<CPI(Rep,Begin_tag)>::type>::type Cartesian_const_iterator;
+  // typedef typename CGAL::decay<typename boost::result_of<CPI(Rep,Begin_tag)>::type>::type Cartesian_const_iterator;
 
   const Rep& rep() const noexcept
   {
@@ -102,7 +102,7 @@ public:
     : Rep(CPBase()(std::move(v))) {}
 
   friend void swap(Self& a, Self& b)
-#ifdef __cpp_lib_is_swappable
+#if !defined(__INTEL_COMPILER) && defined(__cpp_lib_is_swappable)
     noexcept(std::is_nothrow_swappable_v<Rep>)
 #endif
     {
@@ -141,7 +141,7 @@ public:
   {
     auto b = p.cartesian_begin();
     auto e = p.cartesian_end();
-    if(is_ascii(os))
+    if(IO::is_ascii(os))
     {
       os << p.dimension();
       for(; b != e; ++b){
@@ -162,7 +162,7 @@ public:
   friend std::istream& operator>>(std::istream &is, Point_d & p)
   {
     int dim;
-    if( is_ascii(is) )
+    if( IO::is_ascii(is) )
       is >> dim;
     else
     {
@@ -171,10 +171,10 @@ public:
 
     if(!is) return is;
     std::vector<FT_> coords(dim);
-    if(is_ascii(is))
+    if(IO::is_ascii(is))
     {
       for(int i=0;i<dim;++i)
-        is >> iformat(coords[i]);
+        is >> IO::iformat(coords[i]);
     }
     else
     {

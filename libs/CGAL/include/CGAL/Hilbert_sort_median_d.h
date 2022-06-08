@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_sorting/include/CGAL/Hilbert_sort_median_d.h $
-// $Id: Hilbert_sort_median_d.h 5c41b10 2020-01-02T10:26:44+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_d.h $
+// $Id: Hilbert_sort_median_d.h f60dfa8 2022-04-04T10:00:16+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     :  Olivier Devillers
@@ -32,7 +32,7 @@ struct Hilbert_cmp_d
   K k;
   int axe;
   bool orient;
-  Hilbert_cmp_d (int a, bool o, const K &_k = K()) : k(_k), axe(a),  orient(o) {}
+  Hilbert_cmp_d (int a, bool o, const K &_k) : k(_k), axe(a),  orient(o) {}
 
   bool operator() (const Point &p, const Point &q) const
   {
@@ -64,7 +64,7 @@ private:
   };
 
 public:
-  Hilbert_sort_median_d(const Kernel &k = Kernel(), std::ptrdiff_t limit = 1)
+  Hilbert_sort_median_d(const Kernel &k, std::ptrdiff_t limit = 1)
     : _k(k), _limit (limit)
   {}
 
@@ -114,7 +114,7 @@ public:
       current_dir = (current_dir +1) % _dimension;
     }while (current_dir != last_dir);
 
-    if ( end-begin < two_to_dim) return; // less than 2^dim points
+    if ( end-begin < two_to_dim) return; // fewer than 2^dim points
 
     /////////////start recursive calls
     last_dir = (direction + _dimension -1) % _dimension;

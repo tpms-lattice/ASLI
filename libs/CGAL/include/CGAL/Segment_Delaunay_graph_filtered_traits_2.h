@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_filtered_traits_2.h $
-// $Id: Segment_Delaunay_graph_filtered_traits_2.h 9a17c8d 2020-04-16T16:28:01+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_filtered_traits_2.h $
+// $Id: Segment_Delaunay_graph_filtered_traits_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,7 +27,7 @@
 #include <CGAL/Segment_Delaunay_graph_2/Filtered_traits_concept_check_tags.h>
 
 // includes for the default parameters of the filtered traits
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Interval_arithmetic.h>

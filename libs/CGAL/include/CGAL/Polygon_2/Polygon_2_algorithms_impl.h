@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h $
-// $Id: Polygon_2_algorithms_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h $
+// $Id: Polygon_2_algorithms_impl.h 6b87fe3 2020-12-05T11:11:33+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -519,7 +519,7 @@ Orientation orientation_2(ForwardIterator first,
   if (next == last)
     next = first;
 
-  // if the range [first,last) contains less than three points, then some
+  // if the range [first,last) contains fewer than three points, then some
   // of the points (prev,i,next) will coincide
 
   // return the orientation of the triple (prev,i,next)

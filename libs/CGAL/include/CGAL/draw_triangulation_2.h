@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_2/include/CGAL/draw_triangulation_2.h $
-// $Id: draw_triangulation_2.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_2/include/CGAL/draw_triangulation_2.h $
+// $Id: draw_triangulation_2.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -28,7 +28,7 @@ namespace CGAL
 struct DefaultColorFunctorT2
 {
   template<typename T2>
-  static CGAL::Color run(const T2&,
+  static CGAL::IO::Color run(const T2&,
                          const typename T2::Finite_faces_iterator fh)
   {
     CGAL::Random random((unsigned int)(std::size_t)(&*fh));
@@ -68,7 +68,7 @@ public:
 protected:
   void compute_face(Facet_const_handle fh)
   {
-    CGAL::Color c=m_fcolor.run(t2, fh);
+    CGAL::IO::Color c=m_fcolor.run(t2, fh);
     face_begin(c);
 
     add_point_in_face(fh->vertex(0)->point());
@@ -147,7 +147,7 @@ void draw(const CGAL_T2_TYPE& at2,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"t2_viewer","\0"};
+    const char* argv[2]={"t2_viewer", nullptr};
     QApplication app(argc,const_cast<char**>(argv));
     DefaultColorFunctorT2 fcolor;
     SimpleTriangulation2ViewerQt<CGAL_T2_TYPE, DefaultColorFunctorT2>

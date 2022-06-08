@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_searching/include/CGAL/Orthogonal_incremental_neighbor_search.h $
-// $Id: Orthogonal_incremental_neighbor_search.h e6536aa 2020-06-09T20:15:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_searching/include/CGAL/Orthogonal_incremental_neighbor_search.h $
+// $Id: Orthogonal_incremental_neighbor_search.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,7 @@
 #include <CGAL/Kd_tree.h>
 #include <CGAL/Euclidean_distance.h>
 #include <CGAL/tuple.h>
-#include <CGAL/internal/Search_helpers.h>
+#include <CGAL/Spatial_searching/internal/Search_helpers.h>
 
 #include <cstring>
 #include <list>

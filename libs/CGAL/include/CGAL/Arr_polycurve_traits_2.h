@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_polycurve_traits_2.h $
-// $Id: Arr_polycurve_traits_2.h 10f399c 2020-11-04T20:46:07+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_polycurve_traits_2.h $
+// $Id: Arr_polycurve_traits_2.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel <efif@post.tau.ac.il>
@@ -62,8 +62,8 @@ public:
   typedef typename Base::Top_side_category            Top_side_category;
   typedef typename Base::Right_side_category          Right_side_category;
 
-  typedef typename Base::Are_all_sides_oblivious_tag
-    Are_all_sides_oblivious_tag;
+  typedef typename Base::All_sides_oblivious_category
+    All_sides_oblivious_category;
 
   typedef typename Base::X_monotone_subcurve_2        X_monotone_subcurve_2;
   typedef typename Base::Size                         Size;
@@ -89,9 +89,7 @@ public:
   typedef typename Base::Parameter_space_in_x_2       Parameter_space_in_x_2;
   typedef typename Base::Parameter_space_in_y_2       Parameter_space_in_y_2;
   typedef typename Base::Compare_x_on_boundary_2      Compare_x_on_boundary_2;
-  typedef typename Base::Compare_x_at_limit_2         Compare_x_at_limit_2;
   typedef typename Base::Compare_x_near_boundary_2    Compare_x_near_boundary_2;
-  typedef typename Base::Compare_x_near_limit_2       Compare_x_near_limit_2;
   typedef typename Base::Compare_y_on_boundary_2      Compare_y_on_boundary_2;
   typedef typename Base::Compare_y_near_boundary_2    Compare_y_near_boundary_2;
   typedef typename Base::Is_on_y_identification_2     Is_on_y_identification_2;
@@ -476,7 +474,7 @@ public:
   public:
     template <typename OutputIterator>
     OutputIterator operator()(const Curve_2& cv, OutputIterator oi) const
-    { return operator_impl(cv, oi, Are_all_sides_oblivious_tag()); }
+    { return operator_impl(cv, oi, All_sides_oblivious_category()); }
   };
 
   /*! Obtain a Make_x_monotone_2 functor object. */
@@ -738,7 +736,7 @@ public:
         // Locate the index i1 of the subcurve in cv1 which contains cv2's
         // left endpoint.
         i1 = m_poly_traits.locate_impl(cv1, cv2[i2], ARR_MIN_END,
-                                       Are_all_sides_oblivious_tag());
+                                       All_sides_oblivious_category());
         if (i1 == Polycurve_traits_2::INVALID_INDEX) return oi;
 
         if (equal(max_vertex(cv1[i1]), min_vertex(cv2[i2]))) {
@@ -761,7 +759,7 @@ public:
         // Locate the index i2 of the subcurve in cv2 which contains cv1's
         // left endpoint.
         i2 = m_poly_traits.locate_impl(cv2, cv1[i1], ARR_MIN_END,
-                                       Are_all_sides_oblivious_tag());
+                                       All_sides_oblivious_category());
         if (i2 == Polycurve_traits_2::INVALID_INDEX) return oi;
 
         if (equal(max_vertex(cv2[i2]), min_vertex(cv1[i1]))) {
@@ -781,7 +779,7 @@ public:
         }
       }
 
-      // Check if the the left endpoint lies on the other polycurve.
+      // Check if the left endpoint lies on the other polycurve.
       bool left_coincides = (left_res == EQUAL);
       bool left_overlap = false;
 
@@ -817,7 +815,7 @@ public:
 
         right_overlap = false;
 
-        //! EF: the following code is abit suspicious. It may erroneously
+        //! EF: the following code is a bit suspicious. It may erroneously
         //      assume that the subcurves cannot overlap more than once.
         if (! right_coincides && ! left_coincides) {
           // Non of the endpoints of the current subcurve of one polycurve

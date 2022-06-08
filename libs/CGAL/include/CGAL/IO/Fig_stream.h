@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream.h $
-// $Id: Fig_stream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/IO/Fig_stream.h $
+// $Id: Fig_stream.h c3d4306 2021-09-15T14:23:46+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein           <wein@post.tau.ac.il>
@@ -20,6 +20,7 @@
 
 #include <vector>
 #include <fstream>
+#include <sstream>
 #include <cstdio>
 
 namespace CGAL {
@@ -750,14 +751,17 @@ public:
       return;
 
     // Prepare a string desribing the color.
-    char    color_desc [10];
 
-    sprintf ("#%02x%02x%02x", r, g, b);
+    std::stringstream out;
+    out << "0x"  << std::hex
+        << std::setfill('0') << std::setw(2) << r
+        << std::setfill('0') << std::setw(2) << g
+        << std::setfill('0') << std::setw(2) << b;
 
     // Write the color to the FIG file.
     _ofile << "0 "                        // Desginates a color pseudo-object.
            << static_cast<int>(color) << ' '
-           << color_desc << std::endl;
+           << out.str() << std::endl;
 
     // Mark that the color is now defined.
     colors[static_cast<int>(color)] = true;
@@ -1700,7 +1704,6 @@ protected:
     _ofile << ' ' << ix << ' ' << iy << ' ';
 
     // Write the text.
-    char    oct[10];
     int     i;
 
     for (i = 0; i < len_text; i++)
@@ -1712,9 +1715,11 @@ protected:
       }
       else
       {
-        // Convert the current character to an octal string and write it.
-        sprintf (oct, "\\%03o", text[i]);
-        _ofile << oct;
+        // Convert the current character to an octal string and write
+        // it.
+        std::stringstream out;
+        out << "\\" << std::setfill('0') << std::setw(3) << std::oct << text[i];
+        _ofile << out.str();
       }
     }
 

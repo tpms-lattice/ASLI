@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_2/include/CGAL/Nef_2/PM_io_parser.h $
-// $Id: PM_io_parser.h d788427 2021-01-26T09:55:20+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/PM_io_parser.h $
+// $Id: PM_io_parser.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -117,8 +117,8 @@ to output |H| to |os|.}*/
   vn(Base::number_of_vertices()),
   en(Base::number_of_halfedges()),
   fn(Base::number_of_faces())
-{ verbose = (get_mode(out) != CGAL::IO::ASCII &&
-             get_mode(out) != CGAL::IO::BINARY);
+{ verbose = (IO::get_mode(out) != CGAL::IO::ASCII &&
+             IO::get_mode(out) != CGAL::IO::BINARY);
 }
 
 
@@ -130,8 +130,8 @@ PM_io_parser(std::ostream& os, const PMDEC& D)
   vn(Base::number_of_vertices()),
   en(Base::number_of_halfedges()),
   fn(Base::number_of_faces())
-{ verbose = (get_mode(out) != CGAL::IO::ASCII &&
-             get_mode(out) != CGAL::IO::BINARY);
+{ verbose = (IO::get_mode(out) != CGAL::IO::ASCII &&
+             IO::get_mode(out) != CGAL::IO::BINARY);
 }
 
 

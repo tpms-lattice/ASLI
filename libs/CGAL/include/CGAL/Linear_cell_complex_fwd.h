@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Linear_cell_complex/include/CGAL/Linear_cell_complex_fwd.h $
-// $Id: Linear_cell_complex_fwd.h 35bff47 2020-03-29T18:11:39+02:00 Guillaume Damiand
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Linear_cell_complex/include/CGAL/Linear_cell_complex_fwd.h $
+// $Id: Linear_cell_complex_fwd.h d6306be 2020-10-22T10:30:38+02:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -19,11 +19,11 @@
 namespace CGAL {
 
 template<unsigned int d_, unsigned int ambient_dim,
-         class Traits_, class Items_, class Alloc_ >
+         class Traits_, class Items_, class Alloc_, class Concurrent_tag=CGAL::Tag_false >
 class CMap_linear_cell_complex_storage_1;
 
 template<unsigned int d_, unsigned int ambient_dim,
-         class Traits_, class Items_, class Alloc_ >
+         class Traits_, class Items_, class Alloc_, class Concurrent_tag=CGAL::Tag_false >
 class GMap_linear_cell_complex_storage_1;
 
 template <unsigned int d>
@@ -62,7 +62,7 @@ template < unsigned int d_, unsigned int ambient_dim = d_,
            class CMap = Combinatorial_map_base,
            class Storage_ = CMap_linear_cell_complex_storage_1<d_, ambient_dim,
                                                                Traits_, Items_,
-                                                               Alloc_> >
+                                                               Alloc_, CGAL::Tag_false> >
   class Linear_cell_complex_for_combinatorial_map;
 
   template < unsigned int d_, unsigned int ambient_dim = d_,
@@ -73,7 +73,7 @@ template < unsigned int d_, unsigned int ambient_dim = d_,
              class CMap = Generalized_map_base,
              class Storage_ = GMap_linear_cell_complex_storage_1<d_, ambient_dim,
                                                                  Traits_, Items_,
-                                                                 Alloc_> >
+                                                                 Alloc_, CGAL::Tag_false> >
     class Linear_cell_complex_for_generalized_map;
 
 #if !defined(CGAL_NO_DEPRECATED_CODE)
@@ -89,7 +89,7 @@ template < unsigned int d_, unsigned int ambient_dim = d_,
              class CMap = Combinatorial_map_base,
              class Storage_ = CMap_linear_cell_complex_storage_1<d_, ambient_dim,
                                                                  Traits_, Items_,
-                                                                 Alloc_> >
+                                                                 Alloc_, CGAL::Tag_false> >
   class Linear_cell_complex;
 #endif
 

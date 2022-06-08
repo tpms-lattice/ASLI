@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Modular_arithmetic/include/CGAL/Modular_arithmetic/Residue_type.h $
-// $Id: Residue_type.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Modular_arithmetic/include/CGAL/Modular_arithmetic/Residue_type.h $
+// $Id: Residue_type.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion, Michael Hemmer, Alexander Kobel
@@ -197,7 +197,7 @@ public:
       return old_prime;
     }
 
-  /*! \brief return the current prime.  */
+  /*! \brief returns the current prime.  */
     static int get_current_prime(){
       return get_prime_int();
     }

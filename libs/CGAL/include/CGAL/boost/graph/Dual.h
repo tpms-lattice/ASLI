@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/Dual.h $
-// $Id: Dual.h ebd65c9 2020-07-20T11:47:30+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/Dual.h $
+// $Id: Dual.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -128,7 +128,7 @@ struct Dual_vertex_index_pmap{
   typedef typename boost::graph_traits<G>::face_descriptor key_type;
   typedef typename Property_map::value_type value_type;
   typedef typename Property_map::reference reference;
-  typedef typename Property_map::category category;
+  typedef boost::readable_property_map_tag category;
 
   Dual_vertex_index_pmap(const G& g)
     : m_pmap( get(boost::face_index, g) )
@@ -147,7 +147,7 @@ struct Dual_face_index_pmap{
   typedef typename boost::graph_traits<G>::vertex_descriptor key_type;
   typedef typename Property_map::value_type value_type;
   typedef typename Property_map::reference reference;
-  typedef typename Property_map::category category;
+  typedef boost::readable_property_map_tag category;
 
   Dual_face_index_pmap(const G& g)
     : m_pmap( get(boost::vertex_index, g) )

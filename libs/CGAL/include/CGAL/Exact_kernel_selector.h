@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Exact_kernel_selector.h $
-// $Id: Exact_kernel_selector.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Exact_kernel_selector.h $
+// $Id: Exact_kernel_selector.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion,
@@ -23,7 +23,7 @@
 #include <CGAL/Simple_cartesian.h>
 #include <CGAL/Simple_homogeneous.h>
 
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 
 #include <CGAL/representation_tags.h>
 #include <CGAL/Cartesian_converter.h>

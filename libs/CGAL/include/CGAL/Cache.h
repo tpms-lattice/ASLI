@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Cache.h $
-// $Id: Cache.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Cache.h $
+// $Id: Cache.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michael Hemmer    <hemmer@mpi-inf.mpg.de>
@@ -84,7 +84,7 @@ public:
     //! default constructor with empty table
     Cache() : map() {};
 
-    /*! \brief Returns the respective object of type Output.
+    /*! \brief returns the respective object of type Output.
      *
      *  If the object is not in the cache, it is constructed form \c key and
      *  added to the cache.
@@ -127,22 +127,22 @@ public:
     //! Returns a Const_iterator pointing to the end of the cache.
     Const_iterator end() const { return map.end(); }
 
-    /*!        \brief Returns a Reverse_iterator pointing to the beginning of the
+    /*!        \brief returns a Reverse_iterator pointing to the beginning of the
      *  reversed cache.
      */
     Reverse_iterator rbegin() { return map.rbegin(); }
 
-    /*!        \brief Returns a Reverse_iterator pointing to the end of the reversed
+    /*!        \brief returns a Reverse_iterator pointing to the end of the reversed
      *  cache.
      */
     Reverse_iterator rend() { return map.rend(); }
 
-    /*!        \brief Returns a Const_reverse_iterator pointing to the beginning of
+    /*!        \brief returns a Const_reverse_iterator pointing to the beginning of
      *  the reversed cache.
      */
     Const_reverse_iterator rbegin() const { return map.rbegin(); }
 
-    /*!        \brief Returns a Const_reverse_iterator pointing to the end of the
+    /*!        \brief returns a Const_reverse_iterator pointing to the end of the
      *  reversed cache.
      */
     Const_reverse_iterator rend() const { return map.rend(); }

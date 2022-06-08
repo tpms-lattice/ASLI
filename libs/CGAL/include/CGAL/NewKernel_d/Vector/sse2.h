@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Vector/sse2.h $
-// $Id: sse2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Vector/sse2.h $
+// $Id: sse2.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -13,7 +13,7 @@
 #define CGAL_VECTOR_SSE2_H
 
 // Check what needs adapting for clang, intel and microsoft
-#if !defined __SSE2__ || (__GNUC__ * 100 + __GNUC_MINOR__ < 408)
+#if !defined __SSE2__
 #error Requires SSE2 and gcc 4.8+
 #endif
 #include <x86intrin.h> // FIXME: other platforms call it differently

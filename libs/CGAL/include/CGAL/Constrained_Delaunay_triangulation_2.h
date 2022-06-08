@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_2/include/CGAL/Constrained_Delaunay_triangulation_2.h $
-// $Id: Constrained_Delaunay_triangulation_2.h 86e25f7 2020-03-26T19:23:54+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_2/include/CGAL/Constrained_Delaunay_triangulation_2.h $
+// $Id: Constrained_Delaunay_triangulation_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,7 @@
 
 #ifndef CGAL_TRIANGULATION_2_DONT_INSERT_RANGE_OF_POINTS_WITH_INFO
 #include <CGAL/Spatial_sort_traits_adapter_2.h>
-#include <CGAL/internal/info_check.h>
+#include <CGAL/STL_Extension/internal/info_check.h>
 #include <CGAL/is_iterator.h>
 
 #include <boost/container/flat_set.hpp>

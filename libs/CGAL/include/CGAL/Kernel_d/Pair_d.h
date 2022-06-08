@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_d/include/CGAL/Kernel_d/Pair_d.h $
-// $Id: Pair_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Kernel_d/Pair_d.h $
+// $Id: Pair_d.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -61,19 +61,19 @@ Direction_d direction() const
 
 void read(std::istream& is)
 {
-  switch( get_mode(is) ) {
+  switch( IO::get_mode(is) ) {
     case CGAL::IO::ASCII :
       is >> _p[0] >> _p[1]; break;
     case CGAL::IO::BINARY :
       CGAL::read(is, _p[0]); CGAL::read(is, _p[1]); break;
     default:
-    CGAL_error_msg("\nStream must be in ascii or binary mode\n");
+    CGAL_error_msg("\nStream must be in ASCII or binary mode\n");
   }
 }
 
 void print(std::ostream& os, const char* _name) const
 {
-  switch( get_mode(os) ) {
+  switch( IO::get_mode(os) ) {
     case CGAL::IO::ASCII :
       os << _p[0] << " " <<  _p[1]; break;
     case CGAL::IO::BINARY :

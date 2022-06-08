@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_slicer.h $
-// $Id: Polygon_mesh_slicer.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_slicer.h $
+// $Id: Polygon_mesh_slicer.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -276,8 +276,7 @@ class Polygon_mesh_slicer
           get(m_vpmap, source(ed, m_tmesh)),
           get(m_vpmap,target(ed, m_tmesh))
         );
-        typename cpp11::result_of<typename Traits_::Intersect_3(Plane_3, Segment_3)>::type
-          inter = intersect_3(m_plane, s);
+        const auto inter = intersect_3(m_plane, s);
         CGAL_assertion(inter != boost::none);
         const Point_3* pt_ptr = boost::get<Point_3>(&(*inter));
         current_poly.push_back( *pt_ptr );

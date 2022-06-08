@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesher_level/include/CGAL/Mesher_level.h $
-// $Id: Mesher_level.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesher_level/include/CGAL/Mesher_level.h $
+// $Id: Mesher_level.h 5439dbd 2021-08-24T18:04:50+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,9 +18,13 @@
 namespace CGAL {
 
 enum Mesher_level_conflict_status {
-  NO_CONFLICT = 0,
-  CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED,
-  CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED
+  NO_CONFLICT = 0
+  , CONFLICT_BUT_ELEMENT_CAN_BE_RECONSIDERED
+  , CONFLICT_AND_ELEMENT_SHOULD_BE_DROPPED
+  , THE_FACET_TO_REFINE_IS_NOT_IN_ITS_CONFLICT_ZONE
+  , ELEMENT_WAS_A_ZOMBIE
+  , COULD_NOT_LOCK_ZONE
+  , COULD_NOT_LOCK_ELEMENT
 };
 
 struct Null_mesher_level {

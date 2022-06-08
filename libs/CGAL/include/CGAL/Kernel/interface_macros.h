@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Kernel/interface_macros.h $
-// $Id: interface_macros.h a943082 2020-03-26T19:01:31+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/interface_macros.h $
+// $Id: interface_macros.h d0ed658 2021-11-03T17:39:21+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -496,8 +496,8 @@ CGAL_Kernel_pred(Counterclockwise_in_between_2,
                  counterclockwise_in_between_2_object)
 CGAL_Kernel_pred(Do_intersect_2,
                  do_intersect_2_object)
-CGAL_Kernel_pred(Do_intersect_3,
-                 do_intersect_3_object)
+CGAL_Kernel_pred_RT(Do_intersect_3,
+                    do_intersect_3_object)
 CGAL_Kernel_pred(Equal_xy_3,
                  equal_xy_3_object)
 CGAL_Kernel_pred(Equal_x_2,
@@ -542,6 +542,8 @@ CGAL_Kernel_cons(Intersect_2,
                  intersect_2_object)
 CGAL_Kernel_cons(Intersect_3,
                  intersect_3_object)
+CGAL_Kernel_cons(Intersect_point_3_for_polyhedral_envelope,
+                 intersect_point_3_for_polyhedral_envelope_object)
 CGAL_Kernel_pred(Is_degenerate_2,
                  is_degenerate_2_object)
 CGAL_Kernel_pred_RT(Is_degenerate_3,
@@ -580,6 +582,8 @@ CGAL_Kernel_pred(Less_y_3,
                  less_y_3_object)
 CGAL_Kernel_pred(Less_z_3,
                  less_z_3_object)
+CGAL_Kernel_pred(Non_zero_coordinate_index_3,
+                 non_zero_coordinate_index_3_object)
 CGAL_Kernel_pred_RT(Orientation_2,
                     orientation_2_object)
 CGAL_Kernel_pred_RT(Orientation_3,

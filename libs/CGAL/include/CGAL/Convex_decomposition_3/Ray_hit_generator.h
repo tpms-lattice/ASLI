@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator.h $
-// $Id: Ray_hit_generator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator.h $
+// $Id: Ray_hit_generator.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -107,8 +107,7 @@ class Ray_hit_generator : public Modifier_base<typename Nef_::SNC_and_PL> {
         e->twin() = svb;
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
         svb->set_index(e->get_index());
-        svf->set_index();
-        svf->twin()->set_index(svf->get_index());
+        svf->twin()->set_index(svf->new_index());
 #endif
       } else {
         svf->twin() = e;
@@ -117,8 +116,7 @@ class Ray_hit_generator : public Modifier_base<typename Nef_::SNC_and_PL> {
         e->twin() = svf;
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
         svf->set_index(e->get_index());
-        svb->set_index();
-        svb->twin()->set_index(svb->get_index());
+        svb->twin()->set_index(svb->new_index());
 #endif
       }
 
@@ -165,8 +163,7 @@ class Ray_hit_generator : public Modifier_base<typename Nef_::SNC_and_PL> {
         SM_walls smw(&*v_new);
         sv2 = smw.add_ray_svertex(Sphere_point(-dir));
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
-      sv1->set_index();
-      sv2->set_index(sv1->get_index());
+      sv2->set_index(sv1->new_index());
 #endif
       }
     }

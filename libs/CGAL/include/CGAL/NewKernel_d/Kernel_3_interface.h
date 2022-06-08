@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Kernel_3_interface.h $
-// $Id: Kernel_3_interface.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Kernel_3_interface.h $
+// $Id: Kernel_3_interface.h cf54055 2021-02-14T01:16:52+01:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -76,10 +76,11 @@ template <class Base_> struct Kernel_3_interface : public Base_ {
                 Side_of_oriented_sphere_3(Kernel const&k):sos(k){}
                 result_type operator()(Point_3 const&a, Point_3 const&b, Point_3 const&c, Point_3 const&d, Point_3 const&e) {
                         //return sos(a,b,c,d);
-                        Point_3 const* t[5]={&a,&b,&c,&d,&e};
-                        return sos(make_transforming_iterator<Dereference_functor>(t+0),make_transforming_iterator<Dereference_functor>(t+5));
+                        Point_3 const* t[5]={&a,&b,&c,&d};
+                        return sos(make_transforming_iterator<Dereference_functor>(t+0),make_transforming_iterator<Dereference_functor>(t+4),e);
                 }
         };
+        typedef typename Get_functor<Base, Construct_ttag<Point_tag> >::type Construct_point_3;
 
         // I don't have the Coplanar predicates (yet)
 
@@ -88,6 +89,7 @@ template <class Base_> struct Kernel_3_interface : public Base_ {
         Compare_distance_3 compare_distance_3_object()const{ return Compare_distance_3(*this); }
         Orientation_3 orientation_3_object()const{ return Orientation_3(*this); }
         Side_of_oriented_sphere_3 side_of_oriented_sphere_3_object()const{ return Side_of_oriented_sphere_3(*this); }
+        Construct_point_3 construct_point_3_object()const{ return Construct_point_3(*this); }
 };
 }
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Kernel/global_functions_internal_3.h $
-// $Id: global_functions_internal_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/global_functions_internal_3.h $
+// $Id: global_functions_internal_3.h d3b26a6 2021-04-22T17:35:27+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -827,6 +827,14 @@ midpoint(const typename K::Point_3 &p,
          const typename K::Point_3 &q, const K &k)
 {
   return k.construct_midpoint_3_object()(p, q);
+}
+
+template < class K >
+inline
+typename K::Point_3
+midpoint(const typename K::Segment_3 &s, const K &k)
+{
+  return k.construct_midpoint_3_object()(s);
 }
 
 template < class K >

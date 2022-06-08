@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Solver_interface/include/CGAL/Mixed_integer_program_traits.h $
-// $Id: Mixed_integer_program_traits.h 202430d 2020-04-20T15:51:48+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Solver_interface/include/CGAL/Mixed_integer_program_traits.h $
+// $Id: Mixed_integer_program_traits.h 94b7580 2021-06-18T10:02:11+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -96,7 +96,7 @@ namespace CGAL {
         };
         /// \endcond
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The variable of a mixed integer program.
         ///
@@ -195,7 +195,7 @@ namespace CGAL {
         };
         /// \endcond
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The linear constraint of a mixed integer program.
         ///
@@ -227,7 +227,7 @@ namespace CGAL {
         };
 
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The linear objective of a mixed integer program.
         ///
@@ -263,7 +263,7 @@ namespace CGAL {
                 /// \endcond
         };
 
-        /// \ingroup PkgSolverInterfaceRef
+        /// \ingroup PkgSolverInterfaceMIP
         ///
         /// The class `CGAL::Mixed_integer_program_traits` provides an interface for
         /// formulating and solving (constrained or unconstrained) mixed integer
@@ -274,7 +274,7 @@ namespace CGAL {
         ///                  `CGAL::SCIP_mixed_integer_program_traits`. Alternatively, use
         ///       `CGAL::Mixed_integer_program_traits` as a base to derive a new model
         ///       (using e.g., <a href = "https://projects.coin-or.org/Cbc"> CBC </a>,
-        ///       <a href = "http://www.gurobi.com/"> Gurobi </a> for better
+        ///       <a href = "https://www.gurobi.com/"> Gurobi </a> for better
         ///       performance).
         ///
         /// \cond SKIP_IN_MANUAL

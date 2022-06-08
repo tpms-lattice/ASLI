@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Object.h $
-// $Id: Object.h bcf8409 2020-06-23T18:50:20+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Object.h $
+// $Id: Object.h b575892 2021-06-08T18:21:46+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,18 +24,19 @@
 #include <CGAL/config.h>
 #include <CGAL/assertions.h>
 
+#include <iterator>
 #include <typeinfo>
 
 #include <boost/variant.hpp>
 #include <boost/optional.hpp>
 #include <boost/any.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace CGAL {
 
 class Object
 {
-    boost::shared_ptr<boost::any> obj;
+    std::shared_ptr<boost::any> obj;
 
     // returns an any pointer from a variant
     struct Any_from_variant : public boost::static_visitor<boost::any*> {
@@ -75,25 +76,10 @@ class Object
     template <class T>
     bool assign(T &t) const
     {
-      if(obj) {
-        #ifdef CGAL_USE_ANY_BAD_CAST
-        try {
-          t = boost::any_cast<T>(*obj);
-          return true;
-        } catch(...) {
-          return false;
-        }
-        #else
-        const T* res =  boost::any_cast<T>(&(*obj));
-        if (res){
-          t=*res;
-          return true;
-        }
-        return false;
-        #endif
-      } else {
-        return false;
-      }
+      const T* res = boost::any_cast<T>(obj.get());
+      if (!res) return false;
+      t = *res;
+      return true;
     }
 
     bool
@@ -173,19 +159,13 @@ template <class T>
 inline
 const T * object_cast(const Object * o)
 {
-  if(o->obj)
-    return boost::any_cast<T>((o->obj).get());
-  else
-    return nullptr;
+  return boost::any_cast<T>((o->obj).get());
 }
 
 template <class T>
 inline
 T object_cast(const Object & o)
 {
-  if(!o.obj)
-    throw Bad_object_cast();
-
   const T * result = boost::any_cast<T>((o.obj).get());
   if (!result)
     throw Bad_object_cast();

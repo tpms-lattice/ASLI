@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Linear_cell_complex/include/CGAL/draw_linear_cell_complex.h $
-// $Id: draw_linear_cell_complex.h b134ed8 2021-02-05T16:07:32+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Linear_cell_complex/include/CGAL/draw_linear_cell_complex.h $
+// $Id: draw_linear_cell_complex.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -84,7 +84,7 @@ struct DefaultDrawingFunctorLCC
   /// @return the color of the volume containing dh
   ///  used only if colored_volume(alcc, dh) and !colored_face(alcc, dh)
   template<typename LCC>
-  CGAL::Color volume_color(const LCC& alcc,
+  CGAL::IO::Color volume_color(const LCC& alcc,
                            typename LCC::Dart_const_handle dh) const
   {
     CGAL::Random random((unsigned int)(alcc.darts().index(dh)));
@@ -93,7 +93,7 @@ struct DefaultDrawingFunctorLCC
   /// @return the color of the face containing dh
   ///  used only if colored_face(alcc, dh)
   template<typename LCC>
-  CGAL::Color face_color(const LCC& alcc,
+  CGAL::IO::Color face_color(const LCC& alcc,
                          typename LCC::Dart_const_handle dh) const
   {
     CGAL::Random random((unsigned int)(alcc.darts().index(dh)));
@@ -102,7 +102,7 @@ struct DefaultDrawingFunctorLCC
   /// @return the color of the edge containing dh
   ///  used only if colored_edge(alcc, dh)
   template<typename LCC>
-  CGAL::Color edge_color(const LCC& alcc,
+  CGAL::IO::Color edge_color(const LCC& alcc,
                          typename LCC::Dart_const_handle dh) const
   {
     CGAL::Random random((unsigned int)(alcc.darts().index(dh)));
@@ -111,7 +111,7 @@ struct DefaultDrawingFunctorLCC
   /// @return the color of the vertex containing dh
   ///  used only if colored_vertex(alcc, dh)
   template<typename LCC>
-  CGAL::Color vertex_color(const LCC& alcc,
+  CGAL::IO::Color vertex_color(const LCC& alcc,
                            typename LCC::Dart_const_handle dh) const
   {
     CGAL::Random random((unsigned int)(alcc.darts().index(dh)));
@@ -213,17 +213,17 @@ protected:
     if (m_random_face_color)
     {
       CGAL::Random random((unsigned int)(lcc->darts().index(dh)));
-      CGAL::Color c=get_random_color(random);
+      CGAL::IO::Color c=get_random_color(random);
       face_begin(c);
     }
     else if (m_drawing_functor.colored_face(*lcc, dh))
     {
-      CGAL::Color c=m_drawing_functor.face_color(*lcc, dh);
+      CGAL::IO::Color c=m_drawing_functor.face_color(*lcc, dh);
       face_begin(c);
     }
     else if (m_drawing_functor.colored_volume(*lcc, voldh))
     {
-      CGAL::Color c=m_drawing_functor.volume_color(*lcc, voldh);
+      CGAL::IO::Color c=m_drawing_functor.volume_color(*lcc, voldh);
       face_begin(c);
     }
     else
@@ -408,7 +408,7 @@ void draw(const CGAL_LCC_TYPE& alcc,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"lccviewer","\0"};
+    const char* argv[2]={"lccviewer", nullptr};
     QApplication app(argc,const_cast<char**>(argv));
     SimpleLCCViewerQt<CGAL_LCC_TYPE, DrawingFunctorLCC>
       mainwindow(app.activeWindow(), &alcc, title, nofill, drawing_functor);

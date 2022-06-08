@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/TextRenderer.h $
-// $Id: TextRenderer.h af7e1a8 2020-10-16T14:32:12+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/TextRenderer.h $
+// $Id: TextRenderer.h 3b70343 2020-11-16T16:19:43+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -144,7 +144,7 @@ public:
     //!
     //! @see addText(float p_x, float p_y, float p_z, QString p_text, bool p_3D = true,  QFont font = QFont(), QColor p_color = Qt::black)
     void addText(TextItem*);
-    //!\brief Creates a new TextItem in TextRenderer::local_textItems
+    //!\brief creates a new TextItem in TextRenderer::local_textItems
     //!
     //!This is a version of addText(TextItem*) that creates the TextItem on the fly.
     //! @see addText(TextItem*)

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_do_intersect.h $
-// $Id: Iso_cuboid_3_Triangle_3_do_intersect.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_do_intersect.h $
+// $Id: Iso_cuboid_3_Triangle_3_do_intersect.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,20 +14,10 @@
 #ifndef CGAL_INTERNAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_DO_INTERSECT_H
 #define CGAL_INTERNAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_DO_INTERSECT_H
 
-#include <CGAL/Iso_cuboid_3.h>
-#include <CGAL/Triangle_3.h>
-
-// Fast Triangle-Cuboid intersection test, following Tomas Akenine-Moeller description.
-// The code looks slightly different from his code because we avoid the translation at
-// a minimal cost (and we use C++ ;).
-
-#include <CGAL/Uncertain.h>
 #include <CGAL/Intersections_3/internal/Bbox_3_Triangle_3_do_intersect.h>
 
 namespace CGAL {
-
 namespace Intersections {
-
 namespace internal {
 
 template <class K>
@@ -51,6 +41,6 @@ bool do_intersect(const typename K::Iso_cuboid_3& bbox,
 
 
 
-} //namespace CGAL
+} // namespace CGAL
 
-#endif  // CGAL_INTERNAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_DO_INTERSECT_H
+#endif // CGAL_INTERNAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_DO_INTERSECT_H

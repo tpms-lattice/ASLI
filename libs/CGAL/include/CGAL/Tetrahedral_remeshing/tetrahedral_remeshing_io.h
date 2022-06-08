@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h $
-// $Id: tetrahedral_remeshing_io.h 9650869 2020-09-09T10:16:58+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h $
+// $Id: tetrahedral_remeshing_io.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -35,8 +35,8 @@ bool load_triangulation(std::istream& is, T3& t3)
     return false;
 
   std::getline(is, s);
-  if (binary) CGAL::set_binary_mode(is);
-  else        CGAL::set_ascii_mode(is);
+  if (binary) CGAL::IO::set_binary_mode(is);
+  else        CGAL::IO::set_ascii_mode(is);
   is >> t3;
   return bool(is);
 }
@@ -45,7 +45,7 @@ template<typename T3>
 bool save_binary_triangulation(std::ostream& os, const T3& t3)
 {
   os << "binary CGAL c3t3\n";
-  CGAL::set_binary_mode(os);
+  CGAL::IO::set_binary_mode(os);
   return !!(os << t3);
 }
 
@@ -53,7 +53,7 @@ template<typename T3>
 bool save_ascii_triangulation(std::ostream& os, const T3& t3)
 {
   os << "CGAL c3t3\n";
-  CGAL::set_ascii_mode(os);
+  CGAL::IO::set_ascii_mode(os);
   return !!(os << t3);
 }
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Line_3.h $
-// $Id: Line_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Line_3.h $
+// $Id: Line_3.h 8fa0f55 2021-05-27T10:27:38+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -65,6 +65,9 @@ public:
   // conversion impl -> interface class
   Line_3(const Rep& l)
       : Rep(l) {}
+
+  Line_3(Rep&& l)
+      : Rep(std::move(l)) {}
 
   Line_3(const Point_3 & p, const Point_3 & q)
       : Rep(typename R::Construct_line_3()(Return_base_tag(), p, q)) {}
@@ -138,7 +141,7 @@ template < class R >
 std::ostream &
 operator<<(std::ostream &os, const Line_3<R> &l)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << l.point(0) << ' ' << l.point(1);
     case IO::BINARY :

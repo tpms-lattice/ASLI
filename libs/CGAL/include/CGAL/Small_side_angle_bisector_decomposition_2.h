@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Minkowski_sum_2/include/CGAL/Small_side_angle_bisector_decomposition_2.h $
-// $Id: Small_side_angle_bisector_decomposition_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Minkowski_sum_2/include/CGAL/Small_side_angle_bisector_decomposition_2.h $
+// $Id: Small_side_angle_bisector_decomposition_2.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Ron Wein   <wein_r@yahoo.com>
@@ -731,7 +731,7 @@ private:
   }
 
   /*!
-   * Get the angle ratio created by the the bisection of the angle at the
+   * Get the angle ratio created by the bisection of the angle at the
    * reflex vertex v by the diagonal uv.
    * \param vec A vector defining counterclockwise-oriented polygon.
    * \param v_ind The index of the vertex v.

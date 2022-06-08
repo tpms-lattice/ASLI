@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_3/Sliver_perturber.h $
-// $Id: Sliver_perturber.h 4fc2f59 2020-07-31T16:17:56+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/Sliver_perturber.h $
+// $Id: Sliver_perturber.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -489,8 +489,7 @@ private:
    * @class PVertex_id
    * relaxed heap
    */
-  class PVertex_id :
-  public boost::put_get_helper<typename PVertex::id_type, PVertex_id>
+  class PVertex_id
   {
   public:
     typedef boost::readable_property_map_tag category;
@@ -499,6 +498,12 @@ private:
     typedef PVertex key_type;
 
     value_type operator[] (const key_type& pv) const { return pv.id(); }
+
+    friend inline
+    value_type get(const PVertex_id& m, const key_type& k)
+    {
+      return m[k];
+    }
   };
 
   typedef std::less<PVertex> less_PVertex;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/Edge_container.h $
-// $Id: Edge_container.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Edge_container.h $
+// $Id: Edge_container.h f79ec02 2021-06-28T13:11:28+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -48,6 +48,7 @@ struct DEMO_FRAMEWORK_EXPORT Edge_container :public Primitive_container
     Radius,       //!< Designates the buffer that contains the radius of wire spheres.
     Centers,  //!< Designates the buffer that contains the center of c3t3 facets or the center of wire spheres, for example.
     Texture_map,        //!< Designates the buffer that contains the UV map for the texture.
+    Subdomain_indices, //!< Designates the buffer that contains the subdomains of both cells defining a c3t3 facet.
     NbOfVbos      //!< Designates the size of the VBOs vector for `Edge_container`s
   };
 

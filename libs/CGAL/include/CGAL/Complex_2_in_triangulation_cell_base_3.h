@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesher/include/CGAL/Complex_2_in_triangulation_cell_base_3.h $
-// $Id: Complex_2_in_triangulation_cell_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/Complex_2_in_triangulation_cell_base_3.h $
+// $Id: Complex_2_in_triangulation_cell_base_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -120,7 +120,7 @@ operator>>(std::istream &is, Complex_2_in_triangulation_cell_base_3<GT, Cb> &c)
   is >> static_cast<Cb&>(c);
   for(int i = 0; i < 4; ++i)
   {
-    if(is_ascii(is))
+    if(IO::is_ascii(is))
       is >> b;
     else
     {
@@ -142,7 +142,7 @@ operator<<(std::ostream &os,
   os << static_cast<const Cb&>(c);
   for(int i = 0; i < 4; ++i)
   {
-    if(is_ascii(os))
+    if(IO::is_ascii(os))
       os << ' ' << c.is_facet_on_surface(i);
     else
       write(os, static_cast<int>(c.is_facet_on_surface(i)));

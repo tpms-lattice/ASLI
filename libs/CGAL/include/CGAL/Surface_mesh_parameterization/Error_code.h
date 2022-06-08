@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Error_code.h $
-// $Id: Error_code.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Error_code.h $
+// $Id: Error_code.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -38,7 +38,7 @@ enum Error_code
 };
 
 /// \ingroup PkgSurfaceMeshParameterizationEnums
-/// \brief Get the message corresponding to an error code.
+/// \brief gets the message corresponding to an error code.
 /// \param error_code The code returned by `parameterize()`
 /// \return The string describing the error code.
 inline const char* get_error_message(int error_code)

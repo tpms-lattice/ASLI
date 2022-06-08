@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation/include/CGAL/TDS_full_cell_default_storage_policy.h $
-// $Id: TDS_full_cell_default_storage_policy.h 378554e 2020-03-06T16:42:23+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/TDS_full_cell_default_storage_policy.h $
+// $Id: TDS_full_cell_default_storage_policy.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -17,7 +17,7 @@
 
 #include <CGAL/Dimension.h>
 #include <CGAL/Compact_container.h>
-#include <CGAL/internal/Static_or_dynamic_array.h>
+#include <CGAL/Triangulation/internal/Static_or_dynamic_array.h>
 
 #include <boost/cstdint.hpp>
 

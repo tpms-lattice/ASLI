@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/bbox.h $
-// $Id: bbox.h 80f6f65 2020-04-05T17:56:50+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/bbox.h $
+// $Id: bbox.h cf19fb2 2021-01-08T09:35:35+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,11 +27,7 @@
 #ifdef DOXYGEN_RUNNING
 #define CGAL_PMP_NP_TEMPLATE_PARAMETERS NamedParameters
 #define CGAL_PMP_NP_CLASS NamedParameters
-#endif
-
-#ifdef DOXYGEN_RUNNING
-#define CGAL_PMP_NP_TEMPLATE_PARAMETERS NamedParameters
-#define CGAL_PMP_NP_CLASS NamedParameters
+#define CGAL_DEPRECATED
 #endif
 
 namespace CGAL {
@@ -304,4 +300,3 @@ namespace CGAL {
 }
 
 #endif //CGAL_POLYGON_MESH_PROCESSING_BOUNDING_BOX_H
-

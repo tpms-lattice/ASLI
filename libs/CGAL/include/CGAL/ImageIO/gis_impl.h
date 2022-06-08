@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/CGAL_ImageIO/include/CGAL/ImageIO/gis_impl.h $
-// $Id: gis_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_ImageIO/include/CGAL/ImageIO/gis_impl.h $
+// $Id: gis_impl.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -109,19 +109,19 @@ int writeGis( char *name, _image* im) {
 
     switch( im->wordKind ) {
     default :
-      fprintf(stderr, "writeGis: such word kind not handled in ascii mode for file \'%s\'\n", outputName);
+      fprintf(stderr, "writeGis: such word kind not handled in ASCII mode for file \'%s\'\n", outputName);
       if ( outputName != nullptr ) ImageIO_free( outputName );
       return( -3 );
     case WK_FIXED :
       switch ( im->wdim ) {
       default :
-        fprintf(stderr, "writeGis: such word dim not handled in ascii mode for file \'%s\'\n", outputName);
+        fprintf(stderr, "writeGis: such word dim not handled in ASCII mode for file \'%s\'\n", outputName);
         if ( outputName != nullptr ) ImageIO_free( outputName );
         return( -3 );
       case 1 :
         switch ( im->sign ) {
         default :
-          fprintf(stderr, "writeGis: such sign not handled in ascii mode for file \'%s\'\n", outputName);
+          fprintf(stderr, "writeGis: such sign not handled in ASCII mode for file \'%s\'\n", outputName);
           if ( outputName != nullptr ) ImageIO_free( outputName );
           return( -3 );
         case SGN_UNSIGNED :
@@ -169,7 +169,7 @@ int writeGis( char *name, _image* im) {
       case 2 :
         switch ( im->sign ) {
         default :
-          fprintf(stderr, "writeGis: such sign not handled in ascii mode for file \'%s\'\n", outputName);
+          fprintf(stderr, "writeGis: such sign not handled in ASCII mode for file \'%s\'\n", outputName);
           if ( outputName != nullptr ) ImageIO_free( outputName );
           return( -3 );
         case SGN_UNSIGNED :
@@ -502,7 +502,7 @@ int readGisHeader( const char* name,_image* im)
 
 
 
-    /* read data if ascii
+    /* read data if ASCII
        only U8 and S8
      */
     if ( im->dataMode == DM_ASCII ) {
@@ -512,7 +512,7 @@ int readGisHeader( const char* name,_image* im)
       int ret, iv=0;
 
       if ( im->wdim != 1 || im->wordKind != WK_FIXED ) {
-        fprintf(stderr, "readGisHeader: error: unable to read such ascii type\n" );
+        fprintf(stderr, "readGisHeader: error: unable to read such ASCII type\n" );
         return -1;
       }
 
@@ -550,7 +550,7 @@ int readGisHeader( const char* name,_image* im)
           }
 
           if ( ret != 1 ) {
-            fprintf( stderr, "readGisHeader: error in reading ascii data\n" );
+            fprintf( stderr, "readGisHeader: error in reading ASCII data\n" );
             ImageIO_free( im->data ); im->data = nullptr;
             ImageIO_free( str );
             return -1;

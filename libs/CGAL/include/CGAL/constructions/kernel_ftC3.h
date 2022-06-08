@@ -7,7 +7,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/constructions/kernel_ftC3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/constructions/kernel_ftC3.h $
 // $Id: kernel_ftC3.h 80af4b3 2020-10-26T09:17:01+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

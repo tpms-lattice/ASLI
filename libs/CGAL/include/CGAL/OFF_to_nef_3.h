@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/OFF_to_nef_3.h $
-// $Id: OFF_to_nef_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/OFF_to_nef_3.h $
+// $Id: OFF_to_nef_3.h 6d6dc0c 2020-06-24T17:41:20+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -103,7 +103,7 @@ class number_type_converter_nef_3<Cartesian_tag, Kernel> {
 
 #include <CGAL/Cartesian.h>
 #include <CGAL/Nef_3/Mark_bounded_volumes.h>
-#include <CGAL/IO/Scanner_OFF.h>
+#include <CGAL/IO/OFF.h>
 #include <CGAL/normal_vector_newell_3.h>
 
 #ifdef CGAL_NEF_OFF_TO_NEF_TIMER

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Bounding_volumes/include/CGAL/Min_circle_2/Optimisation_circle_2_impl.h $
-// $Id: Optimisation_circle_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Bounding_volumes/include/CGAL/Min_circle_2/Optimisation_circle_2_impl.h $
+// $Id: Optimisation_circle_2_impl.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,7 @@ template < class K_ >
 std::ostream&
 operator << ( std::ostream& os, const CGAL::Optimisation_circle_2<K_>& c)
 {
-    switch ( CGAL::get_mode( os)) {
+    switch ( CGAL::IO::get_mode( os)) {
 
       case CGAL::IO::PRETTY:
         os << "CGAL::Optimisation_circle_2( "
@@ -43,7 +43,7 @@ operator << ( std::ostream& os, const CGAL::Optimisation_circle_2<K_>& c)
 
       default:
         CGAL_optimisation_assertion_msg( false,
-                                         "CGAL::get_mode( os) invalid!");
+                                         "CGAL::IO::get_mode( os) invalid!");
         break; }
 
     return( os);
@@ -56,11 +56,11 @@ operator >> ( std::istream& is, CGAL::Optimisation_circle_2<K_>& c)
     typedef  typename CGAL::Optimisation_circle_2<K_>::Point     Point;
     typedef  typename CGAL::Optimisation_circle_2<K_>::Distance  Distance;
 
-    switch ( CGAL::get_mode( is)) {
+    switch ( CGAL::IO::get_mode( is)) {
 
       case CGAL::IO::PRETTY:
         std::cerr << std::endl;
-        std::cerr << "Stream must be in ascii or binary mode" << std::endl;
+        std::cerr << "Stream must be in ASCII or binary mode" << std::endl;
         break;
 
       case CGAL::IO::ASCII: {
@@ -80,7 +80,7 @@ operator >> ( std::istream& is, CGAL::Optimisation_circle_2<K_>& c)
 
       default:
         CGAL_optimisation_assertion_msg( false,
-                                         "CGAL::get_mode( is) invalid!");
+                                         "CGAL::IO::get_mode( is) invalid!");
         break; }
 
     return( is);

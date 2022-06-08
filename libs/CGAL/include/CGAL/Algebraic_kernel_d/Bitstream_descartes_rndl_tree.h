@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_descartes_rndl_tree.h $
-// $Id: Bitstream_descartes_rndl_tree.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_descartes_rndl_tree.h $
+// $Id: Bitstream_descartes_rndl_tree.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1079,7 +1079,7 @@ public:
         this->ptr()->node_list_.erase(n);
     }
 
-    /*! \brief Replace traits class
+    /*! \brief replaces traits class
      */
     void set_traits(TRAITS& traits) {
 
@@ -1090,7 +1090,7 @@ public:
 
     }
 
-    /*! \brief Returns a copy of this with its own representation
+    /*! \brief returns a copy of this with its own representation
      */
     Self make_unique() const {
       Self tmp = *this;

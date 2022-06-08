@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_3/include/CGAL/Circular_arc_point_3.h $
-// $Id: Circular_arc_point_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_3/include/CGAL/Circular_arc_point_3.h $
+// $Id: Circular_arc_point_3.h acdf4c6 2020-07-22T15:23:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
@@ -20,7 +20,6 @@
 #include <CGAL/license/Circular_kernel_3.h>
 
 
-#include <CGAL/result_of.h>
 #include <CGAL/Bbox_3.h>
 #include <iostream>
 
@@ -196,15 +195,15 @@ public:
 
 
 
-  typename cpp11::result_of<typename R::Compute_circular_x_3(Circular_arc_point_3)>::type
+  decltype(auto)
   x() const
   { return typename R::Compute_circular_x_3()(*this);}
 
-  typename cpp11::result_of<typename R::Compute_circular_y_3(Circular_arc_point_3)>::type
+  decltype(auto)
   y() const
   { return typename R::Compute_circular_y_3()(*this);}
 
-  typename cpp11::result_of<typename R::Compute_circular_z_3(Circular_arc_point_3)>::type
+  decltype(auto)
   z() const
   { return typename R::Compute_circular_z_3()(*this);}
 

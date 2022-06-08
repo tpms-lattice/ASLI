@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Point_set_neighborhood.h $
-// $Id: Point_set_neighborhood.h c7cd9cb 2020-09-30T08:36:15+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Point_set_neighborhood.h $
+// $Id: Point_set_neighborhood.h 833e511 2021-11-10T11:31:42+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -67,11 +67,15 @@ class Point_set_neighborhood
     using value_type = typename boost::property_traits<PointMap>::value_type;
     using reference = typename boost::property_traits<PointMap>::reference;
     using key_type = std::uint32_t;
-    using category = typename boost::property_traits<PointMap>::category;
+    using category = boost::readable_property_map_tag;
+
     My_point_property_map () { }
     My_point_property_map (const PointRange *input, PointMap point_map)
       : input (input), point_map (point_map) { }
-    friend reference get (const My_point_property_map& ppmap, key_type i)
+
+    // we did not put `reference` here on purpose as the recommanded default
+    // is `Identity_property_map<Point_3>` and not `Identity_property_map<const Point_3>`
+    friend decltype(auto) get (const My_point_property_map& ppmap, key_type i)
     { return get(ppmap.point_map, *(ppmap.input->begin()+std::size_t(i))); }
   };
 

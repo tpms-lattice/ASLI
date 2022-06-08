@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polynomial/include/CGAL/Polynomial.h $
-// $Id: Polynomial.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Polynomial.h $
+// $Id: Polynomial.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 //         they may be wrong now.
 
 /*! \file CGAL/Polynomial.h
- *  \brief Defines class CGAL::Polynomial.
+ *  \brief defines class CGAL::Polynomial.
  *
  *  Polynomials in one variable (or more, by recursion)
  */

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polygon_mesh.h $
-// $Id: Triangulate_hole_polygon_mesh.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Hole_filling/Triangulate_hole_polygon_mesh.h $
+// $Id: Triangulate_hole_polygon_mesh.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -94,7 +94,9 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
             OutputIterator out,
             VertexPointMap vpmap,
             bool use_delaunay_triangulation,
-            const Kernel& k)
+            const Kernel& k,
+            const bool use_cdt,
+            const typename Kernel::FT max_squared_distance)
 {
   typedef Halfedge_around_face_circulator<PolygonMesh>   Hedge_around_face_circulator;
   typedef typename boost::graph_traits<PolygonMesh>::vertex_descriptor vertex_descriptor;
@@ -173,6 +175,13 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
   // fill hole using polyline function, with custom tracer for PolygonMesh
   Tracer_polyhedron<PolygonMesh, OutputIterator>
     tracer(out, pmesh, P_edges);
+
+#ifndef CGAL_HOLE_FILLING_DO_NOT_USE_CDT2
+    if(use_cdt && triangulate_hole_polyline_with_cdt(P, tracer, is_valid, k, max_squared_distance))
+    {
+      return std::make_pair(tracer.out, CGAL::internal::Weight_min_max_dihedral_and_area(0,0));
+    }
+#endif
   CGAL::internal::Weight_min_max_dihedral_and_area weight =
     triangulate_hole_polyline(P, Q, tracer, WC(is_valid),
       use_delaunay_triangulation, k)
@@ -182,7 +191,7 @@ triangulate_hole_polygon_mesh(PolygonMesh& pmesh,
   ;
 
   #ifdef CGAL_PMP_HOLE_FILLING_DEBUG
-  std:cerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
+  std::cerr << "Hole filling: " << timer.time() << " sc." << std::endl; timer.reset();
   #endif
   return std::make_pair(tracer.out, weight);
 }

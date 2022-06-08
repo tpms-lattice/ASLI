@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/partition.h $
-// $Id: partition.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/partition.h $
+// $Id: partition.h 48c997a 2020-07-17T17:00:18+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -13,7 +13,7 @@
 #define CGAL_BGL_PARTITION_H
 
 /**
-* \ingroup PkgBGLRef
+* \ingroup PkgBGLPartition
 * \file CGAL/boost/graph/partition.h
 * Convenience header file including the headers for all the partitioning-related
 * free functions of this package.

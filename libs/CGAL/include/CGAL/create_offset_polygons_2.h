@@ -3,7 +3,7 @@
 // This file is part of CGAL (www.cgal.org).
 //
 
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Straight_skeleton_2/include/CGAL/create_offset_polygons_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/create_offset_polygons_2.h $
 // $Id: create_offset_polygons_2.h 145f204 2020-10-09T17:20:01+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

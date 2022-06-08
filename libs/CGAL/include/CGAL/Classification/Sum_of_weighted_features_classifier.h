@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Sum_of_weighted_features_classifier.h $
-// $Id: Sum_of_weighted_features_classifier.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Sum_of_weighted_features_classifier.h $
+// $Id: Sum_of_weighted_features_classifier.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot, Florent Lafarge
@@ -692,11 +692,7 @@ public:
     }
     // Write property tree to XML file
     boost::property_tree::write_xml(output, tree,
-#if BOOST_VERSION >= 105600
                                     boost::property_tree::xml_writer_make_settings<std::string>(' ', 3));
-#else
-                                    boost::property_tree::xml_writer_make_settings<char>(' ', 3));
-#endif
   }
 
   /*!

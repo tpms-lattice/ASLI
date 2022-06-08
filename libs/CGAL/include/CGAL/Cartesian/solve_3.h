@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/Cartesian/solve_3.h $
-// $Id: solve_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/solve_3.h $
+// $Id: solve_3.h a4c57e6 2021-03-21T19:35:41+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,13 +29,27 @@ void solve (const VectorC3<R> &v0,
             const VectorC3<R> &v1,
             const VectorC3<R> &v2,
             const VectorC3<R> &d,
+            typename R::FT &alpha, typename R::FT &beta, typename R::FT &gamma, typename R::FT &denom)
+{
+  CGAL::solve(v0.x(), v0.y(), v0.z(),
+              v1.x(), v1.y(), v1.z(),
+              v2.x(), v2.y(), v2.z(),
+              d.x(),  d.y(),  d.z(),
+              alpha, beta, gamma, denom);
+}
+
+template <class R>
+void solve (const VectorC3<R> &v0,
+            const VectorC3<R> &v1,
+            const VectorC3<R> &v2,
+            const VectorC3<R> &d,
             typename R::FT &alpha, typename R::FT &beta, typename R::FT &gamma)
 {
   CGAL::solve(v0.x(), v0.y(), v0.z(),
-        v1.x(), v1.y(), v1.z(),
-        v2.x(), v2.y(), v2.z(),
-        d.x(),  d.y(),  d.z(),
-        alpha, beta, gamma);
+              v1.x(), v1.y(), v1.z(),
+              v2.x(), v2.y(), v2.z(),
+              d.x(),  d.y(),  d.z(),
+              alpha, beta, gamma);
 }
 
 } // namespace Cartesian_internal

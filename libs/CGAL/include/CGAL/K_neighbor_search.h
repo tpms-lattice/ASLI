@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_searching/include/CGAL/K_neighbor_search.h $
-// $Id: K_neighbor_search.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_searching/include/CGAL/K_neighbor_search.h $
+// $Id: K_neighbor_search.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,9 +18,9 @@
 
 #include <CGAL/disable_warnings.h>
 
-#include <CGAL/internal/K_neighbor_search.h>
-#include <CGAL/internal/Get_dimension_tag.h>
-#include <CGAL/internal/Search_helpers.h>
+#include <CGAL/Spatial_searching/internal/K_neighbor_search.h>
+#include <CGAL/Spatial_searching/internal/Get_dimension_tag.h>
+#include <CGAL/Spatial_searching/internal/Search_helpers.h>
 
 #include <iterator> // for std::distance
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_d/include/CGAL/Kernel_d/Segment_d.h $
-// $Id: Segment_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Kernel_d/Segment_d.h $
+// $Id: Segment_d.h 152a084 2021-09-21T13:34:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 
 #include <CGAL/Kernel_d/Pair_d.h>
 #include <CGAL/Kernel_d/Point_d.h>
-#include <CGAL/Kernel_d/Segment_d.h>
 #include <CGAL/Kernel_d/Line_d.h>
 #include <CGAL/Kernel_d/Ray_d.h>
 #include <CGAL/Kernel_d/Aff_transformation_d.h>

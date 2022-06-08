@@ -227,7 +227,7 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	} else {
 		CGAL::set_mode(stl_fileOut, CGAL::IO::BINARY);
 	}
-	CGAL::write_STL(processedScaffold, stl_fileOut);
+	CGAL::IO::write_STL(stl_fileOut, processedScaffold);
 	stl_fileOut.close();
 
 	std::cout << "\n  SURFACE TRIANGULATION: " << std::endl;
@@ -501,7 +501,7 @@ void MeshCGAL::implicitPoissonReconstruction(outerShell &shell, double offset,
 //			} else {
 //				CGAL::set_mode(stl_fileOut, CGAL::IO::BINARY);
 //			}
-//			CGAL::write_STL(triangle_mesh_temp, stl_fileOut);
+//			CGAL::IO::write_STL(stl_fileOut, triangle_mesh_temp);
 //			stl_fileOut.close();
 //	}
 	}

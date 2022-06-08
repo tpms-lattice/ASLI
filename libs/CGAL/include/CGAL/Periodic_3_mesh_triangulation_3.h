@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_triangulation_3.h $
-// $Id: Periodic_3_mesh_triangulation_3.h 8080601 2020-12-05T17:58:52+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_triangulation_3.h $
+// $Id: Periodic_3_mesh_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
@@ -22,8 +22,8 @@
 // traits class
 #include <CGAL/Kernel_traits.h>
 #include <CGAL/Robust_weighted_circumcenter_filtered_traits_3.h>
-#include <CGAL/internal/Robust_periodic_weighted_circumcenter_traits_3.h>
-#include <CGAL/internal/canonicalize_helper.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Robust_periodic_weighted_circumcenter_traits_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/canonicalize_helper.h>
 
 // periodic triangulations
 #include <CGAL/Periodic_3_regular_triangulation_traits_3.h>

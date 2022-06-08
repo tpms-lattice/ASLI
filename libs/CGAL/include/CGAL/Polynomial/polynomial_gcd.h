@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polynomial/include/CGAL/Polynomial/polynomial_gcd.h $
-// $Id: polynomial_gcd.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Polynomial/polynomial_gcd.h $
+// $Id: polynomial_gcd.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -102,7 +102,7 @@ Polynomial<NT> gcd_(
 // name gcd() forwarded to the internal::gcd_() dispatch function
 /*! \ingroup CGAL_Polynomial
  *  \relates CGAL::Polynomial
- *  \brief return the greatest common divisor of \c p1 and \c p2
+ *  \brief returns the greatest common divisor of \c p1 and \c p2
  *
  *  \pre Requires \c Innermost_coefficient_type to be a \c Field or a \c UFDomain.
  */

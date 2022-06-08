@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h $
-// $Id: polygon_mesh_to_polygon_soup.h 47df5dc 2020-11-30T18:00:41+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h $
+// $Id: polygon_mesh_to_polygon_soup.h 1d98f0f 2020-12-09T14:40:02+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -117,6 +117,8 @@ void polygon_mesh_to_polygon_soup(const PolygonMesh& mesh,
   }
 }
 
+/// \cond SKIP_IN_MANUAL
+
 template<typename PolygonMesh, typename PointRange, typename PolygonRange>
 void polygon_mesh_to_polygon_soup(const PolygonMesh& mesh,
                                   PointRange& points,
@@ -124,6 +126,8 @@ void polygon_mesh_to_polygon_soup(const PolygonMesh& mesh,
 {
   return polygon_mesh_to_polygon_soup(mesh, points, polygons, CGAL::parameters::all_default());
 }
+
+/// \endcond
 
 } // namespace Polygon_mesh_processing
 } // namespace CGAL

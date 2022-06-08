@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path_traits.h $
-// $Id: Surface_mesh_shortest_path_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_shortest_path/include/CGAL/Surface_mesh_shortest_path/Surface_mesh_shortest_path_traits.h $
+// $Id: Surface_mesh_shortest_path_traits.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stephen Kiazyk
@@ -171,7 +171,7 @@ std::ostream& operator<<(std::ostream& os, typename Surface_mesh_shortest_path_t
 
 \internal
 
-\brief Provides an implementation of the SurfaceMeshShortestPathTraits
+\brief provides an implementation of the SurfaceMeshShortestPathTraits
 model which uses an exact Kernel during the unfolding operations to achieve better overall precision
 
 \tparam K Kernel Type

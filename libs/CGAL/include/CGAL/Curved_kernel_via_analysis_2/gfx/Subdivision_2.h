@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_2.h $
-// $Id: Subdivision_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Subdivision_2.h $
+// $Id: Subdivision_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pavel Emeliyanenko <asm@mpi-sb.mpg.de>
@@ -195,7 +195,7 @@ private:
         //! for univariate case
         void get_range_AARD_1(int var, const NT& lower, const NT& upper,
                 const Poly_1& poly, NT& l, NT& h);
-        //! \brief Recursive Taylor, bivariate case
+        //! \brief recursive Taylor, bivariate case
         //!
         //! returns a range of polynomial values as Affine_form
         void get_range_RT_2(const NT& x_low,  const NT& x_high, const NT& y_low,
@@ -283,7 +283,7 @@ void Subdivision_2<NT_, Algebraic_curve_2_>::subdivide(const NT& x_low,
         quad_tree(x_mid,x_high,y_low,y_mid);
 }
 
-//! \brief Recursive Taylor, bivariate case
+//! \brief recursive Taylor, bivariate case
 template <class NT_, class Algebraic_curve_2_>
 void Subdivision_2<NT_, Algebraic_curve_2_>::get_range_RT_2(
         const NT& x_low, const NT& x_high, const NT& y_low, const NT& y_high,

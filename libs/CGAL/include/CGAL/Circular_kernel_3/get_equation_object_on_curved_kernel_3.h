@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_3/include/CGAL/Circular_kernel_3/get_equation_object_on_curved_kernel_3.h $
-// $Id: get_equation_object_on_curved_kernel_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/get_equation_object_on_curved_kernel_3.h $
+// $Id: get_equation_object_on_curved_kernel_3.h ad813b4 2020-07-30T16:19:02+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
@@ -40,33 +40,6 @@ namespace CGAL {
     typedef typename SK::Polynomials_for_line_3 result_type_for_line;
     typedef typename SK::Polynomials_for_circle_3 result_type_for_circle;
     //using LinearFunctors::Get_equation<SK>::operator();
-
-    template <typename>
-    struct result;
-
-    template <typename F>
-    struct result<F(typename SK::Sphere_3)>
-    {
-      typedef result_type_for_sphere type;
-    };
-
-    template <typename F>
-    struct result<F(typename SK::Plane_3)>
-    {
-      typedef result_type_for_plane type;
-    };
-
-    template <typename F>
-    struct result<F(typename SK::Line_3)>
-    {
-      typedef result_type_for_line type;
-    };
-
-    template <typename F>
-    struct result<F(typename SK::Circle_3)>
-    {
-      typedef result_type_for_circle type;
-    };
 
     result_type_for_sphere
     operator() ( const typename SK::Sphere_3 & s )

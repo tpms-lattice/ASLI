@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/optimize_2.h $
-// $Id: optimize_2.h 6fe47ed 2020-05-06T12:10:48+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/optimize_2.h $
+// $Id: optimize_2.h 93ee230 2021-08-23T22:25:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -14,10 +14,10 @@
 
 #include <CGAL/license/Optimal_bounding_box.h>
 
+#include <CGAL/assertions.h>
 #include <CGAL/ch_akl_toussaint.h>
 #include <CGAL/min_quadrilateral_2.h>
 #include <CGAL/Polygon_2.h>
-#include <CGAL/number_type_config.h>
 
 #include <iostream>
 #include <iterator>

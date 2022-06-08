@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Projection_traits_xz_3.h $
-// $Id: Projection_traits_xz_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Projection_traits_xz_3.h $
+// $Id: Projection_traits_xz_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,7 @@
 #ifndef CGAL_PROJECTION_TRAITS_XZ_3_H
 #define CGAL_PROJECTION_TRAITS_XZ_3_H
 
-#include <CGAL/internal/Projection_traits_3.h>
+#include <CGAL/Kernel_23/internal/Projection_traits_3.h>
 
 namespace CGAL {
 

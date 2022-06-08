@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Hash_map/include/CGAL/Handle_hash_function.h $
-// $Id: Handle_hash_function.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Hash_map/include/CGAL/Handle_hash_function.h $
+// $Id: Handle_hash_function.h cec93d0 2021-05-27T14:36:55+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,8 +33,18 @@ namespace internal{
       std::size_t
       operator()(const H& h)
       {
-        return std::size_t(&*h) /
+        return std::size_t(h.operator->()) /
           sizeof( typename std::iterator_traits<H>::value_type);
+      }
+    };
+
+    template <class H>
+    struct Hash_functor<H*>{
+      std::size_t
+      operator()(const H* h)
+      {
+        return std::size_t(h) /
+          sizeof(H);
       }
     };
   }

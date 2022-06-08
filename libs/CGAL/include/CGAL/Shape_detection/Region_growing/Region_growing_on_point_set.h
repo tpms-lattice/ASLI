@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Shape_detection/include/CGAL/Shape_detection/Region_growing/Region_growing_on_point_set.h $
-// $Id: Region_growing_on_point_set.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/Region_growing/Region_growing_on_point_set.h $
+// $Id: Region_growing_on_point_set.h ad17c0b 2021-05-04T08:47:08+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,9 +20,15 @@
 #include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Sphere_neighbor_query.h>
 
 #include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_line_fit_region.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_circle_fit_region.h>
 #include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_plane_fit_region.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_sphere_fit_region.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_cylinder_fit_region.h>
 
 #include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_line_fit_sorting.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_circle_fit_sorting.h>
 #include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_plane_fit_sorting.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_sphere_fit_sorting.h>
+#include <CGAL/Shape_detection/Region_growing/Region_growing_on_point_set/Least_squares_cylinder_fit_sorting.h>
 
 #endif // CGAL_SHAPE_DETECTION_REGION_GROWING_POINT_SET_H

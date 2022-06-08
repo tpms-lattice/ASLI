@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_triangulation_2.h $
-// $Id: Reconstruction_triangulation_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Reconstruction_triangulation_2.h $
+// $Id: Reconstruction_triangulation_2.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin
@@ -787,8 +787,7 @@ public:
       pt, geom_traits().construct_vector_2_object()(pt, ps));
 
     boost::optional<FT> Dqt;
-    typename CGAL::cpp11::result_of<typename Traits_::Intersect_2(Line, Line)>::type
-      result = intersection(lab, lts);
+    const auto result = intersection(lab, lts);
     if (result)
     {
       const Point* iq = boost::get<Point>(&(*result));

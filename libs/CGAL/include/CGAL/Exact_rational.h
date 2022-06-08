@@ -7,14 +7,14 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Exact_rational.h $
-// $Id: Exact_rational.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Exact_rational.h $
+// $Id: Exact_rational.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Laurent Rineau
 
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 
 namespace CGAL {
 
@@ -24,7 +24,7 @@ namespace CGAL {
 `Exact_rational` is an exact rational number type, constructible from `double`.
 
 It is a typedef of another number type. Its exact definition depends on
-the availability the third-party libraries %GMP, %CORE, and %LEDA. %CGAL must
+the availability the third-party libraries \gmp, \core, and \leda. \cgal must
 be configured with at least one of those libraries.
 
 \cgalModels `Field`

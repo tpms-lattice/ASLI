@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_hull_2/include/CGAL/Convex_hull_2/ch_bykat_impl.h $
-// $Id: ch_bykat_impl.h 51086d5 2021-01-28T17:12:26+00:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_2/include/CGAL/Convex_hull_2/ch_bykat_impl.h $
+// $Id: ch_bykat_impl.h 21755b1 2021-03-24T15:05:41+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,8 +66,7 @@ ch_bykat(InputIterator first, InputIterator last,
       *result = a;  ++result;
       return result;
   }
-  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS) \
-    || defined(NDEBUG)
+  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS)
   OutputIterator  res(result);
   #else
   Tee_for_output_iterator<OutputIterator,Point_2> res(result);
@@ -113,8 +112,7 @@ ch_bykat(InputIterator first, InputIterator last,
           P.begin(), P.end(), \
           res.output_so_far_begin(), res.output_so_far_end(), \
           ch_traits));
-  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS) \
-    || defined(NDEBUG)
+  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS)
   return res;
   #else
   return res.to_output_iterator();
@@ -167,8 +165,7 @@ ch_bykat_with_threshold(InputIterator   first, InputIterator last,
       *result = a;  ++result;
       return result;
   }
-  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS) \
-    || defined(NDEBUG)
+  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS)
   OutputIterator  res(result);
   #else
   Tee_for_output_iterator<OutputIterator,Point_2> res(result);
@@ -242,8 +239,7 @@ ch_bykat_with_threshold(InputIterator   first, InputIterator last,
           Pbegin, Pend, \
           res.output_so_far_begin(), res.output_so_far_end(), \
           ch_traits));
-  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS) \
-    || defined(NDEBUG)
+  #if defined(CGAL_CH_NO_POSTCONDITIONS) || defined(CGAL_NO_POSTCONDITIONS)
   return res;
   #else
   return res.to_output_iterator();

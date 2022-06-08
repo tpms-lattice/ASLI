@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_hull_3/include/CGAL/Convex_hull_traits_3.h $
-// $Id: Convex_hull_traits_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/Convex_hull_traits_3.h $
+// $Id: Convex_hull_traits_3.h 61d42c3 2021-12-16T13:49:45+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,18 +15,16 @@
 
 #include <CGAL/license/Convex_hull_3.h>
 
-
 #include <CGAL/Polyhedron_3_fwd.h>
-#include <CGAL/Convex_hull_face_base_2.h>
 #include <CGAL/Projection_traits_xy_3.h>
 #include <CGAL/Projection_traits_xz_3.h>
 #include <CGAL/Projection_traits_yz_3.h>
-#include <list>
 #include <CGAL/Filtered_predicate.h>
 #include <CGAL/Cartesian_converter.h>
 #include <CGAL/Default.h>
 
 namespace CGAL {
+
 template < class R_ >
 class Point_triple
 {

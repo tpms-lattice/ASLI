@@ -4,14 +4,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Isotropic_remeshing/AABB_filtered_projection_traits.h $
-// $Id: AABB_filtered_projection_traits.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Isotropic_remeshing/AABB_filtered_projection_traits.h $
+// $Id: AABB_filtered_projection_traits.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s) : Camille Wormser, Pierre Alliez, Stephane Tayeb, Laurent Rineau
 //
-// File adapted from <CGAL/internal/AABB_tree/AABB_traversal_traits.h>
+// File adapted from <CGAL/AABB_tree/internal/AABB_traversal_traits.h>
 //
 
 #ifndef CGAL_AABB_FILTERED_PROJECTION_TRAITS_H
@@ -23,8 +23,8 @@
 #include <CGAL/property_map.h>
 
 #include <CGAL/AABB_tree.h>
-#include <CGAL/internal/AABB_tree/AABB_node.h>
-#include <CGAL/internal/AABB_tree/Primitive_helper.h>
+#include <CGAL/AABB_tree/internal/AABB_node.h>
+#include <CGAL/AABB_tree/internal/Primitive_helper.h>
 
 namespace CGAL {
 namespace Polygon_mesh_processing {

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_2/include/CGAL/Circular_arc_point_2.h $
-// $Id: Circular_arc_point_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_2/include/CGAL/Circular_arc_point_2.h $
+// $Id: Circular_arc_point_2.h 059bc60 2020-07-22T15:13:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
@@ -21,7 +21,6 @@
 #include <CGAL/license/Circular_kernel_2.h>
 
 
-#include <CGAL/result_of.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/enum.h>
 
@@ -72,15 +71,13 @@ public:
     : RCircular_arc_point_2(typename R::Construct_circular_arc_point_2()(p))
   {}
 
-  typename
-  cpp11::result_of<typename R::Compute_circular_x_2(Circular_arc_point_2)>::type
+  decltype(auto)
   x() const
   {
     return typename R::Compute_circular_x_2()(*this);
   }
 
-  typename
-  cpp11::result_of<typename R::Compute_circular_y_2(Circular_arc_point_2)>::type
+  decltype(auto)
   y() const
   {
     return typename R::Compute_circular_y_2()(*this);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/AABB_tree/include/CGAL/AABB_primitive.h $
-// $Id: AABB_primitive.h 5ec5ad6 2020-04-22T16:23:57+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/AABB_tree/include/CGAL/AABB_primitive.h $
+// $Id: AABB_primitive.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,7 +18,7 @@
 
 #include <CGAL/disable_warnings.h>
 
-#include <CGAL/internal/AABB_tree/Has_nested_type_Shared_data.h>
+#include <CGAL/AABB_tree/internal/Has_nested_type_Shared_data.h>
 #include <CGAL/property_map.h>
 #include <CGAL/tags.h>
 

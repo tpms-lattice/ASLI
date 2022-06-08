@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Mean_value_coordinates_parameterizer_3.h $
-// $Id: Mean_value_coordinates_parameterizer_3.h 93a70d3 2020-07-21T16:46:50+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Mean_value_coordinates_parameterizer_3.h $
+// $Id: Mean_value_coordinates_parameterizer_3.h cac04ed 2021-06-08T13:36:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez, Bruno Levy
@@ -17,9 +17,9 @@
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/Surface_mesh_parameterization/internal/validity.h>
-
 #include <CGAL/Surface_mesh_parameterization/Error_code.h>
 #include <CGAL/Surface_mesh_parameterization/Fixed_border_parameterizer_3.h>
+#include <CGAL/Weights/tangent_weights.h>
 
 #ifdef CGAL_EIGEN3_ENABLED
 #include <CGAL/Eigen_solver_traits.h>
@@ -195,35 +195,18 @@ protected:
                           Vertex_around_target_circulator<Triangle_mesh> neighbor_vertex_v_j) const
   {
     const PPM ppmap = get(vertex_point, mesh);
-
     const Point_3& position_v_i = get(ppmap, main_vertex_v_i);
     const Point_3& position_v_j = get(ppmap, *neighbor_vertex_v_j);
 
-    // Compute the norm of v_j -> v_i vector
-    Vector_3 edge = position_v_i - position_v_j;
-    NT len = std::sqrt(edge * edge);
-
-    // Compute angle of (v_j,v_i,v_k) corner (i.e. angle of v_i corner)
-    // if v_k is the vertex before v_j when circulating around v_i
     vertex_around_target_circulator previous_vertex_v_k = neighbor_vertex_v_j;
-    previous_vertex_v_k--;
+    --previous_vertex_v_k;
     const Point_3& position_v_k = get(ppmap, *previous_vertex_v_k);
-    NT gamma_ij = internal::compute_angle_rad<Kernel>(position_v_j, position_v_i, position_v_k);
 
-    // Compute angle of (v_l,v_i,v_j) corner (i.e. angle of v_i corner)
-    // if v_l is the vertex after v_j when circulating around v_i
     vertex_around_target_circulator next_vertex_v_l = neighbor_vertex_v_j;
-    next_vertex_v_l++;
+    ++next_vertex_v_l;
     const Point_3& position_v_l = get(ppmap, *next_vertex_v_l);
-    NT delta_ij = internal::compute_angle_rad<Kernel>(position_v_l, position_v_i, position_v_j);
 
-    NT weight = 0.0;
-    CGAL_assertion(len != 0.0); // two points are identical!
-    if(len != 0.0)
-      weight = (std::tan(0.5*gamma_ij) + std::tan(0.5*delta_ij)) / len;
-    CGAL_assertion(weight > 0);
-
-    return weight;
+    return CGAL::Weights::tangent_weight(position_v_k, position_v_j, position_v_l, position_v_i) / NT(2);
   }
 };
 

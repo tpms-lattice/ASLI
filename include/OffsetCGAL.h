@@ -10,7 +10,7 @@
 
 /* CGAL headers */
 // IO
-#include <CGAL/IO/facets_in_complex_3_to_triangle_mesh.h>
+#include <CGAL/facets_in_complex_3_to_triangle_mesh.h>
 
 // Polygon processing
 #include <CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h>

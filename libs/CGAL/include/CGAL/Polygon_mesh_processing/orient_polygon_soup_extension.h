@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h $
-// $Id: orient_polygon_soup_extension.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/orient_polygon_soup_extension.h $
+// $Id: orient_polygon_soup_extension.h b539d4a 2021-08-05T18:06:50+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -64,7 +64,8 @@ duplicate_non_manifold_edges_in_polygon_soup(PointRange& points,
   typedef CGAL::Polygon_mesh_processing::internal::
     Polygon_soup_orienter<PointRange, PolygonRange> Orienter;
 
-  Orienter orienter(points, polygons);
+  Default_orientation_visitor visitor;
+  Orienter orienter(points, polygons, visitor);
   orienter.fill_edge_map();
   // make edges to duplicate
   for(std::size_t i1=0;i1<points.size();++i1)

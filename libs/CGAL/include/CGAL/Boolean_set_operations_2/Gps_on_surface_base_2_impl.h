@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_on_surface_base_2_impl.h $
-// $Id: Gps_on_surface_base_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_on_surface_base_2_impl.h $
+// $Id: Gps_on_surface_base_2_impl.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -348,7 +348,7 @@ _insert(const Polygon_2& pgn, Arrangement_on_surface_2 & arr)
   }
 
   Face_const_handle const_f;
-  // face should not be contained as the pgn is completly disjoint of the
+  // face should not be contained as the pgn is completely disjoint of the
   // arrangement.
   CGAL_assertion(CGAL::assign(const_f, obj_f) && !const_f->contained());
   CGAL::assign(const_f, obj_f);

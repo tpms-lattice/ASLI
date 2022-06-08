@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/draw_nef_3.h $
-// $Id: draw_nef_3.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/draw_nef_3.h $
+// $Id: draw_nef_3.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,11 +30,11 @@ namespace CGAL {
 struct DefaultColorFunctorNefPolyhedron
 {
   template<typename NefPolyhedron>
-  static CGAL::Color run(const NefPolyhedron&,
+  static CGAL::IO::Color run(const NefPolyhedron&,
                          typename NefPolyhedron::Halffacet_const_handle fh)
   {
     if (fh == nullptr) // use to get the mono color
-      return CGAL::Color(100, 125, 200); // R G B between 0-255
+      return CGAL::IO::Color(100, 125, 200); // R G B between 0-255
 
     CGAL::Random random((unsigned int)(std::size_t)(&(*fh)));
     return get_random_color(random);
@@ -111,7 +111,7 @@ protected:
         return;
       }
 
-      CGAL::Color c = viewer.run_color(f);
+      CGAL::IO::Color c = viewer.run_color(f);
       viewer.face_begin(c);
 
       SHalfedge_around_facet_const_circulator hc_start(se);
@@ -171,7 +171,7 @@ protected:
     negate_all_normals();
   }
 
-  CGAL::Color run_color(Halffacet_const_handle fh)
+  CGAL::IO::Color run_color(Halffacet_const_handle fh)
   {
     return m_fcolor.run(nef, fh);
   }
@@ -256,7 +256,7 @@ void draw(const CGAL_NEF3_TYPE &anef,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc = 1;
-    const char *argv[2] = {"nef_polyhedron_viewer", "\0"};
+    const char *argv[2] = {"nef_polyhedron_viewer", nullptr};
     QApplication app(argc, const_cast<char **>(argv));
     DefaultColorFunctorNefPolyhedron fcolor;
     SimpleNefPolyhedronViewerQt<CGAL_NEF3_TYPE,

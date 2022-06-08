@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cone_spanners_2/include/CGAL/gnuplot_output_2.h $
-// $Id: gnuplot_output_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cone_spanners_2/include/CGAL/gnuplot_output_2.h $
+// $Id: gnuplot_output_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,7 +38,7 @@ namespace CGAL {
 
 /*!
 *  \ingroup PkgConeSpanners2Ref
-*  \brief Output a set of files used by Gnuplot to plot `g`.
+*  \brief outputs a set of files used by Gnuplot to plot `g`.
 *
 *  The files that are generated for Gnuplot are:
 *  (1) prefix.v (vertex list)

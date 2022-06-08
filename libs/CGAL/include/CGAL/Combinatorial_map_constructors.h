@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Combinatorial_map/include/CGAL/Combinatorial_map_constructors.h $
-// $Id: Combinatorial_map_constructors.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Combinatorial_map/include/CGAL/Combinatorial_map_constructors.h $
+// $Id: Combinatorial_map_constructors.h 461156c 2020-07-17T18:06:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -62,8 +62,8 @@ namespace CGAL {
    * @return a new dart.
    */
   template < class Map >
-  typename Map::Dart_handle
-  CGAL_DEPRECATED make_combinatorial_tetrahedron(Map& amap,
+  CGAL_DEPRECATED typename Map::Dart_handle
+  make_combinatorial_tetrahedron(Map& amap,
                                  typename Map::Dart_handle d1,
                                  typename Map::Dart_handle d2,
                                  typename Map::Dart_handle d3,
@@ -99,8 +99,8 @@ namespace CGAL {
    * @return a dart of the new cuboidal_cell.
    */
   template < class Map >
-  typename Map::Dart_handle
-  CGAL_DEPRECATED make_combinatorial_hexahedron(Map& amap,
+  CGAL_DEPRECATED typename Map::Dart_handle
+  make_combinatorial_hexahedron(Map& amap,
                                 typename Map::Dart_handle d1,
                                 typename Map::Dart_handle d2,
                                 typename Map::Dart_handle d3,

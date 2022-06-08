@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Filtered_kernel/include/CGAL/Filtered_predicate_with_state.h $
-// $Id: Filtered_predicate_with_state.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Filtered_kernel/include/CGAL/Filtered_predicate_with_state.h $
+// $Id: Filtered_predicate_with_state.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -74,12 +74,9 @@ Filtered_predicate_with_state<EP,AP,C2E,C2A,O1,Protection>::
     }
     CGAL_BRANCH_PROFILER_BRANCH(tmp);
     Protect_FPU_rounding<!Protection> p(CGAL_FE_TONEAREST);
+    CGAL_expensive_assertion(FPU_get_cw() == CGAL_FE_TONEAREST);
     if(! oep){
-      #if BOOST_VERSION < 105600
-      oep = EP(c2e(o1));
-      #else
       oep.emplace(c2e(o1));
-      #endif
     }
     return (*oep)(c2e(args)...);
 }

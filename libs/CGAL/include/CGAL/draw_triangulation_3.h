@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_3/include/CGAL/draw_triangulation_3.h $
-// $Id: draw_triangulation_3.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_3/include/CGAL/draw_triangulation_3.h $
+// $Id: draw_triangulation_3.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -28,11 +28,11 @@ namespace CGAL
 struct DefaultColorFunctorT3
 {
   template<typename T3>
-  static CGAL::Color run(const T3&,
+  static CGAL::IO::Color run(const T3&,
                          const typename T3::Finite_facets_iterator* fh)
   {
     if (fh==nullptr) // use to get the mono color
-      return CGAL::Color(100, 125, 200); // R G B between 0-255
+      return CGAL::IO::Color(100, 125, 200); // R G B between 0-255
 
     CGAL::Random random((unsigned int)((std::size_t)(&*((*fh)->first))+
                                        (std::size_t)((*fh)->second)));
@@ -74,7 +74,7 @@ public:
 protected:
   void compute_face(Facet_const_handle fh)
   {
-    CGAL::Color c=m_fcolor.run(t3, &fh);
+    CGAL::IO::Color c=m_fcolor.run(t3, &fh);
     face_begin(c);
 
     add_point_in_face(fh->first->vertex((fh->second+1)%4)->point());
@@ -153,7 +153,7 @@ void draw(const CGAL_T3_TYPE& at3,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"t3_viewer","\0"};
+    const char* argv[2]={"t3_viewer", nullptr};
     QApplication app(argc,const_cast<char**>(argv));
     DefaultColorFunctorT3 fcolor;
     SimpleTriangulation3ViewerQt<CGAL_T3_TYPE, DefaultColorFunctorT3>

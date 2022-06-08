@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/HalfedgeDS/include/CGAL/HalfedgeDS_decorator.h $
-// $Id: HalfedgeDS_decorator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/HalfedgeDS/include/CGAL/HalfedgeDS_decorator.h $
+// $Id: HalfedgeDS_decorator.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -695,7 +695,7 @@ public:
   protected:                               // Supports_halfedge_vertices
       void erase_connected_component_vertex( Halfedge_handle  ,Tag_false){}
       void erase_connected_component_vertex( Halfedge_handle h, Tag_true) {
-          // Erases the the vertex incident to h and sets all references
+          // Erases the vertex incident to h and sets all references
           // from halfedges around this vertex to Halfedge_handle(),
           // if the incident vertex handle is not already equal to
           // Halfedge_handle(). It is used to erase vertices as soon

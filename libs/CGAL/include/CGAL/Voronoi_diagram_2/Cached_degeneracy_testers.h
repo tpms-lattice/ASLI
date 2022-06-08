@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Cached_degeneracy_testers.h $
-// $Id: Cached_degeneracy_testers.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Cached_degeneracy_testers.h $
+// $Id: Cached_degeneracy_testers.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,7 @@
 #include <map>
 
 #include <CGAL/Unique_hash_map.h>
-#include <CGAL/internal/TDS_2/Edge_hash_function.h>
+#include <CGAL/TDS_2/internal/Edge_hash_function.h>
 
 
 namespace CGAL {
@@ -99,18 +99,9 @@ public:
     return operator()(dual, Edge(f,i));
   }
 
+  template <typename EdgeIterator>
   bool operator()(const Delaunay_graph& dual,
-                  const Edge_circulator& ec) const {
-    return operator()(dual, *ec);
-  }
-
-  bool operator()(const Delaunay_graph& dual,
-                  const All_edges_iterator& eit) const {
-    return operator()(dual, *eit);
-  }
-
-  bool operator()(const Delaunay_graph& dual,
-                  const Finite_edges_iterator& eit) const {
+                  const EdgeIterator eit) const {
     return operator()(dual, *eit);
   }
 
@@ -214,18 +205,9 @@ public:
     return operator()(dual, Edge(f,i));
   }
 
+  template <typename EdgeIterator>
   bool operator()(const Delaunay_graph& dual,
-                  const Edge_circulator& ec) const {
-    return operator()(dual, *ec);
-  }
-
-  bool operator()(const Delaunay_graph& dual,
-                  const All_edges_iterator& eit) const {
-    return operator()(dual, *eit);
-  }
-
-  bool operator()(const Delaunay_graph& dual,
-                  const Finite_edges_iterator& eit) const {
+                  const EdgeIterator eit) const {
     return operator()(dual, *eit);
   }
 
@@ -250,11 +232,11 @@ public:
 
   bool is_valid() const { return true; }
 
-  bool is_valid(const Delaunay_graph& dual) const {
+  bool is_valid(const Delaunay_graph& dual) const
+  {
     bool valid = true;
-    All_edges_iterator eit;
-    for (eit = dual.all_edges_begin(); eit != dual.all_edges_end(); ++eit) {
-      Edge e = *eit;
+    for (auto eit = dual.all_edges_begin(); eit != dual.all_edges_end(); ++eit) {
+      const Edge& e = *eit;
       bool b = !emap.is_defined(e) || (emap[e] != UNDEFINED);
       valid = valid && b;
     }

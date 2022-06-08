@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Partition_2/include/CGAL/Partition_2/partition_approx_convex_2.h $
-// $Id: partition_approx_convex_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Partition_2/include/CGAL/Partition_2/partition_approx_convex_2.h $
+// $Id: partition_approx_convex_2.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40800)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Wmaybe-uninitialized\"")
 #endif
@@ -230,7 +230,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
    }
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS)  || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    OutputIterator res(result);
 #else
    typedef typename Traits::Polygon_2                  Polygon_2;
@@ -244,7 +244,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
                                    res.output_so_far_end(), traits));
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS)  || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    return res;
 #else
    return res.to_output_iterator();
@@ -264,7 +264,7 @@ OutputIterator partition_approx_convex_2(InputIterator first,
 }
 
 }
-#if  (BOOST_GCC >= 40800)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 #endif // CGAL_PARTITION_APPROX_CONVEX_H

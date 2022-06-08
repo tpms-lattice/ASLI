@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
-// $Id: Periodic_3_regular_triangulation_3.h 1003046 2020-03-12T20:58:44+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_regular_triangulation_3.h $
+// $Id: Periodic_3_regular_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@inria.fr>
@@ -17,7 +17,7 @@
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 // Needed by remove to fill the hole.
-#include <CGAL/internal/Periodic_3_regular_triangulation_remove_traits_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_regular_triangulation_remove_traits_3.h>
 
 #include <CGAL/Periodic_3_triangulation_3.h>
 #include <CGAL/Periodic_3_triangulation_ds_vertex_base_3.h>
@@ -27,7 +27,7 @@
 #include <CGAL/Regular_triangulation_cell_base_3.h>
 
 #include <CGAL/enum.h>
-#include <CGAL/internal/Has_nested_type_Bare_point.h>
+#include <CGAL/STL_Extension/internal/Has_nested_type_Bare_point.h>
 #include <CGAL/spatial_sort.h>
 #include <CGAL/utility.h>
 
@@ -497,7 +497,7 @@ public:
 
     // Spatial sorting can only be applied to bare points, so we need an adaptor
     typedef typename Geom_traits::Construct_point_3 Construct_point_3;
-    typedef typename boost::result_of<const Construct_point_3(const Weighted_point&)>::type Ret;
+    typedef decltype(std::declval<const Construct_point_3>()(std::declval<const Weighted_point&>())) Ret;
     typedef boost::function_property_map<Construct_point_3, Weighted_point, Ret> fpmap;
     typedef CGAL::Spatial_sort_traits_adapter_3<Geom_traits, fpmap> Search_traits_3;
 
@@ -963,7 +963,7 @@ public:
   // end of geometric functions
 
 #define CGAL_INCLUDE_FROM_PERIODIC_3_REGULAR_TRIANGULATION_3_H
-#include <CGAL/internal/Periodic_3_regular_triangulation_dummy_288.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_regular_triangulation_dummy_288.h>
 #undef CGAL_INCLUDE_FROM_PERIODIC_3_REGULAR_TRIANGULATION_3_H
 
   Vertex_handle nearest_power_vertex(const Bare_point& p, Cell_handle start) const

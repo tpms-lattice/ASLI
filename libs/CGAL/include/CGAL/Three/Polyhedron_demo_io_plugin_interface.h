@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/Polyhedron_demo_io_plugin_interface.h $
-// $Id: Polyhedron_demo_io_plugin_interface.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Polyhedron_demo_io_plugin_interface.h $
+// $Id: Polyhedron_demo_io_plugin_interface.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -31,7 +31,7 @@ class Scene_interface;
 class Polyhedron_demo_io_plugin_interface
 {
 public:
-  //! \brief Initializes the plugin
+  //! \brief initializes the plugin
   //! This function is called in the constructor of the MainWindow.
   //! Whatever initialization the plugin needs can be done here. Default
   //! behavior is to do nothing.

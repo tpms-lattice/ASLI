@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Solver_interface/include/CGAL/Eigen_sparse_matrix.h $
-// $Id: Eigen_sparse_matrix.h 127bf54 2019-12-09T16:39:19+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Solver_interface/include/CGAL/Eigen_sparse_matrix.h $
+// $Id: Eigen_sparse_matrix.h 267a641 2021-05-31T14:01:08+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud
@@ -18,7 +18,7 @@
 namespace CGAL {
 
 /*!
-\ingroup PkgSolverInterfaceRef
+\ingroup PkgSolverInterfaceLS
 
 The class `Eigen_sparse_matrix` is a wrapper around `Eigen` matrix type
 <a href="http://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix`</a>
@@ -298,7 +298,7 @@ private:
 
 
 /*!
-\ingroup PkgSolverInterfaceRef
+\ingroup PkgSolverInterfaceRefLS
 
 The class `Eigen_sparse_symmetric_matrix` is a wrapper around `Eigen` matrix type
 <a href="http://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix` </a>

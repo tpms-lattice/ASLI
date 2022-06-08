@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_overlay_2.h $
-// $Id: Arr_overlay_2.h adef28b 2020-10-21T10:12:51+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_overlay_2.h $
+// $Id: Arr_overlay_2.h 4afc249 2021-09-09T15:58:00+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -168,20 +168,16 @@ overlay(const Arrangement_on_surface_2<GeometryTraitsA_2, TopologyTraitsA>& arr1
   typedef Arrangement_on_surface_2<Rgt2, Rtt>                   Arr_res;
   typedef typename Arr_res::Allocator                           Allocator;
 
-  // some type assertions (not all, but better then nothing).
-#if !defined(CGAL_NO_ASSERTIONS)
+  // some type assertions (not all, but better than nothing).
   typedef typename Agt2::Point_2                                A_point;
   typedef typename Bgt2::Point_2                                B_point;
   typedef typename Rgt2::Point_2                                Res_point;
-#endif
   CGAL_static_assertion((boost::is_convertible<A_point, Res_point>::value));
   CGAL_static_assertion((boost::is_convertible<B_point, Res_point>::value));
 
-#if !defined(CGAL_NO_ASSERTIONS)
   typedef typename Agt2::X_monotone_curve_2                     A_xcv;
   typedef typename Bgt2::X_monotone_curve_2                     B_xcv;
   typedef typename Rgt2::X_monotone_curve_2                     Res_xcv;
-#endif
   CGAL_static_assertion((boost::is_convertible<A_xcv, Res_xcv>::value));
   CGAL_static_assertion((boost::is_convertible<B_xcv, Res_xcv>::value));
 

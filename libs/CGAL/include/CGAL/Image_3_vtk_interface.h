@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/CGAL_ImageIO/include/CGAL/Image_3_vtk_interface.h $
-// $Id: Image_3_vtk_interface.h 9723f5e 2021-06-08T17:38:27+02:00 Adrien Lefieux
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_ImageIO/include/CGAL/Image_3_vtk_interface.h $
+// $Id: Image_3_vtk_interface.h 91d6635 2021-06-16T15:04:45+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -111,6 +111,9 @@ inline
   vtk_image->SetSpacing(image.vx(),
                         image.vy(),
                         image.vz());
+  vtk_image->SetOrigin(image.tx(),
+                       image.ty(),
+                       image.tz());
   vtk_image->AllocateScalars(type, 1);
   vtk_image->GetPointData()->SetScalars(data_array);
   return vtk_image;

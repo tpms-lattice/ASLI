@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_vertex_base_3.h $
-// $Id: Periodic_3_triangulation_ds_vertex_base_3.h 378554e 2020-03-06T16:42:23+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_vertex_base_3.h $
+// $Id: Periodic_3_triangulation_ds_vertex_base_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/basic.h>
-#include <CGAL/internal/Dummy_tds_3.h>
+#include <CGAL/TDS_3/internal/Dummy_tds_3.h>
 #include <CGAL/Periodic_3_offset_3.h>
 
 namespace CGAL {

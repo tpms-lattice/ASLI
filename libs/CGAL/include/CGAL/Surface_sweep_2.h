@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_sweep_2/include/CGAL/Surface_sweep_2.h $
-// $Id: Surface_sweep_2.h 2c490b7 2020-10-20T15:17:24+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2.h $
+// $Id: Surface_sweep_2.h 6b64dc8 2020-11-11T09:38:55+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -109,6 +109,16 @@ public:
                                                         vector_inserter;
   typedef typename Base::Subcurve_alloc                 Subcurve_alloc;
 protected:
+  typedef typename Base::All_sides_oblivious_category
+    All_sides_oblivious_category;
+
+  // Parameter spaces that are either oblivious or open cannot have points
+  // on the boundary, and in particular intersection points. In other words,
+  // intersection points of an oblivious or open parameter space is interior
+  // by definition.
+  typedef typename Base::Sides_category
+    Sides_category;
+
   // Data members:
   Subcurve_container m_overlap_subCurves;
                                      // Contains all of the new sub-curves
@@ -117,8 +127,8 @@ protected:
   Intersection_vector m_x_objects;   // Auxiliary vector for storing the
                                      // intersection objects.
 
-  X_monotone_curve_2 sub_cv1;        // Auxiliary varibales
-  X_monotone_curve_2 sub_cv2;        // (for splitting curves).
+  X_monotone_curve_2 m_sub_cv1;      // Auxiliary varibales
+  X_monotone_curve_2 m_sub_cv2;      // (for splitting curves).
 
 public:
   /*! Constructor.
@@ -208,8 +218,8 @@ protected:
   /*! Create an intersection-point event between two curves.
    * \param xp The intersection point.
    * \param mult Its multiplicity.
-   * \param curve1 The first curve.
-   * \param curve2 The second curve.
+   * \param c1 The first curve.
+   * \param c2 The second curve.
    */
   void _create_intersection_point(const Point_2& xp,
                                   unsigned int mult,

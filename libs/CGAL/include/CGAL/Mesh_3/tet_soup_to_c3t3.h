@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_3/tet_soup_to_c3t3.h $
-// $Id: tet_soup_to_c3t3.h efc903d 2020-09-10T10:22:09+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/tet_soup_to_c3t3.h $
+// $Id: tet_soup_to_c3t3.h 086299c 2021-01-08T10:39:24+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -301,7 +301,7 @@ bool build_infinite_cells(Tr& tr,
 #endif
 
   // add the facets to the incident cells map
-  for (const Cell_handle c : infinite_cells)
+  for (const Cell_handle& c : infinite_cells)
     if(!add_infinite_facets_to_incident_cells_map<Tr>(c, 0, incident_cells_map, verbose))
       return false;
 

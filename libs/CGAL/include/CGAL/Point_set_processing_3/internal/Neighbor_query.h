@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Neighbor_query.h $
-// $Id: Neighbor_query.h efc0c52 2021-01-15T10:02:00+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Neighbor_query.h $
+// $Id: Neighbor_query.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -57,7 +57,7 @@ public:
     typedef input_iterator key_type;
     typedef typename boost::property_traits<PointMap>::reference reference;
     typedef typename boost::property_traits<PointMap>::value_type value_type;
-    typedef typename boost::property_traits<PointMap>::category category;
+    typedef typename boost::readable_property_map_tag category;
 
     PointMap point_map;
 

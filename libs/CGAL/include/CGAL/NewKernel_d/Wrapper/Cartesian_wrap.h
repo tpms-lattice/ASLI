@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Cartesian_wrap.h $
-// $Id: Cartesian_wrap.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Cartesian_wrap.h $
+// $Id: Cartesian_wrap.h 31a0557 2021-08-13T16:45:28+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -56,6 +56,7 @@ template<class T> struct Is_wrapper_iterator<T,true> :
 { };
 
 struct Forward_rep {
+//@mglisse shall we update that code?
 //TODO: make a good C++0X version with perfect forwarding
 //#ifdef CGAL_CXX11
 //template <class T,class=typename std::enable_if<!Is_wrapper<typename std::decay<T>::type>::value&&!Is_wrapper_iterator<typename std::decay<T>::type>::value>::type>

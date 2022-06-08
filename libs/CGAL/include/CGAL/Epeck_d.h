@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/Epeck_d.h $
-// $Id: Epeck_d.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/Epeck_d.h $
+// $Id: Epeck_d.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -19,10 +19,10 @@
 #include <CGAL/NewKernel_d/Kernel_d_interface.h>
 #include <CGAL/NewKernel_d/Lazy_cartesian.h>
 #include <CGAL/NewKernel_d/KernelD_converter.h>
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 #include <CGAL/NewKernel_d/Types/Weighted_point.h>
 
-// TODO: add static filters somewhere
+// TODO: In Kernel_23, Epeck predicates first see if they can convert their arguments to Epick types exactly, and in that case use the Epick predicates (including static filters, Mpzf, etc).
 namespace CGAL {
 #define CGAL_KA Cartesian_base_d<Interval_nt_advanced,Dim>
 #define CGAL_KE Cartesian_base_d<internal::Exact_field_selector<double>::Type, Dim>

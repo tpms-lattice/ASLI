@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_d/include/CGAL/Filtered_kernel_d.h $
-// $Id: Filtered_kernel_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Filtered_kernel_d.h $
+// $Id: Filtered_kernel_d.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus, Olivier Devillers
@@ -13,7 +13,7 @@
 #define CGAL_FILTERED_KERNEL_D_H
 
 #include <CGAL/Filtered_predicate.h>
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 #include <CGAL/Kernel_d/Cartesian_converter_d.h>
 #include <CGAL/Cartesian_d.h>
 

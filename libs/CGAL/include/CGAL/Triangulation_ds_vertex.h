@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation/include/CGAL/Triangulation_ds_vertex.h $
-// $Id: Triangulation_ds_vertex.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/Triangulation_ds_vertex.h $
+// $Id: Triangulation_ds_vertex.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -17,7 +17,7 @@
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/Compact_container.h>
-#include <CGAL/internal/Triangulation/Dummy_TDS.h>
+#include <CGAL/Triangulation/internal/Dummy_TDS.h>
 
 namespace CGAL {
 
@@ -112,7 +112,7 @@ template < class TDS >
 std::istream &
 operator>>(std::istream & is, Triangulation_ds_vertex<TDS> &) /* Concept */
 {
-    /*if( is_ascii(is) )
+    /*if( IO::is_ascii(is) )
     {}
     else {}*/
     return is;
@@ -122,7 +122,7 @@ template< class TDS >
 std::ostream &
 operator<<(std::ostream & os, const Triangulation_ds_vertex<TDS> &) /* Concept */
 {
-    /*if( is_ascii(os) )
+    /*if( IO::is_ascii(os) )
     {
         os << '\n';
     }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_filter_NT.h $
-// $Id: Cartesian_filter_NT.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_filter_NT.h $
+// $Id: Cartesian_filter_NT.h 74c029c 2021-09-09T11:44:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -14,7 +14,7 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/NewKernel_d/Cartesian_change_FT.h>
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 
 namespace CGAL {
 
@@ -48,6 +48,7 @@ struct Cartesian_filter_NT : public Base_
                                           if(is_certain(res)) return get_certain(res);
                                   } catch (Uncertain_conversion_exception&) {}
                             }
+                            CGAL_expensive_assertion(FPU_get_cw() == CGAL_FE_TONEAREST);
                             return p2(std::forward<U>(u)...);
                     }
             };

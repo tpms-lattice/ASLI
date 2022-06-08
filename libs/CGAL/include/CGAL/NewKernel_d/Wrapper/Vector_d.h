@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Vector_d.h $
-// $Id: Vector_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Vector_d.h $
+// $Id: Vector_d.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -22,7 +22,6 @@
 #include <boost/type_traits.hpp>
 #include <CGAL/Kernel/Return_base_tag.h>
 #include <CGAL/Dimension.h>
-#include <boost/utility/result_of.hpp>
 
 namespace CGAL {
 namespace Wrap {
@@ -135,7 +134,7 @@ public:
   {
     auto b = v.cartesian_begin();
     auto e = v.cartesian_end();
-    if(is_ascii(os))
+    if(IO::is_ascii(os))
     {
       os << v.dimension();
       for(; b != e; ++b){
@@ -156,7 +155,7 @@ public:
   friend std::istream & operator>>(std::istream &is, Vector_d & v)
   {
     int dim;
-    if( is_ascii(is) )
+    if( IO::is_ascii(is) )
       is >> dim;
     else
     {
@@ -165,10 +164,10 @@ public:
     if(!is) return is;
 
     std::vector<FT_> coords(dim);
-    if(is_ascii(is))
+    if(IO::is_ascii(is))
     {
       for(int i=0;i<dim;++i)
-        is >> iformat(coords[i]);
+        is >> IO::iformat(coords[i]);
     }
     else
     {

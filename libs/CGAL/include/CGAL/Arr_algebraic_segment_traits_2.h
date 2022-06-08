@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_algebraic_segment_traits_2.h $
-// $Id: Arr_algebraic_segment_traits_2.h d08f8b4 2020-07-02T19:09:51+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_algebraic_segment_traits_2.h $
+// $Id: Arr_algebraic_segment_traits_2.h 6b64dc8 2020-11-11T09:38:55+02:00 Efi Fogel
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -129,14 +129,14 @@ public:
         return CKvA_2::instance().parameter_space_in_x_2_object();
     }
 
-    typedef typename CKvA_2::Compare_x_at_limit_2 Compare_x_at_limit_2;
-    Compare_x_at_limit_2 compare_x_at_limit_2_object() const {
-        return CKvA_2::instance().compare_x_at_limit_2_object();
+    typedef typename CKvA_2::Compare_x_on_boundary_2 Compare_x_on_boundary_2;
+    Compare_x_on_boundary_2 compare_x_on_boundary_2_object() const {
+        return CKvA_2::instance().compare_x_on_boundary_2_object();
     }
 
-    typedef typename CKvA_2::Compare_x_near_limit_2  Compare_x_near_limit_2;
-    Compare_x_near_limit_2 compare_x_near_limit_2_object() const {
-        return CKvA_2::instance().compare_x_near_limit_2_object();
+    typedef typename CKvA_2::Compare_x_near_boundary_2 Compare_x_near_boundary_2;
+    Compare_x_near_boundary_2 compare_x_near_boundary_2_object() const {
+        return CKvA_2::instance().compare_x_near_boundary_2_object();
     }
 
     typedef typename CKvA_2::Construct_min_vertex_2 Construct_min_vertex_2;

@@ -7,12 +7,15 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/assertions_impl.h $
-// $Id: assertions_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/assertions_impl.h $
+// $Id: assertions_impl.h bca05c8 2021-09-24T11:14:01+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Geert-Jan Giezeman and Sven Schönherr
+
+#ifndef CGAL_ASSERTIONS_IMPL_H
+#define CGAL_ASSERTIONS_IMPL_H
 
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline
@@ -280,3 +283,5 @@ set_warning_behaviour(Failure_behaviour eb)
 }
 
 } //namespace CGAL
+
+#endif //CGAL_ASSERTIONS_IMPL_H

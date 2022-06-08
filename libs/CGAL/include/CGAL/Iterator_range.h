@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Iterator_range.h $
-// $Id: Iterator_range.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Iterator_range.h $
+// $Id: Iterator_range.h a88a84b 2021-08-13T15:46:50+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -68,7 +68,6 @@ namespace CGAL {
   {
     return begin()==end();
   }
-#ifndef CGAL_CFG_NO_CPP0X_TUPLE
 
   operator std::tuple<I&, I&>()
   {
@@ -79,8 +78,6 @@ namespace CGAL {
   {
     return std::tuple<const I&, const I&>{this->first, this->second};
   }
-#endif
-
 };
 
   template <typename T>

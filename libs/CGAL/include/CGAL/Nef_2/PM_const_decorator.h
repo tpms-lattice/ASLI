@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_2/include/CGAL/Nef_2/PM_const_decorator.h $
-// $Id: PM_const_decorator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/PM_const_decorator.h $
+// $Id: PM_const_decorator.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -398,7 +398,7 @@ void check_integrity_and_topological_planarity(bool faces=true) const;
 
 template <class VH>
 std::string PV(VH v)
-{ std::ostringstream os; CGAL::set_pretty_mode(os);
+{ std::ostringstream os; CGAL::IO::set_pretty_mode(os);
   if (v != VH()) os << v->point();
   else           os << "nil";
   return os.str();

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_S2/include/CGAL/Nef_S2/SM_point_locator.h $
-// $Id: SM_point_locator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_S2/SM_point_locator.h $
+// $Id: SM_point_locator.h 2334ec5 2021-03-10T18:40:03+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -257,7 +257,7 @@ public:
     Unique_hash_map<SHalfedge_handle,bool> visited(false);
     CGAL_forall_svertices(v,*this) {
       Sphere_point vp = v->point();
-      if ( s.has_on(vp) ) {
+      if ( (v == v_res) || s.has_on(vp) ) {
         CGAL_NEF_TRACEN(" location via vertex at "<<vp);
         s = Sphere_segment(p,vp,s.sphere_circle()); // we shrink the segment
         if ( is_isolated(v) ) {

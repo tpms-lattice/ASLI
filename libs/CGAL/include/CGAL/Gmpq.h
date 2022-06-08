@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Gmpq.h $
-// $Id: Gmpq.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Gmpq.h $
+// $Id: Gmpq.h 152a084 2021-09-21T13:34:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,6 +25,15 @@ template <> class Algebraic_structure_traits< Gmpq >
   public:
     typedef Tag_true            Is_exact;
     typedef Tag_false            Is_numerical_sensitive;
+
+    class Is_zero
+      : public CGAL::cpp98::unary_function< Type, bool > {
+      public:
+        bool operator()( const Type& x_) const {
+          return mpq_sgn(x_.mpq()) == 0;
+        }
+    };
+
 
     class Is_square
       : public CGAL::cpp98::binary_function< Type, Type&,
@@ -59,6 +68,22 @@ template <> class Algebraic_structure_traits< Gmpq >
 template <> class Real_embeddable_traits< Gmpq >
   : public INTERN_RET::Real_embeddable_traits_base< Gmpq , CGAL::Tag_true > {
   public:
+
+    class Is_positive
+      : public CGAL::cpp98::unary_function< Type, bool > {
+      public:
+        bool operator()( const Type& x_) const {
+          return mpq_sgn(x_.mpq()) > 0;
+        }
+    };
+
+    class Is_negative
+      : public CGAL::cpp98::unary_function< Type, bool > {
+      public:
+        bool operator()( const Type& x_) const {
+          return mpq_sgn(x_.mpq()) < 0;
+        }
+    };
 
     class Sgn
       : public CGAL::cpp98::unary_function< Type, ::CGAL::Sign > {
@@ -184,7 +209,6 @@ namespace Eigen {
 
 //since types are included by Gmp_coercion_traits.h:
 #include <CGAL/Gmpz.h>
-#include <CGAL/Gmpq.h>
 #include <CGAL/Gmpzf.h>
 #include <CGAL/GMP_arithmetic_kernel.h>
 

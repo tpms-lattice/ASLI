@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Ridges_3/include/CGAL/Umbilics.h $
-// $Id: Umbilics.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Ridges_3/include/CGAL/Umbilics.h $
+// $Id: Umbilics.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Pouget and Frédéric Cazals
@@ -19,7 +19,7 @@
 #include <CGAL/PolyhedralSurf_neighbors.h>
 #include <CGAL/Kernel/global_functions_3.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <list>
 #include <vector>
@@ -133,7 +133,7 @@ class Umbilic_approximation
   const TriangleMesh& P;
 
   typedef T_PolyhedralSurf_neighbors<TriangleMesh> Poly_neighbors;
-  boost::shared_ptr<Poly_neighbors> poly_neighbors;
+  std::shared_ptr<Poly_neighbors> poly_neighbors;
 
   CGAL::Abs<FT> cgal_abs;
   CGAL::To_double<FT> To_double;
@@ -165,7 +165,7 @@ Umbilic_approximation(const TriangleMesh& p,
 {
   CGAL_precondition(is_triangle_mesh(P));
 
-  poly_neighbors = boost::shared_ptr<Poly_neighbors>(new Poly_neighbors(P));
+  poly_neighbors = std::shared_ptr<Poly_neighbors>(new Poly_neighbors(P));
 }
 
 

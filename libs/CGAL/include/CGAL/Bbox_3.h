@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Bbox_3.h $
-// $Id: Bbox_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Bbox_3.h $
+// $Id: Bbox_3.h 529add2 2021-07-07T14:37:41+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -18,7 +18,6 @@
 
 #include <CGAL/config.h>
 #include <CGAL/kernel_assertions.h>
-#include <CGAL/result_of.h>
 #include <CGAL/IO/io.h>
 #include <CGAL/Dimension.h>
 #include <CGAL/array.h>
@@ -58,12 +57,15 @@ public:
   inline bool operator!=(const Bbox_3 &b) const;
 
   inline int dimension() const;
-  double  xmin() const;
-  double  ymin() const;
-  double  zmin() const;
-  double  xmax() const;
-  double  ymax() const;
-  double  zmax() const;
+  double xmin() const;
+  double ymin() const;
+  double zmin() const;
+  double xmax() const;
+  double ymax() const;
+  double zmax() const;
+  double x_span() const;
+  double y_span() const;
+  double z_span() const;
 
   inline double min BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
   inline double max BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
@@ -106,6 +108,18 @@ inline
 double
 Bbox_3::zmax() const
 { return rep[5]; }
+
+inline double Bbox_3::x_span() const {
+  return xmax() - xmin();
+}
+
+inline double Bbox_3::y_span() const {
+  return ymax() - ymin();
+}
+
+inline double Bbox_3::z_span() const {
+  return zmax() - zmin();
+}
 
 inline
 bool
@@ -206,7 +220,7 @@ inline
 std::ostream&
 operator<<(std::ostream &os, const Bbox_3& b)
 {
-  switch(get_mode(os))
+  switch(IO::get_mode(os))
   {
     case IO::ASCII :
         return os << b.xmin() << ' ' << b.ymin() << ' ' << b.zmin()
@@ -242,11 +256,11 @@ operator>>(std::istream &is, Bbox_3& b)
     double ymax = 0;
     double zmax = 0;
 
-  switch(get_mode(is))
+  switch(IO::get_mode(is))
   {
     case IO::ASCII :
-      is >> iformat(xmin) >> iformat(ymin) >> iformat(zmin)
-         >> iformat(xmax) >> iformat(ymax) >> iformat(zmax);
+      is >> IO::iformat(xmin) >> IO::iformat(ymin) >> IO::iformat(zmin)
+         >> IO::iformat(xmax) >> IO::iformat(ymax) >> IO::iformat(zmax);
         break;
     case IO::BINARY :
         read(is, xmin);

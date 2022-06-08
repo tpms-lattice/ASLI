@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_triangulation_point_location.h $
-// $Id: Arr_triangulation_point_location.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_triangulation_point_location.h $
+// $Id: Arr_triangulation_point_location.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Idit Haran   <haranidi@post.tau.ac.il>
@@ -80,7 +80,7 @@ public:
   typedef Triangulation_vertex_base_with_info_2<Vertex_const_handle, Kernel>
     Vbb;
   typedef Triangulation_hierarchy_vertex_base_2<Vbb>                  Vb;
-  //typedef Triangulation_face_base_with_info_2<CGAL::Color,Kernel>    Fbt;
+  //typedef Triangulation_face_base_with_info_2<CGAL::IO::Color,Kernel>    Fbt;
   typedef Constrained_triangulation_face_base_2<Kernel>               Fb;
   typedef Triangulation_data_structure_2<Vb,Fb>                       TDS;
   typedef Exact_predicates_tag                                        Itag;

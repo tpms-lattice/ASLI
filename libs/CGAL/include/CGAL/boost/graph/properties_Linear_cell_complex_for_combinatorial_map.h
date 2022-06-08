@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Linear_cell_complex/include/CGAL/boost/graph/properties_Linear_cell_complex_for_combinatorial_map.h $
-// $Id: properties_Linear_cell_complex_for_combinatorial_map.h b4c0e6e 2020-03-27T19:12:07+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Linear_cell_complex/include/CGAL/boost/graph/properties_Linear_cell_complex_for_combinatorial_map.h $
+// $Id: properties_Linear_cell_complex_for_combinatorial_map.h f3db661 2022-03-09T14:13:31+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -16,7 +16,6 @@
 
 #include <CGAL/boost/graph/properties.h>
 #include <CGAL/Linear_cell_complex_for_combinatorial_map.h>
-#include <CGAL/Unique_hash_map.h>
 #include <CGAL/Dynamic_property_map.h>
 
 
@@ -42,7 +41,6 @@ namespace CGAL {
 
 template<typename LCC, typename FT>
 struct Wrap_squared_lcc
-  : boost::put_get_helper< double, Wrap_squared_lcc<LCC, FT> >
 {
   typedef typename boost::graph_traits<LCC>::edge_descriptor Handle;
   typedef FT value_type;
@@ -54,12 +52,19 @@ struct Wrap_squared_lcc
   {}
 
   template<typename E>
-  FT operator[](const E& e) const
+  value_type operator[](const E& e) const
   {
     return approximate_sqrt(CGAL::squared_distance
                             (m_lcc.point(e.first_halfedge()),
                              m_lcc.point(e.second_halfedge())));
   }
+
+  friend inline
+  value_type get(const Wrap_squared_lcc& m, const key_type& k)
+  {
+    return m[k];
+  }
+
 private:
   const LCC& m_lcc;
 };

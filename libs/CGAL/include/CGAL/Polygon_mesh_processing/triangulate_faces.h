@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/triangulate_faces.h $
-// $Id: triangulate_faces.h bfd4e99 2020-09-15T15:42:24+02:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/triangulate_faces.h $
+// $Id: triangulate_faces.h 7355675 2021-03-19T12:00:08+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,7 @@
 #include <CGAL/Triangulation_vertex_base_with_info_2.h>
 #include <CGAL/Triangulation_face_base_with_info_2.h>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
-#include <CGAL/Triangulation_2_projection_traits_3.h>
+#include <CGAL/Projection_traits_3.h>
 #else
 #include <CGAL/use.h>
 #endif
@@ -152,7 +152,7 @@ public:
 #ifndef CGAL_TRIANGULATE_FACES_DO_NOT_USE_CDT2
       if (use_cdt)
       {
-        typedef CGAL::Triangulation_2_projection_traits_3<Traits>   P_traits;
+        typedef CGAL::Projection_traits_3<Traits>   P_traits;
         typedef CGAL::Triangulation_vertex_base_with_info_2<halfedge_descriptor,
                                                             P_traits>        Vb;
         typedef CGAL::Triangulation_face_base_with_info_2<Face_info,

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/cluster_point_set.h $
-// $Id: cluster_point_set.h f7f781c 2021-04-19T12:44:25+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/cluster_point_set.h $
+// $Id: cluster_point_set.h e935a3d 2021-04-28T15:24:10+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -71,7 +71,7 @@ CGAL::Emptyset_iterator get_adjacencies (const NamedParameters&, CGAL::Emptyset_
    \tparam ClusterMap is a model of `ReadWritePropertyMap` with value
    type `std::size_t`.
 
-   \param points input point range.
+   \param points input point range
    \param cluster_map maps each point to the index of the cluster it belongs to.
    \param np optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below.
 

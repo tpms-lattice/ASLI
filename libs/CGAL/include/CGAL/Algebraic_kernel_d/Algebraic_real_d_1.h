@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_d_1.h $
-// $Id: Algebraic_real_d_1.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_d_1.h $
+// $Id: Algebraic_real_d_1.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -180,13 +180,13 @@ public:
     }
   }
 
-  /*! \brief Refines the isolating interval. */
+  /*! \brief refines the isolating interval. */
   void refine() const{ this->ptr()->refine(); }
 
   /*! \brief Bisects the isolating interval. */
   void bisect() const{ this->ptr()->bisect(); }
 
-  /*! \brief Refines the isolating interval until \a m is outside
+  /*! \brief refines the isolating interval until \a m is outside
    *  the \c closed interval
    */
   template < class NTX >
@@ -436,8 +436,8 @@ std::ostream&
 operator << (std::ostream& os,
     const CGAL::internal::Algebraic_real_d_1<Coefficient, Rational, HandlePolicy, RepClass >& x){
   os << "["   << x.polynomial()
-     << ",["  << oformat(x.low())
-     << " , " << oformat(x.high()) << " ]]";
+     << ",["  << IO::oformat(x.low())
+     << " , " << IO::oformat(x.high()) << " ]]";
   return os;
 }
 
@@ -458,9 +458,9 @@ operator >> (std::istream& is,
   is >> poly;
   swallow(is, ',');// read the ","
   swallow(is, '[');// read the ","
-  is >> iformat(low);
+  is >> IO::iformat(low);
   swallow(is, ',');// read the ","
-  is >> iformat(high);
+  is >> IO::iformat(high);
   swallow(is, ']');// read the "]"
   swallow(is, ']');// read the "]"
   x = ALGNUM(poly, low, high);

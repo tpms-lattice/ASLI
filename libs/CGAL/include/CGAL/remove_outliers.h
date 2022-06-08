@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/remove_outliers.h $
-// $Id: remove_outliers.h 7d5bec6 2020-09-28T09:49:00+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/remove_outliers.h $
+// $Id: remove_outliers.h 7f72142 2021-11-16T17:15:46+01:00 Clément Jamin
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret and Nader Salman and Pierre Alliez
@@ -103,7 +103,7 @@ compute_avg_knn_sq_distance_3(
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k number of neighbors
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 
@@ -247,33 +247,37 @@ remove_outliers(
 
   if (threshold_distance != FT(0))
     f2r = std::partition (sorted_points.begin(), sorted_points.end(),
-                          [&threshold_distance](const std::pair<FT, value_type>& p) -> bool
+                          [sq_threshold_distance = CGAL::square(threshold_distance)](const std::pair<FT, value_type>& p) -> bool
                           {
-                            return p.first < threshold_distance * threshold_distance;
+                            return p.first < sq_threshold_distance;
                           });
 
-  if (static_cast<std::size_t>(std::distance (sorted_points.begin(), f2r)) < first_index_to_remove)
-  {
-    std::nth_element (f2r,
-                      sorted_points.begin() + first_index_to_remove,
-                      sorted_points.end(),
-                      [](const std::pair<FT, value_type>& v1, const std::pair<FT, value_type>& v2)
-                      {
-                        return v1.first<v2.first;
-                      });
-    f2r = sorted_points.begin() + first_index_to_remove;
-  }
+  iterator out = points.end();
 
-  // Replaces [points.begin(), points.end()) range by the sorted content.
-  iterator pit = points.begin();
-  iterator out = points.begin();
-
-  for (auto sit = sorted_points.begin(); sit != sorted_points.end(); ++ sit)
+  if (f2r != sorted_points.end())
   {
-    *pit = sit->second;
-    if (sit == f2r)
-      out = pit;
-    ++ pit;
+    if (static_cast<std::size_t>(std::distance (sorted_points.begin(), f2r)) < first_index_to_remove)
+    {
+      std::nth_element (f2r,
+                        sorted_points.begin() + first_index_to_remove,
+                        sorted_points.end(),
+                        [](const std::pair<FT, value_type>& v1, const std::pair<FT, value_type>& v2)
+                        {
+                          return v1.first<v2.first;
+                        });
+      f2r = sorted_points.begin() + first_index_to_remove;
+    }
+
+    // Replaces [points.begin(), points.end()) range by the sorted content.
+    iterator pit = points.begin();
+
+    for (auto sit = sorted_points.begin(); sit != sorted_points.end(); ++ sit)
+    {
+      *pit = sit->second;
+      if (sit == f2r)
+        out = pit;
+      ++ pit;
+    }
   }
 
   callback_wrapper.join();

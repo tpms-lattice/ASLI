@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Boolean_set_operations_2/include/CGAL/General_polygon_set_2.h $
-// $Id: General_polygon_set_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Boolean_set_operations_2/include/CGAL/General_polygon_set_2.h $
+// $Id: General_polygon_set_2.h 76f4465 2021-03-03T11:29:12+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -50,13 +50,24 @@ public:
   // default costructor
   General_polygon_set_2() : Base() {}
 
-  // constructor with traits object
-  General_polygon_set_2(const Traits_2& tr) : Base(tr) {}
+  // constructor from a traits object
+  General_polygon_set_2(const Traits_2& traits) : Base(traits) {}
 
+  // constructor from a polygon
   explicit General_polygon_set_2(const Polygon_2& pgn) : Base(pgn) {}
 
-  explicit General_polygon_set_2(const Polygon_with_holes_2& pgn_with_holes):
-   Base(pgn_with_holes)
+  // constructor from a polygon with holes
+  explicit General_polygon_set_2(const Polygon_with_holes_2& pwh) : Base(pwh) {}
+
+  // constructor from a polygon and a traits object
+  explicit General_polygon_set_2(const Polygon_2& pgn, const Traits_2& traits) :
+    Base(pgn, traits)
+  {}
+
+  // constructor from a polygon with holes and a traits object
+  explicit General_polygon_set_2(const Polygon_with_holes_2& pwh,
+                                 const Traits_2& traits) :
+    Base(pwh, traits)
   {}
 
   // For some reason the below functions (the ones that we call "using" for)
@@ -92,17 +103,13 @@ public:
    * \return the underlying arrangement.
    */
   const Arrangement_2& arrangement() const
-  {
-    return *(static_cast<const Arrangement_2*>(this->m_arr));
-  }
+  { return *(static_cast<const Arrangement_2*>(this->m_arr)); }
 
   /*! Obtain a reference to the underlying arrangement
    * \return the underlying arrangement.
    */
   Arrangement_2& arrangement()
-  {
-    return *(static_cast<Arrangement_2*>(this->m_arr));
-  }
+  { return *(static_cast<Arrangement_2*>(this->m_arr)); }
 
   //@}
 };

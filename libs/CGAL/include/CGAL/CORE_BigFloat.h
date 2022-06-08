@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/CORE_BigFloat.h $
-// $Id: CORE_BigFloat.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/CORE_BigFloat.h $
+// $Id: CORE_BigFloat.h 152a084 2021-09-21T13:34:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,6 @@
 
 #include <CGAL/basic.h>
 #include <CGAL/number_type_basic.h>
-#include <CGAL/CORE/BigFloat.h>
 #include <CGAL/CORE_coercion_traits.h>
 #include <CGAL/Interval_traits.h>
 #include <CGAL/Bigfloat_interval_traits.h>
@@ -513,7 +512,6 @@ template <> class Real_embeddable_traits< CORE::BigFloat >
 #include <CGAL/CORE_Expr.h>
 #include <CGAL/CORE_BigInt.h>
 #include <CGAL/CORE_BigRat.h>
-#include <CGAL/CORE_BigFloat.h>
 #include <CGAL/CORE_arithmetic_kernel.h>
 
 namespace Eigen {

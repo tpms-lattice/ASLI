@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_2_iterators.h $
-// $Id: Arrangement_2_iterators.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_2_iterators.h $
+// $Id: Arrangement_2_iterators.h 3448035 2021-03-24T08:25:29+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -288,6 +288,12 @@ public:
     iend (nt)
   {}
 
+  template <typename T>
+  I_Filtered_iterator (T* p) :
+    nt (pointer(p)),
+    iend (nt)
+  {}
+
   I_Filtered_iterator (Iterator it, Iterator end) :
     nt (it),
     iend (end)
@@ -303,6 +309,14 @@ public:
   {
     while (nt != iend && ! filt (*nt))
       ++nt;
+  }
+
+  template <typename P>
+  I_Filtered_iterator& operator= (const P* p)
+  {
+    nt = pointer(p);
+    iend =nt;
+    return *this;
   }
 
   /*! Access operations. */
@@ -439,6 +453,12 @@ public:
     iend (it)
   {}
 
+  template <typename T>
+  I_Filtered_const_iterator (T* p) :
+    nt (pointer(p)),
+    iend (nt)
+  {}
+
   I_Filtered_const_iterator (Iterator it, Iterator end) :
     nt (it),
     iend (end)
@@ -463,6 +483,14 @@ public:
   {
     //    while (nt != iend && ! filt (*nt))
     //      ++nt;
+  }
+
+  template <typename P>
+  I_Filtered_const_iterator& operator= (const P* p)
+  {
+    nt = pointer(p);
+    iend =nt;
+    return *this;
   }
 
   /*! Access operations. */

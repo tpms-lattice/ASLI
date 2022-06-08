@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/QP_solver/include/CGAL/QP_models.h $
-// $Id: QP_models.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/QP_solver/include/CGAL/QP_models.h $
+// $Id: QP_models.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1061,7 +1061,7 @@ private:
   template<typename NumberType>
   bool number(NumberType& entry) {
     // whitespace(); the following >> should care for this
-    from >> CGAL::iformat(entry);
+    from >> CGAL::IO::iformat(entry);
     return from.good();
   }
 

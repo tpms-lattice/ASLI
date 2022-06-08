@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
-// $Id: Constrained_triangulation_plus_2.h bdc2f3e 2020-10-20T13:28:12+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_2/include/CGAL/Constrained_triangulation_plus_2.h $
+// $Id: Constrained_triangulation_plus_2.h 48c462b 2022-03-09T13:46:55+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,12 +29,7 @@
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
 #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 #include <CGAL/Triangulation_2/insert_constraints.h>
-
-#if defined(BOOST_MSVC) && (BOOST_VERSION == 105500)
-#include <set>
-#else
 #include <boost/container/flat_set.hpp>
-#endif
 
 
 namespace CGAL {
@@ -638,7 +633,7 @@ public:
   file_output(std::ostream& os) const
   {
     os << static_cast<const Tr&>(*this);
-    Unique_hash_map<Vertex_handle,int> V;
+    Unique_hash_map<Vertex_handle,int> V(0, number_of_vertices());
     int inum = 0;
     for(Vertex_iterator vit = vertices_begin(); vit != vertices_end() ; ++vit){
       if(! is_infinite(vit)){
@@ -987,12 +982,7 @@ insert_subconstraint(Vertex_handle vaa,
     // edges may contain mirror edges. They no longer exist after triangulate_hole
     // so we have to remove them before calling get_bounded_faces
     if(! edges.empty()){
-
-#if defined(BOOST_MSVC) && (BOOST_VERSION == 105500)
-      std::set<Face_handle> faces(intersected_faces.begin(), intersected_faces.end());
-#else
       boost::container::flat_set<Face_handle> faces(intersected_faces.begin(), intersected_faces.end());
-#endif
       for(typename List_edges::iterator it = edges.begin(); it!= edges.end();){
         if(faces.find(it->first) != faces.end()){
           typename List_edges::iterator it2 = it;
@@ -1196,7 +1186,8 @@ intersect(Face_handle f, int i,
             << " , #" << vd->time_stamp() << "= " << vd->point()
             << " , Exact_intersections_tag)\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
-  Point pi;
+  Point pi(ORIGIN); // initialize although we are sure that it will be
+                    // set by the intersection, but to quiet a warning
   Intersection_tag itag = Intersection_tag();
   CGAL_triangulation_assertion_code( bool ok = )
   intersection(geom_traits(), pa, pb, pc, pd, pi, itag );

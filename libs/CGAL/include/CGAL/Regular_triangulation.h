@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation/include/CGAL/Regular_triangulation.h $
-// $Id: Regular_triangulation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/Regular_triangulation.h $
+// $Id: Regular_triangulation.h e511b68 2021-02-09T17:32:00+01:00 ROUVREAU Vincent
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -974,7 +974,8 @@ Regular_triangulation<Traits, TDS>
   // => we don't insert it
   if (!in_conflict)
   {
-    m_hidden_points.push_back(p);
+    if(only_if_this_vertex_is_in_the_cz == Vertex_handle())
+      m_hidden_points.push_back(p);
     return Vertex_handle();
   }
   else

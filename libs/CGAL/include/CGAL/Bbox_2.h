@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Bbox_2.h $
-// $Id: Bbox_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Bbox_2.h $
+// $Id: Bbox_2.h 529add2 2021-07-07T14:37:41+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -61,6 +61,8 @@ public:
   inline double     ymin() const;
   inline double     xmax() const;
   inline double     ymax() const;
+  inline double x_span() const;
+  inline double y_span() const;
 
   inline double     max BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
   inline double     min BOOST_PREVENT_MACRO_SUBSTITUTION (int i) const;
@@ -90,6 +92,14 @@ inline
 double
 Bbox_2::ymax() const
 { return rep[3]; }
+
+inline double Bbox_2::x_span() const {
+  return xmax() - xmin();
+}
+
+inline double Bbox_2::y_span() const {
+  return ymax() - ymin();
+}
 
 inline
 bool
@@ -176,7 +186,7 @@ inline
 std::ostream&
 operator<<(std::ostream &os, const Bbox_2 &b)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         os << b.xmin() << ' ' << b.ymin() << ' '
            << b.xmax() << ' ' << b.ymax();
@@ -205,9 +215,9 @@ operator>>(std::istream &is, Bbox_2 &b)
     double xmax = 0;
     double ymax = 0;
 
-    switch(get_mode(is)) {
+    switch(IO::get_mode(is)) {
     case IO::ASCII :
-        is >> iformat(xmin) >> iformat(ymin) >> iformat(xmax) >> iformat(ymax);
+        is >> IO::iformat(xmin) >> IO::iformat(ymin) >> IO::iformat(xmax) >> IO::iformat(ymax);
         break;
     case IO::BINARY :
         read(is, xmin);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Descartes.h $
-// $Id: Descartes.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Descartes.h $
+// $Id: Descartes.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,7 +16,7 @@
 //         they may be wrong now.
 
 /*! \file NiX/Descartes.h
-  \brief Defines class NiX::Descartes.
+  \brief defines class NiX::Descartes.
 
   Isolate real roots of polynomials.
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Kernel/solve.h $
-// $Id: solve.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/solve.h $
+// $Id: solve.h be39ec0 2021-03-18T14:11:57+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -55,6 +55,37 @@ void solve (const FT &a1, const FT &a2, const FT &a3,
 
   z = (ab23*d1 + ab12*d3 - ab13*d2)/denom;
 #endif
+}
+
+
+template <class FT>
+void solve (const FT &a1, const FT &a2, const FT &a3,
+            const FT &b1, const FT &b2, const FT &b3,
+            const FT &c1, const FT &c2, const FT &c3,
+            const FT &d1, const FT &d2, const FT &d3,
+            FT &x, FT &y, FT &z, FT& denom)
+{
+  FT ab23 = a3*b2 - a2*b3;
+  FT ab13 = a3*b1 - a1*b3;
+  FT ab12 = a2*b1 - a1*b2;
+
+  denom = ab23*c1 - ab13*c2 + ab12*c3;
+
+  FT cd23 = c3*d2 - c2*d3;
+  FT cd13 = c3*d1 - c1*d3;
+  FT cd12 = c2*d1 - c1*d2;
+
+  x = (b3*cd12 - b2*cd13 + b1*cd23);
+
+  y = (a2*cd13 - cd12*a3 - cd23*a1);
+
+  z = (ab23*d1 + ab12*d3 - ab13*d2);
+  if(denom < 0){
+    denom = -denom;
+    x = -x;
+    y = -y;
+    z = -z;
+  }
 }
 
 

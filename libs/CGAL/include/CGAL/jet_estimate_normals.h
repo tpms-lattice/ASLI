@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/jet_estimate_normals.h $
-// $Id: jet_estimate_normals.h 93f1cd9 2020-07-16T09:53:31+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/jet_estimate_normals.h $
+// $Id: jet_estimate_normals.h 3b7754f 2021-09-20T12:44:38+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret and Marc Pouget and Frederic Cazals
@@ -107,7 +107,7 @@ jet_estimate_normal(const typename NeighborQuery::Point_3& query, ///< point to 
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k number of neighbors
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 
@@ -184,7 +184,7 @@ jet_estimate_normals(
   using parameters::choose_parameter;
   using parameters::get_parameter;
 
-  CGAL_TRACE("Calls jet_estimate_normals()\n");
+  CGAL_TRACE_STREAM << "Calls jet_estimate_normals()\n";
 
   // basic geometric types
   typedef typename PointRange::iterator iterator;
@@ -221,13 +221,15 @@ jet_estimate_normals(
   // precondition: at least 2 nearest neighbors
   CGAL_point_set_processing_precondition(k >= 2 || neighbor_radius > FT(0));
 
-  std::size_t memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("  Creates KD-tree\n");
+  std::size_t memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "  Creates KD-tree\n";
 
   Neighbor_query neighbor_query (points, point_map);
 
-  memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("  Computes normals\n");
+  memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "  Computes normals\n";
 
   std::size_t nb_points = points.size();
 
@@ -251,8 +253,9 @@ jet_estimate_normals(
 
   callback_wrapper.join();
 
-  memory = CGAL::Memory_sizer().virtual_size(); CGAL_TRACE("  %ld Mb allocated\n", memory>>20);
-  CGAL_TRACE("End of jet_estimate_normals()\n");
+  memory = CGAL::Memory_sizer().virtual_size();
+  CGAL_TRACE_STREAM << (memory >> 20) << " Mb allocated\n";
+  CGAL_TRACE_STREAM << "End of jet_estimate_normals()\n";
 }
 
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_traits_2.h $
-// $Id: Periodic_2_triangulation_traits_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_2_triangulation_2/include/CGAL/Periodic_2_triangulation_traits_2.h $
+// $Id: Periodic_2_triangulation_traits_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico@nghk.nl>,
@@ -15,11 +15,11 @@
 
 #include <CGAL/license/Periodic_2_triangulation_2.h>
 
-#include <CGAL/internal/Periodic_2_construct_point_2.h>
-#include <CGAL/internal/Functor_with_offset_points_adaptor_2.h>
+#include <CGAL/Periodic_2_triangulation_2/internal/Periodic_2_construct_point_2.h>
+#include <CGAL/Periodic_2_triangulation_2/internal/Functor_with_offset_points_adaptor_2.h>
 #include <CGAL/Periodic_2_offset_2.h>
 
-#include <CGAL/internal/Has_boolean_tags.h>
+#include <CGAL/Kernel_23/internal/Has_boolean_tags.h>
 #include <CGAL/triangulation_assertions.h>
 
 namespace CGAL {
@@ -122,7 +122,7 @@ class Periodic_2_triangulation_traits_2;
 } // namespace CGAL
 
 // Partial specialization for Filtered_kernel<CK>.
-#include <CGAL/internal/Periodic_2_triangulation_filtered_traits_2.h>
+#include <CGAL/Periodic_2_triangulation_2/internal/Periodic_2_triangulation_filtered_traits_2.h>
 
 namespace CGAL
 {

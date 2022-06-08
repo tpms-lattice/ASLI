@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh/include/CGAL/boost/graph/properties_Surface_mesh.h $
-// $Id: properties_Surface_mesh.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh/include/CGAL/boost/graph/properties_Surface_mesh.h $
+// $Id: properties_Surface_mesh.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,14 +32,13 @@ namespace CGAL {
 
 template <typename Point>
 class SM_edge_weight_pmap
-  : public boost::put_get_helper<typename CGAL::Kernel_traits<Point>::type::FT, SM_edge_weight_pmap<Point> >
 {
   typedef CGAL::Surface_mesh<Point> SM;
 public:
   typedef boost::readable_property_map_tag                category;
   typedef typename CGAL::Kernel_traits<Point>::type::FT   value_type;
   typedef value_type                                      reference;
-  typedef typename SM::Edge_index                        key_type;
+  typedef typename SM::Edge_index                         key_type;
 
   SM_edge_weight_pmap(const CGAL::Surface_mesh<Point>& sm)
     : pm_(sm. template property_map<
@@ -54,15 +53,21 @@ public:
                                                    pm_[target(e, sm_)]));
   }
 
+  friend inline
+  value_type get(const SM_edge_weight_pmap& m, const key_type& k)
+  {
+    return m[k];
+  }
+
 private:
-   typename SM::template Property_map< typename SM::Vertex_index,
-                                       typename SM::Point > pm_;
+  typename SM::template Property_map< typename SM::Vertex_index,
+                                      typename SM::Point > pm_;
   const SM& sm_;
 };
 
 
 template <typename K, typename VEF>
-class SM_index_pmap : public boost::put_get_helper<boost::uint32_t, SM_index_pmap<K,VEF> >
+class SM_index_pmap
 {
 public:
   typedef boost::readable_property_map_tag category;
@@ -73,6 +78,12 @@ public:
   value_type operator[](const key_type& vd) const
   {
     return vd;
+  }
+
+  friend inline
+  value_type get(const SM_index_pmap& m, const key_type& k)
+  {
+    return m[k];
   }
 };
 

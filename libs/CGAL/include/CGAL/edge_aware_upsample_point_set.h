@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/edge_aware_upsample_point_set.h $
-// $Id: edge_aware_upsample_point_set.h ab14acf 2021-03-23T13:14:41+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/edge_aware_upsample_point_set.h $
+// $Id: edge_aware_upsample_point_set.h 343ef10 2021-04-06T15:13:00+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Shihao Wu, Clement Jamin, Pierre Alliez
@@ -289,7 +289,7 @@ update_new_point(
    <A HREF="https://www.boost.org/libs/iterator/doc/function_output_iterator.html">function_output_iterator</A>
    to match specific needs.
 
-   \param points input point range.
+   \param points input point range
    \param output iterator where output points and normals are put.
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
 
@@ -381,8 +381,6 @@ edge_aware_upsample_point_set(
   double neighbor_radius = choose_parameter(get_parameter(np, internal_np::neighbor_radius), -1);
   std::size_t number_of_output_points = choose_parameter(get_parameter(np, internal_np::number_of_output_points), 1000);
 
-  std::cerr << sharpness_angle << " " << edge_sensitivity << " " << neighbor_radius
-            << " " << number_of_output_points << std::endl;
   // trick in case the output iterator add points to the input container
   typename PointRange::const_iterator begin = points.begin();
   typename PointRange::const_iterator end = points.end();

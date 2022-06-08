@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/hash_openmesh.h $
-// $Id: hash_openmesh.h fa44e3c 2021-03-05T08:18:45+00:00 Andreas Fabri
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/hash_openmesh.h $
+// $Id: hash_openmesh.h b2ed4e5 2021-03-10T11:33:30+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -76,7 +76,7 @@ inline std::size_t hash_value(const CGAL::internal::OMesh_edge<OpenMesh::Halfedg
 
 } // namespace OpenMesh
 
-#ifndef OM_HAS_HASH
+
 
 #include <functional>
 
@@ -89,6 +89,8 @@ namespace std {
 #endif
 
 #ifndef CGAL_CFG_NO_STD_HASH
+
+#ifndef OM_HAS_HASH
 
 template <>
 struct hash<OpenMesh::BaseHandle >
@@ -134,16 +136,6 @@ struct hash<OpenMesh::EdgeHandle >
   }
 };
 
-template <>
-struct hash<CGAL::internal::OMesh_edge<OpenMesh::HalfedgeHandle> >
-  : public CGAL::cpp98::unary_function<OpenMesh::HalfedgeHandle, std::size_t>
-{
-
-  std::size_t operator()(const CGAL::internal::OMesh_edge<OpenMesh::HalfedgeHandle>& h) const
-  {
-    return h.idx();
-  }
-};
 
 template <>
 struct hash<OpenMesh::FaceHandle >
@@ -156,6 +148,20 @@ struct hash<OpenMesh::FaceHandle >
   }
 };
 
+#endif  // OM_HAS_HASH
+
+template <typename H>
+struct hash<CGAL::internal::OMesh_edge<H> >
+  : public CGAL::cpp98::unary_function<CGAL::internal::OMesh_edge<H>, std::size_t>
+{
+
+  std::size_t operator()(const CGAL::internal::OMesh_edge<H>& h) const
+  {
+    return h.idx();
+  }
+};
+
+
 #endif // CGAL_CFG_NO_STD_HASH
 
 #if defined(BOOST_MSVC)
@@ -165,6 +171,6 @@ struct hash<OpenMesh::FaceHandle >
 } // namespace std
 
 
-#endif  // OM_HAS_HASH
+
 
 #endif // CGAL_HASH_OPENMESH_H

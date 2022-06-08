@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_2/include/CGAL/Constrained_voronoi_diagram_2.h $
-// $Id: Constrained_voronoi_diagram_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Constrained_voronoi_diagram_2.h $
+// $Id: Constrained_voronoi_diagram_2.h 7e3af5c 2021-09-10T11:26:53+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez
@@ -242,25 +242,9 @@ private:
   bool segment_hides_circumcenter(const Segment& seg,
                                   const Triangle& tr)
   {
-    Point a = seg.source();
-    Point b = seg.target();
-    double dX = b.x() - a.x();
-    double dY = b.y() - a.y();
-
-    const Point& p0 = tr[0];
-    const Point& p1 = tr[1];
-    const Point& p2 = tr[2];
-    double R0 = p0.x()*p0.x() + p0.y()*p0.y();
-    double R1 = p1.x()*p1.x() + p1.y()*p1.y();
-    double R2 = p2.x()*p2.x() + p2.y()*p2.y();
-    double denominator = (p1.x()-p0.x())*(p2.y()-p0.y()) +
-                                   (p0.x()-p2.x())*(p1.y()-p0.y());
-
-    double det = 2*denominator * (a.x()*dY - a.y()*dX)
-                    - (R2-R1) * (p0.x()*dX + p0.y()*dY)
-                    - (R0-R2) * (p1.x()*dX + p1.y()*dY)
-                    - (R1-R0) * (p2.x()*dX + p2.y()*dY);
-    return (det <= 0);
+    typename Geom_traits::Oriented_side_2 os
+      = m_cdt.geom_traits().oriented_side_2_object();
+    return (os(seg, tr) != CGAL::ON_POSITIVE_SIDE);
   }
 
   // tags with their sights, with respect to the Edge constraint,

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Compact_container.h $
-// $Id: Compact_container.h 871c972 2020-06-03T16:23:22+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Compact_container.h $
+// $Id: Compact_container.h e683686 2021-11-18T12:31:39+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion
@@ -343,10 +343,10 @@ public:
     a.swap(b);
   }
 
-  iterator begin() { return iterator(first_item, 0, 0); }
+  iterator begin() { return empty()?end():iterator(first_item, 0, 0); }
   iterator end()   { return iterator(last_item, 0); }
 
-  const_iterator begin() const { return const_iterator(first_item, 0, 0); }
+  const_iterator begin() const { return empty()?end():const_iterator(first_item, 0, 0); }
   const_iterator end()   const { return const_iterator(last_item, 0); }
 
   reverse_iterator rbegin() { return reverse_iterator(end()); }
@@ -425,9 +425,7 @@ public:
     CGAL_precondition(type(&*x) == USED);
     EraseCounterStrategy::increment_erase_counter(*x);
     std::allocator_traits<allocator_type>::destroy(alloc, &*x);
-/*#ifndef CGAL_NO_ASSERTIONS
-    std::memset(&*x, 0, sizeof(T));
-#endif*/
+
     put_on_free_list(&*x);
     --size_;
   }
@@ -734,7 +732,7 @@ void Compact_container<T, Allocator, Increment_policy, TimeStamper>::merge(Self 
   size_ += d.size_;
   // Add the capacities.
   capacity_ += d.capacity_;
-  // It seems reasonnable to take the max of the block sizes.
+  // It seems reasonable to take the max of the block sizes.
   block_size = (std::max)(block_size, d.block_size);
   // Clear d.
   d.init();
@@ -874,6 +872,8 @@ namespace internal {
     {
       m_ptr = nullptr;
     }
+
+    explicit CC_iterator(pointer ptr) : m_ptr(ptr) { }
 
     // Converting constructor from mutable to constant iterator
     template <bool OtherConst>

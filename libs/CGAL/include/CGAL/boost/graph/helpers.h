@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/helpers.h $
-// $Id: helpers.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/helpers.h $
+// $Id: helpers.h 5bd28b4 2020-07-29T10:24:02+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Andreas Fabri
@@ -341,10 +341,12 @@ bool is_valid_face_descriptor( typename boost::graph_traits<FaceGraph>::face_des
  * and all of its associations are reciprocal.
  * For example, `prev(next(h, g), g)` must be `h`,
  * and `next(prev(h, g), g)` must be `h`.
- * \param g the `Graph` to test.
- * \param verb : if `true`, the details of the check will be written in the standard output.
  *
- * \tparam `Graph` a model of `HalfedgeListGraph`
+ * \param g the `Graph` to test.
+ * \param verb if `true`, the details of the check will be written in the standard output.
+ *
+ * \tparam Graph a model of `HalfedgeListGraph`
+ *
  * \return `true` if `g` is valid, `false` otherwise.
  *
  */
@@ -524,10 +526,12 @@ bool is_valid_halfedge_graph(const Graph& g, bool verb = false)
  * of the `FaceListGraph` concept, and all of its associations are reciprocal.
  * For example, `face(halfedge(f,g),g)` must be `f`.
  * calls `is_valid_halfedge_graph()`
- * \param g the `Graph` to test.
- * \param verb : if `true`, the details of the check will be written in the standard output.
  *
- * \tparam `Graph` a model of `FaceListGraph`
+ * \param g the `Graph` to test.
+ * \param verb if `true`, the details of the check will be written in the standard output.
+ *
+ * \tparam Graph a model of `FaceListGraph`
+ *
  * \return `true` if `g` is valid, `false` otherwise.
  *
  * \see `is_valid_halfedge_graph()`

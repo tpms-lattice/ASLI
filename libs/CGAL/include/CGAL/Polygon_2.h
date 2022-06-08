@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon/include/CGAL/Polygon_2.h $
-// $Id: Polygon_2.h ad00738 2020-08-13T14:44:45+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon/include/CGAL/Polygon_2.h $
+// $Id: Polygon_2.h e2cda48 2022-02-02T12:51:24+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -157,11 +157,8 @@ class Polygon_2 {
     template <class InputIterator>
     Polygon_2(InputIterator first, InputIterator last,
               Traits p_traits = Traits())
-        : d_container(), traits(p_traits)
-    {
-      // Sun STL switches off member templates for binary backward compat.
-      std::copy(first, last, std::back_inserter(d_container));
-    }
+      : d_container(first,last), traits(p_traits)
+    {}
 
 #ifndef DOXYGEN_RUNNING
   Polygon_2& operator=(const Polygon_2&)=default;

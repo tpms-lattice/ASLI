@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_vertex_base_3.h $
-// $Id: Mesh_vertex_base_3.h 82bec8a 2021-05-19T17:11:37+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_vertex_base_3.h $
+// $Id: Mesh_vertex_base_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stéphane Tayeb, Andreas Fabri
@@ -24,7 +24,7 @@
 
 
 #include <CGAL/Regular_triangulation_vertex_base_3.h>
-#include <CGAL/internal/Mesh_3/indices_management.h>
+#include <CGAL/Mesh_3/internal/indices_management.h>
 #include <CGAL/Mesh_3/io_signature.h>
 #include <CGAL/Has_timestamp.h>
 #include <CGAL/tags.h>
@@ -256,7 +256,7 @@ public:
   {
     is >> static_cast<Cmvb3_base&>(v);
     int dimension;
-    if(is_ascii(is)) {
+    if(IO::is_ascii(is)) {
       is >> dimension;
 
     } else {
@@ -275,7 +275,7 @@ public:
   friend std::ostream& operator<<(std::ostream &os, const Mesh_vertex_3& v)
   {
     os << static_cast<const Cmvb3_base&>(v);
-    if(is_ascii(os)) {
+    if(IO::is_ascii(os)) {
       os << " " << v.in_dimension()
          << " ";
     } else {

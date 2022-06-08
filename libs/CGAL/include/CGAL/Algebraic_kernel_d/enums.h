@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/enums.h $
-// $Id: enums.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/enums.h $
+// $Id: enums.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -31,7 +31,7 @@ namespace internal {
 } // namespace internal
 
 /*!
- * \brief Represents different strategies how to handle
+ * \brief represents different strategies how to handle
  * degenerate cases during the analysis
  *
  * Currently, there are two possible strategies implemented. See the

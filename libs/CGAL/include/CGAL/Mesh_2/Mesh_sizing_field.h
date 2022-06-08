@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_2/include/CGAL/Mesh_2/Mesh_sizing_field.h $
-// $Id: Mesh_sizing_field.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Mesh_2/Mesh_sizing_field.h $
+// $Id: Mesh_sizing_field.h 0ac4bf6 2021-09-10T11:28:13+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -169,7 +169,7 @@ private:
     typename Tr::Edge_circulator end = ec;
 
     FT sum_len(0.);
-    FT nb = 0.;
+    unsigned int nb = 0;
     do
     {
       Edge e = *ec;
@@ -187,7 +187,7 @@ private:
     while(++ec != end);
     // nb == 0 could happen if there is an isolated point.
     if( 0 != nb )
-      return sum_len/nb;
+      return sum_len/FT(nb);
     else
      // Use outside faces to compute size of point
       return 1.;//todo

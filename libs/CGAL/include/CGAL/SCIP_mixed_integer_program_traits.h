@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Solver_interface/include/CGAL/SCIP_mixed_integer_program_traits.h $
-// $Id: SCIP_mixed_integer_program_traits.h 3b6c100 2020-04-29T14:12:29+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Solver_interface/include/CGAL/SCIP_mixed_integer_program_traits.h $
+// $Id: SCIP_mixed_integer_program_traits.h 267a641 2021-05-31T14:01:08+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -25,7 +25,7 @@
 
 namespace CGAL {
 
-/// \ingroup PkgSolverInterfaceRef
+/// \ingroup PkgSolverInterfaceMIP
 ///
 /// This class provides an interface for formulating and solving
 /// constrained or unconstrained mixed integer programs using

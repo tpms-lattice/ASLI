@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_hull_3/include/CGAL/convex_hull_3.h $
-// $Id: convex_hull_3.h 61d0fb5 2021-01-05T12:06:20+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/convex_hull_3.h $
+// $Id: convex_hull_3.h 9ecb90c 2022-01-26T19:07:34+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,22 +17,20 @@
 
 #include <CGAL/license/Convex_hull_3.h>
 
-#include <CGAL/disable_warnings.h>
-
-#include <CGAL/basic.h>
 #include <CGAL/algorithm.h>
 #include <CGAL/convex_hull_2.h>
+#include <CGAL/Convex_hull_traits_3.h>
+#include <CGAL/Convex_hull_2/ch_assertions.h>
+#include <CGAL/Convex_hull_face_base_2.h>
+#include <CGAL/Convex_hull_vertex_base_2.h>
 #include <CGAL/Projection_traits_xy_3.h>
 #include <CGAL/Projection_traits_xz_3.h>
 #include <CGAL/Projection_traits_yz_3.h>
-#include <CGAL/Convex_hull_traits_3.h>
-#include <CGAL/Convex_hull_2/ch_assertions.h>
 #include <CGAL/Triangulation_data_structure_2.h>
-#include <CGAL/Triangulation_vertex_base_with_info_2.h>
 #include <CGAL/Cartesian_converter.h>
 #include <CGAL/Simple_cartesian.h>
 
-#include <CGAL/internal/Exact_type_selector.h>
+#include <CGAL/Number_types/internal/Exact_type_selector.h>
 #include <CGAL/boost/graph/copy_face_graph.h>
 #include <CGAL/boost/graph/Named_function_parameters.h>
 #include <CGAL/boost/graph/graph_traits_Triangulation_data_structure_2.h>
@@ -359,6 +357,8 @@ public:
       }
     }
     catch (Uncertain_conversion_exception&){}
+    Protector protector(CGAL_FE_TONEAREST);
+    CGAL_expensive_assertion(FPU_get_cw() == CGAL_FE_TONEAREST);
     if (ek_plane_ptr==nullptr) {
       const typename Exact_K::Point_3 ep = to_EK(p);
       ek_plane_ptr = new Vector_plus_point<Exact_K>;
@@ -702,7 +702,6 @@ ch_quickhull_3_scan(TDS_2& tds,
      }
      Vertex_handle vh = tds.star_hole(edges.begin(), edges.end(), visible_set.begin(), visible_set.end());
      vh->point() = farthest_pt;
-     vh->info() = 0;
 
      // now partition the set of outside set points among the new facets.
 
@@ -770,15 +769,15 @@ ch_quickhull_face_graph(std::list<typename Traits::Point_3>& points,
                         const Traits& traits)
 {
   typedef typename Traits::Point_3                            Point_3;
-  typedef typename Traits::Plane_3                                Plane_3;
-  typedef typename std::list<Point_3>::iterator           P3_iterator;
+  typedef typename Traits::Plane_3                            Plane_3;
+  typedef typename std::list<Point_3>::iterator               P3_iterator;
 
   typedef Triangulation_data_structure_2<
-    Triangulation_vertex_base_with_info_2<int, GT3_for_CH3<Traits> >,
-    Convex_hull_face_base_2<int, Traits> >                           Tds;
+    Convex_hull_vertex_base_2<GT3_for_CH3<Traits> >,
+    Convex_hull_face_base_2<Traits> >                         Tds;
 
-  typedef typename Tds::Vertex_handle                     Vertex_handle;
-  typedef typename Tds::Face_handle                     Face_handle;
+  typedef typename Tds::Vertex_handle                         Vertex_handle;
+  typedef typename Tds::Face_handle                           Face_handle;
 
   // found three points that are not collinear, so construct the plane defined
   // by these points and then find a point that has maximum distance from this
@@ -821,7 +820,6 @@ ch_quickhull_face_graph(std::list<typename Traits::Point_3>& points,
     Vertex_handle v2 = tds.create_vertex(); v2->set_point(*point3_it);
     Vertex_handle v3 = tds.create_vertex(); v3->set_point(*max_it);
 
-    v0->info() = v1->info() = v2->info() = v3->info() = 0;
     Face_handle f0 = tds.create_face(v0,v1,v2);
     Face_handle f1 = tds.create_face(v3,v1,v0);
     Face_handle f2 = tds.create_face(v3,v2,v1);
@@ -1108,7 +1106,5 @@ extreme_points_3(const InputRange& range, OutputIterator out)
 }
 
 } // namespace CGAL
-
-#include <CGAL/enable_warnings.h>
 
 #endif // CGAL_CONVEX_HULL_3_H

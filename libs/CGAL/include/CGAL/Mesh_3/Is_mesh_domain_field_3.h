@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_3/Is_mesh_domain_field_3.h $
-// $Id: Is_mesh_domain_field_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/Is_mesh_domain_field_3.h $
+// $Id: Is_mesh_domain_field_3.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,17 +21,12 @@
 #include <CGAL/license/Mesh_3.h>
 
 #include <boost/config.hpp>
-#if BOOST_VERSION >= 106600
-#  include <boost/callable_traits/is_invocable.hpp>
-#else
-#  include <boost/mpl/has_xxx.hpp>
-#endif
+#include <boost/callable_traits/is_invocable.hpp>
 
 #include <CGAL/tags.h>
 
 namespace CGAL {
   namespace Mesh_3 {
-#if BOOST_VERSION >= 106600
     template <typename Tr, typename Type>
     struct Is_mesh_domain_field_3 :
       public CGAL::Boolean_tag
@@ -45,12 +40,6 @@ namespace CGAL {
         >::value
       >
     {};
-#else // Boost before 1.66
-    BOOST_MPL_HAS_XXX_TRAIT_DEF(FT)
-    template <typename Tr, typename Type>
-    struct Is_mesh_domain_field_3 : public Boolean_tag<has_FT<Type>::value>
-    {};
-#endif // Boost before 1.66
   } // end namespace Mesh_3
 } // end namespace CGAL
 

@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Boolean_set_operations_2/include/CGAL/Gps_segment_traits_2.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Boolean_set_operations_2/include/CGAL/Gps_segment_traits_2.h $
 // $Id: Gps_segment_traits_2.h 4f99fe8 2020-08-13T15:37:33+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

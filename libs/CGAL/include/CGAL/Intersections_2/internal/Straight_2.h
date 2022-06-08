@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
-// $Id: Straight_2.h 2549b58 2020-09-30T09:58:12+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_2/include/CGAL/Intersections_2/internal/Straight_2.h $
+// $Id: Straight_2.h 7e62c02 2021-04-12T14:02:37+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,8 +18,8 @@
 #ifndef CGAL_INTERSECTIONS_2_INTERNAL_STRAIGHT_2_H
 #define CGAL_INTERSECTIONS_2_INTERNAL_STRAIGHT_2_H
 
+#include <CGAL/Distance_2/internal/squared_distance_utils_2.h>
 #include <CGAL/Intersections_2/Line_2_Line_2.h>
-#include <CGAL/squared_distance_utils.h>
 #include <CGAL/Kernel/global_functions_internal_2.h>
 
 namespace CGAL {

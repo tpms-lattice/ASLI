@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_2/include/CGAL/Mesh_2/Refine_edges.h $
-// $Id: Refine_edges.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Mesh_2/Refine_edges.h $
+// $Id: Refine_edges.h e3934f1 2021-05-12T15:20:27+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -504,6 +504,14 @@ public:
     va = edge.first->vertex(tr.cw (edge.second));
     vb = edge.first->vertex(tr.ccw(edge.second));
 
+#ifdef CGAL_MESH_2_DEBUG_REFINEMENT_POINTS
+    std::cerr << "refinement_point_impl("
+              << "#" << va->time_stamp() << ": " << va->point() << ", "
+              << "#" << vb->time_stamp() << ": " << vb->point() << ") = ";
+    auto p = midpoint(va->point(), vb->point());
+    std::cerr << p << '\n';
+    return p;
+#endif // CGAL_MESH_2_DEBUG_BAD_FACES
     return midpoint(va->point(), vb->point());
   }
 

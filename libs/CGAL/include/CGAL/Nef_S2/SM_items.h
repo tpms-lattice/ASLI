@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_S2/include/CGAL/Nef_S2/SM_items.h $
-// $Id: SM_items.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_S2/SM_items.h $
+// $Id: SM_items.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -109,7 +109,7 @@ public:
 
     public:
     std::string debug() const
-    { std::ostringstream os; set_pretty_mode(os);
+    { std::ostringstream os; CGAL::IO::set_pretty_mode(os);
       os<<"V"<<point_
       #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
         <<' '<<info_
@@ -210,7 +210,7 @@ public:
     const GenPtr& info() const { return info_; }
 
     std::string debug() const
-    { std::ostringstream os; set_pretty_mode(os);
+    { std::ostringstream os; CGAL::IO::set_pretty_mode(os);
       os <<"e["<<source_->debug()<<", "
          <<twin_->source_->debug()<<
       #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
@@ -289,7 +289,7 @@ public:
     const GenPtr& info() const { return info_; }
 
     std::string debug() const
-    { std::ostringstream os; set_pretty_mode(os);
+    { std::ostringstream os; CGAL::IO::set_pretty_mode(os);
       os<<"l"<<circle_
       #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
         <<' '<<info_

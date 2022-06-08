@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Homogeneous_kernel/include/CGAL/Homogeneous/Iso_cuboidH3.h $
-// $Id: Iso_cuboidH3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Homogeneous_kernel/include/CGAL/Homogeneous/Iso_cuboidH3.h $
+// $Id: Iso_cuboidH3.h 22f5d89 2021-06-25T20:15:56+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -360,10 +360,7 @@ CGAL_KERNEL_INLINE
 bool
 Iso_cuboidH3<R>::
 has_on_unbounded_side(const typename Iso_cuboidH3<R>::Point_3& p) const
-{
-  return (   ( lexicographically_xyz_smaller(p,(this->min)() ))
-           ||( lexicographically_xyz_smaller((this->max)(),p ))  );
-}
+{ return ( bounded_side(p) == ON_UNBOUNDED_SIDE ); }
 
 template < class R >
 CGAL_KERNEL_INLINE

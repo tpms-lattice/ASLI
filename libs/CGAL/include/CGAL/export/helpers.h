@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Installation/include/CGAL/export/helpers.h $
-// $Id: helpers.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/export/helpers.h $
+// $Id: helpers.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@
 #    define CGAL_DLL_EXPORT __declspec(dllexport)
 #    define CGAL_DLL_LOCAL
 #  else
-    #if __GNUC__ >= 4
+    #ifdef __GNUC__
       #define CGAL_DLL_IMPORT __attribute__ ((visibility ("default")))
       #define CGAL_DLL_EXPORT __attribute__ ((visibility ("default")))
       #define CGAL_DLL_LOCAL  __attribute__ ((visibility ("hidden")))

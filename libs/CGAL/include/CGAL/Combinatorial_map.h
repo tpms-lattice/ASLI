@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Combinatorial_map/include/CGAL/Combinatorial_map.h $
-// $Id: Combinatorial_map.h e6536aa 2020-06-09T20:15:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Combinatorial_map/include/CGAL/Combinatorial_map.h $
+// $Id: Combinatorial_map.h f3db661 2022-03-09T14:13:31+00:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -16,11 +16,11 @@
 
 #include <CGAL/Combinatorial_map_fwd.h>
 
-#include <CGAL/internal/Combinatorial_map_internal_functors.h>
-#include <CGAL/internal/Combinatorial_map_utility.h>
-#include <CGAL/internal/Combinatorial_map_group_functors.h>
-#include <CGAL/internal/Combinatorial_map_copy_functors.h>
-#include <CGAL/internal/Combinatorial_map_sewable.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_internal_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_utility.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_group_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_copy_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_sewable.h>
 
 #include <CGAL/Combinatorial_map_storages.h>
 #include <CGAL/Combinatorial_map_functors.h>
@@ -55,7 +55,7 @@
 #endif
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Warray-bounds\"")
 #endif
@@ -3376,7 +3376,7 @@ namespace CGAL {
       CGAL_assertion( is_without_boundary(dimension) );
 
       CGAL::Unique_hash_map< Dart_handle, Dart_handle,
-        typename Self::Hash_function > dual;
+                             typename Self::Hash_function > dual(Dart_handle(), darts().size());
       Dart_handle d, d2, res = amap.null_handle;
 
       // We clear amap. TODO return a new amap ?
@@ -4824,7 +4824,7 @@ namespace CGAL {
 
 } // namespace CGAL
 
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 

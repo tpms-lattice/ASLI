@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/edge_collapse.h $
-// $Id: edge_collapse.h bfd4e99 2020-09-15T15:42:24+02:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/edge_collapse.h $
+// $Id: edge_collapse.h ac1200f 2020-11-10T10:52:53+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando.cacciola@geometryfactory.com>
@@ -34,6 +34,7 @@ template<class TM,
          class EdgeIsConstrainedMap,
          class GetCost,
          class GetPlacement,
+         class ShouldIgnore,
          class Visitor>
 int edge_collapse(TM& tmesh,
                   const ShouldStop& should_stop,
@@ -46,13 +47,14 @@ int edge_collapse(TM& tmesh,
                   // optional strategy policies - defaults to LindstomTurk
                   const GetCost& get_cost,
                   const GetPlacement& get_placement,
+                  const ShouldIgnore& should_ignore,
                   Visitor visitor)
 {
   typedef EdgeCollapse<TM, GT, ShouldStop,
                        VertexIndexMap, VertexPointMap, HalfedgeIndexMap, EdgeIsConstrainedMap,
-                       GetCost, GetPlacement, Visitor> Algorithm;
+                       GetCost, GetPlacement, ShouldIgnore, Visitor> Algorithm;
 
-  Algorithm algorithm(tmesh, traits, should_stop, vim, vpm, him, ecm, get_cost, get_placement, visitor);
+  Algorithm algorithm(tmesh, traits, should_stop, vim, vpm, him, ecm, get_cost, get_placement, should_ignore, visitor);
 
   return algorithm.run();
 }
@@ -79,7 +81,7 @@ struct Dummy_visitor
 
 } // namespace internal
 
-template<class TM, class ShouldStop, class NamedParameters>
+template<class TM, class ShouldStop,class NamedParameters>
 int edge_collapse(TM& tmesh,
                   const ShouldStop& should_stop,
                   const NamedParameters& np)
@@ -98,7 +100,9 @@ int edge_collapse(TM& tmesh,
                                  choose_parameter<No_constrained_edge_map<TM> >(get_parameter(np, internal_np::edge_is_constrained)),
                                  choose_parameter<LindstromTurk_cost<TM> >(get_parameter(np, internal_np::get_cost_policy)),
                                  choose_parameter<LindstromTurk_placement<TM> >(get_parameter(np, internal_np::get_placement_policy)),
+                                 choose_parameter<internal::Dummy_filter>(get_parameter(np, internal_np::filter)),
                                  choose_parameter<internal::Dummy_visitor>(get_parameter(np, internal_np::visitor)));
+
 }
 
 template<class TM, class ShouldStop>

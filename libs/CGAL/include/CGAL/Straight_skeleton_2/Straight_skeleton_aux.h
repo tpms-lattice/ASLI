@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_aux.h $
-// $Id: Straight_skeleton_aux.h 13f19c4 2020-10-07T19:28:54+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_aux.h $
+// $Id: Straight_skeleton_aux.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -164,7 +164,7 @@ private:
   Ref_counted_base& operator=( Ref_counted_base const &);
 protected:
   Ref_counted_base(): mCount(0) {}
-  virtual ~Ref_counted_base() {}
+  virtual ~Ref_counted_base() noexcept(!CGAL_ASSERTIONS_ENABLED) {}
 public:
     void AddRef() const { ++mCount; }
     void Release() const

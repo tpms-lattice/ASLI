@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_subcurve.h $
-// $Id: No_overlap_subcurve.h 092cf8e 2019-10-25T16:26:17+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_subcurve.h $
+// $Id: No_overlap_subcurve.h a3d04af 2021-07-28T16:19:20+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,
@@ -63,6 +63,7 @@ public:
   typedef Subcurve_                                     Subcurve;
   typedef Event_                                        Event;
   typedef Allocator_                                    Allocator;
+  typedef Tag_false                                     Handle_overlaps;
 
 private:
   typedef Geometry_traits_2                             Gt2;

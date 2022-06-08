@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/METIS/partition_graph.h $
-// $Id: partition_graph.h a84927d 2020-07-23T17:15:44+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/METIS/partition_graph.h $
+// $Id: partition_graph.h 4f02dd2 2021-11-22T13:06:46+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -112,6 +112,8 @@ void partition_graph(const TriangleMesh& tm,
     eptr[i + 1] = j;
   }
 
+  idx_t nparts_as_idx_t = nparts;
+
   // either the edgecut or the total communication volume of the dual graph’s partitioning
   idx_t objval;
 
@@ -130,7 +132,7 @@ void partition_graph(const TriangleMesh& tm,
   CGAL_assertion_code(int ret =)
     METIS_PartMeshNodal(&ne, &nn, eptr, eind,
                         nullptr /* nodes weights */, nullptr /* nodes sizes */,
-                        &nparts,
+                        &nparts_as_idx_t,
                         nullptr /* partitions weights */,
                         *options,
                         &objval, epart, npart);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_S2/include/CGAL/Nef_S2/SM_io_parser.h $
-// $Id: SM_io_parser.h 2e592e0 2021-01-20T08:38:33+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_S2/SM_io_parser.h $
+// $Id: SM_io_parser.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -152,8 +152,8 @@ SM_io_parser(std::ostream& iout, const Base& D)
   en(this->number_of_shalfedges()),
   ln(this->number_of_shalfloops()),
   fn(this->number_of_sfaces())
-{ verbose = (get_mode(out) != CGAL::IO::ASCII &&
-             get_mode(out) != CGAL::IO::BINARY);
+{ verbose = (IO::get_mode(out) != CGAL::IO::ASCII &&
+             IO::get_mode(out) != CGAL::IO::BINARY);
 }
 
 

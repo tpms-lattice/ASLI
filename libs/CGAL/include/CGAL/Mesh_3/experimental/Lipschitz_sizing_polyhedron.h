@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_polyhedron.h $
-// $Id: Lipschitz_sizing_polyhedron.h 0fa0c4f 2019-12-05T11:05:35+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_polyhedron.h $
+// $Id: Lipschitz_sizing_polyhedron.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -26,7 +26,7 @@
 #include <CGAL/array.h>
 #include <CGAL/Bbox_3.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <list>
 #include <sstream>
@@ -66,7 +66,7 @@ public:
 
 private:
   const Tree* m_ptree;
-  boost::shared_ptr<Tree> m_own_ptree;
+  std::shared_ptr<Tree> m_own_ptree;
 
   const MeshDomain& m_domain;
   Parameters m_params;

@@ -4,14 +4,14 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_3/experimental/AABB_filtered_projection_traits.h $
-// $Id: AABB_filtered_projection_traits.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/experimental/AABB_filtered_projection_traits.h $
+// $Id: AABB_filtered_projection_traits.h 1af4f93 2021-10-08T16:24:51+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s) : Camille Wormser, Pierre Alliez, Stephane Tayeb, Laurent Rineau
 //
-// File adapted from <CGAL/internal/AABB_tree/AABB_traversal_traits.h>
+// File adapted from <CGAL/AABB_tree/internal/AABB_traversal_traits.h>
 //
 
 #ifndef CGAL_MESH_3_AABB_FILTERED_PROJECTION_TRAITS_H
@@ -22,8 +22,8 @@
 #include <CGAL/property_map.h>
 
 #include <CGAL/AABB_tree.h>
-#include <CGAL/internal/AABB_tree/AABB_node.h>
-#include <CGAL/internal/AABB_tree/Primitive_helper.h>
+#include <CGAL/AABB_tree/internal/AABB_node.h>
+#include <CGAL/AABB_tree/internal/Primitive_helper.h>
 
 namespace CGAL {
 namespace Mesh_3 {
@@ -48,7 +48,7 @@ class Filtered_projection_traits
 
   typedef typename boost::property_traits<IndexPropertyMap>::value_type Index_type;
 
-  typedef std::set<typename boost::remove_const<Index_type>::type> Set_of_indices;
+  typedef std::set<Index_type> Set_of_indices;
 
 public:
   template <typename IndexToIgnoreIterator>

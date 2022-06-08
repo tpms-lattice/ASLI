@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cone_spanners_2/include/CGAL/Cone_spanners_2/Plane_scan_tree.h $
-// $Id: Plane_scan_tree.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cone_spanners_2/include/CGAL/Cone_spanners_2/Plane_scan_tree.h $
+// $Id: Plane_scan_tree.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -154,7 +154,7 @@ public:
         return const_iterator (l, k);
     }
 
-    /* Returns the the minimum value that has a key strictly greater than
+    /* Returns the minimum value that has a key strictly greater than
      * the specified key.
      *
      * @param x The threshold key

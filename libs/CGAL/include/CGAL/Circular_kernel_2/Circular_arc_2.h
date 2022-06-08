@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_2/include/CGAL/Circular_kernel_2/Circular_arc_2.h $
-// $Id: Circular_arc_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_2/include/CGAL/Circular_kernel_2/Circular_arc_2.h $
+// $Id: Circular_arc_2.h 059bc60 2020-07-22T15:13:09+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
@@ -639,13 +639,13 @@ public:
        return _support;
     }
 
-    typename cpp11::result_of<typename CK::Construct_center_2(Circle_2)>::type
+    decltype(auto)
     center() const
     {
        return supporting_circle().center();
     }
 
-    typename cpp11::result_of<typename CK::Compute_squared_radius_2(Circle_2)>::type
+    decltype(auto)
     squared_radius() const
     {
        return supporting_circle().squared_radius();

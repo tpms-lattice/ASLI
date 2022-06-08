@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Apollonius_graph_2/include/CGAL/Hyperbola_ray_2.h $
-// $Id: Hyperbola_ray_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Apollonius_graph_2/include/CGAL/Hyperbola_ray_2.h $
+// $Id: Hyperbola_ray_2.h 45b73ad 2021-05-12T15:45:07+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -44,20 +44,12 @@ public:
   using Base::f;
 
 protected:
-#if defined(__POWERPC__) && \
-  defined(__GNUC__) && (__GNUC__ == 3 ) && (__GNUC_MINOR__ == 4)
-  // hack to avoid nasty warning for G++ 3.4 on Darwin
-  static FT OFFSET()
-  {
-    return FT(10000);
-  }
-#else
+
   static const FT& OFFSET()
   {
     static const FT offset_(10000);
     return offset_;
   }
-#endif
 
   template< class Stream >
   inline

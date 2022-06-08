@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_3/include/CGAL/Circular_kernel_3/Circular_arc_3.h $
-// $Id: Circular_arc_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/Circular_arc_3.h $
+// $Id: Circular_arc_3.h c529418 2021-03-23T14:06:16+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
@@ -73,8 +73,8 @@ namespace CGAL {
       : _full(false)
       {
         // l must pass through s and t, and s != t
-        CGAL_kernel_precondition(SK().has_on_3_object()(c,s));
-        CGAL_kernel_precondition(SK().has_on_3_object()(c,t));
+//        CGAL_kernel_precondition(SK().has_on_3_object()(c,s));
+//        CGAL_kernel_precondition(SK().has_on_3_object()(c,t));
         CGAL_kernel_precondition(s != t);
         base = Rep(c,s,t);
         // we can optimize the computations of the sign (for the has_on functor),

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/GMP/Gmpfr_type.h $
-// $Id: Gmpfr_type.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/GMP/Gmpfr_type.h $
+// $Id: Gmpfr_type.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author: Luis Peñaranda <luis.penaranda@gmx.com>
@@ -1167,7 +1167,7 @@ std::ostream& operator<<(std::ostream& os,const Gmpfr &a){
         if(a.is_inf())
                 return os<<(a<0?"-inf":"+inf");
         // The rest of the function was written by George Tzoumas.
-        if (!is_pretty(os)) {
+        if (!IO::is_pretty(os)) {
                 std::pair<Gmpz,long> ie=a.to_integer_exp();
                 os << ie.first << 'e' << ie.second;
                 return os;

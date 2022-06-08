@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_masks_3.h $
-// $Id: subdivision_masks_3.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_masks_3.h $
+// $Id: subdivision_masks_3.h 45696cd 2021-10-30T13:35:17+03:00 Dimitris Papavasiliou
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -331,6 +331,7 @@ public:
   void vertex_node(vertex_descriptor vertex, Point& pt) {
     Halfedge_around_vertex_circulator vcir(vertex, *(this->pmesh));
     size_t n = circulator_size(vcir);
+    CGAL_assume(n > 0);
 
     FT R[] = {0.0, 0.0, 0.0};
     Point_ref S = get(this->vpmap,vertex);
@@ -476,7 +477,7 @@ public:
 
   /// computes the Doo-Sabin point `pt` of the vertex pointed by the halfedge `he`.
   void corner_node(halfedge_descriptor he, Point& pt) {
-    size_t n = 0;
+    int n = 0;
     halfedge_descriptor hd = he;
     do{
       hd = next(hd, *(this->pmesh));
@@ -492,7 +493,7 @@ public:
       cv = cv/16;
     }  else {
       FT a;
-      for (size_t k = 0; k < n; ++k, he = next(he, *(this->pmesh))) {
+      for (int k = 0; k < n; ++k, he = next(he, *(this->pmesh))) {
         if (k == 0) a = (FT) ((5.0/n) + 1);
         else a = (FT) (3+2*std::cos(2*k*CGAL_PI/n))/n;
         cv = cv + (get(this->vpm, target(he, *(this->pmesh)))-CGAL::ORIGIN)*a;

@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/frame_impl.h $
-// $Id: frame_impl.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/frame_impl.h $
+// $Id: frame_impl.h c9a020b 2021-02-09T12:12:56+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -21,7 +21,6 @@
 
 #include <CGAL/Qt/frame.h>
 #include <CGAL/Qt/constraint.h>
-#include <CGAL/Qt/domUtils.h>
 #include <math.h>
 
 namespace CGAL{
@@ -999,68 +998,6 @@ void Frame::getTransformOfFrom(const qreal src[3], qreal res[3],
     res[i] = r[i];
 }
 
-////////////////////////////      STATE      //////////////////////////////
-
-/*! Returns an XML \c QDomElement that represents the Frame.
-
- \p name is the name of the QDomElement tag. \p doc is the \c QDomDocument
- factory used to create QDomElement.
-
- The resulting QDomElement looks like:
- \code
- <name>
-   <position x=".." y=".." z=".." />
-   <orientation q0=".." q1=".." q2=".." q3=".." />
- </name>
- \endcode
-
- Use initFromDOMElement() to restore the Frame state from the resulting \c
- QDomElement.
-
-
- See Vec::domElement() for a complete example. See also
-
- Quaternion::domElement(), Camera::domElement()...
-
- \attention The constraint() and referenceFrame() are not saved in the
- QDomElement. */
-CGAL_INLINE_FUNCTION
-QDomElement Frame::domElement(const QString &name,
-                              QDomDocument &document) const {
-  // TODO: use translation and rotation instead when referenceFrame is coded...
-  QDomElement e = document.createElement(name);
-  e.appendChild(position().domElement("position", document));
-  e.appendChild(orientation().domElement("orientation", document));
-  return e;
-}
-
-/*! Restores the Frame state from a \c QDomElement created by domElement().
-
- See domElement() for the \c QDomElement syntax. See the
- Vec::initFromDOMElement() and Quaternion::initFromDOMElement() documentations
- for details on default values if an argument is missing.
-
- \attention The constraint() and referenceFrame() are not restored by this
- method and are left unchanged. */
-CGAL_INLINE_FUNCTION
-void Frame::initFromDOMElement(const QDomElement &element) {
-  // TODO: use translation and rotation instead when referenceFrame is coded...
-
-  // Reset default values. Attention: destroys constraint.
-  // *this = Frame();
-  // This instead ? Better : what is not set is not changed.
-  // setPositionAndOrientation(Vec(), Quaternion());
-
-  QDomElement child = element.firstChild().toElement();
-  while (!child.isNull()) {
-    if (child.tagName() == "position")
-      setPosition(Vec(child));
-    if (child.tagName() == "orientation")
-      setOrientation(Quaternion(child).normalized());
-
-    child = child.nextSibling().toElement();
-  }
-}
 
 /////////////////////////////////   ALIGN   /////////////////////////////////
 

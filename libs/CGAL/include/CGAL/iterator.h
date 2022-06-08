@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/iterator.h $
-// $Id: iterator.h c1d8fb6 2020-04-22T13:47:33+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/iterator.h $
+// $Id: iterator.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,6 @@
 #include <CGAL/assertions.h>
 #include <CGAL/circulator.h>
 #include <CGAL/Iterator_range.h>
-#include <CGAL/result_of.h>
 #include <CGAL/tuple.h>
 #include <CGAL/use.h>
 
@@ -660,7 +659,8 @@ class Join_input_iterator_1
 
 public:
   typedef typename std::iterator_traits<I1>::iterator_category  iterator_category;
-  typedef std::decay_t<typename cpp11::result_of<Op(arg_type)>::type> value_type;
+  typedef std::decay_t<decltype(std::declval<Op>()(std::declval<arg_type>()))>
+                                                                value_type;
   typedef typename std::iterator_traits<I1>::difference_type    difference_type;
   typedef value_type const*                                     pointer;
   typedef value_type const&                                     reference;
@@ -746,7 +746,8 @@ class Join_input_iterator_2
 
 public:
   typedef typename std::iterator_traits<I1>::iterator_category        iterator_category;
-  typedef typename cpp11::result_of<Op(arg_type_1, arg_type_2)>::type value_type;
+  typedef decltype(std::declval<Op>()(std::declval<arg_type_1>(), std::declval<arg_type_2>()))
+                                                                      value_type;
   typedef typename std::iterator_traits<I1>::difference_type          difference_type;
   typedef value_type*                                                 pointer;
   typedef value_type&                                                 reference;
@@ -840,7 +841,7 @@ class Join_input_iterator_3
 
 public:
   typedef typename std::iterator_traits<I1>::iterator_category  iterator_category;
-  typedef typename cpp11::result_of<Op(arg_type_1, arg_type_2, arg_type_3)>::type
+  typedef decltype(std::declval<Op>()(std::declval<arg_type_1>(), std::declval<arg_type_2>(), std::declval<arg_type_3>()))
                                                                 value_type;
   typedef typename std::iterator_traits<I1>::difference_type    difference_type;
   typedef value_type*                                           pointer;
@@ -1378,22 +1379,14 @@ public:
   template<BOOST_VARIANT_ENUM_PARAMS(typename T)>
   Self& operator=(const boost::variant<BOOST_VARIANT_ENUM_PARAMS(T) >& t) {
     internal::Output_visitor<Self> visitor(this);
-    #if BOOST_VERSION==105800
     t.apply_visitor(visitor);
-    #else
-    boost::apply_visitor(visitor, t);
-    #endif
     return *this;
   }
 
   template<BOOST_VARIANT_ENUM_PARAMS(typename T)>
   Self& operator=(const boost::optional< boost::variant<BOOST_VARIANT_ENUM_PARAMS(T) > >& t) {
     internal::Output_visitor<Self> visitor(this);
-    #if BOOST_VERSION==105800
-    if(t) t->apply_visitor(visitor);
-    #else
     if(t)  boost::apply_visitor(visitor, *t);
-    #endif
     return *this;
   }
 

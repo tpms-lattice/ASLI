@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Interpolation/include/CGAL/regular_neighbor_coordinates_2.h $
-// $Id: regular_neighbor_coordinates_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Interpolation/include/CGAL/regular_neighbor_coordinates_2.h $
+// $Id: regular_neighbor_coordinates_2.h ce98cd4 2021-09-03T09:15:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Julia Floetotto
@@ -20,6 +20,7 @@
 #include <CGAL/iterator.h>
 #include <CGAL/utility.h>
 #include <CGAL/function_objects.h>
+#include <CGAL/Polygon_2_algorithms.h>
 
 #include <boost/utility/enable_if.hpp>
 #include <boost/type_traits/is_convertible.hpp>

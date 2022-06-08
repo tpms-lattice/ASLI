@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Mesh_feature_generator.h $
-// $Id: Mesh_feature_generator.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Mesh_feature_generator.h $
+// $Id: Mesh_feature_generator.h 350b917 2021-04-11T14:50:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -43,7 +43,7 @@ namespace Classification {
 /*!
   \ingroup PkgClassificationMesh
 
-  \brief Generates a set of generic features for surface mesh
+  \brief generates a set of generic features for surface mesh
   classification.
 
   This class takes care of computing and storing all necessary data
@@ -67,7 +67,7 @@ namespace Classification {
   is `GeomTraits::Point_3`.
   \tparam ConcurrencyTag enables sequential versus parallel
   computation of `CGAL::Classification::Local_eigen_analysis`
-  objects. Possible values are `Parallel_tag` (default value if %CGAL
+  objects. Possible values are `Parallel_tag` (default value if \cgal
   is linked with TBB) or `Sequential_tag` (default value otherwise).
   \tparam DiagonalizeTraits model of `DiagonalizeTraits` used for
   matrix diagonalization. It can be omitted: if Eigen 3 (or greater)

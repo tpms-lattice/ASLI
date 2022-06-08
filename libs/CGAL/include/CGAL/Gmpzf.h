@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Gmpzf.h $
-// $Id: Gmpzf.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Gmpzf.h $
+// $Id: Gmpzf.h 152a084 2021-09-21T13:34:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -171,7 +171,6 @@ public:
 //since types are included by Gmp_coercion_traits.h:
 #include <CGAL/Gmpz.h>
 #include <CGAL/Gmpq.h>
-#include <CGAL/Gmpzf.h>
 
 #endif // CGAL_GMPZF_H
 

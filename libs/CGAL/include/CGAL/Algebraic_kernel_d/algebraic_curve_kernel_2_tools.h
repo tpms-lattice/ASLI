@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/algebraic_curve_kernel_2_tools.h $
-// $Id: algebraic_curve_kernel_2_tools.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/algebraic_curve_kernel_2_tools.h $
+// $Id: algebraic_curve_kernel_2_tools.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -95,7 +95,7 @@ set_union_with_source(InputIterator1 first_begin,
 }
 
 /*
- * \brief Removes the leading term of the polynomial \c f as long as it
+ * \brief removes the leading term of the polynomial \c f as long as it
  * vanishes at \c alpha
  *
  */
@@ -169,7 +169,7 @@ template<typename AlgebraicKernel_1> typename AlgebraicKernel_1::Bound
 
 
 /*!
- * \brief Produces intermediate rational values for a list of
+ * \brief produces intermediate rational values for a list of
  * algebraic reals.
  *
  * For a list of Algebraic real values with \c n elements, a list with

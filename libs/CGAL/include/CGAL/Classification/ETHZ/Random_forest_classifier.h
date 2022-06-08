@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/ETHZ/Random_forest_classifier.h $
-// $Id: Random_forest_classifier.h fba2e1f 2021-01-14T15:18:24+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/ETHZ/Random_forest_classifier.h $
+// $Id: Random_forest_classifier.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -141,7 +141,7 @@ public:
 
     \tparam ConcurrencyTag enables sequential versus parallel
     algorithm. Possible values are `Parallel_tag` (default value if
-    %CGAL is linked with TBB) or `Sequential_tag` (default value
+    \cgal is linked with TBB) or `Sequential_tag` (default value
     otherwise).
 
     \param ground_truth vector of label indices. It should contain for
@@ -324,7 +324,7 @@ public:
   /// @{
 
   /*!
-    \brief converts a deprecated configuration (in compressed ASCII
+    \brief converts a deprecated configuration (in compressed \ascii
     format) to a new configuration (in binary format).
 
     The input file should be a GZIP container written by the

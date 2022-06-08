@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_hierarchy_2_impl.h $
-// $Id: Segment_Delaunay_graph_hierarchy_2_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Segment_Delaunay_graph_hierarchy_2_impl.h $
+// $Id: Segment_Delaunay_graph_hierarchy_2_impl.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1031,10 +1031,10 @@ file_output(std::ostream& os) const
 
   // write each level of the hierarchy
   hierarchy[0]->file_output(os, P, true);
-  if ( is_ascii(os) ) { os << std::endl << std::endl; }
+  if ( IO::is_ascii(os) ) { os << std::endl << std::endl; }
   for (unsigned int i = 1; i < sdg_hierarchy_2__maxlevel; ++i) {
     hierarchy[i]->file_output(os, P, false);
-    if ( is_ascii(os) ) { os << std::endl << std::endl; }
+    if ( IO::is_ascii(os) ) { os << std::endl << std::endl; }
   }
 
   Vertex_map* V = new Vertex_map[sdg_hierarchy_2__maxlevel];
@@ -1070,22 +1070,22 @@ file_output(std::ostream& os) const
   }
 
   // write up and down pointer info
-  if ( is_ascii(os) ) { os << std::endl << std::endl; }
+  if ( IO::is_ascii(os) ) { os << std::endl << std::endl; }
   for (unsigned int i = 0; i < sdg_hierarchy_2__maxlevel; ++i) {
     os << i;
-    if ( is_ascii(os) ) { os << " "; }
+    if ( IO::is_ascii(os) ) { os << " "; }
     os << hierarchy[i]->number_of_vertices();
-    if ( is_ascii(os) ) { os << std::endl; }
+    if ( IO::is_ascii(os) ) { os << std::endl; }
     for (Finite_vertices_iterator vit = hierarchy[i]->finite_vertices_begin();
          vit != hierarchy[i]->finite_vertices_end(); ++vit) {
       os << V[i][vit];
-      if ( is_ascii(os) ) { os << " "; }
+      if ( IO::is_ascii(os) ) { os << " "; }
       os << V_down[i][vit];
-      if ( is_ascii(os) ) { os << " "; }
+      if ( IO::is_ascii(os) ) { os << " "; }
       os << V_up[i][vit];
-      if ( is_ascii(os) ) { os << std::endl; }
+      if ( IO::is_ascii(os) ) { os << std::endl; }
     }
-    if ( is_ascii(os) ) { os << std::endl << std::endl; }
+    if ( IO::is_ascii(os) ) { os << std::endl << std::endl; }
   }
 
   delete[] V;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_batched_pl_ss_visitor.h $
-// $Id: Arr_batched_pl_ss_visitor.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_batched_pl_ss_visitor.h $
+// $Id: Arr_batched_pl_ss_visitor.h 5985db1 2021-07-28T16:17:10+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -112,7 +112,7 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-// Memeber-function definitions:
+// Member-function definitions:
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
-// $Id: oriented_bounding_box.h d567a0d 2020-07-16T09:52:32+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/oriented_bounding_box.h $
+// $Id: oriented_bounding_box.h 93ee230 2021-08-23T22:25:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,19 +19,16 @@
 #include <CGAL/Optimal_bounding_box/internal/population.h>
 #include <CGAL/Optimal_bounding_box/Oriented_bounding_box_traits_3.h>
 
-#include <CGAL/boost/graph/Named_function_parameters.h>
-#include <CGAL/boost/graph/named_params_helper.h>
-
+#include <CGAL/Aff_transformation_3.h>
 #include <CGAL/assertions.h>
 #include <CGAL/boost/graph/helpers.h>
+#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/boost/graph/named_params_helper.h>
 #include <CGAL/convex_hull_3.h>
 #include <CGAL/Convex_hull_traits_3.h>
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Iso_cuboid_3.h>
 #include <CGAL/Iterator_range.h>
 #include <CGAL/Kernel_traits.h>
 #include <CGAL/Random.h>
-#include <CGAL/Simple_cartesian.h>
 
 #ifdef CGAL_OPTIMAL_BOUNDING_BOX_BENCHMARKS
 #include <CGAL/Real_timer.h>
@@ -245,7 +242,7 @@ void construct_oriented_bounding_box(const PointRange& points,
 
 /// \addtogroup PkgOptimalBoundingBox_Oriented_bounding_box
 ///
-/// The function `oriented_bounding_box` computes an approximation of the <i>optimal bounding box</i>,
+/// The function `oriented_bounding_box()` computes an approximation of the <i>optimal bounding box</i>,
 /// which is defined as the rectangular box with smallest volume of all the rectangular boxes containing
 /// the input points.
 ///
@@ -277,7 +274,7 @@ void construct_oriented_bounding_box(const PointRange& points,
 
 /// \ingroup PkgOptimalBoundingBox_Oriented_bounding_box
 ///
-/// The function `oriented_bounding_box` computes an approximation of the <i>optimal bounding box</i>,
+/// The function `oriented_bounding_box()` computes an approximation of the <i>optimal bounding box</i>,
 /// which is defined as the rectangular box with smallest volume of all the rectangular boxes containing
 /// the input points.
 ///
@@ -432,8 +429,6 @@ void oriented_bounding_box(const PolygonMesh& pmesh,
 #endif
                            )
 {
-  namespace PMP = CGAL::Polygon_mesh_processing;
-
   using CGAL::parameters::choose_parameter;
   using CGAL::parameters::get_parameter;
 

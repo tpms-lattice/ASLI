@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Stream_lines_2/include/CGAL/Regular_grid_2.h $
-// $Id: Regular_grid_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Stream_lines_2/include/CGAL/Regular_grid_2.h $
+// $Id: Regular_grid_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,7 @@
 #include <CGAL/basic.h>
 #include <CGAL/streamlines_assertions.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <vector>
 
@@ -39,7 +39,7 @@ public:
   typedef typename StreamLinesTraits_2::Point_2 Point_2;
   typedef typename StreamLinesTraits_2::Vector_2 Vector_2;
 protected:
-  boost::shared_ptr< std::vector<FT> > vector_field;
+  std::shared_ptr< std::vector<FT> > vector_field;
   inline int get_index(int i,int j) const;
   int number_of_samples_x;
   int number_of_samples_y;
@@ -118,7 +118,7 @@ Regular_grid_2<StreamLinesTraits_2>::Regular_grid_2(int m,
   number_of_samples_y = n;
   domain_size_x = x;
   domain_size_y = y;
-  vector_field = boost::shared_ptr<std::vector<FT> >(new std::vector<FT>(number_of_samples_x*number_of_samples_y* 2));
+  vector_field = std::shared_ptr<std::vector<FT> >(new std::vector<FT>(number_of_samples_x*number_of_samples_y* 2));
 }
 
 

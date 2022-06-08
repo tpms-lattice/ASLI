@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_unb_planar_insertion_helper.h $
-// $Id: Arr_unb_planar_insertion_helper.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_unb_planar_insertion_helper.h $
+// $Id: Arr_unb_planar_insertion_helper.h 6e1fc8a 2021-09-02T16:53:07+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -89,7 +89,7 @@ public:
 };
 
 //-----------------------------------------------------------------------------
-// Memeber-function definitions:
+// Member-function definitions:
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -162,9 +162,11 @@ before_handle_event(Event* event)
 {
   if (event->is_closed()) return;
 
-  // In case the event lies at inifinity, check whether its incident curve
+  // In case the event lies at infinity, check whether its incident curve
   // is already in the arrangement.
-  if (event->curve().halfedge_handle() == Halfedge_handle()) {
+  Arr_curve_end ce;
+  if (event->boundary_touching_curve(ce).halfedge_handle() == Halfedge_handle())
+  {
     // The curve is not in the arrangement, use the base construction helper
     // to handle the event:
     Base::before_handle_event (event);

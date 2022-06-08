@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh/include/CGAL/boost/graph/graph_traits_Surface_mesh.h $
-// $Id: graph_traits_Surface_mesh.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh/include/CGAL/boost/graph/graph_traits_Surface_mesh.h $
+// $Id: graph_traits_Surface_mesh.h 863ab75 2021-10-05T11:43:39+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -493,7 +493,6 @@ void
 remove_face(typename boost::graph_traits<CGAL::Surface_mesh<P> >::face_descriptor f,
             CGAL::Surface_mesh<P>& sm)
 {
-
   sm.remove_face(f);
 }
 

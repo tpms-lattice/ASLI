@@ -1,10 +1,16 @@
-// Copyright (c) 2011 GeometryFactory (France). All rights reserved.
+// Copyright (c) 1997-2021
+// Utrecht University (The Netherlands),
+// ETH Zurich (Switzerland),
+// INRIA Sophia-Antipolis (France),
+// Max-Planck-Institute Saarbruecken (Germany),
+// and Tel-Aviv University (Israel).
+// GeometryFactory (France)
 // All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_3/include/CGAL/Intersection_traits_3.h $
-// $Id: Intersection_traits_3.h 8b41189 2020-03-26T18:58:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersection_traits_3.h $
+// $Id: Intersection_traits_3.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,6 +20,10 @@
 #define CGAL_INTERSECTION_TRAITS_3_H
 
 #include <CGAL/Intersection_traits.h>
+
+#include <boost/optional.hpp>
+#include <boost/variant.hpp>
+
 #include <vector>
 
 namespace CGAL  {

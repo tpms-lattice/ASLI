@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/IO/File_medit.h $
-// $Id: File_medit.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/IO/File_medit.h $
+// $Id: File_medit.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
@@ -330,8 +330,10 @@ void output_to_medit(std::ostream& os,
 
 } // namespace Periodic_3_mesh_3
 
+namespace IO {
+
 /**
- * \brief Outputs a periodic mesh to the .mesh file format, which can be visualized
+ * \brief outputs a periodic mesh to the .mesh file format, which can be visualized
  *        using medit. By default, 7 copies are used, for a total of 8 instances of the domains.
  * \param os the stream
  * \param c3t3 the mesh
@@ -366,6 +368,12 @@ void output_periodic_mesh_to_medit(std::ostream& os,
       Periodic_3_mesh_3::output_to_medit<C3T3, false, true>(os, c3t3, occurrence_count, distinguish_copies);
   }
 }
+
+} // namespace IO
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+using IO::output_periodic_mesh_to_medit;
+#endif
 
 } // namespace CGAL
 

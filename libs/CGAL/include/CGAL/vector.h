@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/vector.h $
-// $Id: vector.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/vector.h $
+// $Id: vector.h b42bbde 2021-05-05T06:46:57+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -109,6 +109,8 @@ public:
         tmp += n;
         return tmp.operator*();
     }
+    bool operator==( std::nullptr_t) const { return ptr == nullptr; }
+    bool operator!=( std::nullptr_t) const { return ptr != nullptr; }
     bool operator< ( const Self& i) const { return ( ptr < i.ptr); }
     bool operator> ( const Self& i) const { return i < *this;    }
     bool operator<=( const Self& i) const { return !(i < *this); }

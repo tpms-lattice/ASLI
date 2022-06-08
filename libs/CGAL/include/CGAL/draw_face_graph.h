@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/draw_face_graph.h $
-// $Id: draw_face_graph.h aa527e9 2020-10-14T16:28:44+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/draw_face_graph.h $
+// $Id: draw_face_graph.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -26,11 +26,11 @@ namespace CGAL
 struct DefaultColorFunctorFaceGraph
 {
   template<typename Graph>
-  CGAL::Color operator()(const Graph&,
+  CGAL::IO::Color operator()(const Graph&,
                          typename boost::graph_traits<Graph>::face_descriptor fh) const
   {
     if (fh==boost::graph_traits<Graph>::null_face()) // use to get the mono color
-      return CGAL::Color(100, 125, 200); // R G B between 0-255
+      return CGAL::IO::Color(100, 125, 200); // R G B between 0-255
 
     return get_random_color(CGAL::get_default_random());
   }
@@ -141,7 +141,7 @@ protected:
         {
           if (fh!=boost::graph_traits<SM>::null_face())
           {
-            CGAL::Color c=fcolor(sm, fh);
+            CGAL::IO::Color c=fcolor(sm, fh);
             face_begin(c);
             auto hd=halfedge(fh, sm);
             const auto first_hd = hd;

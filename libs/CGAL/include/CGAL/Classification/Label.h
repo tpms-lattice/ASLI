@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Label.h $
-// $Id: Label.h 250ab87 2020-10-12T08:10:41+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Label.h $
+// $Id: Label.h c863ee6 2021-05-04T17:28:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -15,6 +15,7 @@
 #include <CGAL/license/Classification.h>
 #include <CGAL/IO/Color.h>
 
+#include <string>
 #include <memory>
 
 namespace CGAL {
@@ -39,7 +40,7 @@ private:
   std::string m_name;
   std::size_t m_index;
   std::size_t m_standard_index;
-  CGAL::Color m_color;
+  CGAL::IO::Color m_color;
 
   friend Label_set;
 
@@ -48,7 +49,7 @@ public:
   /// \cond SKIP_IN_MANUAL
   // Undocumented: Labels should be created by the set
   Label (std::string name, std::size_t index, std::size_t standard_index,
-         const CGAL::Color& color)
+         const CGAL::IO::Color& color)
     : m_name (name), m_index (index), m_standard_index (standard_index)
     , m_color (color)
   { }
@@ -84,7 +85,7 @@ public:
     attribute embedded in a data set which _can_ be used (see
     `Color_channel`).
   */
-  const CGAL::Color& color() const { return m_color; }
+  const CGAL::IO::Color& color() const { return m_color; }
 
   /// @}
 
@@ -93,7 +94,7 @@ public:
 
   void set_name (const std::string& name) { m_name = name; }
   void set_standard_index(std::size_t idx) { m_standard_index = idx; }
-  void set_color (const Color& color) { m_color = color; }
+  void set_color (const IO::Color& color) { m_color = color; }
 
   /// @}
 };

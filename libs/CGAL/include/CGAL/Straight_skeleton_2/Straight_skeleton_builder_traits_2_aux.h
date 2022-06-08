@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_traits_2_aux.h $
-// $Id: Straight_skeleton_builder_traits_2_aux.h 7d311d3 2020-11-27T13:54:22+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_traits_2_aux.h $
+// $Id: Straight_skeleton_builder_traits_2_aux.h c8624ee 2021-09-09T11:01:03+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -136,20 +136,23 @@ public:
   result_type
   operator()(A&& ... a) const
   {
-    try
     {
       Protect_FPU_rounding<Protection> P;
-      FC_result_type fr = Filter_construction(To_Filtered(std::forward<A>(a))...);
+      try
+      {
+        FC_result_type fr = Filter_construction(To_Filtered(std::forward<A>(a))...);
 
-      const double precision =
-        Lazy_exact_nt<double>::get_relative_precision_of_to_double();
+        const double precision =
+          Lazy_exact_nt<double>::get_relative_precision_of_to_double();
 
-      if ( fr && has_enough_precision(*fr, precision) )
-        return From_Filtered(fr);
+        if ( fr && has_enough_precision(*fr, precision) )
+          return From_Filtered(fr);
+      }
+      catch (Uncertain_conversion_exception&) {}
     }
-    catch (Uncertain_conversion_exception&) {}
 
     Protect_FPU_rounding<!Protection> P(CGAL_FE_TONEAREST);
+    CGAL_expensive_assertion(FPU_get_cw() == CGAL_FE_TONEAREST);
     EC_result_type er = Exact_construction(To_Exact(std::forward<A>(a))...) ;
     return From_Exact(er);
   }

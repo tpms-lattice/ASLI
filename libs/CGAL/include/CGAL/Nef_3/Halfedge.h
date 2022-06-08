@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/Halfedge.h $
-// $Id: Halfedge.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Halfedge.h $
+// $Id: Halfedge.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -100,6 +100,17 @@ class Halfedge_base
           return *this;
         }
 
+      Halfedge_base<Refs>& operator=(Halfedge_base<Refs>&& e) noexcept
+        { center_vertex_ = std::move(e.center_vertex_);
+          point_ = std::move(e.point_);
+          mark_ = std::move(e.mark_);
+          twin_ = std::move(e.twin_);
+          out_sedge_ = std::move(e.out_sedge_);
+          incident_sface_ = std::move(e.incident_sface_);
+          info_ = 0;
+          return *this;
+        }
+
       Vertex_handle& center_vertex() { return center_vertex_; }
       Vertex_const_handle center_vertex() const { return center_vertex_; }
 
@@ -133,7 +144,7 @@ class Halfedge_base
  public:
       std::string debug() const
         { std::stringstream os;
-          set_pretty_mode(os);
+          CGAL::IO::set_pretty_mode(os);
           os<<"sv [ "<<point_
     #ifdef CGAL_I_DO_WANT_TO_USE_GENINFO
       <<info_

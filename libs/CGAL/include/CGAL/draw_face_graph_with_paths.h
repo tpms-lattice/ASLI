@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_topology/include/CGAL/draw_face_graph_with_paths.h $
-// $Id: draw_face_graph_with_paths.h a85cf6e 2021-01-26T09:45:18+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/draw_face_graph_with_paths.h $
+// $Id: draw_face_graph_with_paths.h ee11c85 2021-11-10T09:59:48+01:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -148,7 +148,7 @@ protected:
     if (m_current_dart!=lcc.darts().end())
     { // We want to draw only one dart
       Dart_const_handle selected_dart=m_current_dart; //lcc.dart_handle(m_current_dart);
-      compute_edge(selected_dart, CGAL::Color(255,0,0));
+      compute_edge(selected_dart, CGAL::IO::Color(255,0,0));
       lcc.template mark_cell<1>(selected_dart, markedges);
       compute_vertex(selected_dart);
 
@@ -217,7 +217,7 @@ protected:
     }
     while(cur!=dh);
 
-    // CGAL::Color c=m_fcolor.run(*lcc, dh);
+    // CGAL::IO::Color c=m_fcolor.run(*lcc, dh);
     face_begin(); //c);
 
     cur=dh;
@@ -241,13 +241,13 @@ protected:
     {
       if (m_draw_marked_darts && m_amark!=LCC::INVALID_MARK &&
           (lcc.is_marked(dh, m_amark) || lcc.is_marked(lcc.opposite2(dh), m_amark)))
-      { add_segment(p1, get_point(d2), CGAL::Color(0, 0, 255)); }
+      { add_segment(p1, get_point(d2), CGAL::IO::Color(0, 0, 255)); }
       else
       { add_segment(p1, get_point(d2)); }
     }
   }
 
-  void compute_edge(Dart_const_handle dh, const CGAL::Color& color)
+  void compute_edge(Dart_const_handle dh, const CGAL::IO::Color& color)
   {
     Point p1 = get_point(dh);
     Dart_const_handle d2 = lcc.other_extremity(dh);
@@ -262,14 +262,14 @@ protected:
   {
     Base::init();
     setKeyDescription(::Qt::Key_D, "Increase current dart drawing");
-    setKeyDescription(::Qt::Key_D+::Qt::ControlModifier, "Decrease current dart drawing");
-    setKeyDescription(::Qt::Key_D+::Qt::ShiftModifier, "Draw all darts");
+    setKeyDescription(::Qt::ControlModifier, ::Qt::Key_D, "Decrease current dart drawing");
+    setKeyDescription(::Qt::ShiftModifier, ::Qt::Key_D, "Draw all darts");
 
     setKeyDescription(::Qt::Key_X, "Toggles marked darts display");
 
     setKeyDescription(::Qt::Key_P, "Increase current path drawing");
-    setKeyDescription(::Qt::Key_P+::Qt::ControlModifier, "Decrease current path drawing");
-    setKeyDescription(::Qt::Key_P+::Qt::ShiftModifier, "Draw all paths");
+    setKeyDescription(::Qt::ControlModifier, ::Qt::Key_P, "Decrease current path drawing");
+    setKeyDescription(::Qt::ShiftModifier, ::Qt::Key_P, "Draw all paths");
   }
 
   virtual void keyPressEvent(QKeyEvent *e)
@@ -367,7 +367,7 @@ protected:
     { return; }
 
     CGAL::Random random(static_cast<unsigned int>(i));
-    CGAL::Color color=get_random_color(random);
+    CGAL::IO::Color color=get_random_color(random);
 
     add_point(get_point((*m_paths)[i].get_ith_dart(0)), color);
     for (std::size_t j=0; j<(*m_paths)[i].length(); ++j)
@@ -412,7 +412,7 @@ void draw(const Mesh& alcc,
   {
     CGAL::Qt::init_ogl_context(4,3);
     int argc=1;
-    const char* argv[2]={"lccviewer","\0"};
+    const char* argv[1]={"lccviewer"};
     QApplication app(argc,const_cast<char**>(argv));
     Face_graph_with_path_viewer<Mesh, DrawingFunctor> mainwindow(app.activeWindow(),
                                                                  alcc, &paths, amark,

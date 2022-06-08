@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/internal/validity.h $
-// $Id: validity.h bdd4efe 2021-01-15T10:06:56+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/internal/validity.h $
+// $Id: validity.h c47ba58 2021-11-19T13:42:11+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -26,7 +26,8 @@
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 
 #include <boost/iterator/function_output_iterator.hpp>
-
+#include <boost/utility/enable_if.hpp>
+#include <boost/range/has_range_iterator.hpp>
 #include <vector>
 
 namespace CGAL {
@@ -240,7 +241,10 @@ template <typename TriangleMesh,
           typename VertexUVMap>
 bool is_one_to_one_mapping(const TriangleMesh& mesh,
                            const Faces_Container& faces,
-                           const VertexUVMap uvmap)
+                           const VertexUVMap uvmap,
+                           typename boost::enable_if<
+                              boost::has_range_iterator<Faces_Container>
+                           >::type* = nullptr)
 {
   typedef typename boost::graph_traits<TriangleMesh>::vertex_descriptor    vertex_descriptor;
   typedef typename boost::graph_traits<TriangleMesh>::halfedge_descriptor  halfedge_descriptor;

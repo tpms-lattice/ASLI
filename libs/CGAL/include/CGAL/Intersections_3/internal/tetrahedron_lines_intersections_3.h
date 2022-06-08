@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_3/include/CGAL/Intersections_3/internal/tetrahedron_lines_intersections_3.h $
-// $Id: tetrahedron_lines_intersections_3.h 586987e 2020-03-23T11:34:37+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/tetrahedron_lines_intersections_3.h $
+// $Id: tetrahedron_lines_intersections_3.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,9 +14,14 @@
 #ifndef CGAL_INTERNAL_INTERSECTIONS_3_TETRAHEDRON_LINES_INTERSECTIONS_3_H
 #define CGAL_INTERNAL_INTERSECTIONS_3_TETRAHEDRON_LINES_INTERSECTIONS_3_H
 
-#include <vector>
+#include <CGAL/Intersection_traits_3.h>
+
 #include <CGAL/kernel_basic.h>
-#include <CGAL/intersections.h>
+#include <CGAL/Tetrahedron_3.h>
+#include <CGAL/Triangle_3.h>
+
+#include <utility>
+#include <vector>
 
 namespace CGAL {
 namespace Intersections {
@@ -25,13 +30,8 @@ namespace internal {
 template<class K, class O, class Derived>
 struct Tetrahedron_lines_intersection_3_base
 {
-  typedef typename Intersection_traits<K,
-  CGAL::Tetrahedron_3<K>,
-  O>::result_type Result_type;
-
-  typedef typename Intersection_traits<K,
-  CGAL::Triangle_3<K>,
-  O>::result_type Inter_type;
+  typedef typename Intersection_traits<K, CGAL::Tetrahedron_3<K>, O>::result_type Result_type;
+  typedef typename Intersection_traits<K, CGAL::Triangle_3<K>, O>::result_type Inter_type;
 
   const typename K::Tetrahedron_3& tet;
   const O& o;
@@ -68,7 +68,7 @@ struct Tetrahedron_lines_intersection_3_base
       if(do_intersect(o, triangle))
       {
         tr_seg[i] = typename K::Intersect_3()(o, triangle);
-        if( boost::get<typename K::Segment_3>(&*tr_seg[i]) != nullptr)
+        if(boost::get<typename K::Segment_3>(&*tr_seg[i]) != nullptr)
         {
           res_id = i;
           break;
@@ -77,7 +77,7 @@ struct Tetrahedron_lines_intersection_3_base
     }
 
     //if there is a segment in the intersections, then we return it
-    if(res_id !=-1)
+    if(res_id != -1)
     {
       output = tr_seg[res_id];
       return;
@@ -91,13 +91,14 @@ struct Tetrahedron_lines_intersection_3_base
     {
       if(tr_seg[i])
       {
-        if (const typename K::Point_3* p = boost::get<typename K::Point_3>(&*tr_seg[i]))
+        if(const typename K::Point_3* p = boost::get<typename K::Point_3>(&*tr_seg[i]))
         {
           if(res_points.empty())
           {
             res_id = i;
           }
-          else {
+          else
+          {
             if(*p != res_points.front())
             {
               res_id = -1;
@@ -109,9 +110,7 @@ struct Tetrahedron_lines_intersection_3_base
     }
 
     if(res_points.empty())
-    {
       return;
-    }
 
     if(res_id != -1)
     {
@@ -127,7 +126,7 @@ struct Tetrahedron_lines_intersection_3_base
     std::size_t res_id_2 = -1;
     std::vector<std::vector<typename K::FT> > sq_distances(res_points.size());
 
-    for(std::size_t i = 0; i< res_points.size(); ++i)
+    for(std::size_t i = 0; i<res_points.size(); ++i)
     {
       const auto& p1 = res_points[i];
       for(const auto& p2 : res_points)
@@ -152,7 +151,8 @@ struct Tetrahedron_lines_intersection_3_base
   }
 };
 
-}
-}
-} //end namespaces
+} // namespace internal
+} // namespace Intersections
+} // namespace CGAL
+
 #endif // CGAL_INTERNAL_INTERSECTIONS_3_TETRAHEDRON_LINES_INTERSECTIONS_3_H

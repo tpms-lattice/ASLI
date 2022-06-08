@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/basic.h $
-// $Id: basic.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/basic.h $
+// $Id: basic.h da0635e 2020-07-20T17:03:28+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,11 +22,6 @@
 
 #include <iostream>
 #include <cstdlib>
-
-// This cannot be disabled for now until we have a clear idea which
-// compilers implement N3276.
-
-#include <CGAL/result_of.h>
 
 #include <CGAL/assertions.h>
 #include <CGAL/tags.h>

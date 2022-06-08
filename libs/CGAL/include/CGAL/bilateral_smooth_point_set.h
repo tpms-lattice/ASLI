@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_processing_3/include/CGAL/bilateral_smooth_point_set.h $
-// $Id: bilateral_smooth_point_set.h ab14acf 2021-03-23T13:14:41+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/bilateral_smooth_point_set.h $
+// $Id: bilateral_smooth_point_set.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Shihao Wu, Clement Jamin, Pierre Alliez
@@ -178,9 +178,9 @@ compute_max_spacing(
    For more details, please see section 4 in \cgalCite{ear-2013}.
 
    A parallel version of this function is provided and requires the executable to be
-   linked against the <a href="https://www.threadingbuildingblocks.org">Intel TBB library</a>.
+   linked against the <a href="https://github.com/oneapi-src/oneTBB">Intel TBB library</a>.
    To control the number of threads used, the user may use the tbb::task_scheduler_init class.
-   See the <a href="https://www.threadingbuildingblocks.org/documentation">TBB documentation</a>
+   See the <a href="https://software.intel.com/content/www/us/en/develop/documentation/onetbb-documentation/top.html">TBB documentation</a>
    for more details.
 
    \pre Normals must be unit vectors
@@ -191,7 +191,7 @@ compute_max_spacing(
    \tparam PointRange is a model of `Range`. The value type of
    its iterator is the key type of the named parameter `point_map`.
 
-   \param points input point range.
+   \param points input point range
    \param k size of the neighborhood for the implicit surface patch fitting.
    The larger the value is, the smoother the result will be.
    \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/Cartesian/Circle_3.h $
-// $Id: Circle_3.h fe5f655 2021-03-29T15:23:24+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/Circle_3.h $
+// $Id: Circle_3.h 4a30144 2021-06-23T17:37:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Pedro Machado, Sebastien Loriot
@@ -66,10 +66,10 @@ public:
   {
     // the plane contains the center and it is not degenerate
     CGAL_kernel_assertion(!R().is_degenerate_3_object()(p));
-    CGAL_kernel_assertion((p.a() * center.x() +
-                           p.b() * center.y() +
-                           p.c() * center.z() +
-                           p.d()) == 0);
+//    CGAL_kernel_assertion((p.a() * center.x() +
+//                           p.b() * center.y() +
+//                           p.c() * center.z() +
+//                           p.d()) == 0);
     CGAL_kernel_assertion(squared_r >= FT(0));
     base = Rep(Sphere_3(center,squared_r), p);
   }

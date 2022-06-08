@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Intersection_type.h $
-// $Id: Intersection_type.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Intersection_type.h $
+// $Id: Intersection_type.h f9a9d12 2021-07-21T11:33:48+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@ namespace CGAL{
 namespace Polygon_mesh_processing {
 namespace Corefinement{
 
-enum Intersection_type {ON_FACE,ON_EDGE,ON_VERTEX,EMPTY,COPLANAR_TRIANGLES};
+enum Intersection_type {ON_VERTEX, ON_EDGE, ON_FACE, EMPTY, COPLANAR_TRIANGLES};
 
 template <class TriangleMesh, class Exact_kernel>
 struct Coplanar_intersection{

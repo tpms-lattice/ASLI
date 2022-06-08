@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_approximation/include/CGAL/Variational_shape_approximation.h $
-// $Id: Variational_shape_approximation.h 6007fe7 2020-10-28T09:51:02+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_approximation/include/CGAL/Variational_shape_approximation.h $
+// $Id: Variational_shape_approximation.h 6911f0c 2022-01-07T15:42:50+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1152,7 +1152,9 @@ private:
         target_px = max_nb_proxies;
       else
         target_px *= 2;
-      add_proxies_error_diffusion(target_px - m_proxies.size());
+      // if no proxies could be added, stop
+      if( add_proxies_error_diffusion(target_px - m_proxies.size()) == 0)
+        break;
       const FT err = run(nb_relaxations);
       error_drop = err / initial_err;
     }
@@ -1552,7 +1554,7 @@ private:
         std::cerr << "#chord_anchor " << m_bcycles.back().num_anchors << std::endl;
 #endif
 
-        for(const halfedge_descriptor he : chord)
+        for(const halfedge_descriptor& he : chord)
           he_candidates.erase(he);
       } while (he_start != he_mark);
     }
@@ -1600,7 +1602,7 @@ private:
         FT dist_max(0.0);
         chord_vec = scale_functor(chord_vec,
           FT(1.0) / CGAL::approximate_sqrt(chord_vec.squared_length()));
-        for(const halfedge_descriptor he : chord) {
+        for(const halfedge_descriptor& he : chord) {
           Vector_3 vec = vector_functor(pt_begin, m_vpoint_map[target(he, *m_ptm)]);
           vec = cross_product_functor(chord_vec, vec);
           const FT dist = CGAL::approximate_sqrt(vec.squared_length());
@@ -1612,7 +1614,7 @@ private:
       }
       else {
         FT dist_max(0.0);
-        for(const halfedge_descriptor he : chord) {
+        for(const halfedge_descriptor& he : chord) {
           const FT dist = CGAL::approximate_sqrt(CGAL::squared_distance(
             pt_begin, m_vpoint_map[target(he, *m_ptm)]));
           if (dist > dist_max) {
@@ -1833,7 +1835,7 @@ private:
    * @param chord_begin begin iterator of the chord
    * @param chord_end end iterator of the chord
    * @param subdivision_ratio the chord recursive split error threshold
-   * @param relative_to_chord set `true` if the subdivision_ratio is relative to the the chord length (relative sense),
+   * @param relative_to_chord set `true` if the subdivision_ratio is relative to the chord length (relative sense),
    * otherwise it's relative to the average edge length (absolute sense).
    * @param with_dihedral_angle if set to `true` add dihedral angle weight to the distance.
    * @return the number of anchors of the chord apart from the first one

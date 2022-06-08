@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Envelope_2/include/CGAL/Env_default_diagram_1.h $
-// $Id: Env_default_diagram_1.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Envelope_2/include/CGAL/Env_default_diagram_1.h $
+// $Id: Env_default_diagram_1.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein   <wein@post.tau.ac.il>
@@ -18,7 +18,7 @@
 
 #define CGAL_DEPRECATED_HEADER "<CGAL/Env_default_diagram_1.h>"
 #define CGAL_REPLACEMENT_HEADER "<CGAL/Envelope_diagram_1>"
-#include <CGAL/internal/deprecation_warning.h>
+#include <CGAL/Installation/internal/deprecation_warning.h>
 
 #if (defined __GNUC__)
   #if !(defined __STRICT_ANSI__)

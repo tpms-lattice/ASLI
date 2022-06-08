@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/Types/Sphere.h $
-// $Id: Sphere.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/Types/Sphere.h $
+// $Id: Sphere.h 634fe39 2020-12-30T19:56:58+01:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -83,7 +83,7 @@ template <class R_> struct Squared_radius {
   CGAL_FUNCTOR_INIT_IGNORE(Squared_radius)
   typedef typename Get_type<R_, Sphere_tag>::type        Sphere;
   typedef typename Get_type<R_, FT_tag>::type const&        result_type;
-  // TODO: Is_exact?
+  // TODO: Uses_no_arithmetic?
   result_type operator()(Sphere const&s)const{
     return s.squared_radius();
   }

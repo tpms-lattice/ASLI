@@ -1,24 +1,22 @@
-// Copyright (c) 1997
+// Copyright (c) 1997-2021
 // Utrecht University (The Netherlands),
 // ETH Zurich (Switzerland),
 // INRIA Sophia-Antipolis (France),
 // Max-Planck-Institute Saarbruecken (Germany),
-// and Tel-Aviv University (Israel).  All rights reserved.
+// and Tel-Aviv University (Israel).
+// GeometryFactory (France)
+// All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_3/include/CGAL/intersection_3.h $
-// $Id: intersection_3.h 90d2e03 2020-01-15T13:32:11+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/intersection_3.h $
+// $Id: intersection_3.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
-//
 //
 // Author(s)     : Geert-Jan Giezeman <geert@cs.uu.nl>
 
-
 #ifndef CGAL_INTERSECTION_3_H
 #define CGAL_INTERSECTION_3_H
-
-#include <CGAL/disable_warnings.h>
 
 #include <CGAL/Intersections_3/Bbox_3_Bbox_3.h>
 #include <CGAL/Intersections_3/Bbox_3_Iso_cuboid_3.h>
@@ -52,6 +50,7 @@
 #include <CGAL/Intersections_3/Line_3_Triangle_3.h>
 
 #include <CGAL/Intersections_3/Plane_3_Plane_3.h>
+#include <CGAL/Intersections_3/Plane_3_Plane_3_Plane_3.h>
 #include <CGAL/Intersections_3/Plane_3_Point_3.h>
 #include <CGAL/Intersections_3/Plane_3_Ray_3.h>
 #include <CGAL/Intersections_3/Plane_3_Segment_3.h>
@@ -83,10 +82,7 @@
 
 #include <CGAL/Intersections_3/Tetrahedron_3_Tetrahedron_3.h>
 #include <CGAL/Intersections_3/Tetrahedron_3_Triangle_3.h>
-#include <CGAL/Intersections_3/Tetrahedron_3_Triangle_3.h>
 
 #include <CGAL/Intersections_3/Triangle_3_Triangle_3.h>
-
-#include <CGAL/enable_warnings.h>
 
 #endif // CGAL_INTERSECTION_3_H

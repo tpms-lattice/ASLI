@@ -2,7 +2,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/HalfedgeDS/include/CGAL/boost/graph/graph_traits_HalfedgeDS_default.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/HalfedgeDS/include/CGAL/boost/graph/graph_traits_HalfedgeDS_default.h $
 // $Id: graph_traits_HalfedgeDS_default.h 620dfa4 2020-03-27T08:37:32+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

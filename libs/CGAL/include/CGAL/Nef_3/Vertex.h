@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/Vertex.h $
-// $Id: Vertex.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Vertex.h $
+// $Id: Vertex.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -304,7 +304,7 @@ class Vertex_base {
  public:
       std::string debug() const
         { std::stringstream os;
-          set_pretty_mode(os);
+          CGAL::IO::set_pretty_mode(os);
           os<<"{ addr, point, mark, snc, svb, sve, seb, see, sfb, sfe, sl,"
             <<" info }"<<std::endl;
           os<<"{ "<<this<<", "<<point_at_center_<<", "<<mark_<<", "<<&*sncp_<<", "
@@ -343,7 +343,7 @@ class Vertex_base {
         valid = valid && (sfaces_last_  != nullptr && sfaces_last_  != SFace_iterator());
         valid = valid && (shalfloop_ != nullptr && shalfloop_ != SHalfloop_iterator());
 
-        if(shalfedges_begin_ == sncp()->shalfedges_end()) {         // point in volume or on plane, which is either isolated or has one outgoing edge
+        if(valid && shalfedges_begin_ == sncp()->shalfedges_end()) {         // point in volume or on plane, which is either isolated or has one outgoing edge
           if(shalfloop_ != sncp()->shalfloops_end())
             valid = valid && (++SFace_const_iterator(sfaces_begin_) == sfaces_last_);
           else

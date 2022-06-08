@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Property_map/include/CGAL/Index_property_map.h $
-// $Id: Index_property_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Property_map/include/CGAL/Index_property_map.h $
+// $Id: Index_property_map.h 8166579 2021-10-11T19:58:07+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret
@@ -13,7 +13,7 @@
 #define CGAL_INDEX_PROPERTY_MAP_H
 
 #include <CGAL/property_map.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <iterator>
 #include <map>
@@ -97,7 +97,7 @@ public:
 
 private:
   // Property maps must be lightweight classes => share std::map
-  boost::shared_ptr<Index_map> m_index_map;
+  std::shared_ptr<Index_map> m_index_map;
 };
 
 /// @cond SKIP_IN_MANUAL
@@ -121,7 +121,7 @@ public:
 
   /// Free function to access the map elements.
   friend inline
-  reference get(const Index_property_map& map, key_type p)
+  value_type get(const Index_property_map& map, key_type p)
   {
     return std::distance(map.m_first, p);
   }

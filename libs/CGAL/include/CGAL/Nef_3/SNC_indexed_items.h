@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/SNC_indexed_items.h $
-// $Id: SNC_indexed_items.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/SNC_indexed_items.h $
+// $Id: SNC_indexed_items.h 2a54687 2021-06-04T13:52:14+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -37,7 +37,7 @@ class Index_generator {
   static int get_unique_index()
   {
     // initialized with 0
-    // http://en.cppreference.com/w/cpp/language/zero_initialization
+    // https://en.cppreference.com/w/cpp/language/zero_initialization
 #ifdef CGAL_NO_ATOMIC
     static int unique;
 #else
@@ -115,8 +115,9 @@ class SNC_indexed_items {
       init_ifacet = sl.init_ifacet;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = idx; }
     int get_index() const { return index; }
     Halffacet_const_handle get_index_facet() const {
@@ -150,8 +151,9 @@ class SNC_indexed_items {
       init_ifacet = se.init_ifacet;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = index2 = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = index2 = idx; }
     int get_index() const {
       return index;
@@ -185,8 +187,9 @@ class SNC_indexed_items {
       index = sv.index;
       return *this;
     }
-
-    void set_index(int idx = Index_generator::get_unique_index())
+    int new_index()
+    { index = Index_generator::get_unique_index(); return index; }
+    void set_index(int idx)
     { index = idx; }
     int get_index() const { return index; }
   };

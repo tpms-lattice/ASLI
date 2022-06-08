@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_sorting/include/CGAL/hilbert_sort.h $
-// $Id: hilbert_sort.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_sorting/include/CGAL/hilbert_sort.h $
+// $Id: hilbert_sort.h f5d2fb2 2021-09-01T16:41:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Christophe Delage
@@ -19,6 +19,7 @@
 #include <CGAL/Hilbert_sort_2.h>
 #include <CGAL/Hilbert_sort_3.h>
 #include <CGAL/Hilbert_sort_d.h>
+#include <CGAL/Kernel_traits.h>
 #include <CGAL/algorithm.h>
 
 #include <boost/random/random_number_generator.hpp>

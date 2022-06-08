@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_overlay_subcurve.h $
-// $Id: Arr_overlay_subcurve.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_overlay_subcurve.h $
+// $Id: Arr_overlay_subcurve.h b0c3c84 2019-12-18T09:05:45+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -102,7 +102,7 @@ public:
     m_above(nullptr)
   { m_top_face.red = nullptr; }
 
-  /*! Get the subcurve lying above above this subcurve in the status line. */
+  /*! Get the subcurve lying above this subcurve in the status line. */
   Self* subcurve_above() const { return m_above; }
 
   /*! Set the subcurve above. */

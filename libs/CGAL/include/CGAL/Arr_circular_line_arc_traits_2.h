@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_circular_line_arc_traits_2.h $
-// $Id: Arr_circular_line_arc_traits_2.h 03ff1a6 2020-10-02T15:19:36+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_circular_line_arc_traits_2.h $
+// $Id: Arr_circular_line_arc_traits_2.h af94033 2021-01-07T16:39:03+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Julien Hazebrouck
@@ -159,11 +159,11 @@ namespace CGAL {
     { return CK_Equal_2()(a0, a1); }
 
     result_type
-    operator() ( const Line_arc_2 &a0, const Circular_arc_2 &a1) const
+    operator() ( const Line_arc_2 &/*a0*/, const Circular_arc_2 &/*a1*/) const
     { return false; }
 
     result_type
-    operator() ( const Circular_arc_2 &a0, const Line_arc_2 &a1) const
+    operator() ( const Circular_arc_2 &/*a0*/, const Line_arc_2 &/*a1*/) const
     { return false; }
 
       result_type

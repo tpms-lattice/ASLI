@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Shape_detection/include/CGAL/Shape_detection/Region_growing/internal/utils.h $
-// $Id: utils.h 393f547 2020-11-26T14:21:10+01:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/Region_growing/internal/utils.h $
+// $Id: utils.h f2d9066 2021-08-19T12:05:30+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -44,7 +44,15 @@ namespace internal {
   public:
     FT operator()(const FT value) const {
 
-      CGAL_precondition(value >= FT(0));
+      // TODO: This happens for circles and cylinders only! Maybe after my
+      // precision cleaning in the new revision PR, this will be gone for all platforms.
+      if (value < FT(0)) return FT(0); // clamp to zero
+      const bool is_value_ok = (value >= FT(0));
+      if (!is_value_ok) { // TODO: remove that!
+        std::cout.precision(20);
+        std::cout << "- wrong value: " << value << std::endl;
+      }
+      CGAL_precondition(is_value_ok);
       return static_cast<FT>(CGAL::sqrt(CGAL::to_double(value)));
     }
   };

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_sorting/include/CGAL/Hilbert_sort_median_3.h $
-// $Id: Hilbert_sort_median_3.h 4eeb7f1 2020-02-06T11:57:04+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_sorting/include/CGAL/Hilbert_sort_median_3.h $
+// $Id: Hilbert_sort_median_3.h f60dfa8 2022-04-04T10:00:16+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Christophe Delage
@@ -35,7 +35,7 @@ struct Hilbert_cmp_3<K,x,true>
 {
   typedef typename K::Point_3 Point;
   K k;
-  Hilbert_cmp_3 (const K &_k = K()) : k(_k) {}
+  Hilbert_cmp_3 (const K &_k) : k(_k) {}
   bool operator() (const Point &p, const Point &q) const
   {
     return Hilbert_cmp_3<K,x,false> (k) (q, p);
@@ -48,7 +48,7 @@ struct Hilbert_cmp_3<K,0,false>
 {
   typedef typename K::Point_3 Point;
   K k;
-  Hilbert_cmp_3 (const K &_k = K()) : k(_k) {}
+  Hilbert_cmp_3 (const K &_k) : k(_k) {}
   bool operator() (const Point &p, const Point &q) const
   {
     return k.less_x_3_object() (p, q);
@@ -61,7 +61,7 @@ struct Hilbert_cmp_3<K,1,false>
 {
   typedef typename K::Point_3 Point;
   K k;
-  Hilbert_cmp_3 (const K &_k = K()) : k(_k) {}
+  Hilbert_cmp_3 (const K &_k) : k(_k) {}
   bool operator() (const Point &p, const Point &q) const
   {
     return k.less_y_3_object() (p, q);
@@ -74,7 +74,7 @@ struct Hilbert_cmp_3<K,2,false>
 {
   typedef typename K::Point_3 Point;
   K k;
-  Hilbert_cmp_3 (const K &_k = K()) : k(_k) {}
+  Hilbert_cmp_3 (const K &_k) : k(_k) {}
   bool operator() (const Point &p, const Point &q) const
   {
     return k.less_z_3_object() (p, q);
@@ -83,8 +83,14 @@ struct Hilbert_cmp_3<K,2,false>
 
 } // namespace internal
 
+#ifdef __clang__
+#define CGAL_VISIBILITY_MACRO __attribute__ ((visibility ("hidden")))
+#else
+#define CGAL_VISIBILITY_MACRO
+#endif
+
 template <class K, class ConcurrencyTag>
-class Hilbert_sort_median_3
+class CGAL_VISIBILITY_MACRO Hilbert_sort_median_3
 {
 public:
   typedef Hilbert_sort_median_3<K, ConcurrencyTag> Self;
@@ -103,7 +109,7 @@ private:
   };
 
 public:
-  Hilbert_sort_median_3 (const Kernel &k = Kernel(), std::ptrdiff_t limit = 1)
+  Hilbert_sort_median_3 (const Kernel &k, std::ptrdiff_t limit = 1)
     : _k(k), _limit (limit)
   {}
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Point_set_feature_generator.h $
-// $Id: Point_set_feature_generator.h 19004a7 2020-08-04T13:41:48+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Point_set_feature_generator.h $
+// $Id: Point_set_feature_generator.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -44,7 +44,7 @@ namespace Classification {
 /*!
   \ingroup PkgClassificationPointSet
 
-  \brief Generates a set of generic features for point set
+  \brief generates a set of generic features for point set
   classification.
 
   This class takes care of computing and storing all necessary data
@@ -65,7 +65,7 @@ namespace Classification {
   is `GeomTraits::Point_3`.
   \tparam ConcurrencyTag enables sequential versus parallel
   computation of `CGAL::Classification::Local_eigen_analysis`
-  objects. Possible values are `Parallel_tag` (default value is %CGAL
+  objects. Possible values are `Parallel_tag` (default value is \cgal
   is linked with TBB) or `Sequential_tag` (default value otherwise).
   \tparam DiagonalizeTraits model of `DiagonalizeTraits` used for
   matrix diagonalization. It can be omitted: if Eigen 3 (or greater)
@@ -355,7 +355,7 @@ public:
 
     \tparam ColorMap model of `ReadablePropertyMap`  whose key type is
     the value type of the iterator of `PointRange` and value type is
-    `CGAL::Color`.
+    `CGAL::IO::Color`.
 
     \param features the feature set where the features are instantiated.
     \param color_map property map to access the colors of the input points (if any).

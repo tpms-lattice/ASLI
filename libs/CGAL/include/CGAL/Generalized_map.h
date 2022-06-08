@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Generalized_map/include/CGAL/Generalized_map.h $
-// $Id: Generalized_map.h e6536aa 2020-06-09T20:15:16+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Generalized_map/include/CGAL/Generalized_map.h $
+// $Id: Generalized_map.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -13,10 +13,10 @@
 #define CGAL_GENERALIZED_MAP_H 1
 
 #include <CGAL/Generalized_map_fwd.h>
-#include <CGAL/internal/Combinatorial_map_utility.h>
-#include <CGAL/internal/Generalized_map_group_functors.h>
-#include <CGAL/internal/Combinatorial_map_copy_functors.h>
-#include <CGAL/internal/Generalized_map_sewable.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_utility.h>
+#include <CGAL/Generalized_map/internal/Generalized_map_group_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_copy_functors.h>
+#include <CGAL/Generalized_map/internal/Generalized_map_sewable.h>
 
 #include <CGAL/Generalized_map_storages.h>
 #include <CGAL/Combinatorial_map_functors.h>
@@ -42,7 +42,7 @@
 #endif
 
 #include <boost/config.hpp>
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
 _Pragma("GCC diagnostic push")
 _Pragma("GCC diagnostic ignored \"-Warray-bounds\"")
 #endif
@@ -3890,7 +3890,7 @@ namespace CGAL {
 
 } // namespace CGAL
 
-#if  (BOOST_GCC >= 40900)
+#if defined(BOOST_GCC)
  _Pragma("GCC diagnostic pop")
 #endif
 

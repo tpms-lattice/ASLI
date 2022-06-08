@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/SM_visualizor.h $
-// $Id: SM_visualizor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/SM_visualizor.h $
+// $Id: SM_visualizor.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,8 +24,8 @@
 #include <CGAL/Nef_S2/SM_decorator.h>
 #include <CGAL/Nef_S2/SM_triangulator.h>
 
-#define CGAL_NEF3_LGREY CGAL::Color(170,170,200)
-#define CGAL_NEF3_DGREY CGAL::Color(30,30,50)
+#define CGAL_NEF3_LGREY CGAL::IO::Color(170,170,200)
+#define CGAL_NEF3_DGREY CGAL::IO::Color(30,30,50)
 
 namespace CGAL {
 

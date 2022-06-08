@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/NT_converter.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/NT_converter.h $
 // $Id: NT_converter.h 848aa7d 2021-02-08T10:16:59+01:00 Simon Giraudot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

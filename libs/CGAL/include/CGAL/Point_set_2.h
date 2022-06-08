@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Point_set_2/include/CGAL/Point_set_2.h $
-// $Id: Point_set_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_2/include/CGAL/Point_set_2.h $
+// $Id: Point_set_2.h 7e62c02 2021-04-12T14:02:37+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 #include <CGAL/basic.h>
 #include <CGAL/Unique_hash_map.h>
 #include <CGAL/Delaunay_triangulation_2.h>
-#include <CGAL/squared_distance_2_1.h>
 #include <CGAL/compare_vertices.h>
 #include <list>
 #include <queue>

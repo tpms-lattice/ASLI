@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_impl.h $
-// $Id: Min_sphere_of_spheres_d_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Bounding_volumes/include/CGAL/Min_sphere_of_spheres_d/Min_sphere_of_spheres_d_impl.h $
+// $Id: Min_sphere_of_spheres_d_impl.h a522818 2021-03-21T19:06:01+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,6 +29,8 @@
 #include <CGAL/Min_sphere_of_spheres_d.h>
 
 namespace CGAL_MINIBALL_NAMESPACE {
+
+namespace  Bounding_volumes {
 
   template<typename FT>
   inline bool compare(const FT& a,const FT& b,
@@ -55,6 +57,8 @@ namespace CGAL_MINIBALL_NAMESPACE {
       return 4 * uu *bp > sqr(v);
     }
   }
+
+} // namespace Bounding_volumes
 
   template<class Traits>
   void Min_sphere_of_spheres_d<Traits>::update(LP_algorithm) {
@@ -168,7 +172,7 @@ namespace CGAL_MINIBALL_NAMESPACE {
                                          t.center_cartesian_begin(*l[k]),FT(0),std::plus<FT>(),
         Subtract_and_square<FT>());
 
-      if (compare(max,maxp,t.radius(*l[k]),dist)) {
+      if (Bounding_volumes::compare(max,maxp,t.radius(*l[k]),dist)) {
         max   = t.radius(*l[k]);
         maxp  = dist;
         i     = k;
@@ -203,7 +207,7 @@ namespace CGAL_MINIBALL_NAMESPACE {
          Subtract_and_square_to_double<FT>());
 
       const double r = CGAL_MINIBALL_NTS to_double(t.radius(*l[k]));
-      if (compare(max,maxp,r,dist)) {
+      if (Bounding_volumes::compare(max,maxp,r,dist)) {
         max   = r;
         maxp  = dist;
         i     = k;

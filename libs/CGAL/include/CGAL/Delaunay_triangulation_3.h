@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_3/include/CGAL/Delaunay_triangulation_3.h $
-// $Id: Delaunay_triangulation_3.h d1a323c 2020-03-26T19:24:14+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_3/include/CGAL/Delaunay_triangulation_3.h $
+// $Id: Delaunay_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -72,7 +72,7 @@ template < class Gt,
 class Delaunay_triangulation_3;
 
 // There is a specialization Delaunay_triangulation_3<Gt, Tds, Fast_location>
-// defined in <CGAL/internal/Delaunay_triangulation_hierarchy_3.h>.
+// defined in <CGAL/Triangulation_3/internal/Delaunay_triangulation_hierarchy_3.h>.
 
 // Here is the specialization Delaunay_triangulation_3<Gt, Tds>, with three
 // arguments, that is if Location_policy being the default value 'Default'.
@@ -2059,7 +2059,7 @@ is_valid(Cell_handle c, bool verbose, int level) const
 
 } //namespace CGAL
 
-#include <CGAL/internal/Delaunay_triangulation_hierarchy_3.h>
+#include <CGAL/Triangulation_3/internal/Delaunay_triangulation_hierarchy_3.h>
 
 #include <CGAL/enable_warnings.h>
 

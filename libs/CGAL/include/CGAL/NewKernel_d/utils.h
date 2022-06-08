@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/utils.h $
-// $Id: utils.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/utils.h $
+// $Id: utils.h 9c28a54 2021-03-18T09:38:30+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -92,25 +92,6 @@ struct Has_type_different_from <T, No, true>
         template <class NT> struct has_cheap_constructor : boost::is_arithmetic<NT>{};
         template <bool p> struct has_cheap_constructor<Interval_nt<p> > {
                         enum { value=true };
-        };
-
-        // like std::multiplies but allows mixing types
-        // in C++11 in doesn't need to be a template
-        template < class Ret >
-        struct multiplies {
-                template<class A,class B>
-                decltype(auto) operator()(A&&a,B&&b)const
-                {
-                        return std::forward<A>(a)*std::forward<B>(b);
-                }
-        };
-        template < class Ret >
-        struct division {
-                template<class A,class B>
-                decltype(auto) operator()(A&&a,B&&b)const
-                {
-                        return std::forward<A>(a)/std::forward<B>(b);
-                }
         };
 
         using std::decay;

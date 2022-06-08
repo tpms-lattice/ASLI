@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/HalfedgeDS/include/CGAL/HalfedgeDS_iterator.h $
-// $Id: HalfedgeDS_iterator.h 1d3c8bb 2020-06-10T22:33:26+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/HalfedgeDS/include/CGAL/HalfedgeDS_iterator.h $
+// $Id: HalfedgeDS_iterator.h 4e4a93d 2021-03-31T15:48:05+02:00 Simon Giraudot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -181,7 +181,7 @@ public:
 // CREATION
 // --------
 
-    _HalfedgeDS_facet_circ() : It(0) {}
+    _HalfedgeDS_facet_circ() : It(nullptr) {}
     //_HalfedgeDS_facet_circ( pointer p) : It(p) {}
     _HalfedgeDS_facet_circ( It i) : It(i) {}
 
@@ -200,7 +200,7 @@ public:
     bool operator!=( const Self& i) const { return !(*this == i); }
 
     Self& operator++() {
-        this->nt = (*this->nt).next();
+        this->nt = typename It::Iterator((*this->nt).next());
         return *this;
     }
     Self  operator++(int) {
@@ -213,7 +213,7 @@ public:
 // ---------------------------------
 
     Self& operator--() {
-        this->nt = (*this->nt).prev();
+        this->nt = typename It::Iterator((*this->nt).prev());
         return *this;
     }
     Self  operator--(int) {
@@ -241,7 +241,7 @@ public:
 // CREATION
 // --------
 
-    _HalfedgeDS_facet_const_circ() : It(0) {}
+    _HalfedgeDS_facet_const_circ() : It(nullptr) {}
     _HalfedgeDS_facet_const_circ( pointer p) : It(p) {}
     _HalfedgeDS_facet_const_circ( It i) : It(i) {}
 
@@ -266,7 +266,7 @@ public:
     bool operator!=( const It& i) const { return !(*this == i); }
 
     Self& operator++() {
-        this->nt = (*this->nt).next();
+        this->nt = typename It::Iterator((*this->nt).next());
         return *this;
     }
     Self  operator++(int) {
@@ -279,7 +279,7 @@ public:
 // ---------------------------------
 
     Self& operator--() {
-        this->nt = (*this->nt).prev();
+        this->nt = typename It::Iterator((*this->nt).prev());
         return *this;
     }
     Self  operator--(int) {
@@ -306,7 +306,7 @@ public:
 // CREATION
 // --------
 
-    _HalfedgeDS_vertex_circ() : It(0) {}
+    _HalfedgeDS_vertex_circ() : It(nullptr) {}
     //_HalfedgeDS_vertex_circ( pointer p) : It(p) {}
     _HalfedgeDS_vertex_circ( It i) : It(i) {}
 
@@ -321,11 +321,12 @@ public:
         return It::operator==( It(nullptr));
     }
     bool operator!=( std::nullptr_t p) const { return !(*this == p); }
+    bool operator==( const It& i) const { return  It::operator==(i); }
     bool operator==( const Self& i) const { return  It::operator==(i); }
     bool operator!=( const Self& i) const { return !(*this == i); }
 
     Self& operator++() {
-        this->nt = (*this->nt).next()->opposite();
+        this->nt = typename It::Iterator((*this->nt).next()->opposite());
         return *this;
     }
     Self  operator++(int) {
@@ -338,7 +339,7 @@ public:
 // ---------------------------------
 
     Self& operator--() {
-        this->nt = (*this->nt).opposite()->prev();
+        this->nt = typename It::Iterator((*this->nt).opposite()->prev());
         return *this;
     }
     Self  operator--(int) {
@@ -366,7 +367,7 @@ public:
 // CREATION
 // --------
 
-    _HalfedgeDS_vertex_const_circ() : It(0) {}
+    _HalfedgeDS_vertex_const_circ() : It(nullptr) {}
     _HalfedgeDS_vertex_const_circ( pointer p) : It(p) {}
     _HalfedgeDS_vertex_const_circ( It i) : It(i) {}
 
@@ -389,7 +390,7 @@ public:
     bool operator!=( const Self& i) const { return !(*this == i); }
 
     Self& operator++() {
-        this->nt = (*this->nt).next()->opposite();
+      this->nt = typename It::Iterator((*this->nt).next()->opposite());
         return *this;
     }
     Self  operator++(int) {
@@ -402,7 +403,7 @@ public:
 // ---------------------------------
 
     Self& operator--() {
-        this->nt = (*this->nt).opposite()->prev();
+        this->nt = typename It::Iterator((*this->nt).opposite()->prev());
         return *this;
     }
     Self  operator--(int) {

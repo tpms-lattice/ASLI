@@ -457,7 +457,7 @@ void ASLI::LoadInputFiles() {
 
 	#ifdef CGAL_MESH // Place somewhere else
 		std::ifstream stl_file(stlFile, std::ios::binary);
-		CGAL::read_STL(stl_file, shell.points, shell.polygons);
+		CGAL::IO::read_STL(stl_file, shell.points, shell.polygons);
 		stl_file.close();
 	#endif
 

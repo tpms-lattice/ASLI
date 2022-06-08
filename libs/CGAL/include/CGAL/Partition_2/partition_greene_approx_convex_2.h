@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Partition_2/include/CGAL/Partition_2/partition_greene_approx_convex_2.h $
-// $Id: partition_greene_approx_convex_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Partition_2/include/CGAL/Partition_2/partition_greene_approx_convex_2.h $
+// $Id: partition_greene_approx_convex_2.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -609,7 +609,7 @@ void find_smallest_yx(BidirectionalCirculator& first, const Traits& traits)
    current++;
    // find out which direction to go
    typename Traits::Less_yx_2     less_yx = traits.less_yx_2_object();
-   if (less_yx(*current, *first))   // go foward
+   if (less_yx(*current, *first))   // go forward
    {
       do
       {
@@ -798,7 +798,7 @@ OutputIterator partition_greene_approx_convex_2(InputIterator first,
    typedef typename Traits::Polygon_2                        Polygon_2;
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS) || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    OutputIterator res(result);
 #else
 
@@ -829,7 +829,7 @@ OutputIterator partition_greene_approx_convex_2(InputIterator first,
                                    res.output_so_far_end(), traits));
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS) || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    return res;
 #else
    return res.to_output_iterator();

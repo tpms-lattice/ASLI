@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_2/include/CGAL/Intersections_2/Circle_2_Line_2.h $
-// $Id: Circle_2_Line_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_2/include/CGAL/Intersections_2/Circle_2_Line_2.h $
+// $Id: Circle_2_Line_2.h 7e62c02 2021-04-12T14:02:37+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,10 +18,11 @@
 #ifndef CGAL_INTERSECTIONS_2_CIRCLE_2_LINE_2_H
 #define CGAL_INTERSECTIONS_2_CIRCLE_2_LINE_2_H
 
+#include <CGAL/Distance_2/Point_2_Line_2.h>
+#include <CGAL/Intersection_traits_2.h>
+
 #include <CGAL/Circle_2.h>
 #include <CGAL/Line_2.h>
-#include <CGAL/squared_distance_2_1.h>
-#include <CGAL/Intersection_traits_2.h>
 
 namespace CGAL {
 namespace Intersections {

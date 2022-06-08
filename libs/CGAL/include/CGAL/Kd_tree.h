@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Spatial_searching/include/CGAL/Kd_tree.h $
-// $Id: Kd_tree.h 2aa9b02 2021-02-20T11:03:11+01:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Spatial_searching/include/CGAL/Kd_tree.h $
+// $Id: Kd_tree.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Hans Tangelder (<hanst@cs.uu.nl>),
@@ -25,7 +25,7 @@
 #include <CGAL/algorithm.h>
 #include <CGAL/Kd_tree_node.h>
 #include <CGAL/Splitters.h>
-#include <CGAL/internal/Get_dimension_tag.h>
+#include <CGAL/Spatial_searching/internal/Get_dimension_tag.h>
 
 #include <boost/container/deque.hpp>
 #include <boost/optional.hpp>

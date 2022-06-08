@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Homogeneous_kernel/include/CGAL/Homogeneous/SphereH3.h $
-// $Id: SphereH3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Homogeneous_kernel/include/CGAL/Homogeneous/SphereH3.h $
+// $Id: SphereH3.h 3640099 2021-09-28T15:36:51+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -198,7 +198,7 @@ template <class R>
 CGAL_KERNEL_MEDIUM_INLINE
 Oriented_side
 SphereH3<R>::oriented_side(const typename SphereH3<R>::Point_3& p) const
-{ return Oriented_side(bounded_side(p) * orientation()); }
+{ return Oriented_side(static_cast<int>(bounded_side(p)) * static_cast<int>(orientation())); }
 
 template <class R>
 CGAL_KERNEL_INLINE

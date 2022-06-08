@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_segmentation/include/CGAL/mesh_segmentation.h $
-// $Id: mesh_segmentation.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_segmentation/include/CGAL/mesh_segmentation.h $
+// $Id: mesh_segmentation.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -20,7 +20,7 @@
  * @file mesh_segmentation.h
  * @brief The API which contains free template functions for SDF computation and mesh segmentation.
  */
-#include <CGAL/internal/Surface_mesh_segmentation/Surface_mesh_segmentation.h>
+#include <CGAL/Surface_mesh_segmentation/internal/Surface_mesh_segmentation.h>
 #include <CGAL/boost/graph/helpers.h>
 #include <boost/config.hpp>
 #include <CGAL/Kernel/global_functions_3.h>

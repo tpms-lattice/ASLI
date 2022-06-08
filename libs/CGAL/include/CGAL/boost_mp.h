@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/boost_mp.h $
-// $Id: boost_mp.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/boost_mp.h $
+// $Id: boost_mp.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -13,14 +13,14 @@
 #define CGAL_BOOST_MP_H
 
 #include <CGAL/config.h>
-// This could check BOOST_VERSION >= 105300, but before 1.56 there is no
-// implicit conversion from double, which makes it hard to use in CGAL.
+
 // It is easier to disable this number type completely for old versions.
 // Before 1.63, I/O is broken.  Again, disabling the whole file is just the
 // easy solution.
-// TODO: MSVC has trouble with versions <= 1.69, reenable once 1.70 has been
-// tested. https://github.com/boostorg/multiprecision/issues/98
-#if !defined CGAL_DISABLE_GMP && !defined CGAL_DO_NOT_USE_BOOST_MP && BOOST_VERSION >= 106300 && !defined _MSC_VER
+// MSVC had trouble with versions <= 1.69:
+// https://github.com/boostorg/multiprecision/issues/98
+#if !defined CGAL_DO_NOT_USE_BOOST_MP && \
+    (!defined _MSC_VER || BOOST_VERSION >= 107000)
 #define CGAL_USE_BOOST_MP 1
 
 #include <CGAL/functional.h> // *ary_function

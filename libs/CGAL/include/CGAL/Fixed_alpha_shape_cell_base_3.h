@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Alpha_shapes_3/include/CGAL/Fixed_alpha_shape_cell_base_3.h $
-// $Id: Fixed_alpha_shape_cell_base_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Alpha_shapes_3/include/CGAL/Fixed_alpha_shape_cell_base_3.h $
+// $Id: Fixed_alpha_shape_cell_base_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,7 @@
 #include <vector>
 #include <CGAL/Compact_container.h>
 #include <CGAL/Delaunay_triangulation_cell_base_3.h>
-#include <CGAL/internal/Classification_type.h>
+#include <CGAL/Alpha_shapes_3/internal/Classification_type.h>
 
 namespace CGAL {
 

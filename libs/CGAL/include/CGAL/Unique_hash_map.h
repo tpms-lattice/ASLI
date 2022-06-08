@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Hash_map/include/CGAL/Unique_hash_map.h $
-// $Id: Unique_hash_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Hash_map/include/CGAL/Unique_hash_map.h $
+// $Id: Unique_hash_map.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -133,27 +133,29 @@ namespace boost {
   public:
     typedef KeyType key_type;
     typedef ValueType value_type;
-    typedef const value_type& reference;
+    typedef value_type& reference;
     typedef lvalue_property_map_tag category;
+
     associative_property_map() : m_c(0) { }
     associative_property_map(C& c) : m_c(&c) { }
-    value_type& operator[](const key_type& k) const {
+
+    reference operator[](const key_type& k) const {
       return (*m_c)[k];
     }
 
-  friend
-  const value_type&
-  get(const associative_property_map<C>& uhm, const key_type& key)
-  {
-    return uhm[key];
-  }
+    friend
+    reference
+    get(const associative_property_map<C>& uhm, const key_type& key)
+    {
+      return uhm[key];
+    }
 
-  friend
-  void
-  put(associative_property_map<C>& uhm, const key_type& key, const value_type& val)
-  {
-    uhm[key] = val;
-  }
+    friend
+    void
+    put(associative_property_map<C>& uhm, const key_type& key, const value_type& val)
+    {
+      uhm[key] = val;
+    }
 
   private:
     C* m_c;

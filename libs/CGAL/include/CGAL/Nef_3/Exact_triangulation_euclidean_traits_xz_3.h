@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/Exact_triangulation_euclidean_traits_xz_3.h $
-// $Id: Exact_triangulation_euclidean_traits_xz_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Exact_triangulation_euclidean_traits_xz_3.h $
+// $Id: Exact_triangulation_euclidean_traits_xz_3.h 5ea5e93 2021-01-20T15:17:41+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ralf Osbild <osbild@mpi-sb.mpg.de>
@@ -33,7 +33,10 @@ struct Exact_intersect_xz_2 <R,Cartesian_tag>
    typedef typename R::Point_3     Point_3;
    typedef typename R::Segment_3   Segment_3;
 
-   CGAL::Object operator() (Segment_3 s3, Segment_3 t3)
+   typedef  boost::variant<Point_3, Segment_3> variant_type;
+
+   boost::optional<variant_type>
+   operator() (const Segment_3& s3, const Segment_3& t3)
    {  Point_2 p2, q2;
       Point_3 p3, q3;
 
@@ -48,18 +51,22 @@ struct Exact_intersect_xz_2 <R,Cartesian_tag>
 
       // convert intersection from Object_2 to Object_3
       // Note: there is not necessarily a spartial intersection,
-      //       so all second components are faked!
-      CGAL::Object obj = intersection (s2,t2);
-      if ( CGAL::assign(p2, obj) )
-      {  obj = make_object (Point_3 (p2.x(),0,p2.y()));
+      //       so all third components are faked!
+      auto obj = intersection (s2,t2);
+      if(! obj){
+        return boost::none;
       }
-      else if ( CGAL::assign(s2, obj) )
-      {  p2 = s2.source();
-         q2 = s2.target();
-         obj = make_object( Segment_3(
-               Point_3(p2.x(),0,p2.y()), Point_3(q2.x(),0,q2.y()) ) );
+      if (const Point_2* pi =  boost::get<Point_2>(&*obj))
+      {
+        return boost::make_optional(variant_type(Point_3(p2.x(),0,p2.y())));
       }
-      return obj;
+
+      const Segment_2* si = boost::get<Segment_2>(&*obj);
+      p2 = si->source();
+      q2 = si->target();
+
+      return boost::make_optional(variant_type(Segment_3(Point_3(p2.x(),0,p2.y()),
+                                                         Point_3(q2.x(),0,q2.y()) ) ));
    }
 };
 
@@ -72,7 +79,9 @@ struct Exact_intersect_xz_2 <R,Homogeneous_tag>
    typedef typename R::Point_3     Point_3;
    typedef typename R::Segment_3   Segment_3;
 
-   CGAL::Object operator() (Segment_3 s3, Segment_3 t3)
+   typedef  boost::variant<Point_3, Segment_3> variant_type;
+
+   boost::optional<variant_type> operator() (Segment_3 s3, Segment_3 t3)
    {  Point_2 p2, q2;
       Point_3 p3, q3;
 
@@ -89,20 +98,24 @@ struct Exact_intersect_xz_2 <R,Homogeneous_tag>
 
       // convert intersection from Object_2 to Object_3
       // Note: there is not necessarily a spartial intersection,
-      //       so all second components are faked!
-      CGAL::Object obj = intersection (s2,t2);
-      if ( CGAL::assign(p2, obj) )
-      {  obj = make_object (Point_3 (p2.hx(),0,p2.hy(),p2.hw()));
+      //       so all third components are faked!
+      auto obj = intersection (s2,t2);
+      if(! obj){
+        return boost::none;
       }
-      else if ( CGAL::assign(s2, obj) )
-      {  p2 = s2.source();
-         q2 = s2.target();
-         obj = make_object( Segment_3(
-            Point_3 (p2.hx(),0,p2.hy(),p2.hw()),
-            Point_3 (q2.hx(),0,q2.hy(),q2.hw()) ) );
+      if (const Point_2* pi =  boost::get<Point_2>(&*obj))
+      {
+        return boost::make_optional(variant_type(Point_3(p2.hx(),0,p2.hy(),p2.hw())));
       }
-      return obj;
+
+      const Segment_2* si = boost::get<Segment_2>(&*obj);
+      p2 = si->source();
+      q2 = si->target();
+
+      return boost::make_optional(variant_type(Segment_3(Point_3 (p2.hx(),0,p2.hy(),p2.hw()),
+                                                         Point_3 (q2.hx(),0,q2.hy(),q2.hw())) ));
    }
+
 };
 
 template <class R>

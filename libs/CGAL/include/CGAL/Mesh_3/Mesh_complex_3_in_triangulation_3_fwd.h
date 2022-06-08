@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Installation/include/CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_fwd.h $
-// $Id: Mesh_complex_3_in_triangulation_3_fwd.h aeda2ef 2020-09-07T12:35:54+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/Mesh_3/Mesh_complex_3_in_triangulation_3_fwd.h $
+// $Id: Mesh_complex_3_in_triangulation_3_fwd.h c863ee6 2021-05-04T17:28:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 
@@ -12,6 +12,8 @@
 
 /// \file Mesh_complex_3_in_triangulation_3_fwd.h
 /// Forward declarations of the Mesh_3 package.
+
+#include <istream>
 
 #ifndef DOXYGEN_RUNNING
 namespace CGAL {

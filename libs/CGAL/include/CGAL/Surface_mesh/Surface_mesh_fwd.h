@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Installation/include/CGAL/Surface_mesh/Surface_mesh_fwd.h $
-// $Id: Surface_mesh_fwd.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/Surface_mesh/Surface_mesh_fwd.h $
+// $Id: Surface_mesh_fwd.h 65c1a4f 2020-01-28T11:28:02+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 
@@ -19,7 +19,6 @@ namespace CGAL {
 // fwdS for the public interface
 template<typename P>
 class Surface_mesh;
-
 
 } // CGAL
 #endif

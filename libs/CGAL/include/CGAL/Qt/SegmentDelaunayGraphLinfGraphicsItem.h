@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/SegmentDelaunayGraphLinfGraphicsItem.h $
-// $Id: SegmentDelaunayGraphLinfGraphicsItem.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/SegmentDelaunayGraphLinfGraphicsItem.h $
+// $Id: SegmentDelaunayGraphLinfGraphicsItem.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -199,7 +199,7 @@ SegmentDelaunayGraphLinfGraphicsItem<T>::drawAll(QPainter *painter, const QStyle
            vit != t->finite_vertices_end(); ++vit) {
         typename T::Site_2 s = vit->site();
         if ( s.is_input() ) {
-          //*widget << CGAL::red();
+          //*widget << CGAL::IO::red();
         } else {
           //*widget << CGAL::yellow();
         }

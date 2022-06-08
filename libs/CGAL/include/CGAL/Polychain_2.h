@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Segment_Delaunay_graph_Linf_2/include/CGAL/Polychain_2.h $
-// $Id: Polychain_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Segment_Delaunay_graph_Linf_2/include/CGAL/Polychain_2.h $
+// $Id: Polychain_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -97,7 +97,7 @@ operator<<(std::ostream &os,
               ::Vertex_const_iterator
            i;
 
-  switch(get_mode(os)) {
+  switch(IO::get_mode(os)) {
     case IO::ASCII :
       os << p.size() << ' ';
       for (i = p.vertices_begin(); i != p.vertices_end(); ++i) {
@@ -268,7 +268,7 @@ operator<<(std::ostream &os,
 {
   typename Polychainray_2<Traits_P,Container_P>::Vertex_const_iterator i;
 
-  switch(get_mode(os)) {
+  switch(IO::get_mode(os)) {
     case IO::ASCII :
       os << p.size() << ' ';
       for (i = p.vertices_begin(); i != p.vertices_end(); ++i) {
@@ -779,7 +779,7 @@ operator<<(std::ostream &os,
 {
   typename Polychainline_2<Traits_P,Container_P>::Vertex_const_iterator i;
 
-  switch(get_mode(os)) {
+  switch(IO::get_mode(os)) {
     case IO::ASCII :
       os << p.size() << ' ';
       os << ", dinc=" << p.get_incoming() << ", ";

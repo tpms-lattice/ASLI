@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/face_graph_utils.h $
-// $Id: face_graph_utils.h 3254365 2021-03-03T17:10:16+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/face_graph_utils.h $
+// $Id: face_graph_utils.h 8ca5971 2021-12-07T11:30:34+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -377,11 +377,11 @@ struct Dummy_default_vertex_point_map
   }
 };
 
-template <class Point_3, class NamedParameter, class PolygonMesh>
+template <class Point_3, class NamedParameters, class PolygonMesh>
 struct TweakedGetVertexPointMap
 {
   typedef typename GetVertexPointMap<PolygonMesh,
-                                     NamedParameter>::type Default_map;
+                                     NamedParameters>::type Default_map;
   typedef typename boost::is_same<Point_3,
     typename boost::property_traits<Default_map>::value_type>::type Use_default_tag;
 
@@ -416,26 +416,53 @@ template <class TriangleMesh>
 struct Default_visitor{
   typedef boost::graph_traits<TriangleMesh> GT;
   typedef typename GT::face_descriptor face_descriptor;
-
+  typedef typename GT::halfedge_descriptor halfedge_descriptor;
+  typedef typename GT::vertex_descriptor vertex_descriptor;
+// face visitor functions
   void before_subface_creations(face_descriptor /*f_old*/,TriangleMesh&){}
   void after_subface_creations(TriangleMesh&){}
   void before_subface_created(TriangleMesh&){}
   void after_subface_created(face_descriptor /*f_new*/,TriangleMesh&){}
-  void before_face_copy(face_descriptor /*f_old*/, TriangleMesh&, TriangleMesh&){}
-  void after_face_copy(face_descriptor /*f_old*/, TriangleMesh&,
+  void before_face_copy(face_descriptor /*f_old*/, const TriangleMesh&, TriangleMesh&){}
+  void after_face_copy(face_descriptor /*f_old*/, const TriangleMesh&,
                        face_descriptor /* f_new */, TriangleMesh&){}
+// edge visitor functions
+  void before_edge_split(halfedge_descriptor /* h */, TriangleMesh& /* tm */){}
+  void edge_split(halfedge_descriptor /* hnew */, TriangleMesh& /* tm */){}
+  void after_edge_split(){}
 
+  void add_retriangulation_edge(halfedge_descriptor /* h */ , TriangleMesh& /* tm */) {} // edges added during split face retriangulation
+
+  void before_edge_copy(halfedge_descriptor /*h_old*/, const TriangleMesh&, TriangleMesh&){}
+  void after_edge_copy(halfedge_descriptor /*h_old*/, const TriangleMesh&,
+                       halfedge_descriptor /* f_new */, TriangleMesh&){}
+
+  void before_edge_duplicated(halfedge_descriptor /*h_old*/, TriangleMesh&){} // called before a patch border edge is duplicated
+  void after_edge_duplicated(halfedge_descriptor /*h_old*/,
+                             halfedge_descriptor /* f_new */, TriangleMesh&){} // called after a patch border edge is duplicated
+
+  void intersection_edge_copy(halfedge_descriptor /* h_old1 */, const TriangleMesh& /* tm1 */,
+                              halfedge_descriptor /* h_old2 */, const TriangleMesh& /* tm2 */,
+                              halfedge_descriptor /* h_new */,  TriangleMesh& /* tm_new */){}
+// vertex visitor functions
+  void new_vertex_added(std::size_t /* node_id */,
+                        vertex_descriptor /* vh */,
+                        const TriangleMesh& /* tm */){}
+
+  void intersection_point_detected(std::size_t /* node_id */,
+                                   int /* sdim */,
+                                   halfedge_descriptor /* principal_edge */,
+                                   halfedge_descriptor /* additional_edge */,
+                                   const TriangleMesh& /* tm1 */,
+                                   const TriangleMesh& /* tm2 */,
+                                   bool /* is_target_coplanar */,
+                                   bool /* is_source_coplanar */) {}
+  void before_vertex_copy(vertex_descriptor /*v_src*/, const TriangleMesh& /*tm_src*/, TriangleMesh& /*tm_tgt*/){}
+  void after_vertex_copy(vertex_descriptor /*v_src*/, const TriangleMesh& /*tm_src*/,
+                         vertex_descriptor /* v_tgt */, TriangleMesh& /*tm_tgt*/){}
 // calls commented in the code and probably incomplete due to the migration
 // see NODE_VISITOR_TAG
 /*
-  void new_node_added(  std::size_t node_id,
-                        Intersection_type type,
-                        halfedge_descriptor principal_edge,
-                        halfedge_descriptor additional_edge,
-                        bool is_target_coplanar,
-                        bool is_source_coplanar)
-  {}
-
   // autorefinement only
   void new_node_added_triple_face(std::size_t node_id,
                                   face_descriptor f1,
@@ -443,10 +470,6 @@ struct Default_visitor{
                                   face_descriptor f3,
                                   const TriangleMesh& tm)
   {}
-
-  void new_vertex_added(std::size_tnode_id,
-                        vertex_descriptor vh,
-                        TriangleMesh& tm){}
 */
 };
 
@@ -484,10 +507,10 @@ triangulate_a_face(
   for(Node_id node_id : node_ids)
   {
     vertex_descriptor v=add_vertex(tm);
-//    user_visitor.new_vertex_added(node_id, v, tm); // NODE_VISITOR_TAG
     nodes.call_put(vpm, v, node_id, tm);
     // register the new vertex in the output builder
     output_builder.set_vertex_id(v, node_id, tm);
+    user_visitor.new_vertex_added(node_id, v, tm);
 
     CGAL_assertion(node_id_to_vertex.size()>node_id);
     node_id_to_vertex[node_id]=v;
@@ -508,6 +531,7 @@ triangulate_a_face(
          !cdt.is_infinite(cdt.mirror_vertex(it->first,it->second)) )
     {
       edge_descriptor e=add_edge(tm);
+      user_visitor.add_retriangulation_edge(halfedge(e, tm), tm);
       halfedge_descriptor h=halfedge(e,tm), h_opp=opposite(h,tm);
 
       Node_id i0=cdt_v0->info(), i1=cdt_v1->info();
@@ -720,28 +744,38 @@ struct Patch_container{
     typedef typename GT::face_descriptor face_descriptor;
 
     Patch_description<PolygonMesh>& patch=this->operator[](i);
-    out << "OFF\n" << patch.interior_vertices.size() +
-                      patch.shared_edges.size();
-    out << " " << patch.faces.size() << " 0\n";
+
+    std::stringstream ss;
     std::map<vertex_descriptor, int> vertexid;
     int id=0;
     for(vertex_descriptor vh : patch.interior_vertices)
     {
       vertexid[vh]=id++;
-      out << get(vertex_point, pm, vh) << "\n";
+      ss << get(vertex_point, pm, vh) << "\n";
     }
 
     for(halfedge_descriptor hh : patch.shared_edges)
     {
-      vertexid[target(hh, pm)]=id++;
-      out << get(vertex_point, pm, target(hh, pm)) << "\n";
+      if( vertexid.insert( std::make_pair(target(hh,pm), id) ).second )
+      {
+        ss << get(vertex_point, pm, target(hh, pm)) << "\n";
+        ++id;
+      }
+      if( vertexid.insert( std::make_pair(source(hh,pm), id) ).second )
+      {
+        ss << get(vertex_point, pm, source(hh, pm)) << "\n";
+        ++id;
+      }
     }
+
+    out << "OFF\n" << id << " " << patch.faces.size() << " 0\n";
+    out << ss.str();
 
     for(face_descriptor f : patch.faces)
     {
-      out << "3 " << vertexid[source(halfedge(f,pm),pm)] <<
-             " "  << vertexid[target(halfedge(f,pm),pm)] <<
-             " "  << vertexid[target(next(halfedge(f,pm),pm),pm)] << "\n";
+      out << "3 " << vertexid.at(source(halfedge(f,pm),pm)) <<
+             " "  << vertexid.at(target(halfedge(f,pm),pm)) <<
+             " "  << vertexid.at(target(next(halfedge(f,pm),pm),pm)) << "\n";
     }
 
     return out;
@@ -751,6 +785,16 @@ struct Patch_container{
   {
     for (std::size_t i=selection.find_first();
                      i < selection.npos; i = selection.find_next(i))
+    {
+      std::stringstream ss;
+      ss << prefix << "-" << i << ".off";
+      std::ofstream output(ss.str().c_str());
+      dump_patch(i, output);
+    }
+  }
+  void dump_patches(std::string prefix)
+  {
+    for (std::size_t i=0;i <patches.size() ; ++i)
     {
       std::stringstream ss;
       ss << prefix << "-" << i << ".off";
@@ -785,7 +829,8 @@ template <class PolygonMesh,
           class VertexPointMap1,
           class VertexPointMap2,
           class VertexPointMapOut,
-          class IntersectionEdgeMap>
+          class IntersectionEdgeMap,
+          class UserVisitor>
 void import_polyline(
   PolygonMesh& output,
   typename boost::graph_traits<PolygonMesh>::halfedge_descriptor h1,
@@ -802,7 +847,8 @@ void import_polyline(
   const VertexPointMap2& /*vpm2*/,
   const VertexPointMapOut& vpm_out,
   std::vector<typename boost::graph_traits<PolygonMesh>
-                ::edge_descriptor>& output_shared_edges)
+                ::edge_descriptor>& output_shared_edges,
+  UserVisitor& user_visitor)
 {
   typedef boost::graph_traits<PolygonMesh> GT;
   typedef typename GT::halfedge_descriptor halfedge_descriptor;
@@ -818,9 +864,11 @@ void import_polyline(
 
   if( insert_res.second )
   {
+    user_visitor.before_vertex_copy(source(h1,pm1), pm1, output);
     src = add_vertex(output);
     set_halfedge(src, opposite(h_out,output),output);
     put(vpm_out, src, get(vpm1, source(h1,pm1)));
+    user_visitor.after_vertex_copy(source(h1,pm1), pm1, src, output);
     insert_res.first->second = src;
   }
   else
@@ -834,18 +882,22 @@ void import_polyline(
       pm1_to_output_vertices.insert( std::make_pair( target(h1,pm1), tgt ) );
     if( insert_res.second )
     {
+      user_visitor.before_vertex_copy(target(h1,pm1), pm1, output);
       tgt = add_vertex(output);
       set_halfedge(tgt, h_out, output);
       put(vpm_out, tgt, get(vpm1, target(h1,pm1)));
+      user_visitor.after_vertex_copy(target(h1,pm1), pm1, tgt, output);
       insert_res.first->second = tgt;
     }
     else
       tgt = insert_res.first->second;
   }
   else{
+    user_visitor.before_vertex_copy(target(h1,pm1), pm1, output);
     tgt = add_vertex(output);
     set_halfedge(tgt, h_out, output);
     put(vpm_out, tgt, get(vpm1, target(h1,pm1)));
+    user_visitor.after_vertex_copy(target(h1,pm1), pm1, tgt, output);
   }
 
   //update source and target vertex of the edge created
@@ -862,6 +914,8 @@ void import_polyline(
   pm2_to_output_edges.insert(
     std::make_pair(edge(prev2, pm2), edge(prev_out, output)) );
 
+  user_visitor.intersection_edge_copy(prev1, pm1, prev2, pm2, h_out, output);
+
   src=tgt;
   for (std::size_t i=1; i<nb_segments; ++i)
   {
@@ -871,22 +925,29 @@ void import_polyline(
     //get the new edge
     h1 = next_marked_halfedge_around_target_vertex(prev1, pm1, intersection_edges1);
     h2 = next_marked_halfedge_around_target_vertex(prev2, pm2, intersection_edges2);
+
+    user_visitor.intersection_edge_copy(h1, pm1, h2, pm2, h_out, output);
+
     //if this is the final segment, only create a target vertex if it does not exist
     if (i+1!=nb_segments)
     {
+      user_visitor.before_vertex_copy(target(h1,pm1), pm1, output);
       tgt=add_vertex(output);
       set_halfedge(tgt, h_out, output);
       put(vpm_out, tgt, get(vpm1, target(h1,pm1)));
+      user_visitor.after_vertex_copy(target(h1,pm1), pm1, tgt, output);
     }
     else{
       std::pair< typename VertexMap::iterator, bool > insert_res =
         pm1_to_output_vertices.insert(std::make_pair(target(h1,pm1), tgt));
       if (insert_res.second)
       {
+        user_visitor.before_vertex_copy(target(h1,pm1), pm1, output);
         tgt=add_vertex(output);
         set_halfedge(tgt, h_out, output);
         put(vpm_out, tgt, get(vpm1, target(h1,pm1)));
         insert_res.first->second = tgt;
+        user_visitor.after_vertex_copy(target(h1,pm1), pm1, tgt, output);
       }
       else
         tgt = insert_res.first->second;
@@ -1025,9 +1086,17 @@ void append_patches_to_triangle_mesh(
   Triangle_mesh_extension_helper<TriangleMesh, reverse_patch_orientation>
     helper(tm_to_output_edges, tm, output);
 
+  std::vector<std::size_t> ids_of_patches_to_append;
+  ids_of_patches_to_append.reserve(patches_to_append.count());
   for (std::size_t i=patches_to_append.find_first();
                    i < patches_to_append.npos;
                    i = patches_to_append.find_next(i))
+  {
+    ids_of_patches_to_append.push_back(i);
+  }
+
+  std::vector<halfedge_descriptor> interior_vertex_halfedges;
+  for (std::size_t i : ids_of_patches_to_append)
   {
     #ifdef CGAL_COREFINEMENT_POLYHEDRA_DEBUG
     #warning the size of tm_to_output_edges will increase at each step \
@@ -1038,12 +1107,12 @@ void append_patches_to_triangle_mesh(
 
     Patch_description<TriangleMesh>& patch = patches[i];
 
-    std::vector<halfedge_descriptor> interior_vertex_halfedges;
-
     //insert interior halfedges and create interior vertices
     for(halfedge_descriptor h : patch.interior_edges)
     {
+      user_visitor.before_edge_copy(h, tm, output);
       edge_descriptor new_edge = add_edge(output), ed = edge(h,tm);
+      user_visitor.after_edge_copy(h, tm, halfedge(new_edge, output), output);
 
       // copy the mark on input edge to the output edge
       copy_edge_mark<TriangleMesh>(ed, new_edge,
@@ -1062,23 +1131,32 @@ void append_patches_to_triangle_mesh(
       if (  halfedge(target(h,tm),tm)==h &&
             patch.interior_vertices.count(target(h, tm)) )
       {
+        user_visitor.before_vertex_copy(target(h,tm), tm, output);
         vertex_descriptor v = add_vertex(output);
         set_halfedge(v, new_h, output);
         set_target(new_h, v, output);
         put(vpm_out, v, get(vpm_tm, target(h, tm) ) );
+        user_visitor.after_vertex_copy(target(h,tm), tm, v, output);
         interior_vertex_halfedges.push_back( new_h );
       }
       if (  halfedge(source(h,tm),tm)==opposite(h,tm) &&
             patch.interior_vertices.count(source(h,tm)) )
       {
+        user_visitor.before_vertex_copy(source(h,tm), tm, output);
         vertex_descriptor v = add_vertex(output);
         halfedge_descriptor new_h_opp = opposite(new_h, output);
         set_halfedge(v, new_h_opp, output);
         set_target(new_h_opp, v, output);
         put(vpm_out, v, get(vpm_tm, source(h, tm) ) );
+        user_visitor.after_vertex_copy(source(h,tm), tm, v, output);
         interior_vertex_halfedges.push_back( new_h_opp );
       }
     }
+  }
+
+  for (std::size_t i : ids_of_patches_to_append)
+  {
+    Patch_description<TriangleMesh>& patch = patches[i];
 
     //create faces and connect halfedges
     for(face_descriptor f : patch.faces)
@@ -1097,20 +1175,24 @@ void append_patches_to_triangle_mesh(
         set_face(hedges[i], new_f, output);
       }
     }
+  }
 
-    // handle interior edges that are on the border of the mesh:
-    // they do not have a prev/next pointer set since only the pointers
-    // of patch interior halfedges part a face have been. In the following
-    // (i) we set the next/prev pointer around interior vertices on the mesh
-    // boundary and (ii) we collect interior mesh border halfedges incident to
-    // a patch border vertex and set their next/prev pointer (possibly of
-    // another patch)
+  // handle interior edges that are on the border of the mesh:
+  // they do not have a prev/next pointer set since only the pointers
+  // of patch interior halfedges part a face have been. In the following
+  // (i) we set the next/prev pointer around interior vertices on the mesh
+  // boundary and (ii) we collect interior mesh border halfedges incident to
+  // a patch border vertex and set their next/prev pointer (possibly of
+  // another patch)
 
-    // Containers used for step (ii) for collecting mesh border halfedges
-    // with source/target on an intersection polyline that needs it prev/next
-    // pointer to be set
-    std::vector<halfedge_descriptor> border_halfedges_source_to_link;
-    std::vector<halfedge_descriptor> border_halfedges_target_to_link;
+  // Containers used for step (ii) for collecting mesh border halfedges
+  // with source/target on an intersection polyline that needs it prev/next
+  // pointer to be set
+  std::vector<halfedge_descriptor> border_halfedges_source_to_link;
+  std::vector<halfedge_descriptor> border_halfedges_target_to_link;
+  for (std::size_t i : ids_of_patches_to_append)
+  {
+    Patch_description<TriangleMesh>& patch = patches[i];
     for(halfedge_descriptor h : patch.interior_edges)
       if (is_border_edge(h,tm))
       {
@@ -1137,41 +1219,46 @@ void append_patches_to_triangle_mesh(
         CGAL_assertion(is_border(h_out,output) && is_border(h_out_next,output));
         set_next(h_out, h_out_next, output);
       }
-    // now the step (ii) we look for the candidate halfedge by turning around
-    // the vertex in the direction of the interior of the patch
-    for(halfedge_descriptor h_out : border_halfedges_target_to_link)
-    {
-      halfedge_descriptor candidate =
-        opposite(prev(opposite(h_out, output), output), output);
-      CGAL_assertion_code(halfedge_descriptor start=candidate);
-      while (!is_border(candidate, output)){
-        candidate=opposite(prev(candidate, output), output);
-        CGAL_assertion(candidate!=start);
-      }
-      set_next(h_out, candidate, output);
-    }
-    for(halfedge_descriptor h_out : border_halfedges_source_to_link)
-    {
-      halfedge_descriptor candidate =
-      opposite(next(opposite(h_out, output), output), output);
-      while (!is_border(candidate, output))
-        candidate = opposite(next(candidate, output), output);
-      set_next(candidate, h_out, output);
-    }
+  }
 
-    // For all interior vertices, update the vertex pointer
-    // of all but the vertex halfedge
-    for(halfedge_descriptor h_out : interior_vertex_halfedges)
-    {
-      vertex_descriptor v = target(h_out, output);
-      halfedge_descriptor next_around_vertex=h_out;
-      do{
-        CGAL_assertion(next(next_around_vertex, output) != GT::null_halfedge());
-        next_around_vertex=opposite(next(next_around_vertex, output), output);
-        set_target(next_around_vertex, v, output);
-      }while(h_out != next_around_vertex);
+  // now the step (ii) we look for the candidate halfedge by turning around
+  // the vertex in the direction of the interior of the patch
+  for(halfedge_descriptor h_out : border_halfedges_target_to_link)
+  {
+    halfedge_descriptor candidate =
+      opposite(prev(opposite(h_out, output), output), output);
+    CGAL_assertion_code(halfedge_descriptor start=candidate);
+    while (!is_border(candidate, output)){
+      candidate=opposite(prev(candidate, output), output);
+      CGAL_assertion(candidate!=start);
     }
+    set_next(h_out, candidate, output);
+  }
+  for(halfedge_descriptor h_out : border_halfedges_source_to_link)
+  {
+    halfedge_descriptor candidate =
+    opposite(next(opposite(h_out, output), output), output);
+    while (!is_border(candidate, output))
+      candidate = opposite(next(candidate, output), output);
+    set_next(candidate, h_out, output);
+  }
 
+  // For all interior vertices, update the vertex pointer
+  // of all but the vertex halfedge
+  for(halfedge_descriptor h_out : interior_vertex_halfedges)
+  {
+    vertex_descriptor v = target(h_out, output);
+    halfedge_descriptor next_around_vertex=h_out;
+    do{
+      CGAL_assertion(next(next_around_vertex, output) != GT::null_halfedge());
+      next_around_vertex=opposite(next(next_around_vertex, output), output);
+      set_target(next_around_vertex, v, output);
+    }while(h_out != next_around_vertex);
+  }
+
+  for (std::size_t i : ids_of_patches_to_append)
+  {
+    Patch_description<TriangleMesh>& patch = patches[i];
     // For all patch boundary vertices, update the vertex pointer
     // of all but the vertex halfedge
     for(halfedge_descriptor h : patch.shared_edges)
@@ -1261,7 +1348,8 @@ void fill_new_triangle_mesh(
                       tm1_to_output_vertices,
                       intersection_edges1, intersection_edges2,
                       vpm1, vpm2, vpm_out,
-                      output_shared_edges);
+                      output_shared_edges,
+                      user_visitor);
 
   //import patches of tm1
   if (reverse_orientation_of_patches_from_tm1)
@@ -1310,13 +1398,15 @@ void fill_new_triangle_mesh(
 
 template <class TriangleMesh,
           class PatchContainer,
-          class EdgeMap>
+          class EdgeMap,
+          class UserVisitor>
 void disconnect_patches(
   TriangleMesh& tm1,
   const boost::dynamic_bitset<>& patches_to_remove,
   PatchContainer& patches_of_tm1,
   const EdgeMap& tm1_edge_to_tm2_edge, //map intersection edges of tm1 to the equivalent in tm2
-        EdgeMap& new_tm1_edge_to_tm2_edge) //map the new intersection edges of tm1 to the equivalent in tm2
+        EdgeMap& new_tm1_edge_to_tm2_edge, //map the new intersection edges of tm1 to the equivalent in tm2
+        UserVisitor& user_visitor)
 {
   typedef boost::graph_traits<TriangleMesh> GT;
   typedef typename GT::halfedge_descriptor halfedge_descriptor;
@@ -1372,7 +1462,9 @@ void disconnect_patches(
     for(std::size_t k=0; k<nb_shared_edges; ++k)
     {
       halfedge_descriptor h = patch.shared_edges[k];
+      user_visitor.before_edge_duplicated(h, tm1);
       halfedge_descriptor new_hedge = halfedge(add_edge(tm1), tm1);
+      user_visitor.after_edge_duplicated(h, new_hedge, tm1);
       set_next(new_hedge, next(h, tm1), tm1);
       set_next(prev(h, tm1), new_hedge, tm1);
       set_face(new_hedge, face_backup[k], tm1);
@@ -1522,7 +1614,7 @@ void compute_inplace_operation_delay_removal_and_insideout(
   //init the map with the previously filled one (needed when reusing patches in two operations)
   disconnected_patches_edge_to_tm2_edge=tm1_edge_to_tm2_edge;
   disconnect_patches(tm1, ~patches_of_tm1_to_keep, patches_of_tm1,
-                     tm1_edge_to_tm2_edge, disconnected_patches_edge_to_tm2_edge);
+                     tm1_edge_to_tm2_edge, disconnected_patches_edge_to_tm2_edge, user_visitor);
 
   //we import patches from tm2
   if (reverse_patch_orientation_tm2)
@@ -1841,13 +1933,16 @@ void remove_unused_polylines(
 
     do{
 
-      halfedge_descriptor tmp_start = h;
+      halfedge_descriptor starter = h;
       while ( !is_border(h, tm) || is_border(opposite(h, tm), tm) )
       {
         h = opposite(next(h, tm), tm);
-        if (tmp_start==h) break;
+        if (starter==h) break; // it might happen that no update is required because
+                               // it is already closed thanks to another patch from tm'
+                               // (usually incident to coplanar patches)
+
       }
-      if( !is_border(h, tm) )
+      if( !is_border(h, tm) || is_border(opposite(h, tm), tm) )
       {
         // nothing to do: the vertex has already been updated and is now in the middle of a patch kept.
         // This function can be called after the stitching of the patches kept, the vertex halfedge

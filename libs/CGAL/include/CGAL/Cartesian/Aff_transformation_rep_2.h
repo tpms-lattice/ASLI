@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_rep_2.h $
-// $Id: Aff_transformation_rep_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_rep_2.h $
+// $Id: Aff_transformation_rep_2.h e73b8de 2021-04-22T21:17:24+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -60,6 +60,11 @@ public:
 
   virtual Aff_transformation_2 inverse() const  = 0;
   virtual bool                 is_even() const  = 0;
+  virtual bool                 is_translation() const { return false; }
+  virtual bool                 is_scaling() const { return false; }
+  virtual bool                 is_rotation() const { return false; }
+  virtual bool                 is_reflection() const { return false; }
+
   virtual FT                   cartesian(int i, int j) const = 0;
   virtual std::ostream         &print(std::ostream &os) const = 0;
 };

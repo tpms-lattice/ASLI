@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Xy_coordinate_2.h $
-// $Id: Xy_coordinate_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Xy_coordinate_2.h $
+// $Id: Xy_coordinate_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -675,7 +675,7 @@ template < class AlgebraicCurveKernel_2, class Rep>
 std::ostream& operator<< (std::ostream& os,
     const Xy_coordinate_2<AlgebraicCurveKernel_2, Rep>& pt)
 {
-  switch (::CGAL::get_mode(os)) {
+  switch (::CGAL::IO::get_mode(os)) {
   case ::CGAL::IO::PRETTY: {
     os << "[x-coord: " << CGAL::to_double(pt.x()) << "; curve: " <<
       pt.curve().polynomial_2() <<
@@ -703,7 +703,7 @@ std::istream& operator >> (
     std::istream& is,
     Xy_coordinate_2< AlgebraicCurveKernel_2, Rep_>& pt) {
 
-  CGAL_precondition(CGAL::is_ascii(is));
+  CGAL_precondition(CGAL::IO::is_ascii(is));
 
   // this instance's first template argument
   typedef AlgebraicCurveKernel_2 Algebraic_curve_kernel_2;

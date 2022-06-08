@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_S2/include/CGAL/Nef_polyhedron_S2.h $
-// $Id: Nef_polyhedron_S2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_polyhedron_S2.h $
+// $Id: Nef_polyhedron_S2.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -73,7 +73,12 @@ class Nef_polyhedron_S2_rep {
 public:
   Nef_polyhedron_S2_rep() : sm_() {}
   Nef_polyhedron_S2_rep(const Self&) : sm_() {}
-  ~Nef_polyhedron_S2_rep() { sm_.clear(); }
+  ~Nef_polyhedron_S2_rep() noexcept(!CGAL_ASSERTIONS_ENABLED)
+  {
+    CGAL_destructor_assertion_catch(
+      sm_.clear();
+    );
+  }
 };
 
 /*{\Moptions print_title=yes }*/

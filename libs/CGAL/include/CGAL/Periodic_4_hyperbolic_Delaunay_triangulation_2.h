@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h $
-// $Id: Periodic_4_hyperbolic_Delaunay_triangulation_2.h 4bb0406 2021-02-04T18:12:12+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_2.h $
+// $Id: Periodic_4_hyperbolic_Delaunay_triangulation_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Iordan Iordanov
@@ -24,7 +24,6 @@
 
 #include <CGAL/intersections.h>
 #include <CGAL/iterator.h>
-#include <CGAL/result_of.h>
 #include <CGAL/Timer.h>
 
 #include <iterator>
@@ -726,6 +725,6 @@ remove(Vertex_handle v)
 
 } // namespace CGAL
 
-#include <CGAL/internal/Periodic_4_hyperbolic_triangulation_dummy_14.h>
+#include <CGAL/Periodic_4_hyperbolic_triangulation_2/internal/Periodic_4_hyperbolic_triangulation_dummy_14.h>
 
 #endif // CGAL_PERIODIC_4_HYPERBOLIC_DELAUNAY_TRIANGULATION_2_H

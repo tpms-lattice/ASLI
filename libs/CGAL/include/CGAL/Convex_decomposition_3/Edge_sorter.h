@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Edge_sorter.h $
-// $Id: Edge_sorter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Edge_sorter.h $
+// $Id: Edge_sorter.h 1a08127 2020-11-18T07:43:12+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -212,7 +212,7 @@ template<typename Nef_, typename FTComparison, typename Container>
   SNC_point_locator* pl;
 
  public:
-  Edge_sorter(Container& cin) : c(cin) {}
+  Edge_sorter(Container& cin) : c(cin), sncp(nullptr), pl(nullptr) {}
 
   void operator()(SNC_and_PL& sncpl) {
     sncp = sncpl.sncp;

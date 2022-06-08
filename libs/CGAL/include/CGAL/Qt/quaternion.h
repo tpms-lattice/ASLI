@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/quaternion.h $
-// $Id: quaternion.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/quaternion.h $
+// $Id: quaternion.h 9cd0d45 2021-02-09T11:31:34+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_QUATERNION_H
@@ -300,12 +300,6 @@ public:
   static Quaternion randomQuaternion();
   //@}
 
-  /*! @name XML representation */
-  //@{
-  explicit Quaternion(const QDomElement &element);
-  QDomElement domElement(const QString &name, QDomDocument &document) const;
-  void initFromDOMElement(const QDomElement &element);
-//@}
 
 #ifdef DOXYGEN
   /*! @name Output stream */

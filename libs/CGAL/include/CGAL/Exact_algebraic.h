@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Exact_algebraic.h $
-// $Id: Exact_algebraic.h 66040cb 2020-07-20T17:13:01+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Exact_algebraic.h $
+// $Id: Exact_algebraic.h 350b917 2021-04-11T14:50:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -34,7 +34,7 @@ namespace CGAL {
 `Exact_algebraic` is an exact algebraic number type, constructible from `double`.
 
 It is a typedef of another number type. Its exact definition depends on
-the availability the third-party libraries %CORE, and %LEDA. %CGAL must
+the availability the third-party libraries \core, and \leda. \cgal must
 be configured with at least one of those libraries.
 
 \cgalModels `FieldWithSqrt`

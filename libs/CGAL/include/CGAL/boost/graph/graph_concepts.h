@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/graph_concepts.h $
-// $Id: graph_concepts.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/graph_concepts.h $
+// $Id: graph_concepts.h c9af7a1 2020-10-14T10:59:46+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,9 +25,9 @@ BOOST_concept(HalfedgeGraph,(G))
 
   BOOST_CONCEPT_USAGE(HalfedgeGraph)
   {
-    BOOST_CONCEPT_ASSERT((boost::DefaultConstructible<halfedge_descriptor>)) CGAL_UNUSED;
-    BOOST_CONCEPT_ASSERT((boost::EqualityComparable<halfedge_descriptor>)) CGAL_UNUSED;
-    BOOST_CONCEPT_ASSERT((boost::Assignable<halfedge_descriptor>)) CGAL_UNUSED;
+    BOOST_CONCEPT_ASSERT((boost::DefaultConstructible<halfedge_descriptor>));
+    BOOST_CONCEPT_ASSERT((boost::EqualityComparable<halfedge_descriptor>));
+    BOOST_CONCEPT_ASSERT((boost::Assignable<halfedge_descriptor>));
 
 
     e = edge(h, g);
@@ -97,9 +97,9 @@ BOOST_concept(FaceGraph,(G))
 
   BOOST_CONCEPT_USAGE(FaceGraph)
   {
-    BOOST_CONCEPT_ASSERT((boost::DefaultConstructible<face_descriptor>)) CGAL_UNUSED;
-    BOOST_CONCEPT_ASSERT((boost::EqualityComparable<face_descriptor>)) CGAL_UNUSED;
-    BOOST_CONCEPT_ASSERT((boost::Assignable<face_descriptor>)) CGAL_UNUSED;
+    BOOST_CONCEPT_ASSERT((boost::DefaultConstructible<face_descriptor>));
+    BOOST_CONCEPT_ASSERT((boost::EqualityComparable<face_descriptor>));
+    BOOST_CONCEPT_ASSERT((boost::Assignable<face_descriptor>));
 
     f = face(h, g);
     h = halfedge(f, g);

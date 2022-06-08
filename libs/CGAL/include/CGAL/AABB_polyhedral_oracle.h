@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesher/include/CGAL/AABB_polyhedral_oracle.h $
-// $Id: AABB_polyhedral_oracle.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/AABB_polyhedral_oracle.h $
+// $Id: AABB_polyhedral_oracle.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,7 @@
 #include <CGAL/AABB_traits.h>
 #include <CGAL/AABB_face_graph_triangle_primitive.h>
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 namespace CGAL {
 
@@ -50,7 +50,7 @@ namespace CGAL {
     typedef AABB_tree<AABB_traits> Tree;
     typedef typename AABB_traits::Bounding_box Bounding_box;
 
-    typedef boost::shared_ptr<Tree> Tree_shared_ptr;
+    typedef std::shared_ptr<Tree> Tree_shared_ptr;
     Tree_shared_ptr m_pTree;
 
   public:

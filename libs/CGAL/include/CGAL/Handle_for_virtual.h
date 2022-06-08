@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Handle_for_virtual.h $
-// $Id: Handle_for_virtual.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Handle_for_virtual.h $
+// $Id: Handle_for_virtual.h 2ceedcf 2021-01-08T19:44:01+00:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -79,6 +79,7 @@ class Handle_for_virtual
 
     ~Handle_for_virtual()
     {
+      if(!ptr) return;
       ptr->remove_reference();
       if ( !ptr->is_referenced() )
           delete ptr;

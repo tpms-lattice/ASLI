@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Trapezoidal_decomposition_2.h $
-// $Id: Trapezoidal_decomposition_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Trapezoidal_decomposition_2.h $
+// $Id: Trapezoidal_decomposition_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Oren Nechushtan <theoren@math.tau.ac.il>
@@ -27,7 +27,7 @@
 
 #include <boost/optional.hpp>
 #include <boost/variant.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <cstdlib>
 #include <cstring>
@@ -1206,7 +1206,7 @@ protected:
 
   void deactivate_vertex (Dag_node& vtx_node) const;
 
-  void deactivate_edge (boost::shared_ptr<X_monotone_curve_2>& cv, Dag_node& edge_node) const;
+  void deactivate_edge (std::shared_ptr<X_monotone_curve_2>& cv, Dag_node& edge_node) const;
 
   //-----------------------------------------------------------------------------
   // Description:

@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/CGAL_ImageIO/include/CGAL/ImageIO/pnm_impl.h $
-// $Id: pnm_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_ImageIO/include/CGAL/ImageIO/pnm_impl.h $
+// $Id: pnm_impl.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -366,7 +366,7 @@ int readPgmAsciiImage(const char *name,_image *im)
       switch ( im->wordKind ) {
       case WK_FIXED :
         if ( sscanf( tmp, "%d", &iv ) != 1 ) {
-          fprintf( stderr, "readAsciiPgmImage: error in reading ascii data\n" );
+          fprintf( stderr, "readAsciiPgmImage: error in reading ASCII data\n" );
           ImageIO_free( im->data ); im->data = nullptr;
           return 0;
         }

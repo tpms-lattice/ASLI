@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/Edge_edge_overlay.h $
-// $Id: Edge_edge_overlay.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Edge_edge_overlay.h $
+// $Id: Edge_edge_overlay.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -796,7 +796,7 @@ public:
 
     if(!empty_c[1] && !empty_e[1]) {
       CGAL_assertion(first_first == empty_c[0]);
-      if(first_first) { // nothing happend on the other half
+      if(first_first) { // nothing happened on the other half
         if(equator[2] || equator[3]) {
           first_first = false;
           previous_first = sv[3]->out_sedge();

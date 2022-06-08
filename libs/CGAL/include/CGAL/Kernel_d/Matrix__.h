@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_d/include/CGAL/Kernel_d/Matrix__.h $
-// $Id: Matrix__.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Kernel_d/Matrix__.h $
+// $Id: Matrix__.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -746,7 +746,7 @@ std::ostream&  operator<<(std::ostream& os, const Matrix_<NT_,AL_>& M)
 
     int d = M.row_dimension();
     int k = M.column_dimension();
-    switch (get_mode(os)) {
+    switch (IO::get_mode(os)) {
     case CGAL::IO::BINARY:
         CGAL::write( os, d);
         CGAL::write( os, k);
@@ -790,7 +790,7 @@ std::istream&  operator>>(std::istream& is, Matrix_<NT_,AL_>& M)
              x_d2,0 ... x_d2,d1-1 */
 
   int cdim, rdim, i;
-  switch(get_mode(is)) {
+  switch(IO::get_mode(is)) {
     case CGAL::IO::BINARY :
       CGAL::read(is,rdim);
       CGAL::read(is,cdim);
@@ -804,7 +804,7 @@ std::istream&  operator>>(std::istream& is, Matrix_<NT_,AL_>& M)
         is >> M(i/rdim,i%cdim);
       break;
     default:
-      std::cerr<<"\nStream must be in ascii or binary mode"<<std::endl;
+      std::cerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
       break;
   }
   return is;

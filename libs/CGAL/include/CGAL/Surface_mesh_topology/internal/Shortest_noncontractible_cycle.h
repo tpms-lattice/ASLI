@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Shortest_noncontractible_cycle.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Shortest_noncontractible_cycle.h $
 // $Id: Shortest_noncontractible_cycle.h 52186a0 2020-05-14T11:38:15+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

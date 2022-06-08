@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/Lindstrom_Turk_core.h $
-// $Id: Lindstrom_Turk_core.h 6f96731 2019-10-28T09:41:51+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/Lindstrom_Turk_core.h $
+// $Id: Lindstrom_Turk_core.h bd60028 2021-01-08T10:20:34+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -491,7 +491,7 @@ add_shape_optimization_constraints(const vertex_descriptor_vector& link)
            0.0, 0.0, s);
 
   Vector c = NULL_VECTOR;
-  for(const vertex_descriptor v : link)
+  for(const vertex_descriptor& v : link)
     c = c + (ORIGIN - get_point(v));
 
   CGAL_SMS_LT_TRACE(1,"  Adding shape optimization constraint. Shape vector: " << xyz_to_string(c));
@@ -540,7 +540,7 @@ compute_shape_cost(const Point& p,
                    const vertex_descriptor_vector& link)
 {
   FT rCost(0);
-  for(const vertex_descriptor v : link)
+  for(const vertex_descriptor& v : link)
     rCost += squared_distance(p, get_point(v));
 
   return rCost;

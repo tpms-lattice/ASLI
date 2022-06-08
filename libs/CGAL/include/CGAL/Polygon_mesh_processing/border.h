@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/border.h $
-// $Id: border.h 80f6f65 2020-04-05T17:56:50+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/border.h $
+// $Id: border.h c374b38 2021-09-29T11:05:33+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_GET_BORDER_H
 #define CGAL_POLYGON_MESH_PROCESSING_GET_BORDER_H
 
-#include <CGAL/license/Polygon_mesh_processing/miscellaneous.h>
+#include <CGAL/license/Polygon_mesh_processing/core.h>
 
 #include <CGAL/algorithm.h>
 #include <CGAL/boost/graph/iterator.h>

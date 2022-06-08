@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Circular_kernel_3/include/CGAL/Circular_kernel_3/function_objects_polynomial_sphere.h $
-// $Id: function_objects_polynomial_sphere.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/function_objects_polynomial_sphere.h $
+// $Id: function_objects_polynomial_sphere.h 81d9556 2021-02-10T10:06:45+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
@@ -567,15 +567,6 @@ template < class SK > \
     typedef typename SK::Kernel_base::Circle_3  RCircle_3;
     typedef typename Circle_3::Rep              Rep;
   public:
-    template<typename>
-    struct result {
-      typedef forwarded_result_type type;
-    };
-
-    template<typename F>
-    struct result<F(Circular_arc_3)> {
-      typedef const forwarded_result_type& type;
-    };
 
     forwarded_result_type
     operator()(const Point_3& p, const FT& sr,
@@ -1019,44 +1010,17 @@ template < class SK > \
 
   public:
 
-    template <typename>
-    struct result;
-
-    // the binary overload always goes to Linear::Intersect_3
-    template <typename F, typename A, typename B>
-    struct result<F(A, B)>
-    { typedef typename Intersection_traits<SK, A, B>::result_type type; };
-
-    // This one is only for the spherical kernel, O is an output iterator
-    template <typename F, typename A, typename B, typename OutputIterator>
-    struct result<F(A, B, OutputIterator)>
-    { typedef OutputIterator type;};
-
-    // there is no quaternary form in the linear Kernel
-    template <typename F, typename A, typename B, typename C, typename OutputIterator>
-    struct result<F(A, B, C, OutputIterator)>
-    { typedef OutputIterator type; };
-
-    //only ternary from the linear kernel
-    template<typename F>
-    struct result<F(Plane_3, Plane_3, Plane_3)> {
-      typedef boost::optional<
-        boost::variant< Point_3,
-                        Line_3,
-                        Plane_3 > > type;
-    };
-
     //using SK::Linear_kernel::Intersect_3::operator();
 
     typedef typename SK::Linear_kernel::Intersect_3 Intersect_linear_3;
 
     template<class A, class B>
-    typename Intersection_traits<SK, A, B>::result_type
+    decltype(auto)
     operator()(const A& a, const B& b) const{
       return Intersect_linear_3()(a,b);
     }
 
-    typename result<Intersect_linear_3(Plane_3, Plane_3, Plane_3)>::type
+    decltype(auto)
     operator()(const Plane_3& p, const Plane_3& q, const Plane_3& r) const
     {
       return Intersect_linear_3()(p, q, r);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Combinatorial_map/include/CGAL/Combinatorial_map_operations.h $
-// $Id: Combinatorial_map_operations.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Combinatorial_map/include/CGAL/Combinatorial_map_operations.h $
+// $Id: Combinatorial_map_operations.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -13,7 +13,7 @@
 #define CGAL_COMBINATORIAL_MAP_OPERATIONS_H 1
 
 #include <CGAL/Dart_const_iterators.h>
-#include <CGAL/internal/Combinatorial_map_group_functors.h>
+#include <CGAL/Combinatorial_map/internal/Combinatorial_map_group_functors.h>
 
 #include <deque>
 

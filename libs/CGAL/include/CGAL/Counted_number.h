@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Counted_number.h $
-// $Id: Counted_number.h 3e03d50 2021-05-05T15:32:22+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Counted_number.h $
+// $Id: Counted_number.h 59a0da4 2021-05-19T17:23:53+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -490,14 +490,14 @@ void Counted_number<NT>::report(std::ostream &os)
 template <class NT>
 std::ostream& operator<<(std::ostream &os, Counted_number<NT> const &n)
 {
-    return os << ::CGAL::oformat( n.rep() )<< std::endl;
+    return os << ::CGAL::IO::oformat( n.rep() )<< std::endl;
 }
 
 template <class NT>
 std::istream& operator>>(std::istream &is, Counted_number<NT> &n)
 {
     NT num;
-    is >> ::CGAL::iformat(num);
+    is >> ::CGAL::IO::iformat(num);
     if (is) n = Counted_number<NT>(num);
     return is;
 }

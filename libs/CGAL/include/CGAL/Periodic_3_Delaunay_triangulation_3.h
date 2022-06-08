@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_triangulation_3/include/CGAL/Periodic_3_Delaunay_triangulation_3.h $
-// $Id: Periodic_3_Delaunay_triangulation_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_Delaunay_triangulation_3.h $
+// $Id: Periodic_3_Delaunay_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -22,7 +22,7 @@
 #include <CGAL/spatial_sort.h>
 
 // Needed by remove to fill the hole.
-#include <CGAL/internal/Periodic_3_Delaunay_triangulation_remove_traits_3.h>
+#include <CGAL/Periodic_3_triangulation_3/internal/Periodic_3_Delaunay_triangulation_remove_traits_3.h>
 #include <CGAL/Delaunay_triangulation_3.h>
 
 #include <iostream>

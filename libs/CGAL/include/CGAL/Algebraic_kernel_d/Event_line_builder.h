@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Event_line_builder.h $
-// $Id: Event_line_builder.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Event_line_builder.h $
+// $Id: Event_line_builder.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -114,7 +114,7 @@ public:
 
 
     /*!
-     * \brief Creates an event line at position \c alpha for the specified
+     * \brief creates an event line at position \c alpha for the specified
      * curve.
      *
      * Additionally, the \c id of the event line to be created has to be
@@ -441,7 +441,7 @@ protected:
                 }
 /*
 #if CGAL_ACK_DEBUG_FLAG
-                ::CGAL::set_ascii_mode(CGAL_ACK_DEBUG_PRINT);
+                ::CGAL::IO::set_ascii_mode(CGAL_ACK_DEBUG_PRINT);
                 CGAL_ACK_DEBUG_PRINT << "Stha: " << (*seq_it) << std::endl;
 #endif
 */

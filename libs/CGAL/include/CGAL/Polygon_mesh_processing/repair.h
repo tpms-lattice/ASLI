@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair.h $
-// $Id: repair.h 40338b2 2020-10-09T16:50:29+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair.h $
+// $Id: repair.h b56b368 2022-03-21T11:23:27+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -245,7 +245,9 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
     {
       const FT fa = face_area(f, tmesh, np);
       component_areas[face_cc[f]] += fa;
+      exact(component_areas[face_cc[f]]);
       total_area += fa;
+      exact(total_area);
     }
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL
@@ -281,6 +283,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
                         get(vpm, target(prev(halfedge(f, tmesh), tmesh), tmesh)));
 
       component_volumes[i] += fv;
+      exact(component_volumes[i]);
     }
 
     // negative volume means the CC was oriented inward
@@ -289,6 +292,7 @@ std::size_t remove_connected_components_of_negligible_size(TriangleMesh& tmesh,
     {
       component_volumes[i] = CGAL::abs(component_volumes[i]);
       total_volume += component_volumes[i];
+      exact(total_volume);
     }
 
 #ifdef CGAL_PMP_DEBUG_SMALL_CC_REMOVAL

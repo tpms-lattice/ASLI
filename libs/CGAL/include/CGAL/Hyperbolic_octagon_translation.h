@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Hyperbolic_octagon_translation.h $
-// $Id: Hyperbolic_octagon_translation.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Hyperbolic_octagon_translation.h $
+// $Id: Hyperbolic_octagon_translation.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Iordan Iordanov <iordan.iordanov@loria.fr>
@@ -14,9 +14,9 @@
 
 #include <CGAL/license/Periodic_4_hyperbolic_triangulation_2.h>
 
-#include <CGAL/internal/Hyperbolic_octagon_translation_matrix.h>
-#include <CGAL/internal/Hyperbolic_octagon_translation_word.h>
-#include <CGAL/internal/Exact_complex.h>
+#include <CGAL/Periodic_4_hyperbolic_triangulation_2/internal/Hyperbolic_octagon_translation_matrix.h>
+#include <CGAL/Periodic_4_hyperbolic_triangulation_2/internal/Hyperbolic_octagon_translation_word.h>
+#include <CGAL/Hyperbolic_triangulation_2/internal/Exact_complex.h>
 #include <CGAL/Exact_algebraic.h>
 #include <CGAL/tss.h>
 

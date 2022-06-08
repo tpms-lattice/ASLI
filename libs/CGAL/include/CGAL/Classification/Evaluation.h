@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Evaluation.h $
-// $Id: Evaluation.h 2d7e15b 2020-09-30T08:32:43+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Evaluation.h $
+// $Id: Evaluation.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -123,7 +123,7 @@ public:
     CGAL_precondition (m_labels.is_valid_ground_truth (ground_truth));
     CGAL_precondition (m_labels.is_valid_ground_truth (result));
 
-    for (const auto& p : CGAL::make_range
+    for (const auto p : CGAL::make_range
            (boost::make_zip_iterator(boost::make_tuple(ground_truth.begin(), result.begin())),
             boost::make_zip_iterator(boost::make_tuple(ground_truth.end(), result.end()))))
     {
@@ -333,7 +333,7 @@ public:
   /// @{
 
   /*!
-    \brief outputs the evaluation in a simple ASCII format to the stream `os`.
+    \brief outputs the evaluation in a simple \ascii format to the stream `os`.
   */
   friend std::ostream& operator<< (std::ostream& os, const Evaluation& evaluation)
   {

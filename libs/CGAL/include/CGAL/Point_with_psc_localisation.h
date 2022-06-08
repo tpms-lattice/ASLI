@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesher/include/CGAL/Point_with_psc_localisation.h $
-// $Id: Point_with_psc_localisation.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/Point_with_psc_localisation.h $
+// $Id: Point_with_psc_localisation.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -116,7 +116,7 @@ std::ostream&
 operator<<(std::ostream &os, const Point_with_psc_localisation<Point>& p)
 {
   os << static_cast<const Point&>(p);
-  if(is_ascii(os))
+  if(IO::is_ascii(os))
     os << ' ' << p.dimension() << ' ' << p.element_index();
   else {
     write(os, p.dimension());
@@ -131,7 +131,7 @@ operator>>(std::istream &is, Point_with_psc_localisation<Point>& p)
 {
   is >>  static_cast<Point&>(p);
   int index, dim;
-  if(is_ascii(is))
+  if(IO::is_ascii(is))
     is >> dim >> index;
   else {
     read(is, dim);

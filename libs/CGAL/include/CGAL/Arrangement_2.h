@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arrangement_2.h $
-// $Id: Arrangement_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2.h $
+// $Id: Arrangement_2.h d91194f 2019-12-02T21:22:25+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -46,7 +46,7 @@ class Arrangement_2 :
 
 protected:
 
-  typedef Default_planar_topology<GeomTraits_, Dcel_ >    Default_topology;
+  typedef Default_planar_topology<GeomTraits_, Dcel_>     Default_topology;
 
 public:
   typedef Arrangement_on_surface_2<GeomTraits_,
@@ -162,13 +162,13 @@ public:
   //@{
 
   /*! Obtain the geometry-traits class. */
-  const Traits_2* traits () const
+  const Traits_2* traits() const
   {
     return (this->geometry_traits());
   }
 
   /*! Obtain the number of vertices at infinity. */
-  Size number_of_vertices_at_infinity () const
+  Size number_of_vertices_at_infinity() const
   {
     // The vertices at infinity are valid, but not concrete:
     return (this->topology_traits()->number_of_valid_vertices() -

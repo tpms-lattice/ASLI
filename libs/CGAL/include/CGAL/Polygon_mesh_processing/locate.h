@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/locate.h $
-// $Id: locate.h 4b51704 2020-11-04T20:45:57+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/locate.h $
+// $Id: locate.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé,
@@ -1499,7 +1499,7 @@ public:
   const VertexPointMap& vpm() const { return vpm_; }
 
   // get function for property map
-  inline friend reference get(const Self& pmap, key_type v) {
+  inline friend value_type get(const Self& pmap, key_type v) {
     return pmap.converter()(get(pmap.vpm(), v));
   }
 

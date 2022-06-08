@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Shape_detection/include/CGAL/Shape_detection/deprecated/Region_growing.h $
-// $Id: Region_growing.h 604c793 2020-09-01T09:14:10+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/deprecated/Region_growing.h $
+// $Id: Region_growing.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Florent Lafarge, Simon Giraudot
@@ -45,7 +45,7 @@
   "CGAL::Shape_detection_3::Region_growing<> has been replaced by the class "\
   "CGAL::Shape_detection::Region_growing<>."
 
-#include <CGAL/internal/deprecation_warning.h>
+#include <CGAL/Installation/internal/deprecation_warning.h>
 
 namespace CGAL {
 namespace Shape_detection {

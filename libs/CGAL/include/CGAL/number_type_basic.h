@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/number_type_basic.h $
-// $Id: number_type_basic.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/number_type_basic.h $
+// $Id: number_type_basic.h a88a84b 2021-08-13T15:46:50+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -54,11 +54,7 @@
 #include <CGAL/Interval_nt.h> // needed by To_interval(long double), To_interval(long), To_interval(long long)
 
 #include <CGAL/int.h>
-#ifdef CGAL_USE_LONG_LONG
 #include <CGAL/long_long.h>
-#endif
-
-
 
 #ifdef CGAL_USE_GMP
 #ifdef CGAL_USE_GMPXX

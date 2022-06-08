@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/KernelD_converter.h $
-// $Id: KernelD_converter.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/KernelD_converter.h $
+// $Id: KernelD_converter.h 209513d 2020-07-31T15:58:38+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -134,7 +134,7 @@ typename typeset_intersection<typename K1::Object_list, typename K2::Object_list
         KernelD_converter(){}
         KernelD_converter(K1 const&a,K2 const&b):Store_kernel<K1>(a),Store_kernel2<K2>(b){}
 
-        // For boost::result_of, used in transforming_iterator
+        // For the (not anymore used in CGAL) boost result of, used in transforming_iterator
         template<class T,int i=is_iterator<T>::value?42:0> struct result:Base::template result<T>{};
         template<class T> struct result<Final_(T),42> {
                 typedef transforming_iterator<Final_,T> type;

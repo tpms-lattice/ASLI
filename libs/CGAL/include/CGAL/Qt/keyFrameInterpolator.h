@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/keyFrameInterpolator.h $
-// $Id: keyFrameInterpolator.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/keyFrameInterpolator.h $
+// $Id: keyFrameInterpolator.h 9cd0d45 2021-02-09T11:31:34+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-only
 #ifndef QGLVIEWER_KEY_FRAME_INTERPOLATOR_H
 #define QGLVIEWER_KEY_FRAME_INTERPOLATOR_H
@@ -279,14 +279,6 @@ public Q_SLOTS:
       startInterpolation();
   }
   virtual void interpolateAtTime(qreal time);
-  //@}
-
-  /*! @name XML representation */
-  //@{
-public:
-  virtual QDomElement domElement(const QString &name,
-                                 QDomDocument &document) const;
-  virtual void initFromDOMElement(const QDomElement &element);
   //@}
 
 private Q_SLOTS:

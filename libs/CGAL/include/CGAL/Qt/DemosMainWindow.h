@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/DemosMainWindow.h $
-// $Id: DemosMainWindow.h 624e8e8 2020-06-12T10:34:48+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/DemosMainWindow.h $
+// $Id: DemosMainWindow.h b80daff 2021-02-19T11:29:38+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -72,16 +72,16 @@ private:
   QMenu* getHelpMenu();
 
 protected:
-  DemosMainWindow (QWidget * parent = 0, ::Qt::WindowFlags flags = ::Qt::WindowType(0) );
+  DemosMainWindow (QWidget * parent = nullptr, ::Qt::WindowFlags flags = ::Qt::WindowType(0) );
   ~DemosMainWindow();
   void setupStatusBar();
   void addNavigation(QGraphicsView*);
-  void setupOptionsMenu(QMenu* menu  = 0);
-  void addAboutCGAL(QMenu* menu  = 0);
-  void addAboutDemo(QString htmlResourceName, QMenu* menu  = 0);
+  void setupOptionsMenu(QMenu* menu  = nullptr);
+  void addAboutCGAL(QMenu* menu  = nullptr);
+  void addAboutDemo(QString htmlResourceName, QMenu* menu  = nullptr);
   void setupExportSVG(QAction*, QGraphicsView*);
 
-  void addRecentFiles(QMenu* menu, QAction* insertBefore = 0);
+  void addRecentFiles(QMenu* menu, QAction* insertBefore = nullptr);
 
   void writeState(QString groupname = "MainWindow");
   void readState(QString groupname = "MainWindow",

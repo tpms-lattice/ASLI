@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/population.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Optimal_bounding_box/include/CGAL/Optimal_bounding_box/internal/population.h $
 // $Id: population.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/Graph_with_descriptor_with_graph.h $
-// $Id: Graph_with_descriptor_with_graph.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/Graph_with_descriptor_with_graph.h $
+// $Id: Graph_with_descriptor_with_graph.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -727,7 +727,7 @@ struct Graph_with_descriptor_with_graph_property_map {
   template <typename Descriptor>
   friend
   void
-  put(const Graph_with_descriptor_with_graph_property_map<Graph,PM>& gpm, const Descriptor& d,   const value_type& v)
+  put(const Graph_with_descriptor_with_graph_property_map<Graph,PM>& gpm, const Descriptor& d, const value_type& v)
   {
     CGAL_assertion(gpm.graph!=nullptr);
     CGAL_assertion(d.graph == gpm.graph);
@@ -747,9 +747,9 @@ struct Graph_with_descriptor_with_graph_property_map<Graph, PM, boost::lvalue_pr
   Graph* graph;
   PM pm;
 
-  value_type& operator[](key_type& k) const
+  reference operator[](key_type& k) const
   {
-      return get(*this, k);
+    return get(*this, k);
   }
 
   Graph_with_descriptor_with_graph_property_map()

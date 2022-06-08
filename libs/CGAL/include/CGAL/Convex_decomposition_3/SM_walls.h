@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/SM_walls.h $
-// $Id: SM_walls.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/SM_walls.h $
+// $Id: SM_walls.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -529,10 +529,8 @@ class SM_walls : SM_decorator<SMap> {
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
     CGAL_assertion(index1==0 || index1!=index2);
     if(index1==0) {
-      se_new->set_index();
-      se_new->twin()->set_index();
-      index1 = se_new->get_index();
-      index2 = se_new->twin()->get_index();
+      index1 = se_new->new_index();
+      index2 = se_new->twin()->new_index();
     } else {
       se_new->set_index(index1);
       se_new->twin()->set_index(index2);

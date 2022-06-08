@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/MP_Float.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/MP_Float.h $
 // $Id: MP_Float.h 12c7bb2 2020-05-19T11:24:12+02:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //

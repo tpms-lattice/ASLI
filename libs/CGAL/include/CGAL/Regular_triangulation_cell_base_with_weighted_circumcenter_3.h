@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_with_weighted_circumcenter_3.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_3/include/CGAL/Regular_triangulation_cell_base_with_weighted_circumcenter_3.h $
 // $Id: Regular_triangulation_cell_base_with_weighted_circumcenter_3.h dbbee66 2020-04-02T18:31:00+05:30 rathod-sahaab
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

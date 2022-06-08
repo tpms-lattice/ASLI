@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_2_impl.h $
-// $Id: Straight_skeleton_builder_2_impl.h 1e249af 2020-11-10T19:21:21+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_builder_2_impl.h $
+// $Id: Straight_skeleton_builder_2_impl.h 2a513a0 2022-03-09T13:23:07+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -15,14 +15,9 @@
 
 #include <CGAL/number_type_config.h>
 #include <CGAL/Real_timer.h>
-#include <CGAL/Unique_hash_map.h>
 
 #include <boost/utility.hpp>
 #include <boost/version.hpp>
-#if BOOST_VERSION == 106000
-//ice_not is deprecated in boost 1.60 but used within adjacency_matrix.hpp
-#include <boost/type_traits/detail/ice_not.hpp>
-#endif
 #include <boost/graph/adjacency_matrix.hpp>
 
 #if defined(BOOST_MSVC)

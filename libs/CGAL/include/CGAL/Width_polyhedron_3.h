@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polytope_distance_d/include/CGAL/Width_polyhedron_3.h $
-// $Id: Width_polyhedron_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polytope_distance_d/include/CGAL/Width_polyhedron_3.h $
+// $Id: Width_polyhedron_3.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -194,8 +194,7 @@ class Data_access {
     res=it->second;
   }
 
-#if !(defined(CGAL_KERNEL_NO_ASSERTIONS) || defined(CGAL_NO_ASSERTIONS) \
-      || defined(NDEBUG))
+#if !(defined(CGAL_KERNEL_NO_ASSERTIONS) || defined(CGAL_NO_ASSERTIONS))
   int size_of_impassable() {
     return(int(impassable_halfedges.size()));
   }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Shape_detection/include/CGAL/Shape_detection/Efficient_RANSAC/property_map.h $
-// $Id: property_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/Efficient_RANSAC/property_map.h $
+// $Id: property_map.h 590ddf8 2021-10-08T15:38:47+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -90,7 +90,7 @@ namespace Shape_detection {
     typedef value_type reference;
     typedef boost::read_write_property_map_tag category;
 
-    inline friend reference get (const Plane_map&, const key_type& k)
+    inline friend value_type get (const Plane_map&, const key_type& k)
     {
       return value_type(*k);
     }

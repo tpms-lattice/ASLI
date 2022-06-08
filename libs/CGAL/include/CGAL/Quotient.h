@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/Quotient.h $
-// $Id: Quotient.h 14c3b7e 2020-05-27T16:33:33+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Quotient.h $
+// $Id: Quotient.h 8d32692 2021-09-09T15:48:59+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -565,7 +565,7 @@ namespace INTERN_QUOTIENT {
         public:
           NT operator()( const NT& x ) const {
             CGAL_precondition(x > 0);
-            return NT(CGAL_NTS sqrt(x.numerator()*x.denominator()),
+            return NT(CGAL_NTS sqrt(typename NT::NT(x.numerator()*x.denominator())),
                       x.denominator());
           }
       };

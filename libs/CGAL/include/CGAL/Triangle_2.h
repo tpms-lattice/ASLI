@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Triangle_2.h $
-// $Id: Triangle_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Triangle_2.h $
+// $Id: Triangle_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,6 @@
 #include <CGAL/Kernel/Return_base_tag.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Dimension.h>
-#include <CGAL/result_of.h>
 #include <CGAL/IO/io.h>
 
 namespace CGAL {
@@ -101,13 +100,13 @@ public:
     return !(*this == t);
   }
 
-  typename cpp11::result_of<typename R::Construct_vertex_2( Triangle_2, int)>::type
+  decltype(auto)
   vertex(int i) const
   {
     return R().construct_vertex_2_object()(*this,i);
   }
 
-  typename cpp11::result_of<typename R::Construct_vertex_2( Triangle_2, int)>::type
+  decltype(auto)
   operator[](int i) const
   {
     return vertex(i);
@@ -176,7 +175,7 @@ template < class R >
 std::ostream &
 operator<<(std::ostream &os, const Triangle_2<R> &t)
 {
-    switch(get_mode(os)) {
+    switch(IO::get_mode(os)) {
     case IO::ASCII :
         return os << t[0] << ' ' << t[1] << ' ' << t[2];
     case IO::BINARY :

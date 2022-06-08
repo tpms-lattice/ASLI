@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polynomial/include/CGAL/Exponent_vector.h $
-// $Id: Exponent_vector.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Exponent_vector.h $
+// $Id: Exponent_vector.h 0ef8127 2021-04-20T20:20:58+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -161,7 +161,7 @@ inline std::ostream& operator << (std::ostream& os, const Exponent_vector& ev) {
 namespace std{
 template <> inline
 void swap(CGAL::Exponent_vector& ev1, CGAL::Exponent_vector& ev2)
-  CGAL_NOEXCEPT(std::is_nothrow_move_constructible<CGAL::Exponent_vector>::value
+  noexcept(std::is_nothrow_move_constructible<CGAL::Exponent_vector>::value
                 && std::is_nothrow_move_assignable<CGAL::Exponent_vector>::value)
 {
   ev1.swap(ev2);

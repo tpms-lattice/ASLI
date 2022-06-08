@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Skin_surface_3/include/CGAL/Skin_surface_refinement_policy_3.h $
-// $Id: Skin_surface_refinement_policy_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Skin_surface_3/include/CGAL/Skin_surface_refinement_policy_3.h $
+// $Id: Skin_surface_refinement_policy_3.h 0d28171 2021-06-23T17:40:25+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,11 +17,11 @@
 
 #include <CGAL/Cartesian.h>
 #include <CGAL/Cartesian_converter.h>
+#include <CGAL/intersection_3.h>
 
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/Skin_surface_polyhedral_items_3.h>
 
-#include <CGAL/intersection_3_1.h>
 namespace CGAL {
 
 template <class SkinSurface_3, class Polyhedron_3>

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Number_types/include/CGAL/leda_rational.h $
-// $Id: leda_rational.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/leda_rational.h $
+// $Id: leda_rational.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -180,7 +180,7 @@ public:
     Output_rep( const leda_rational& tt) : t(tt) {}
     //! perform the output, calls \c operator\<\< by default.
     std::ostream& operator()( std::ostream& out) const {
-        switch (get_mode(out)) {
+        switch (IO::get_mode(out)) {
         case IO::PRETTY:{
             if(t.denominator() == leda_integer(1))
                 return out <<t.numerator();
@@ -221,9 +221,9 @@ public:
     std::ostream& operator()( std::ostream& out) const {
         Needs_parens_as_product< leda_rational > needs_parens_as_product;
         if (needs_parens_as_product(t))
-            return out <<"("<< oformat(t) <<")";
+            return out <<"("<< IO::oformat(t) <<")";
         else
-            return out << oformat(t);
+            return out << IO::oformat(t);
     }
 };
 

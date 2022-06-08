@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Curve_renderer_2.h $
-// $Id: Curve_renderer_2.h 1fb65b6 2020-10-01T17:59:46+01:00 Ahmed Essam
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Curve_renderer_2.h $
+// $Id: Curve_renderer_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pavel Emeliyanenko <asm@mpi-sb.mpg.de>
@@ -2586,8 +2586,8 @@ inline bool is_isolated_pixel(const Pixel_2& /* pix */) {
 // DEBUG ONLY
 #ifdef Gfx_USE_OUT
 void dump_neighbourhood(const Pixel_2& pix) {
-    CGAL::set_mode(std::cerr, CGAL::IO::PRETTY);
-    CGAL::set_mode(std::cout, CGAL::IO::PRETTY);
+    CGAL::IO::set_mode(std::cerr, CGAL::IO::PRETTY);
+    CGAL::IO::set_mode(std::cout, CGAL::IO::PRETTY);
 
     Stripe box[2]; // 0 - left-right stripe, 1 - bottom-top stripe
     //NT inv = NT(1) / NT(one << pix.level);

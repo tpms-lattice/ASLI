@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cone_spanners_2/include/CGAL/Cone_spanners_enum_2.h $
-// $Id: Cone_spanners_enum_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cone_spanners_2/include/CGAL/Cone_spanners_enum_2.h $
+// $Id: Cone_spanners_enum_2.h 26355e2 2020-06-25T12:31:21+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,13 +27,13 @@ namespace CGAL {
    \brief An enum of the choice of cones in cone spanners.
    */
   enum Cones_selected {
-    /*! \brief Select even cones.
+    /*! \brief selects even cones.
      */
     EVEN_CONES = 0,
-    /*! \brief Select odd cones.
+    /*! \brief selects odd cones.
      */
     ODD_CONES = 1,
-    /*! \brief Select all cones.
+    /*! \brief selects all cones.
      */
     ALL_CONES = 2 };
 

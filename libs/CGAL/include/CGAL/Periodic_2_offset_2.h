@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_2_triangulation_2/include/CGAL/Periodic_2_offset_2.h $
-// $Id: Periodic_2_offset_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_2_triangulation_2/include/CGAL/Periodic_2_offset_2.h $
+// $Id: Periodic_2_offset_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico@nghk.nl>
@@ -146,7 +146,7 @@ inline typename K::Point_2 operator+(const typename K::Point_2 &p, const Periodi
 inline std::ostream
 &operator<<(std::ostream &os, const Periodic_2_offset_2 &off)
 {
-  if (is_ascii(os))
+  if (IO::is_ascii(os))
     os << off.x() << " " << off.y();
   else
     {
@@ -161,7 +161,7 @@ inline std::istream
 &operator>>(std::istream &is, Periodic_2_offset_2 &off)
 {
   int x = 0, y = 0;
-  if (is_ascii(is))
+  if (IO::is_ascii(is))
     is >> x >> y;
   else
     {

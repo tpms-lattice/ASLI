@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/Pluecker_line_3.h $
-// $Id: Pluecker_line_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Pluecker_line_3.h $
+// $Id: Pluecker_line_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -316,7 +316,7 @@ on their Pluecker coefficient tuples.}*/
 template <typename Tag, typename R>
 std::ostream& operator<<(std::ostream& os, const Pluecker_line_3<Tag,R>& l)
 {
-  switch( get_mode(os) ) {
+  switch( IO::get_mode(os) ) {
     case CGAL::IO::ASCII :
       for (unsigned i=0; i<6; ++i) os << l[i] << " ";
       return os;

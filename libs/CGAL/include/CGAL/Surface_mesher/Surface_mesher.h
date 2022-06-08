@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
-// $Id: Surface_mesher.h 627a7b2 2020-04-27T17:08:35+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
+// $Id: Surface_mesher.h 0b4f136 2022-01-10T10:41:44+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,6 +38,8 @@
 #include <CGAL/Surface_mesher/Types_generators.h>
 #include <CGAL/Surface_mesher/Profile_counter.h>
 #include <CGAL/Surface_mesher/Profile_timer.h>
+
+#include <CGAL/use.h>
 
 namespace CGAL {
 
@@ -298,6 +300,7 @@ namespace CGAL {
 
           for(bool exit = false; ; exit = true)
           {
+            CGAL_USE(exit);
             // this for loop is a trick to pass in the following "if" once
             // with center="surface center", and once with
             // center="circumcenter"

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_cell_criteria_3.h $
-// $Id: Mesh_cell_criteria_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_cell_criteria_3.h $
+// $Id: Mesh_cell_criteria_3.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,9 +21,7 @@
 #include <CGAL/Mesh_3/Is_mesh_domain_field_3.h>
 
 #include <boost/config.hpp>
-#if BOOST_VERSION >= 106600
 #  include <boost/callable_traits/is_invocable.hpp>
-#endif
 
 #include <type_traits>
 

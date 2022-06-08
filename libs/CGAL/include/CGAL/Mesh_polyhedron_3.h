@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_polyhedron_3.h $
-// $Id: Mesh_polyhedron_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_polyhedron_3.h $
+// $Id: Mesh_polyhedron_3.h 0f4559a 2021-04-06T17:39:54+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -85,7 +85,7 @@ public:
     return indices;
   }
 
-  Mesh_polyhedron_vertex() : Pdv_base(), nb_of_feature_edges(0) {}
+  Mesh_polyhedron_vertex() : Pdv_base(), time_stamp_(-1), nb_of_feature_edges(0) {}
   Mesh_polyhedron_vertex(const Point& p) : Pdv_base(p), time_stamp_(-1), nb_of_feature_edges(0) {}
 };
 

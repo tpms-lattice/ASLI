@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
-// $Id: orbifold_shortest_path.h d5185e6 2020-07-21T13:38:47+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
+// $Id: orbifold_shortest_path.h 752c07e 2021-06-04T11:23:16+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -190,8 +190,8 @@ void compute_shortest_paths_between_cones(const TriangleMesh& mesh,
     compute_shortest_paths_between_two_cones(mesh, *first, *next, std::back_inserter(seams));
   }
 
-  std::ofstream out("shortest_path.selection.txt");
 #ifdef CGAL_SMP_ORBIFOLD_DEBUG
+  std::ofstream out("shortest_path.selection.txt");
   internal::output_shortest_paths_to_selection_file(mesh, seams, out);
 #endif
 }

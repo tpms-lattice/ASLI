@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Iterator_adaptors.h $
-// $Id: Iterator_adaptors.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Iterator_adaptors.h $
+// $Id: Iterator_adaptors.h 2e47630 2021-11-10T09:28:05+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -85,13 +85,13 @@ class Iterator_adaptor_base
     return tmp;
   }
 
-  bool operator==(const Iterator& other) const {
+  bool operator==(const Self& other) const {
     if ( vda_ == nullptr ) { return other.vda_ == nullptr; }
     if ( other.vda_ == nullptr ) { return vda_ == nullptr; }
     return ( vda_ == other.vda_ && cur_ == other.cur_ );
   }
 
-  bool operator!=(const Iterator& other) const {
+  bool operator!=(const Self& other) const {
     return !(*this == other);
   }
 
@@ -235,12 +235,12 @@ private:
     return *this;
   }
 
-  bool operator==(const Self& other) const {
-    return Base::operator==(other) && is_first_ == other.is_first_;
+  friend bool operator==(const Self& i, const Self& other) {
+    return i.Base::operator==(other) && i.is_first_ == other.is_first_;
   }
 
-  bool operator!=(const Self& other) const {
-    return !(*this == other);
+  friend bool operator!=(const Self& i, const Self& other) {
+    return !(i == other);
   }
 
  private:

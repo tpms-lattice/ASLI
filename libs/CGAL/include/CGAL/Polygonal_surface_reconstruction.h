@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygonal_surface_reconstruction/include/CGAL/Polygonal_surface_reconstruction.h $
-// $Id: Polygonal_surface_reconstruction.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygonal_surface_reconstruction/include/CGAL/Polygonal_surface_reconstruction.h $
+// $Id: Polygonal_surface_reconstruction.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -15,9 +15,9 @@
 
 #include <CGAL/bounding_box.h>
 #include <CGAL/property_map.h>
-#include <CGAL/internal/hypothesis.h>
-#include <CGAL/internal/compute_confidences.h>
-#include <CGAL/internal/point_set_with_planes.h>
+#include <CGAL/Polygonal_surface_reconstruction/internal/hypothesis.h>
+#include <CGAL/Polygonal_surface_reconstruction/internal/compute_confidences.h>
+#include <CGAL/Polygonal_surface_reconstruction/internal/point_set_with_planes.h>
 
 #include <unordered_map>
 

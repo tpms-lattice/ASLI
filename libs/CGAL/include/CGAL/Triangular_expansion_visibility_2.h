@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Visibility_2/include/CGAL/Triangular_expansion_visibility_2.h $
-// $Id: Triangular_expansion_visibility_2.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Visibility_2/include/CGAL/Triangular_expansion_visibility_2.h $
+// $Id: Triangular_expansion_visibility_2.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,7 +18,7 @@
 
 
 #include <CGAL/Arrangement_2.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <CGAL/boost/iterator/transform_iterator.hpp>
 #include <CGAL/Constrained_Delaunay_triangulation_2.h>
 #include <CGAL/Arr_observer.h>
@@ -151,7 +151,7 @@ private:
 
   // May change during visibility computation
   mutable Observer observer;
-  mutable boost::shared_ptr<CDT> p_cdt;
+  mutable std::shared_ptr<CDT> p_cdt;
   mutable std::vector<Segment_2> needles;
 
   // Copy constructor and assignment not supported
@@ -696,7 +696,7 @@ private:
                                               Make_constraint());
 
     //std::cout << "init_cdt new CDT" << std::endl;
-    p_cdt = boost::shared_ptr<CDT>(new CDT(begin, end));
+    p_cdt = std::shared_ptr<CDT>(new CDT(begin, end));
     observer.has_changed = false;
     //std::cout << "init_cdt done" << std::endl;
     //std::cout << std::endl;

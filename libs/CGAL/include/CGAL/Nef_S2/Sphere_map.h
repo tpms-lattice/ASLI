@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_S2/include/CGAL/Nef_S2/Sphere_map.h $
-// $Id: Sphere_map.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_S2/Sphere_map.h $
+// $Id: Sphere_map.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -229,7 +229,12 @@ public:
   Sphere_map(bool = false) : boundary_item_(boost::none),
     svertices_(), sedges_(), sfaces_(), shalfloop_() {}
 
-  ~Sphere_map() { clear(); }
+  ~Sphere_map() noexcept(!CGAL_ASSERTIONS_ENABLED)
+  {
+    CGAL_destructor_assertion_catch(
+      clear();
+    );
+  }
 
   Sphere_map(const Self& D) : boundary_item_(boost::none),
     svertices_(D.svertices_),

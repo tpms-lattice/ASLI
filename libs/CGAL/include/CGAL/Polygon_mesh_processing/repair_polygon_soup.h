@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_polygon_soup.h $
-// $Id: repair_polygon_soup.h dc854d8 2021-03-31T11:54:38+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/repair_polygon_soup.h $
+// $Id: repair_polygon_soup.h c03444a 2021-06-17T08:29:08+02:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -145,11 +145,11 @@ bool simplify_polygon(PointRange& points,
 //
 // \tparam PointRange a model of the concept `RandomAccessContainer` whose value type is the point type.
 // \tparam PolygonRange a model of the concept `SequenceContainer`
-//                      whose value_type is itself a model of the concept `SequenceContainer`
-//                      whose value_type is `std::size_t`.
+//                      whose `value_type` is itself a model of the concept `SequenceContainer`
+//                      whose `value_type` is `std::size_t`.
 // \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 //
-// \param points points of the soup of polygons.
+// \param points points of the soup of polygons
 // \param polygons a vector of polygons. Each element in the vector describes a polygon
 //        using the indices of the points in `points`.
 // \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -199,11 +199,11 @@ std::size_t simplify_polygons_in_polygon_soup(PointRange& points,
 //
 // \tparam PointRange a model of the concept `RandomAccessContainer` whose value type is the point type.
 // \tparam PolygonRange a model of the concept `SequenceContainer`
-//                      whose value_type is itself a model of the concepts `SequenceContainer`
-//                      and `Swappable` whose value_type is `std::size_t`.
+//                      whose `value_type` is itself a model of the concepts `SequenceContainer`
+//                      and `Swappable` whose `value_type` is `std::size_t`.
 // \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 //
-// \param points points of the soup of polygons.
+// \param points points of the soup of polygons
 // \param polygons a vector of polygons. Each element in the vector describes a polygon
 //        using the indices of the points in `points`.
 // \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -304,11 +304,11 @@ std::size_t split_pinched_polygons_in_polygon_soup(PointRange& points,
 //
 // \tparam PointRange a model of the concept `Container` whose value type is the point type.
 // \tparam PolygonRange a model of the concept `SequenceContainer`
-//                      whose value_type is itself a model of the concept `Container`
-//                      whose value_type is `std::size_t`.
+//                      whose `value_type` is itself a model of the concept `Container`
+//                      whose `value_type` is `std::size_t`.
 // \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 //
-// \param points points of the soup of polygons.
+// \param points points of the soup of polygons
 // \param polygons a vector of polygons. Each element in the vector describes a polygon
 //        using the indices of the points in `points`.
 //
@@ -350,10 +350,10 @@ std::size_t remove_invalid_polygons_in_polygon_soup(PointRange& /*points*/,
 ///
 /// \tparam PointRange a model of the concept `SequenceContainer` whose value type is the point type.
 /// \tparam PolygonRange a model of the concept `RandomAccessContainer`
-///                      whose value_type is itself a model of the concept `RandomAccessContainer`
-///                      whose value_type is `std::size_t`.
+///                      whose `value_type` is itself a model of the concept `RandomAccessContainer`
+///                      whose `value_type` is `std::size_t`.
 ///
-/// \param points points of the soup of polygons.
+/// \param points points of the soup of polygons
 /// \param polygons a vector of polygons. Each element in the vector describes a polygon
 ///        using the indices of the points in `points`.
 ///
@@ -454,11 +454,11 @@ std::size_t remove_isolated_points_in_polygon_soup(PointRange& points,
 /// \tparam PointRange a model of the concepts `SequenceContainer` and `Swappable`
 ///                    whose value type is the point type.
 /// \tparam PolygonRange a model of the concept `RandomAccessContainer`
-///                      whose value_type is itself a model of the concept `RandomAccessContainer`
-///                      whose value_type is `std::size_t`.
+///                      whose `value_type` is itself a model of the concept `RandomAccessContainer`
+///                      whose `value_type` is `std::size_t`.
 /// \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 ///
-/// \param points points of the soup of polygons.
+/// \param points points of the soup of polygons
 /// \param polygons a vector of polygons. Each element in the vector describes a polygon
 ///        using the indices of the points in `points`.
 /// \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -766,12 +766,12 @@ struct Duplicate_collector<ValueType, CGAL::Emptyset_iterator>
 //
 // \tparam PointRange a model of the concept `RandomAccessContainer` whose value type is the point type.
 // \tparam PolygonRange a model of the concept `RandomAccessContainer`
-//                      whose value_type is itself a model of the concepts `RandomAccessContainer`
-//                      and `ReversibleContainer` whose value_type is `std::size_t`.
+//                      whose `value_type` is itself a model of the concepts `RandomAccessContainer`
+//                      and `ReversibleContainer` whose `value_type` is `std::size_t`.
 // \tparam DuplicateOutputIterator a model of `OutputIterator` with value type
 //                                 `std::vector<std::vector<std::size_t> >`.
 //
-// \param points points of the soup of polygons.
+// \param points points of the soup of polygons
 // \param polygons a vector of polygons. Each element in the vector describes a polygon
 //        using the indices of the points in `points`.
 // \param out the output iterator in which duplicate polygons are put. Each entry is a vector of
@@ -844,11 +844,11 @@ DuplicateOutputIterator collect_duplicate_polygons(const PointRange& points,
 ///
 /// \tparam PointRange a model of the concept `RandomAccessContainer` whose value type is the point type.
 /// \tparam PolygonRange a model of the concept `SequenceContainer`
-///                      whose value_type is itself a model of the concepts `RandomAccessContainer`
-///                      and `ReversibleContainer` whose value_type is `std::size_t`.
+///                      whose `value_type` is itself a model of the concepts `RandomAccessContainer`
+///                      and `ReversibleContainer` whose `value_type` is `std::size_t`.
 /// \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 ///
-/// \param points points of the soup of polygons.
+/// \param points points of the soup of polygons
 /// \param polygons a vector of polygons. Each element in the vector describes a polygon
 ///        using the indices of the points in `points`.
 /// \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -902,7 +902,7 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(const PointRange& points,
   typedef typename internal::GetPolygonGeomTraits<PointRange, PolygonRange, NamedParameters>::type Traits;
   Traits traits = choose_parameter<Traits>(get_parameter(np, internal_np::geom_traits));
 
-  std::vector<std::vector<P_ID> > all_duplicate_polygons;
+  std::deque<std::vector<P_ID> > all_duplicate_polygons;
   internal::collect_duplicate_polygons(points, polygons, std::back_inserter(all_duplicate_polygons), traits, same_orientation);
 
   if(all_duplicate_polygons.empty())
@@ -1008,11 +1008,11 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(PointRange& points,
 /// \tparam PointRange a model of the concepts `SequenceContainer` and `Swappable`
 ///                    and whose value type is the point type.
 /// \tparam PolygonRange a model of the concept `SequenceContainer`.
-///                      whose value_type is itself a model of the concepts `SequenceContainer`,
-///                      `Swappable`, and `ReversibleContainer` whose value_type is `std::size_t`.
+///                      whose `value_type` is itself a model of the concepts `SequenceContainer`,
+///                      `Swappable`, and `ReversibleContainer` whose `value_type` is `std::size_t`.
 /// \tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters"
 ///
-/// \param points points of the soup of polygons.
+/// \param points points of the soup of polygons
 /// \param polygons a vector of polygons. Each element in the vector describes a polygon
 ///        using the indices of the points in `points`.
 /// \param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -1021,7 +1021,7 @@ std::size_t merge_duplicate_polygons_in_polygon_soup(PointRange& points,
 ///   \cgalParamNBegin{geom_traits}
 ///     \cgalParamDescription{an instance of a geometric traits class}
 ///     \cgalParamType{The traits class must provide the nested functors `Less_xyz_3` and `Equal_3`
-///                    to respectivelycompare lexicographically two points and to check if 2 points
+///                    to respectivelycompare lexicographically two points and to check if two points
 ///                    are identical. For each functor `Foo`, a function `Foo foo_object()` must be provided.}
 ///     \cgalParamDefault{a \cgal Kernel deduced from the point type, using `CGAL::Kernel_traits`}
 ///     \cgalParamExtra{The geometric traits class must be compatible with the vertex point type.}

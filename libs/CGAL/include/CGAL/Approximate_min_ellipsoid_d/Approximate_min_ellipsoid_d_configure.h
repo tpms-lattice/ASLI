@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_configure.h $
-// $Id: Approximate_min_ellipsoid_d_configure.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_configure.h $
+// $Id: Approximate_min_ellipsoid_d_configure.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,7 @@
 #include <iostream>
 #include <iomanip>
 
-#if (defined(CGAL_NO_ASSERTIONS) || defined(NDEBUG))
+#if defined(CGAL_NO_ASSERTIONS)
   #undef CGAL_APPEL_ASSERTION_MODE
   #undef CGAL_APPEL_EXP_ASSERTION_MODE
   #undef CGAL_APPEL_LOG_MODE

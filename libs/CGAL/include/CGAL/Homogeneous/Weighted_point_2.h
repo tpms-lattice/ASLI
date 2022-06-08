@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Homogeneous_kernel/include/CGAL/Homogeneous/Weighted_point_2.h $
-// $Id: Weighted_point_2.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Homogeneous_kernel/include/CGAL/Homogeneous/Weighted_point_2.h $
+// $Id: Weighted_point_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mariette Yvinec
@@ -79,7 +79,7 @@ template < class R_ >
 std::ostream &
 operator<<(std::ostream &os, const Weighted_pointH2<R_> &p)
 {
-  switch(get_mode(os))
+  switch(IO::get_mode(os))
   {
   case IO::ASCII :
     return os << p.point() <<  " " << p.weight();
@@ -100,7 +100,7 @@ operator>>(std::istream &is, Weighted_pointH2<R_> &wp)
   typename Weighted_pointH2<R_>::Point_2 p;
   is >> p;
   if(!is) return is;
-  if(is_ascii(is))
+  if(IO::is_ascii(is))
     is >> w;
   else
     read(is, w);

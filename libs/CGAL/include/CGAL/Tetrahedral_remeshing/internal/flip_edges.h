@@ -3,7 +3,7 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/flip_edges.h $
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/flip_edges.h $
 // $Id: flip_edges.h 7c4a61e 2020-10-09T16:50:14+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //

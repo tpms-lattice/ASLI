@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/Three.h $
-// $Id: Three.h b4bba7f 2020-06-15T08:58:13+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Three.h $
+// $Id: Three.h 720b2dd 2021-08-30T12:47:10+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,6 +22,8 @@
 #include <CGAL/Three/Viewer_interface.h>
 #include <QMainWindow>
 #include <QApplication>
+#include <QMutex>
+#include <QWaitCondition>
 
 #ifdef three_EXPORTS
 #  define THREE_EXPORT Q_DECL_EXPORT
@@ -58,6 +60,9 @@ public:
   static int getDefaultPointSize();
   static int getDefaultNormalLength();
   static int getDefaultLinesWidth();
+  static bool &isLocked();
+  static QMutex *getMutex();
+  static QWaitCondition* getWaitCondition();
   /*! \brief Adds a dock widget to the interface
    *
    * Adds a dock widget in the left section of the MainWindow. If the slot is already
@@ -65,7 +70,7 @@ public:
    */
   void addDockWidget(QDockWidget* dock_widget);
 
-  /*! \brief Gets an item of the templated type.
+  /*! \brief gets an item of the templated type.
    * \returns the first `SceneType` item found in the scene's list of currently selected
    * items;
    * \returns nullptr if there is no `SceneType` in the list.
@@ -105,6 +110,7 @@ public:
    * Displays an error popup.
    */
   static void error(QString title, QString message);
+  static void lock_test_item(bool b);
 protected:
   static QMainWindow* s_mainwindow;
   static Viewer_interface* s_mainviewer;
@@ -117,6 +123,9 @@ protected:
   static int default_point_size;
   static int default_normal_length;
   static int default_lines_width;
+  static QMutex* s_mutex;
+  static QWaitCondition* s_wait_condition;
+  static bool s_is_locked;
 
 public:
   struct CursorScopeGuard

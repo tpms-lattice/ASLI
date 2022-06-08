@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_2/include/CGAL/Nef_2/PM_checker.h $
-// $Id: PM_checker.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/PM_checker.h $
+// $Id: PM_checker.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -124,7 +124,7 @@ check_order_preserving_embedding(Vertex_const_handle v) const
 {
   if ( is_isolated(v) ) return;
   std::ostringstream error_status;
-  CGAL::set_pretty_mode ( error_status );
+  CGAL::IO::set_pretty_mode ( error_status );
   Halfedge_const_handle ef = first_out_edge(v) ,e=ef,en,enn;
   error_status << "check_order_preserving_embedding\n";
   error_status << "vertex " << PV(v) << std::endl;
@@ -251,7 +251,7 @@ check_is_triangulation() const
   CGAL::Unique_hash_map< Halfedge_const_iterator, bool> on_boundary(false);
   Halfedge_around_face_const_circulator hit(eb), hend(hit);
   std::ostringstream error_status;
-  CGAL::set_pretty_mode ( error_status );
+  CGAL::IO::set_pretty_mode ( error_status );
   error_status << "check_is_triangulation\n";
   error_status << "on boundary:\n";
   CGAL_For_all(hit,hend) {

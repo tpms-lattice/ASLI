@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/connected_components.h $
-// $Id: connected_components.h 10ba347 2020-10-02T15:20:53+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/connected_components.h $
+// $Id: connected_components.h 863ab75 2021-10-05T11:43:39+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -326,7 +326,7 @@ std::size_t number_of_connected_components(const PolygonMesh& pmesh,
                                            const CGAL_PMP_NP_CLASS& np)
 {
   typedef typename boost::graph_traits<PolygonMesh>::faces_size_type                faces_size_type;
-  typedef CGAL::dynamic_face_property_t<faces_size_type>                             Face_property_tag;
+  typedef CGAL::dynamic_face_property_t<faces_size_type>                            Face_property_tag;
   typedef typename boost::property_map<PolygonMesh, Face_property_tag >::const_type Patch_ids_map;
 
   Patch_ids_map patch_ids_map = get(Face_property_tag(), pmesh);

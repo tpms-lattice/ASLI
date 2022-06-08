@@ -3,21 +3,19 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polyhedron_IO/include/CGAL/IO/Polyhedron_VRML_1_ostream.h $
-// $Id: Polyhedron_VRML_1_ostream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polyhedron/include/CGAL/IO/Polyhedron_VRML_1_ostream.h $
+// $Id: Polyhedron_VRML_1_ostream.h 580a1ef 2020-05-22T15:31:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Lutz Kettner  <kettner@mpi-sb.mpg.de>
 
 #ifndef CGAL_IO_POLYHEDRON_VRML_1_OSTREAM_H
-#define CGAL_IO_POLYHEDRON_VRML_1_OSTREAM_H 1
+#define CGAL_IO_POLYHEDRON_VRML_1_OSTREAM_H
 
 #include <CGAL/license/Polyhedron.h>
 
-
-#include <CGAL/IO/VRML_1_ostream.h>
+// VRML_1 derives from inventor_ostream and will use that one
 #include <CGAL/IO/Polyhedron_inventor_ostream.h>
 
-#endif // CGAL_IO_POLYHEDRON_VRML_1_OSTREAM_H //
-// EOF //
+#endif // CGAL_IO_POLYHEDRON_VRML_1_OSTREAM_H

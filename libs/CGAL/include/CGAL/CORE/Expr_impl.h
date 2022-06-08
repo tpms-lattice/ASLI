@@ -19,8 +19,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.2.3/CGAL_Core/include/CGAL/CORE/Expr_impl.h $
- * $Id: Expr_impl.h bd172e5 2020-07-21T17:15:45+02:00 Laurent Rineau
+ * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_Core/include/CGAL/CORE/Expr_impl.h $
+ * $Id: Expr_impl.h a8dbdc3 2021-11-16T16:44:43+01:00 Laurent Rineau
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -1225,21 +1225,6 @@ CORE_MEMORY_IMPL(SqrtRep)
 
 CORE_MEMORY_IMPL(MultRep)
 CORE_MEMORY_IMPL(DivRep)
-
-
- template class AddSubRep<Add>;
- template class AddSubRep<Sub>;
-
-template class Realbase_for<long>;
-template class Realbase_for<double>;
-template class Realbase_for<BigInt>;
-template class Realbase_for<BigRat>;
-template class Realbase_for<BigFloat>;
-
- template class ConstPolyRep<Expr>;
- template class ConstPolyRep<BigFloat>;
- template class ConstPolyRep<BigInt>;
- template class ConstPolyRep<BigRat>;
 } //namespace CORE
 
 #include <CGAL/enable_warnings.h>

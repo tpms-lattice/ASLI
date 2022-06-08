@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Periodic_3_triangulation_3/include/CGAL/Periodic_3_offset_3.h $
-// $Id: Periodic_3_offset_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_offset_3.h $
+// $Id: Periodic_3_offset_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -108,7 +108,7 @@ inline Point_3<K> operator+(const Point_3<K> &p, const Periodic_3_offset_3 &off)
 
 inline std::ostream
 &operator<<(std::ostream &os, const Periodic_3_offset_3 &off) {
-  if (is_ascii(os))
+  if (IO::is_ascii(os))
     os << off.x() << " " << off.y() << " " << off.z();
   else {
     write(os,off.x());
@@ -121,7 +121,7 @@ inline std::ostream
 inline std::istream
 &operator>>(std::istream &is, Periodic_3_offset_3 &off) {
   int x=0,y=0,z=0;
-  if (is_ascii(is))
+  if (IO::is_ascii(is))
     is >> x >> y >> z;
   else {
     read(is,x);

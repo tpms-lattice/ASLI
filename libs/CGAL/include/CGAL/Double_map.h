@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesher_level/include/CGAL/Double_map.h $
-// $Id: Double_map.h 58b10a3 2020-03-26T18:58:50+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesher_level/include/CGAL/Double_map.h $
+// $Id: Double_map.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,13 +22,7 @@
 #include <CGAL/function_objects.h> // for CGAL::Identity
 
 #include <boost/version.hpp>
-#if BOOST_VERSION >= 103500
 #  define CGAL_USE_BOOST_BIMAP
-#endif
-
-#if defined(CGAL_USE_BOOST_BIMAP) && BOOST_VERSION == 104100
-#include <CGAL/internal/container_fwd_fixed.hpp>
-#endif
 
 #ifdef CGAL_USE_BOOST_BIMAP
 #  if defined(BOOST_MSVC)

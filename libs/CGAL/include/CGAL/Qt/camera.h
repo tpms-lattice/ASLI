@@ -6,19 +6,19 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/GraphicsView/include/CGAL/Qt/camera.h $
-// $Id: camera.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/camera.h $
+// $Id: camera.h b32619f 2022-05-16T17:12:00+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-only
 
 
 #ifndef QGLVIEWER_CAMERA_H
 #define QGLVIEWER_CAMERA_H
 #include <QMap>
-#include <QDomElement>
 #include <CGAL/Qt/vec.h>
 #include <CGAL/Qt/quaternion.h>
 #include <CGAL/export/Qt.h>
 #include <QOpenGLFunctions_2_1>
+#include <QOpenGLFunctions>
 
 namespace CGAL{
 class QGLViewer;
@@ -200,6 +200,7 @@ public:
   CGAL::QGLViewer's window dimensions when the Camera is attached to a CGAL::QGLViewer. See
   also QOpenGLWidget::height() */
   int screenHeight() const { return screenHeight_; }
+  qreal devicePixelRatio() const { return devicePixelRatio_; }
   void getViewport(GLint viewport[4]) const;
   qreal pixelGLRatio(const Vec &position) const;
 
@@ -280,7 +281,7 @@ public Q_SLOTS:
     setScreenWidthAndHeight(int(100.0 * aspect), 100);
   }
 
-  void setScreenWidthAndHeight(int width, int height);
+  void setScreenWidthAndHeight(int width, int height, qreal devicePixelRatio = 1.0);
   /*! Sets the zNearCoefficient() value. */
   void setZNearCoefficient(qreal coef) {
     zNearCoef_ = coef;
@@ -435,15 +436,6 @@ public Q_SLOTS:
   void setFlySpeed(qreal speed);
   //@}
 
-  /*! @name XML representation */
-  //@{
-public:
-  virtual QDomElement domElement(const QString &name,
-                                 QDomDocument &document) const;
-public Q_SLOTS:
-  virtual void initFromDOMElement(const QDomElement &element);
-  //@}
-
 private Q_SLOTS:
   void onFrameModified();
 
@@ -454,6 +446,7 @@ private:
 
   // C a m e r a   p a r a m e t e r s
   int screenWidth_, screenHeight_; // size of the window, in pixels
+  qreal devicePixelRatio_;
   qreal fieldOfView_;              // in radians
   Vec sceneCenter_;
   qreal sceneRadius_; // OpenGL units
@@ -476,6 +469,36 @@ private:
   QMap<unsigned int, KeyFrameInterpolator *> kfi_;
   KeyFrameInterpolator *interpolationKfi_;
 };
+
+inline void read_pixel(const QPoint &pixel, QOpenGLFunctions *p,
+                        const Camera *camera, GLenum format, GLenum type,
+                        GLvoid *pixel_data) {
+  const auto pixel_ratio = camera->devicePixelRatio();
+  p->glReadPixels(pixel.x() * pixel_ratio,
+                  (camera->screenHeight() - pixel.y()) * pixel_ratio - 1, 1, 1,
+                  format, type, pixel_data);
+}
+
+inline auto read_pixel_as_float_rgb(const QPoint &pixel, QOpenGLFunctions *p,
+                                    const Camera *camera) {
+  std::array<float, 3> res;
+  read_pixel(pixel, p, camera, GL_RGB, GL_FLOAT, res.data());
+  return res;
+}
+
+inline auto read_pixel_as_ubyte_rgba(const QPoint &pixel, QOpenGLFunctions *p,
+                                    const Camera *camera) {
+  std::array<GLubyte, 4> res;
+  read_pixel(pixel, p, camera, GL_RGBA, GL_UNSIGNED_BYTE, res.data());
+  return res;
+}
+
+inline float read_depth_under_pixel(const QPoint &pixel, QOpenGLFunctions *p,
+                                    const Camera *camera) {
+  float depth = 2.0f;
+  read_pixel(pixel, p, camera, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+  return depth;
+}
 
 } // namespace qglviewer
 } //CGAL

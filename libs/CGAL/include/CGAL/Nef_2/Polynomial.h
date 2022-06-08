@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_2/include/CGAL/Nef_2/Polynomial.h $
-// $Id: Polynomial.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/Polynomial.h $
+// $Id: Polynomial.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1737,7 +1737,7 @@ template <class NT>
 std::ostream& operator << (std::ostream& os, const Polynomial<NT>& p)
 {
   int i;
-  switch( get_mode(os) )
+  switch( IO::get_mode(os) )
   {
     case CGAL::IO::ASCII :
       os << p.degree() << ' ';
@@ -1773,7 +1773,7 @@ std::istream& operator >> (std::istream& is, Polynomial<NT>& p) {
     char ch;
     NT   c;
     bool pretty = false;
-    switch( get_mode(is) ) {
+    switch( IO::get_mode(is) ) {
     case CGAL::IO::ASCII :
     case CGAL::IO::PRETTY :
         is >> ch;

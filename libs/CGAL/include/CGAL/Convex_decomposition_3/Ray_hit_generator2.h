@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
-// $Id: Ray_hit_generator2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
+// $Id: Ray_hit_generator2.h 2d9dc6c 2021-09-29T11:46:58+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -69,7 +69,8 @@ class Ray_hit_generator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
   bool vertex_added;
 
  public:
-  Ray_hit_generator2(Vector_3 d, Vertex_handle v) : dir(d), vs(v) {}
+  Ray_hit_generator2(Vector_3 d, Vertex_handle v)
+    : dir(d), vs(v), sncp(nullptr), pl(nullptr), edge_splitted(false), vertex_added(false) {}
 
   Vertex_handle create_vertex_on_first_hit(const Ray_3& r) {
 
@@ -112,8 +113,7 @@ class Ray_hit_generator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
         e->twin() = svb;
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
         svb->set_index(e->get_index());
-        svf->set_index();
-        svf->twin()->set_index(svf->get_index());
+        svf->twin()->set_index(svf->new_index());
 #endif
       } else {
         svf->twin() = e;
@@ -122,8 +122,7 @@ class Ray_hit_generator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
         e->twin() = svf;
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
         svf->set_index(e->get_index());
-        svb->set_index();
-        svb->twin()->set_index(svb->get_index());
+        svb->twin()->set_index(svb->new_index());
 #endif
       }
 
@@ -182,8 +181,7 @@ class Ray_hit_generator2 : public Modifier_base<typename Nef_::SNC_and_PL> {
       sv1->twin() = sv2; // TODO: why is this necessary?
       sv2->twin() = sv1; // these edges should not go into the Edge_sorter
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
-      sv1->set_index();
-      sv2->set_index(sv1->get_index());
+      sv2->set_index(sv1->new_index());
 #endif
     }
   }

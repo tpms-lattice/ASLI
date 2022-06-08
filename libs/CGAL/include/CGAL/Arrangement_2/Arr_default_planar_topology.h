@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_default_planar_topology.h $
-// $Id: Arr_default_planar_topology.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_default_planar_topology.h $
+// $Id: Arr_default_planar_topology.h 2a3fbc0 2019-11-19T09:47:44+02:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,10 +32,10 @@ namespace CGAL {
 
 namespace internal {
 
-template <class GeomTraits, class Dcel, class Tag>
+template <typename GeomTraits, typename Dcel, typename Tag>
 struct Default_planar_topology_impl {};
 
-template <class GeomTraits, class Dcel>
+template <typename GeomTraits, typename Dcel>
 struct Default_planar_topology_impl<GeomTraits, Dcel,
                                     Arr_all_sides_oblivious_tag>
 {
@@ -44,7 +44,7 @@ struct Default_planar_topology_impl<GeomTraits, Dcel,
 
 };
 
-template <class GeomTraits, class Dcel>
+template <typename GeomTraits, typename Dcel>
 struct Default_planar_topology_impl<GeomTraits, Dcel,
                                     Arr_not_all_sides_oblivious_tag>
 {
@@ -54,11 +54,11 @@ struct Default_planar_topology_impl<GeomTraits, Dcel,
 
 } // namespace internal
 
-template <typename GeomTraits, typename Dcel >
+template <typename GeomTraits, typename Dcel>
 struct Default_planar_topology :
   public internal::Default_planar_topology_impl<
     GeomTraits, Dcel,
-    typename Arr_are_all_sides_oblivious_tag<
+    typename Arr_all_sides_oblivious_category<
       typename internal::Arr_complete_left_side_category<GeomTraits>::Category,
       typename internal::Arr_complete_bottom_side_category<GeomTraits>::Category,
       typename internal::Arr_complete_top_side_category<GeomTraits>::Category,

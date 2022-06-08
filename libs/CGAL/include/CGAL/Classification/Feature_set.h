@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Feature_set.h $
-// $Id: Feature_set.h e0ee8aa 2021-03-31T11:52:12+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Feature_set.h $
+// $Id: Feature_set.h 473d30b 2021-04-06T15:12:45+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -32,7 +32,7 @@ namespace Classification {
 /*!
 \ingroup PkgClassificationFeature
 
-\brief Set of features (see `Feature_base`) used as input by
+\brief sets of features (see `Feature_base`) used as input by
 classification algorithms. This class handles both the instantiation,
 the addition and the deletion of features.
 

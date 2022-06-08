@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/IO/Complex_3_in_triangulation_3_to_vtk.h $
-// $Id: Complex_3_in_triangulation_3_to_vtk.h 8bb22d5 2020-03-26T14:23:37+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/IO/Complex_3_in_triangulation_3_to_vtk.h $
+// $Id: Complex_3_in_triangulation_3_to_vtk.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,6 +25,8 @@
 #include <boost/unordered_map.hpp>
 
 namespace CGAL {
+
+namespace IO {
 
 //if export_complex is false, there must be no far point.
 template <typename C3T3>
@@ -120,6 +122,12 @@ output_c3t3_to_vtk_unstructured_grid(const C3T3& c3t3,
   vtk_cells->Delete();
   return grid;
 }
+
+} // namespace IO
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+using IO::output_c3t3_to_vtk_unstructured_grid;
+#endif
 
 } // end namespace CGAL
 

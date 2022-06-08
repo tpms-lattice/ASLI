@@ -33,10 +33,9 @@
 
 // IO
 #include <CGAL/IO/facets_in_complex_2_to_triangle_mesh.h>
-#include <CGAL/IO/facets_in_complex_3_to_triangle_mesh.h>
+#include <CGAL/facets_in_complex_3_to_triangle_mesh.h>
 #include <CGAL/IO/Complex_2_in_triangulation_3_file_writer.h>
-#include <CGAL/IO/Polyhedron_builder_from_STL.h>
-#include <CGAL/IO/STL_writer.h>
+#include <CGAL/IO/STL.h>
 //#include <CGAL/IO/output_to_vtu.h>
 #include <CGAL/IO/write_xyz_points.h>
 

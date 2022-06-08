@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/IO/File_maya.h $
-// $Id: File_maya.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/IO/File_maya.h $
+// $Id: File_maya.h 70058db 2021-05-03T15:30:52+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin
@@ -25,11 +25,7 @@
 #include <sstream>
 
 namespace CGAL {
-
-//-------------------------------------------------------
-// IO functions
-//-------------------------------------------------------
-
+namespace IO {
 template <class C3T3>
 void
 output_to_maya(std::ostream& os,
@@ -314,6 +310,12 @@ output_to_maya(std::ostream& os,
   std::cerr << "done.\n";
 #endif
 } // end output_to_maya(...)
+
+} // namespace IO
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+using IO::output_to_maya;
+#endif
 
 } // end namespace CGAL
 

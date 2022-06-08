@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/smooth_vertices.h $
-// $Id: smooth_vertices.h 26ed477 2021-01-06T16:05:06+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/smooth_vertices.h $
+// $Id: smooth_vertices.h 086299c 2021-01-08T10:39:24+01:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -162,7 +162,7 @@ private:
       }
     }
 
-    for (const std::pair<Facet, Vector_3>& fn : fnormals)
+    for (const auto& fn : fnormals)
     {
       if(fn.second != CGAL::NULL_VECTOR)
         continue;
@@ -347,7 +347,7 @@ private:
       v->set_point(typename Tr::Point(pv + frac * move));
 
       bool valid_try = true;
-      for (const typename Tr::Cell_handle ci : inc_cells)
+      for (const typename Tr::Cell_handle& ci : inc_cells)
       {
         if (CGAL::POSITIVE != CGAL::orientation(point(ci->vertex(0)->point()),
                                                 point(ci->vertex(1)->point()),

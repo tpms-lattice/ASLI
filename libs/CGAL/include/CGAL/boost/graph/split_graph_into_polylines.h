@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/split_graph_into_polylines.h $
-// $Id: split_graph_into_polylines.h ebd65c9 2020-07-20T11:47:30+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/split_graph_into_polylines.h $
+// $Id: split_graph_into_polylines.h 4138477 2021-09-30T16:49:40+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau, Xiang Gao
@@ -153,7 +153,7 @@ void duplicate_terminal_vertices(Graph& graph,
   {
     typename boost::graph_traits<OrigGraph>::vertex_descriptor orig_v = graph[v];
     typename boost::graph_traits<Graph>::degree_size_type deg = degree(v, graph);
-    if ((deg != 0 && is_terminal(orig_v, orig)) || deg > 2)
+    if (deg != 2 || is_terminal(orig_v, orig))
       {
         out_edge_iterator b, e;
         boost::tie(b, e) = out_edges(v, graph);
@@ -170,7 +170,6 @@ void duplicate_terminal_vertices(Graph& graph,
             const std::pair<edge_descriptor, bool> pair = add_edge(vc, w, graph);
             graph[pair.first] = orig_e;
           }
-        CGAL_assertion(degree(v, graph) == 1);
       }
   }
 
@@ -205,7 +204,7 @@ split_graph_into_polylines(const Graph& graph,
 #endif
 
 /*!
-\ingroup PkgBGLRef
+\ingroup PkgBGLPartition
 splits into polylines the graph `g` at vertices of degree greater than 2
 and at vertices for which `is_terminal(v,graph)==true`.
 The polylines are reported using a visitor.

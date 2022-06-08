@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification.h $
-// $Id: Classification.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification.h $
+// $Id: Classification.h 8264096 2021-02-23T08:49:18+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -20,10 +20,6 @@
 
 #ifdef CGAL_LINKED_WITH_OPENCV
 #include <CGAL/Classification/OpenCV/Random_forest_classifier.h>
-#endif
-
-#ifdef CGAL_LINKED_WITH_TENSORFLOW
-#include <CGAL/Classification/TensorFlow/Neural_network_classifier.h>
 #endif
 
 #include <CGAL/Classification/Cluster.h>

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_hull_3/include/CGAL/Extreme_points_traits_adapter_3.h $
-// $Id: Extreme_points_traits_adapter_3.h 4e01ec7 2020-03-24T16:22:06+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/Extreme_points_traits_adapter_3.h $
+// $Id: Extreme_points_traits_adapter_3.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,6 @@
 #include <CGAL/Kernel_traits.h>
 
 #include <CGAL/convex_hull_3.h>
-#include <CGAL/result_of.h>
 
 namespace CGAL {
 namespace Convex_hull_3 {
@@ -37,14 +36,14 @@ struct Forward_functor
   Forward_functor(const PointPropertyMap& vpm, const F& f) : F(f), vpm_(vpm) {}
 
   template <class Vertex>
-  typename cpp11::result_of<F(const Vertex&, const Vertex&)>::type
+  decltype(auto)
   operator()(const Vertex& p, const Vertex& q) const
   {
     return static_cast<const F*>(this)->operator()(get(vpm_, p), get(vpm_, q));
   }
 
   template <class Vertex>
-  typename cpp11::result_of<F(const Vertex&, const Vertex&, const Vertex&)>::type
+  decltype(auto)
   operator()(const Vertex& p, const Vertex& q, const Vertex& r) const
   {
     return static_cast<const F*>(this)->operator()(get(vpm_, p),
@@ -53,7 +52,7 @@ struct Forward_functor
   }
 
   template <class Vertex>
-  typename cpp11::result_of<F(const Vertex&, const Vertex&, const Vertex&, const Vertex&)>::type
+  decltype(auto)
   operator()(const Vertex& p, const Vertex& q, const Vertex& r, const Vertex& s) const
   {
     return static_cast<const F*>(this)->operator()(get(vpm_, p),

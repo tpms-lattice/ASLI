@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Alpha_shapes_2/include/CGAL/Alpha_shape_face_base_2.h $
-// $Id: Alpha_shape_face_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Alpha_shapes_2/include/CGAL/Alpha_shape_face_base_2.h $
+// $Id: Alpha_shape_face_base_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 
 
 #include <CGAL/utility.h>
-#include <CGAL/internal/Lazy_alpha_nt_2.h>
+#include <CGAL/Alpha_shapes_2/internal/Lazy_alpha_nt_2.h>
 #include <CGAL/Default.h>
 #include <CGAL/Triangulation_face_base_2.h>
 

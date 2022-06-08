@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Iso_rectangle_2.h $
-// $Id: Iso_rectangle_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Iso_rectangle_2.h $
+// $Id: Iso_rectangle_2.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,6 @@
 #include <CGAL/Kernel/Return_base_tag.h>
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Dimension.h>
-#include <CGAL/result_of.h>
 
 namespace CGAL {
 
@@ -82,13 +81,13 @@ public:
   Iso_rectangle_2(const Bbox_2& bbox)
     : Rep(typename R::Construct_iso_rectangle_2()(Return_base_tag(), bbox.xmin(), bbox.ymin(), bbox.xmax(), bbox.ymax())) {}
 
-  typename cpp11::result_of<typename R::Construct_min_vertex_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   min BOOST_PREVENT_MACRO_SUBSTITUTION () const
   {
     return R().construct_min_vertex_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R::Construct_max_vertex_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   max BOOST_PREVENT_MACRO_SUBSTITUTION () const
   {
     return R().construct_max_vertex_2_object()(*this);
@@ -107,43 +106,43 @@ public:
   }
 
 
-  typename cpp11::result_of<typename R::Construct_vertex_2( Iso_rectangle_2, int )>::type
+  decltype(auto)
   vertex(int i) const
   {
     return R().construct_vertex_2_object()(*this,i);
   }
 
-  typename cpp11::result_of<typename R::Construct_vertex_2( Iso_rectangle_2, int )>::type
+  decltype(auto)
   operator[](int i) const
   {
     return R().construct_vertex_2_object()(*this,i);
   }
 
-  typename cpp11::result_of<typename R::Compute_xmin_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   xmin() const
   {
     return R().compute_xmin_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_xmax_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   xmax() const
   {
     return R().compute_xmax_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_ymin_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   ymin() const
   {
     return R().compute_ymin_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_ymax_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   ymax() const
   {
     return R().compute_ymax_2_object()(*this);
   }
 
-  typename cpp11::result_of<typename R::Compute_xmin_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   min_coord(int i) const
   {
     CGAL_kernel_precondition( i == 0 || i == 1 );
@@ -153,7 +152,7 @@ public:
       return ymin();
   }
 
-  typename cpp11::result_of<typename R::Compute_xmin_2( Iso_rectangle_2 )>::type
+  decltype(auto)
   max_coord(int i) const
   {
     CGAL_kernel_precondition( i == 0 || i == 1 );
@@ -223,7 +222,7 @@ template < class R >
 std::ostream &
 operator<<(std::ostream &os, const Iso_rectangle_2<R> &r)
 {
-  switch(get_mode(os)) {
+  switch(IO::get_mode(os)) {
   case IO::ASCII :
     return os << (r.min)() << ' ' << (r.max)();
   case IO::BINARY :

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Profiling_tools/include/CGAL/Profile_counter.h $
-// $Id: Profile_counter.h 1b5b61a 2021-05-07T12:17:32+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Profiling_tools/include/CGAL/Profile_counter.h $
+// $Id: Profile_counter.h a885f9b 2021-08-25T13:02:11+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -121,9 +121,9 @@ struct Profile_histogram_counter
 {
 private:
 #ifdef CGAL_CONCURRENT_PROFILE
-    typedef tbb::concurrent_hash_map<unsigned, unsigned>  Counters;
+    typedef tbb::concurrent_hash_map<unsigned, unsigned>  CounterMap;
 #else
-    typedef std::map<unsigned, unsigned>  Counters;
+    typedef std::map<unsigned, unsigned>  CounterMap;
 #endif
 
 public:
@@ -133,7 +133,7 @@ public:
     void operator()(unsigned i)
     {
 #ifdef CGAL_CONCURRENT_PROFILE
-      Counters::accessor a;
+      CounterMap::accessor a;
       counters.insert(a, i);
       ++a->second;
 #else
@@ -144,7 +144,7 @@ public:
     ~Profile_histogram_counter()
     {
         unsigned total=0;
-        for (Counters::const_iterator it=counters.begin(), end=counters.end();
+        for (CounterMap::const_iterator it=counters.begin(), end=counters.end();
              it != end; ++it) {
             std::cerr << "[CGAL::Profile_histogram_counter] " << s;
             std::cerr << " [ " << std::setw(10) << internal::dot_it(it->first) << " : "
@@ -158,7 +158,7 @@ public:
     }
 
 private:
-    Counters  counters;
+    CounterMap  counters;
     const std::string s;
 };
 

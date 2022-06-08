@@ -3,14 +3,12 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_vertex_base_2.h $
-// $Id: Segment_Delaunay_graph_vertex_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_vertex_base_2.h $
+// $Id: Segment_Delaunay_graph_vertex_base_2.h 87ecfae 2021-02-17T10:55:59+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Menelaos Karavelas <mkaravel@iacm.forth.gr>
-
-
 
 
 #ifndef CGAL_SEGMENT_DELAUNAY_GRAPH_VERTEX_BASE_2_H
@@ -21,12 +19,7 @@
 #include <CGAL/disable_warnings.h>
 
 #include <CGAL/Segment_Delaunay_graph_2/basic.h>
-
 #include <CGAL/Triangulation_ds_vertex_base_2.h>
-#include <CGAL/Segment_Delaunay_graph_storage_site_2.h>
-#include <CGAL/Segment_Delaunay_graph_simple_storage_site_2.h>
-
-
 
 namespace CGAL {
 

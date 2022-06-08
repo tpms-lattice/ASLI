@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator3.h $
-// $Id: Single_wall_creator3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Single_wall_creator3.h $
+// $Id: Single_wall_creator3.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -169,8 +169,7 @@ class Single_wall_creator3 : public Modifier_base<typename Nef_::SNC_and_PL> {
         lateral_sv_tgt[0]->twin() = lateral_sv_tgt[1];
         lateral_sv_tgt[1]->twin() = lateral_sv_tgt[0];
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
-        lateral_sv_tgt[0]->set_index();
-        lateral_sv_tgt[1]->set_index(lateral_sv_tgt[0]->get_index());
+        lateral_sv_tgt[1]->set_index(lateral_sv_tgt[0]->new_index());
 #endif
         pl->add_edge(lateral_sv_tgt[0]);
         return;
@@ -182,8 +181,7 @@ class Single_wall_creator3 : public Modifier_base<typename Nef_::SNC_and_PL> {
       lateral_sv_tgt[0]->twin() = opp;
       pl->add_edge(opp);
 #ifndef CGAL_NEF_NO_INDEXED_ITEMS
-      opp->set_index();
-      lateral_sv_tgt[0]->set_index(opp->get_index());
+      lateral_sv_tgt[0]->set_index(opp->new_index());
 #endif
       lateral_sv_tgt[0] =
         SMW_tgt.add_lateral_svertex(Sphere_segment(lateral_sv_tgt[0]->point().antipode(),

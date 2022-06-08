@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Multiset.h $
-// $Id: Multiset.h 6b991a9 2020-10-22T09:45:31+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Multiset.h $
+// $Id: Multiset.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -590,7 +590,7 @@ public:
   /*!
    * Destructor. [takes O(n) operations]
    */
-  virtual ~Multiset ();
+  virtual ~Multiset () noexcept(!CGAL_ASSERTIONS_ENABLED);
 
   /*!
    * Assignment operator. [takes O(n) operations]
@@ -1196,7 +1196,7 @@ public:
 
   /*!
    * Split the tree such that all remaining objects are less than a given
-   * key, and all objects greater then (or equal to) this key form
+   * key, and all objects greater than (or equal to) this key form
    * a new output tree. [takes O(log n) operations]
    * \param key The split key.
    * \param comp_key A comparison functor for comparing keys and objects.
@@ -1565,14 +1565,16 @@ Multiset<Type, Compare, Allocator, UseCompactContainer>::Multiset (const Self& t
 // Destructor.
 //
 template <class Type, class Compare, typename Allocator, typename UseCompactContainer>
-Multiset<Type, Compare, Allocator, UseCompactContainer>::~Multiset ()
+Multiset<Type, Compare, Allocator, UseCompactContainer>::~Multiset () noexcept(!CGAL_ASSERTIONS_ENABLED)
 {
   if (UseCompactContainer::value)
     return;
 
   // Delete the entire tree recursively.
-  if (rootP != nullptr)
-    _destroy (rootP);
+  CGAL_destructor_assertion_catch(
+    if (rootP != nullptr)
+      _destroy (rootP);
+  );
 
   rootP = nullptr;
   beginNode.parentP = nullptr;

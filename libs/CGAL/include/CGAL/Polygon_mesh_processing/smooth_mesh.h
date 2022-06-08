@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_mesh.h $
-// $Id: smooth_mesh.h 10ba347 2020-10-02T15:20:53+02:00 Sebastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/smooth_mesh.h $
+// $Id: smooth_mesh.h f55ef7d 2020-10-09T18:36:17+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -328,6 +328,7 @@ void smooth_mesh(const FaceRange& faces,
   }
 }
 
+///\cond SKIP_IN_MANUAL
 template <typename FaceRange, typename TriangleMesh>
 void smooth_mesh(const FaceRange& face_range, TriangleMesh& tmesh)
 {
@@ -346,8 +347,6 @@ void smooth_mesh(TriangleMesh& tmesh)
   smooth_mesh(faces(tmesh), tmesh, parameters::all_default());
 }
 
-
-///\cond SKIP_IN_MANUAL
 template<typename TriangleMesh, typename GeomTraits, typename Stream>
 void angles_evaluation(TriangleMesh& tmesh, GeomTraits traits, Stream& output)
 {

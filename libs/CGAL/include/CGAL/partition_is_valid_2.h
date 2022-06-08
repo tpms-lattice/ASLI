@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Partition_2/include/CGAL/partition_is_valid_2.h $
-// $Id: partition_is_valid_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Partition_2/include/CGAL/partition_is_valid_2.h $
+// $Id: partition_is_valid_2.h 521c72d 2021-10-04T13:22:00+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -201,10 +201,10 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 }
 } // namespace internal
 
-template<class InputIterator, class FowardIterator>
+template<class InputIterator, class ForwardIterator>
 bool
 partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
-                      FowardIterator poly_first, FowardIterator poly_last)
+                      ForwardIterator poly_first, ForwardIterator poly_last)
 {
    typedef typename std::iterator_traits<InputIterator>::value_type   Point_2;
    typedef typename Kernel_traits<Point_2>::Kernel     K;
@@ -218,10 +218,10 @@ partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
 }
 
 
-template<class InputIterator, class FowardIterator, class Traits>
+template<class InputIterator, class ForwardIterator, class Traits>
 bool
 partition_is_valid_2 (InputIterator point_first, InputIterator point_last,
-                      FowardIterator poly_first, FowardIterator poly_last,
+                      ForwardIterator poly_first, ForwardIterator poly_last,
                       const Traits& traits)
 {
   //typedef typename std::iterator_traits<InputIterator>::value_type   Point_2;

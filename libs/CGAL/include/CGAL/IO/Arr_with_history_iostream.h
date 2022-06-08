@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_iostream.h $
-// $Id: Arr_with_history_iostream.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_iostream.h $
+// $Id: Arr_with_history_iostream.h 755693b 2021-05-03T13:25:26+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,6 +30,8 @@
 
 namespace CGAL {
 
+namespace IO {
+
 /*!
  * Write an arrangement with history to an output stream using a given
  * formatter.
@@ -54,6 +56,8 @@ std::ostream& write
   return (os);
 }
 
+} // namespace IO
+
 /*!
  * Output operator (importer).
  * \param os The output stream.
@@ -76,6 +80,8 @@ std::ostream& operator<<
   writer (text_format);
   return (os);
 }
+
+namespace IO {
 
 /*!
  * Read an arrangement with history from an input stream using a given
@@ -101,6 +107,8 @@ std::istream& read
   return (is);
 }
 
+} // namespace IO
+
 /*!
  * Output operator (exporter).
  * \param is The input stream.
@@ -123,6 +131,11 @@ std::istream& operator>>
   reader (text_format);
   return (is);
 }
+
+#ifndef CGAL_NO_DEPRECATED_CODE
+using IO::read;
+using IO::write;
+#endif
 
 } //namespace CGAL
 

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/BGL/include/CGAL/boost/graph/graph_traits_OpenMesh.h $
-// $Id: graph_traits_OpenMesh.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/graph_traits_OpenMesh.h $
+// $Id: graph_traits_OpenMesh.h 40a3eee 2020-06-16T16:40:16+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -631,20 +631,19 @@ void clear(OPEN_MESH_CLASS& sm)
   CGAL_postcondition(num_faces(sm) == 0);
 }
 
+//doesn't seem to work. Use BGL default IO functions instead.
+//template<typename K>
+//bool read_OFF(std::istream& is, OPEN_MESH_CLASS& sm)
+//{
+//  OpenMesh::IO::Options ropt;
+//  return OpenMesh::IO::read_mesh(sm, is, ".OFF", ropt, false);
+//}
 
-template<typename K>
-bool read_off(std::istream& is, OPEN_MESH_CLASS& sm)
-{
-  OpenMesh::IO::Options ropt;
-  return OpenMesh::IO::read_mesh(sm, is, ".OFF", ropt, false);
-}
-
-
-template<typename K>
-bool write_off(std::ostream& os, OPEN_MESH_CLASS& sm)
-{
-  return OpenMesh::IO::write_mesh(sm, os, ".OFF");
-}
+//template<typename K>
+//bool write_OFF(std::ostream& os, OPEN_MESH_CLASS& sm)
+//{
+//  return OpenMesh::IO::write_mesh(sm, os, ".OFF");
+//}
 
 }
 #ifndef CGAL_NO_DEPRECATED_CODE

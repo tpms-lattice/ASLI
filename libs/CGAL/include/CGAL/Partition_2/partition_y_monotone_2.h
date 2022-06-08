@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Partition_2/include/CGAL/Partition_2/partition_y_monotone_2.h $
-// $Id: partition_y_monotone_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Partition_2/include/CGAL/Partition_2/partition_y_monotone_2.h $
+// $Id: partition_y_monotone_2.h 5a36ff8 2020-12-04T08:02:26+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -418,7 +418,7 @@ OutputIterator partition_y_monotone_2(InputIterator first,
    typedef Circulator_from_iterator<I>                     Circulator;
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS) || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    OutputIterator res(result);
 #else
    typedef typename Traits::Polygon_2                      Polygon_2;
@@ -490,7 +490,7 @@ OutputIterator partition_y_monotone_2(InputIterator first,
                                        res.output_so_far_end(), traits));
 
 #if defined(CGAL_PARTITION_NO_POSTCONDITIONS) || \
-    defined(CGAL_NO_POSTCONDITIONS) || defined(NDEBUG)
+    defined(CGAL_NO_POSTCONDITIONS)
    return res;
 #else
    return res.to_output_iterator();

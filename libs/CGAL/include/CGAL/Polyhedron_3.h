@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polyhedron/include/CGAL/Polyhedron_3.h $
-// $Id: Polyhedron_3.h b89bbbf 2020-07-14T18:01:35+02:00 Dmitry Anisimov
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polyhedron/include/CGAL/Polyhedron_3.h $
+// $Id: Polyhedron_3.h cff3cdb 2021-08-12T10:23:57+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -16,9 +16,6 @@
 #include <CGAL/license/Polyhedron.h>
 
 #include <CGAL/Polyhedron_3_fwd.h>
-#include <CGAL/basic.h>
-#include <algorithm>
-#include <cstddef>
 
 #include <CGAL/HalfedgeDS_iterator.h>
 #include <CGAL/Iterator_project.h>
@@ -33,6 +30,8 @@
 #include <CGAL/Polyhedron_traits_3.h>
 #include <CGAL/iterator.h>
 
+#include <algorithm>
+#include <cstddef>
 
 namespace CGAL {
 
@@ -111,7 +110,8 @@ public:
 
     // the degree of the vertex, i.e., edges emanating from this vertex
     std::size_t vertex_degree() const {
-        return this->halfedge()->vertex_degree();
+        return this->halfedge()!=Halfedge_const_handle()
+               ? this->halfedge()->vertex_degree() : 0;
     }
     size_type degree() const { return vertex_degree(); } //backwards compatible
 

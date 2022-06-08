@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/merge_border_vertices.h $
-// $Id: merge_border_vertices.h c253679 2020-04-18T16:27:58+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/merge_border_vertices.h $
+// $Id: merge_border_vertices.h 4231bc8 2020-07-13T14:17:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -262,7 +262,7 @@ void merge_vertices_in_range(const HalfedgeRange& sorted_hedges,
 /// merges identical vertices around a cycle of boundary edges.
 ///
 /// @tparam PolygonMesh a model of `FaceListGraph` and `MutableFaceGraph`.
-/// @tparam NamedParameter a sequence of \ref bgl_namedparameters "Named Parameters".
+/// @tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters".
 ///
 /// @param h a halfedge that belongs to a boundary cycle.
 /// @param pm the polygon mesh which contains the boundary cycle.
@@ -277,14 +277,14 @@ void merge_vertices_in_range(const HalfedgeRange& sorted_hedges,
 ///   \cgalParamNEnd
 /// \cgalNamedParamsEnd
 ///
-template <class PolygonMesh, class NamedParameter>
+template <class PolygonMesh, class NamedParameters>
 void merge_duplicated_vertices_in_boundary_cycle(
         typename boost::graph_traits<PolygonMesh>::halfedge_descriptor h,
         PolygonMesh& pm,
-        const NamedParameter& np)
+        const NamedParameters& np)
 {
   typedef typename boost::graph_traits<PolygonMesh>::halfedge_descriptor halfedge_descriptor;
-  typedef typename GetVertexPointMap<PolygonMesh, NamedParameter>::const_type Vpm;
+  typedef typename GetVertexPointMap<PolygonMesh, NamedParameters>::const_type Vpm;
 
   using parameters::get_parameter;
   using parameters::choose_parameter;
@@ -318,7 +318,7 @@ void merge_duplicated_vertices_in_boundary_cycle(
 /// extracts boundary cycles and merges the duplicated vertices of each cycle.
 ///
 /// @tparam PolygonMesh a model of `FaceListGraph` and `MutableFaceGraph`.
-/// @tparam NamedParameter a sequence of \ref bgl_namedparameters "Named Parameters".
+/// @tparam NamedParameters a sequence of \ref bgl_namedparameters "Named Parameters".
 ///
 /// @param pm the polygon mesh which contains the cycles.
 /// @param np an optional sequence of \ref bgl_namedparameters "Named Parameters" among the ones listed below
@@ -333,9 +333,9 @@ void merge_duplicated_vertices_in_boundary_cycle(
 /// \cgalNamedParamsEnd
 ///
 /// \sa `merge_duplicated_vertices_in_boundary_cycle()`
-template <class PolygonMesh, class NamedParameter>
+template <class PolygonMesh, class NamedParameters>
 void merge_duplicated_vertices_in_boundary_cycles(      PolygonMesh& pm,
-                                                  const NamedParameter& np)
+                                                  const NamedParameters& np)
 {
   typedef typename boost::graph_traits<PolygonMesh>::halfedge_descriptor halfedge_descriptor;
 

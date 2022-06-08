@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Generator/include/CGAL/random_convex_hull_in_disc_2.h $
-// $Id: random_convex_hull_in_disc_2.h 3b1dfc7 2021-03-24T08:44:17+01:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Generator/include/CGAL/random_convex_hull_in_disc_2.h $
+// $Id: random_convex_hull_in_disc_2.h 393ae7d 2021-05-12T15:03:53+02:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -68,19 +68,6 @@ void generate_points_annulus(long n, double a, double b, double small_radius,
   }
   if (n == 1)  // generation of a point
   {
-
-    #if BOOST_VERSION < 104700
-
-    boost::uniform_real<double> random_squared_radius_distribution(
-        small_radius * small_radius / (big_radius * big_radius), 1);
-    boost::uniform_real<double> random_angle_distribution(a, b);
-    boost::variate_generator<
-        GEN&, boost::uniform_real<double> > random_angle(gen, random_angle_distribution);
-    boost::variate_generator<
-        GEN&, boost::uniform_real<double> > random_squared_radius(gen, random_squared_radius_distribution);
-
-    #else
-
     boost::random::uniform_real_distribution<double> random_squared_radius_distribution(
         small_radius * small_radius / (big_radius * big_radius), 1);
 
@@ -89,8 +76,6 @@ void generate_points_annulus(long n, double a, double b, double small_radius,
         GEN&, boost::random::uniform_real_distribution<double> > random_angle(gen, random_angle_distribution);
     boost::random::variate_generator<
         GEN&, boost::random::uniform_real_distribution<double> > random_squared_radius(gen, random_squared_radius_distribution);
-
-    #endif
 
     double alpha = random_angle();
     double r = big_radius * std::sqrt(random_squared_radius());

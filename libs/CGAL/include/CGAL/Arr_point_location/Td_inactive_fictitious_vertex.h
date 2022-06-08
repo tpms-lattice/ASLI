@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_fictitious_vertex.h $
-// $Id: Td_inactive_fictitious_vertex.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_fictitious_vertex.h $
+// $Id: Td_inactive_fictitious_vertex.h 97cac65 2021-07-23T10:59:49+02:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>
@@ -96,14 +96,8 @@ public:
 #ifdef CGAL_PM_FRIEND_CLASS
 #if defined(__SUNPRO_CC) || defined(__PGI) || defined(__INTEL_COMPILER)
   friend class Trapezoidal_decomposition_2<Traits>::In_face_iterator;
-#elif defined(__GNUC__)
-
-#if ((__GNUC__ < 3) || ((__GNUC__ == 3) && (__GNUC_MINOR__ <= 2)))
-  friend typename Trapezoidal_decomposition_2<Traits>::In_face_iterator;
-#else
+#elif (__GNUC__ > 0)
   friend class Trapezoidal_decomposition_2<Traits>::In_face_iterator;
-#endif
-
 #else
   friend class In_face_iterator;
 #endif

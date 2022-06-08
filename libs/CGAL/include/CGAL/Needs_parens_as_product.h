@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Algebraic_foundations/include/CGAL/Needs_parens_as_product.h $
-// $Id: Needs_parens_as_product.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_foundations/include/CGAL/Needs_parens_as_product.h $
+// $Id: Needs_parens_as_product.h a88a84b 2021-08-13T15:46:50+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,7 +27,7 @@ namespace CGAL {
 class Parens_as_product_tag {};
 
 /*! \ingroup NiX_io_parens
- *  \brief Decides whether this number requires parentheses
+ *  \brief decides whether this number requires parentheses
  *  in case it appears within a produkt.
  */
 template <class NT>
@@ -36,7 +36,7 @@ struct Needs_parens_as_product{
 };
 
 /*! \ingroup NiX_io_parens
- *  \brief Decides whether this number requires parentheses
+ *  \brief decides whether this number requires parentheses
  *  in case it appears within a produkt.
  */
 template <class NT>
@@ -56,9 +56,9 @@ public:
     Output_rep(const T& tt) : t(tt) {}
     std::ostream& operator () (std::ostream& out) const {
         if ( needs_parens_as_product(t)) {
-            return out << "(" << oformat(t) << ")";
+            return out << "(" << IO::oformat(t) << ")";
         } else {
-            return out << oformat(t);
+            return out << IO::oformat(t);
         }
     }
 };
@@ -75,11 +75,9 @@ template <> struct Needs_parens_as_product<long>{
     bool operator()(const long& x){return x < long(0);}
 };
 
-#ifdef CGAL_USE_LONG_LONG
 template <> struct Needs_parens_as_product<long long>{
     bool operator()(const long long& x){return x < (long long)(0);}
 };
-#endif
 
 template <> struct Needs_parens_as_product<float>{
     bool operator()(const float& x){return x < float(0);}

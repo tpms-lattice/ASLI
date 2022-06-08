@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Polycurve_2.h $
-// $Id: Polycurve_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Polycurve_2.h $
+// $Id: Polycurve_2.h 7cd3a26 2020-09-08T17:46:08+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein  <wein@post.tau.ac.il>
@@ -119,8 +119,8 @@ public:
    */
   template <typename InputIterator>
   CGAL_DEPRECATED void construct_polycurve(InputIterator begin,
-                                          InputIterator end,
-                                          boost::true_type)
+                                           InputIterator end,
+                                           boost::true_type)
   {
     // Check if there are no points in the range:
     InputIterator ps = begin;

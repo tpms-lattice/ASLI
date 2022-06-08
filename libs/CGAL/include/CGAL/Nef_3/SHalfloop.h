@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Nef_3/include/CGAL/Nef_3/SHalfloop.h $
-// $Id: SHalfloop.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/SHalfloop.h $
+// $Id: SHalfloop.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -75,6 +75,15 @@ class SHalfloop_base {
         return *this;
       }
 
+    SHalfloop_base<Refs>& operator=(SHalfloop_base<Refs>&& l) noexcept
+      { twin_ = std::move(l.twin_);
+        incident_sface_ = std::move(l.incident_sface_);
+        facet_ = std::move(l.facet_);
+        mark_ = std::move(l.mark_);
+        circle_ = std::move(l.circle_);
+        return *this;
+      }
+
     Mark& mark() { return mark_;}
     const Mark& mark() const { return mark_; }
 
@@ -93,7 +102,7 @@ class SHalfloop_base {
  public:
     std::string debug() const
       { std::stringstream os;
-        set_pretty_mode(os);
+        CGAL::IO::set_pretty_mode(os);
         os<<"sl [ "<<circle_<<" ] ";
         return os.str();
       }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Polygon_mesh_processing/include/CGAL/Rigid_triangle_mesh_collision_detection.h $
-// $Id: Rigid_triangle_mesh_collision_detection.h 48bd92b 2020-04-13T13:03:05+02:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Rigid_triangle_mesh_collision_detection.h $
+// $Id: Rigid_triangle_mesh_collision_detection.h 4afc249 2021-09-09T15:58:00+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -176,6 +176,12 @@ public:
     : m_free_id(0)
   {}
 
+  //! move constructor
+  Rigid_triangle_mesh_collision_detection(Rigid_triangle_mesh_collision_detection&& other)
+  {
+    *this = std::move(other);
+  }
+
   ~Rigid_triangle_mesh_collision_detection()
   {
     for (std::size_t k=0; k<m_free_id; ++k)
@@ -183,6 +189,23 @@ public:
       std::size_t id = m_id_pool[k];
       if (m_own_aabb_trees[id]) delete m_aabb_trees[id];
     }
+  }
+
+  //! move assignment operator
+  Rigid_triangle_mesh_collision_detection& operator=(Rigid_triangle_mesh_collision_detection&& other)
+  {
+    m_own_aabb_trees = std::move(other.m_own_aabb_trees);
+    m_aabb_trees = std::move(other.m_aabb_trees);
+    m_is_closed = std::move(other.m_is_closed);
+    m_points_per_cc = std::move(other.m_points_per_cc);
+    m_traversal_traits = std::move(other.m_traversal_traits);
+    m_free_id = std::move(other.m_free_id);
+    m_id_pool = std::move(other.m_id_pool);
+
+    for(std::size_t i = 0; i< other.m_own_aabb_trees.size(); ++i)
+      other.m_own_aabb_trees[i]= false;
+
+    return *this;
   }
 
  /*!
@@ -223,11 +246,7 @@ public:
   {
     // handle vpm
     typedef typename CGAL::GetVertexPointMap<TriangleMesh, NamedParameters>::const_type Local_vpm;
-    CGAL_USE_TYPE(Local_vpm);
-
-    CGAL_assertion_code(
-      static const bool same_vpm = (boost::is_same<Local_vpm,Vpm>::value); )
-    CGAL_static_assertion(same_vpm);
+    CGAL_static_assertion( (boost::is_same<Local_vpm,Vpm>::value) );
 
     Vpm vpm =
       parameters::choose_parameter(parameters::get_parameter(np, internal_np::vertex_point),
@@ -539,11 +558,7 @@ public:
         parameters::get_parameter(np, internal_np::apply_per_connected_component), true);
 
     typedef typename CGAL::GetVertexPointMap<TriangleMesh, NamedParameters>::const_type Local_vpm;
-    CGAL_USE_TYPE(Local_vpm);
-
-    CGAL_assertion_code(
-      static const bool same_vpm = (boost::is_same<Local_vpm,Vpm>::value); )
-    CGAL_static_assertion(same_vpm);
+    CGAL_static_assertion((boost::is_same<Local_vpm,Vpm>::value));
 
     Vpm vpm =
       parameters::choose_parameter(parameters::get_parameter(np, internal_np::vertex_point),

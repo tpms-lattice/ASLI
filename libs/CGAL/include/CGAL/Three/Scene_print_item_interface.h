@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/Scene_print_item_interface.h $
-// $Id: Scene_print_item_interface.h af7e1a8 2020-10-16T14:32:12+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Scene_print_item_interface.h $
+// $Id: Scene_print_item_interface.h 3b70343 2020-11-16T16:19:43+01:00 Maxime Gimeno
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime GIMENO
@@ -44,13 +44,13 @@ public:
   //! Prints all the primitive ids if their number is not too high. The limit is
   //! editable in the View menu of the application.
   virtual void printAllIds() = 0;
-  //! \brief Tests if an id should be displayed or not.
+  //! \brief tests if an id should be displayed or not.
   //!
   //! \returns true if the Id should be displayed
   //! \returns false if the Id should not be displayed (if it is hidden for example)
   virtual bool testDisplayId(double, double, double, CGAL::Three::Viewer_interface*)const = 0;
 
-  //! \brief Tests if this item should display its ids.
+  //! \brief tests if this item should display its ids.
   //!
   //! The default behavior is to only display ids of the currently selected item (\see mainSelectionIndex()).
   //! This function allows to override this behavior.

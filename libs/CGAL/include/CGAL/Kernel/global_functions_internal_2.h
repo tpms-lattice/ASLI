@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_23/include/CGAL/Kernel/global_functions_internal_2.h $
-// $Id: global_functions_internal_2.h a943082 2020-03-26T19:01:31+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/global_functions_internal_2.h $
+// $Id: global_functions_internal_2.h 92d90a4 2021-08-12T10:12:26+02:00 Sebastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -371,6 +371,17 @@ compare_slope(const typename K::Segment_2 &s1,
               const typename K::Segment_2 &s2, const K& k)
 {
   return k.compare_slope_2_object()(s1, s2);
+}
+
+template < class K >
+inline
+typename K::Comparison_result
+compare_slope(const typename K::Point_2 &s1s,
+              const typename K::Point_2 &s1t,
+              const typename K::Point_2 &s2s,
+              const typename K::Point_2 &s2t,const K& k)
+{
+  return k.compare_slope_2_object()(s1s, s1t, s2s, s2t);
 }
 
 template < class K >
@@ -786,6 +797,14 @@ midpoint(const typename K::Point_2 &p,
          const typename K::Point_2 &q, const K &k)
 {
   return k.construct_midpoint_2_object()(p, q);
+}
+
+template < class K >
+inline
+typename K::Point_2
+midpoint(const typename K::Segment_2 &s, const K &k)
+{
+  return k.construct_midpoint_2_object()(s);
 }
 
 template < class K >

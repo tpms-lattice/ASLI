@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Apollonius_graph_2/include/CGAL/Apollonius_graph_2.h $
-// $Id: Apollonius_graph_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Apollonius_graph_2/include/CGAL/Apollonius_graph_2.h $
+// $Id: Apollonius_graph_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -37,7 +37,7 @@
 #include <CGAL/Apollonius_graph_vertex_base_2.h>
 
 #include <CGAL/in_place_edge_list.h>
-#include <CGAL/internal/TDS_2/edge_list.h>
+#include <CGAL/TDS_2/internal/edge_list.h>
 #include <CGAL/Apollonius_graph_2/Traits_wrapper_2.h>
 
 #include <CGAL/Apollonius_graph_2/Constructions_C2.h>

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_core.h $
-// $Id: GarlandHeckbert_core.h 9a7c98f 2019-11-29T11:42:18+01:00 Mael Rouxel-Labbé
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/GarlandHeckbert_core.h $
+// $Id: GarlandHeckbert_core.h 72b8f75 2021-10-21T11:14:43+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baskin Burak Senbaslar,
@@ -200,6 +200,8 @@ struct GarlandHeckbert_core
 
       const Vector_3 plane_n = gt.construct_vector_3_object()(a, b, c);
       const FT norm = CGAL::sqrt(CGAL::square(a) + CGAL::square(b) + CGAL::square(c));
+      if (norm==0)
+        continue;
       const FT den = FT(1) / norm;
 
       Row4 plane_mtr_r;
@@ -224,6 +226,8 @@ struct GarlandHeckbert_core
         const FT disc_d = - gt.compute_scalar_product_3_object()(disc_plane_n, vvt);
 
         const FT disc_norm = CGAL::sqrt(gt.compute_squared_length_3_object()(disc_plane_n));
+        if (disc_norm==0)
+          continue;
         const FT disc_den = FT(1) / disc_norm;
 
         Row4 disc_mtr_r;

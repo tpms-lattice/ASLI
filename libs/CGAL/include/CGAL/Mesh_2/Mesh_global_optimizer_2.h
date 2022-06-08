@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_2/include/CGAL/Mesh_2/Mesh_global_optimizer_2.h $
-// $Id: Mesh_global_optimizer_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Mesh_2/Mesh_global_optimizer_2.h $
+// $Id: Mesh_global_optimizer_2.h 0ac4bf6 2021-09-10T11:28:13+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez, Stéphane Tayeb
@@ -352,7 +352,7 @@ private:
       sum += CGAL::sqrt(*it);
 
 #ifdef CGAL_MESH_2_OPTIMIZER_VERBOSE
-    sum_moves_ = sum/big_moves_.size();
+    sum_moves_ = sum/FT(big_moves_.size());
 #endif
 
     return ( sum/FT(big_moves_.size()) < convergence_ratio_ );

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_2.h $
-// $Id: Aff_transformation_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_2.h $
+// $Id: Aff_transformation_2.h e73b8de 2021-04-22T21:17:24+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -164,6 +164,11 @@ public:
 
   bool is_even() const { return this->Ptr()->is_even(); }
   bool is_odd() const { return ! (this->Ptr()->is_even()); }
+
+  bool is_translation() const { return this->Ptr()->is_translation(); }
+  bool is_scaling() const { return this->Ptr()->is_scaling(); }
+  bool is_reflection() const { return this->Ptr()->is_reflection(); }
+  bool is_rotation() const { return this->Ptr()->is_rotation(); }
 
   FT cartesian(int i, int j) const { return this->Ptr()->cartesian(i,j); }
   FT homogeneous(int i, int j) const { return cartesian(i,j); }

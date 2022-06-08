@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_intersection.h $
-// $Id: Iso_cuboid_3_Triangle_3_intersection.h bbe02d9 2019-10-29T15:22:49+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_intersection.h $
+// $Id: Iso_cuboid_3_Triangle_3_intersection.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -121,7 +121,7 @@ template <class K>
 typename Intersection_traits<K, typename K::Iso_cuboid_3, typename K::Triangle_3>::result_type
 intersection(
     const typename K::Iso_cuboid_3 &cub,
-    const typename K::Triangle_3 &tr,
+    const typename K::Triangle_3& tr,
     const K& k)
 {
   typedef typename K::Point_3 Point;
@@ -203,7 +203,7 @@ intersection(
 template <class K>
 typename Intersection_traits<K, typename K::Iso_cuboid_3, typename K::Triangle_3>::result_type
 intersection(
-    const typename K::Triangle_3 &tr,
+    const typename K::Triangle_3& tr,
     const typename K::Iso_cuboid_3 &cub,
     const K& k)
 {

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_segments_3.h $
-// $Id: linear_least_squares_fitting_segments_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_segments_3.h $
+// $Id: linear_least_squares_fitting_segments_3.h 3efe2ec 2021-03-31T09:40:19+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Sylvain Pion and Ankit Gupta
@@ -19,6 +19,7 @@
 #include <CGAL/centroid.h>
 #include <CGAL/PCA_util.h>
 #include <CGAL/linear_least_squares_fitting_points_3.h>
+#include <CGAL/Subiterator.h>
 
 #include <list>
 #include <iterator>
@@ -74,24 +75,16 @@ linear_least_squares_fitting_3(InputIterator first,
 {
   typedef typename K::Segment_3  Segment;
   typedef typename K::Point_3  Point;
+  auto converter = [](const Segment& s, int idx) -> Point { return s[idx]; };
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
 
-  std::list<Point> points;
-  for(InputIterator it = first;
-      it != beyond;
-      it++)
-  {
-    const Segment& t = *it;
-    points.push_back(t[0]);
-    points.push_back(t[1]);
-  }
-
-  // compute fitting plane
-  return linear_least_squares_fitting_3(points.begin(),points.end(),plane,c,(Point*)nullptr,k,tag,
-                                        diagonalize_traits);
-
+  return linear_least_squares_fitting_3
+    (make_subiterator<Point, 2> (first, converter),
+     make_subiterator<Point, 2> (beyond),
+     plane,c,(Point*)nullptr,k,tag,
+     diagonalize_traits);
 } // end linear_least_squares_fitting_segments_3
 
 // fits a line to a 3D segment set
@@ -141,24 +134,16 @@ linear_least_squares_fitting_3(InputIterator first,
 {
   typedef typename K::Segment_3  Segment;
   typedef typename K::Point_3  Point;
+  auto converter = [](const Segment& s, int idx) -> Point { return s[idx]; };
 
   // precondition: at least one element in the container.
   CGAL_precondition(first != beyond);
 
-  std::list<Point> points;
-  for(InputIterator it = first;
-      it != beyond;
-      it++)
-  {
-    const Segment& t = *it;
-    points.push_back(t[0]);
-    points.push_back(t[1]);
-  }
-
-  // compute fitting plane
-  return linear_least_squares_fitting_3(points.begin(),points.end(),line,c,(Point*)nullptr,k,tag,
-                                        diagonalize_traits);
-
+  return linear_least_squares_fitting_3
+    (make_subiterator<Point, 2> (first, converter),
+     make_subiterator<Point, 2> (beyond),
+     line,c,(Point*)nullptr,k,tag,
+     diagonalize_traits);
 } // end linear_least_squares_fitting_segments_3
 
 } // end namespace internal

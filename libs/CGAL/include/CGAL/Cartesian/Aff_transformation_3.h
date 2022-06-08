@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_3.h $
-// $Id: Aff_transformation_3.h 9a3e038 2020-05-18T12:24:25+02:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/Aff_transformation_3.h $
+// $Id: Aff_transformation_3.h 153413e 2021-04-15T13:58:33+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -143,14 +143,7 @@ public:
 
   Plane_3
   transform(const Plane_3& p) const
-  {
-    if (is_even())
-      return Plane_3(transform(p.point()),
-                 transpose().inverse().transform(p.orthogonal_direction()));
-    else
-      return Plane_3(transform(p.point()),
-               - transpose().inverse().transform(p.orthogonal_direction()));
-  }
+  { return this->Ptr()->transform(p); }
 
   Plane_3
   operator()(const Plane_3& p) const
@@ -160,6 +153,10 @@ public:
 
   bool is_even() const { return this->Ptr()->is_even(); }
   bool is_odd() const { return  ! (this->Ptr()->is_even()); }
+
+  bool is_translation() const { return this->Ptr()->is_translation(); }
+  bool is_scaling() const { return this->Ptr()->is_scaling(); }
+
 
   FT cartesian(int i, int j) const { return this->Ptr()->cartesian(i,j); }
   FT homogeneous(int i, int j) const { return cartesian(i,j); }

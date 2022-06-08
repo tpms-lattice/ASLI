@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Mesh_3/include/CGAL/Mesh_triangulation_3.h $
-// $Id: Mesh_triangulation_3.h 3fc0ba4 2020-12-09T15:35:47+01:00 Laurent Rineau
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_triangulation_3.h $
+// $Id: Mesh_triangulation_3.h 91d862d 2021-12-23T11:58:19+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -154,7 +154,6 @@ private:
                                                      Concurrency_tag> {};
   using Triangulation =
       Mesh_3_regular_triangulation_3_wrapper<Geom_traits, Tds>;
-  ;
 
 public:
   using type = Triangulation;

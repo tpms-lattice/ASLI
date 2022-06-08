@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h $
-// $Id: pullout_directions.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h $
+// $Id: pullout_directions.h 1f45360 2021-01-26T09:05:24+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Shahar    <shasha94@gmail.com>
@@ -129,7 +129,7 @@ pullout_directions
     //is true if segment_outer_circle \in [first,clock_first,clock_second]
     if (f_between_ab && s_between_ab) {
       // std::cout<<"case 1"<<std::endl<<std::endl;
-      // case 1 //surly not case 4b since [f,s] is less then a semicircle
+      // case 1 //surly not case 4b since [f,s] is less than a semicircle
       continue;
     }
     if (!f_between_ab && s_between_ab) {

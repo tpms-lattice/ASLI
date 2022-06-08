@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Kernel_d/include/CGAL/Kernel_d/Vector__.h $
-// $Id: Vector__.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Kernel_d/Vector__.h $
+// $Id: Vector__.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -405,7 +405,7 @@ std::ostream& operator<<(std::ostream& os, const Vector_<NT_,AL_>& v)
 /*{\Xbinopfunc  writes |\Mvar| componentwise to the output stream $O$.}*/
 { /* syntax: d x_0 x_1 ... x_d-1 */
     int d = v.dimension();
-    switch (get_mode(os)) {
+    switch (IO::get_mode(os)) {
     case CGAL::IO::BINARY:
         CGAL::write( os, d);
         for ( int i = 0; i < d; ++i)
@@ -434,7 +434,7 @@ std::istream& operator>>(std::istream& is, Vector_<NT_,AL_>& v)
 /*{\Xbinopfunc  reads |\Mvar| componentwise from the input stream $I$.}*/
 { /* syntax: d x_0 x_1 ... x_d-1 */
   int d;
-  switch (get_mode(is)) {
+  switch (IO::get_mode(is)) {
     case CGAL::IO::ASCII :
     case CGAL::IO::BINARY :
       is >> d;
@@ -444,7 +444,7 @@ std::istream& operator>>(std::istream& is, Vector_<NT_,AL_>& v)
       }
       break;
     default:
-      std::cerr<<"\nStream must be in ascii or binary mode"<<std::endl;
+      std::cerr<<"\nStream must be in ASCII or binary mode"<<std::endl;
       break;
   }
   return is;

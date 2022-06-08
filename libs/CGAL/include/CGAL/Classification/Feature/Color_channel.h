@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Classification/include/CGAL/Classification/Feature/Color_channel.h $
-// $Id: Color_channel.h 0e934b1 2020-08-04T13:16:13+02:00 Simon Giraudot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/Feature/Color_channel.h $
+// $Id: Color_channel.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -56,7 +56,7 @@ namespace Feature {
     `ColorMap`.
     \tparam ColorMap model of `ReadablePropertyMap` whose key
     type is the value type of the iterator of `PointRange` and value type
-    is `CGAL::Color`.
+    is `CGAL::IO::Color`.
   */
 template <typename GeomTraits, typename PointRange, typename ColorMap>
 class Color_channel : public Feature_base

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Three/include/CGAL/Three/Scene_group_item.h $
-// $Id: Scene_group_item.h 9384b06 2021-04-16T13:39:30+02:00 Maxime Gimeno
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Scene_group_item.h $
+// $Id: Scene_group_item.h f513a79 2021-04-21T15:48:36+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -45,14 +45,14 @@ public :
     //!Returns true to avoid disturbing the BBox of the scene.
     bool isEmpty() const Q_DECL_OVERRIDE;
     /*!
-         * \brief Locks a child
+         * \brief locks a child
          *
          * A locked child cannot be moved out of the group nor can it be deleted.
          * Use it to prevent a child to be destroyed without its parent.
          */
         void lockChild(CGAL::Three::Scene_item*);
         /*!
-        * \brief Locks a child
+        * \brief locks a child
         *
         * A locked child cannot be moved out of the group nor can it be deleted.
         * Use it to prevent a child to be destroyed without its parent.
@@ -60,25 +60,25 @@ public :
         void lockChild(Scene_interface::Item_id id);
 
         /*!
-         * \brief Unlocks a child
+         * \brief unlocks a child
          *
          * @see lockChild()
          */
         void unlockChild(CGAL::Three::Scene_item*);
         /*!
-         * \brief Unlocks a child
+         * \brief unlocks a child
          *
          * @see lockChild()
          */
         void unlockChild(Scene_interface::Item_id id);
         /*!
-         * \brief Tells if a child is locked.
+         * \brief tells if a child is locked.
          * \return true if the child is locked.
          * @see lockChild()
          */
         bool isChildLocked(CGAL::Three::Scene_item*);
         /*!
-             * \brief Tells if a child is locked.
+             * \brief tells if a child is locked.
              * \return true if the child is locked.
              * @see lockChild()
              */
@@ -94,7 +94,7 @@ public :
     //!Returns an empty Bbox to avoid disturbing the Bbox of the scene.
     Bbox bbox() const Q_DECL_OVERRIDE;
     //!Not supported.
-    Scene_item* clone() const Q_DECL_OVERRIDE {return 0;}
+    Scene_item* clone() const Q_DECL_OVERRIDE {return nullptr;}
     //! Indicates if the rendering mode is supported.
     //! \returns true for all rendering modes that are shared by
     //! all of the children.
@@ -192,7 +192,7 @@ public :
     //!Sets the alpha value for the froup and all its children.
         virtual void setAlpha(int) Q_DECL_OVERRIDE;
 
-    //! \brief Returns a list of all the direct children.
+    //! \brief returns a list of all the direct children.
     //!
     //! Only returns children that have this item as a parent.
     //! Children of these children are not returned.
@@ -213,7 +213,7 @@ public :
      if(isChildLocked(item))
       return;
      update_group_number(item,0);
-     item->moveToGroup(0);
+     item->moveToGroup(nullptr);
      children->removeOne(scene->item_id(item));
     }
     //!Removes a Scene_item from the list of children using its index.
@@ -229,7 +229,7 @@ public :
 
     void compute_bbox() const Q_DECL_OVERRIDE{};
 public Q_SLOTS:
-    //!\brief Redraws children.
+    //!\brief redraws children.
     //!
     //! As each drawing function of a group draws all parts of its children,
     //! once any of these functions is called, we skip all drawing calls

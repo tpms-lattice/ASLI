@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/STL_Extension/include/CGAL/Modifiable_priority_queue.h $
-// $Id: Modifiable_priority_queue.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Modifiable_priority_queue.h $
+// $Id: Modifiable_priority_queue.h 4ea7b65 2021-08-26T11:42:01+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando.cacciola@geometryfactory.com>
@@ -16,7 +16,7 @@
 #ifdef CGAL_SURFACE_MESH_SIMPLIFICATION_USE_RELAXED_HEAP
 #include <boost/pending/relaxed_heap.hpp>
 #else
-#include <CGAL/internal/boost/mutable_queue.hpp>
+#include <CGAL/STL_Extension/internal/boost/mutable_queue.hpp>
 
 
 namespace CGAL {

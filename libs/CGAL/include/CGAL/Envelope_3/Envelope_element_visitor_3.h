@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/Envelope_3/include/CGAL/Envelope_3/Envelope_element_visitor_3.h $
-// $Id: Envelope_element_visitor_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Envelope_3/include/CGAL/Envelope_3/Envelope_element_visitor_3.h $
+// $Id: Envelope_element_visitor_3.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michal Meyerovitch     <gorgymic@post.tau.ac.il>
@@ -533,7 +533,7 @@ public:
       CGAL_assertion(!cur_obj.is_empty());
       if (assign(point, cur_obj))
       {
-        // if the point is on the curve, should add it the the split points
+        // if the point is on the curve, should add it the split points
         // list, otherwise, it is irrelevant and should be ignored
         if (is_point_on_curve(point, original_cv))
           split_points.push_back(Point_2_with_info(point, false, false));

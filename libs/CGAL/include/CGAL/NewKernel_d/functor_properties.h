@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.2.3/NewKernel_d/include/CGAL/NewKernel_d/functor_properties.h $
-// $Id: functor_properties.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/functor_properties.h $
+// $Id: functor_properties.h 634fe39 2020-12-30T19:56:58+01:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -24,7 +24,7 @@ namespace CGAL {
   template<class T> \
   struct Is_pretty<T,true> : T::Is_pretty {}
 
-CGAL_STRAWBERRY(Is_exact);
+CGAL_STRAWBERRY(Uses_no_arithmetic);
 CGAL_STRAWBERRY(Is_fast);
 CGAL_STRAWBERRY(Is_stored);
 #undef CGAL_STRAWBERRY
