@@ -87,6 +87,7 @@ Install compilers, and libraries (GMP, MPFR, Boost):
 ```Shell
 pacman -S --needed base-devel mingw-w64-x86_64-toolchain
 pacman -S msys2-runtime-devel
+pacman -S mingw-w64-x86_64-boost
 ```
 
 Install libraries (TBB):  
