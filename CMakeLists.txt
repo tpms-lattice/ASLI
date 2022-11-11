@@ -211,43 +211,23 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   endif()
 endif()
 
-# Set files to compile
-if(CGAL_MESH AND MMG_MESH)
-  add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp # TEMP!
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc
-  )
-elseif(CGAL_MESH)
-  add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp # TEMP!
-  )
-elseif(MMG_MESH)
-  add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
-  )
-else()
-  add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp
-                      ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
-  )
+# Specify ASLI source files
+set(ASLI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp 
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp 
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc)
+
+if(CGAL_MESH)
+  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp 
+                                   ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp) # TEMP!
 endif()
+
+if(MMG_MESH)
+  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp)
+endif()
+
+add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${ASLI_SOURCES})
 
 # Bring the headers into the build enviroment and set properties
 target_include_directories(ASLI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include) 
