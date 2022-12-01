@@ -42,6 +42,7 @@
 // Polygon processing
 #include <CGAL/Polyhedron_3.h>
 #include <CGAL/Polyhedron_items_with_id_3.h>
+#include <CGAL/Polygon_mesh_processing/detect_features.h>
 #include <CGAL/Polygon_mesh_processing/polygon_soup_to_polygon_mesh.h>
 #include <CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h>
 #include <CGAL/Polygon_mesh_processing/clip.h>
@@ -128,8 +129,7 @@ typedef CGAL::Polyhedron_3<Kernel, CGAL::Polyhedron_items_with_id_3> PolygonMesh
 
 // Surface mesh
 typedef CGAL::Surface_mesh<Point_3> SurfaceMesh;
-
-
+typedef boost::graph_traits<SurfaceMesh>::edge_descriptor edge_descriptor;
 
 // 3D volume meshing (from implicit domain)
 typedef CGAL::Labeled_mesh_domain_3<Kernel> Implicit_domain;

@@ -51,6 +51,8 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	FT me_cellRadiusEdgeRatio = me_settings.CGAL_cellRadiusEdgeRatio;
 	FT me_cellSize = me_settings.CGAL_cellSize;     
 
+	FT edgesProtectionAngle = me_settings.CGAL_edgesProtectionAngle;
+
 	std::string me_side = me_settings.side;
 
 	// Concurrency settings
@@ -171,6 +173,7 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	std::cout << "  Post-processing mesh... " << std::flush; TicToc::tic();
 
 	SurfaceMesh processedScaffold;
+	SurfaceMesh::Property_map<edge_descriptor, bool> ecmap = processedScaffold.add_property_map<edge_descriptor, bool>("e:is_constrained", false).first;
 	if (me_settings.CGAL_preserveEdges == TRUE) {
 		// Extract surface triangulation
 		SurfaceMesh scaffold;
@@ -185,15 +188,17 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 			CGAL::Polygon_mesh_processing::experimental::snap_borders(scaffold);
 			CGAL::Polygon_mesh_processing::stitch_borders(scaffold);
 		}
-
-		// Clip scaffold (using intersection)
+		
+		// Clip scaffold (using intersection) and collect constrained edges in a property map
 		SurfaceMesh outer_shell;
 		surfaceRemesh(shell, lt_type, lt_size, lt_feature, me_settings, outer_shell); // Remesh outer shell to hopefully ensure assertion violations due to overly large elements are avoided
 
-		if( CGAL::Polygon_mesh_processing::corefine_and_compute_intersection(scaffold, outer_shell, processedScaffold) == false)
+		if(CGAL::Polygon_mesh_processing::corefine_and_compute_intersection(scaffold, outer_shell, processedScaffold, CGAL::parameters::default_values(), CGAL::parameters::default_values(), CGAL::parameters::edge_is_constrained_map(ecmap)) == false)
 			std::cout << "\n  WARNING: corefine_and_compute_intersection output may have only been corefined!" << std::endl;
 
-	} else { // If preserveEdges != TRUE
+		CGAL::Polygon_mesh_processing::detect_sharp_edges(processedScaffold, edgesProtectionAngle, ecmap);
+
+	} else { // If preserveEdges == FALSE
 		// Save volume mesh
 		if (me_settings.volumeMesh == TRUE) {
 			// Write output to .mesh file
