@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Mesh_2/Refine_edges_with_clusters.h $
-// $Id: Refine_edges_with_clusters.h e3934f1 2021-05-12T15:20:27+02:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,13 +27,13 @@ namespace Mesh_2 {
 /**
  * This class is the base for the first level of Mesh_2: the edge
  * conforming level. It \e does handle clusters.
- * To handle clusters, an helping \c Clusters object is used.
+ * To handle clusters, an helping `Clusters` object is used.
  *
  * \param Tr is the type of triangulation on which the level acts.
  * \param Is_locally_conform defines the locally conform criterion: Gabriel
  *        or Delaunay. It defaults to the Garbriel criterion.
  * \param Container is the type of container. It defaults to a filtered
- *        queue of \c Vertex_handle pair (see \c Filtered_queue_container).
+ *        queue of `Vertex_handle` pair (see `Filtered_queue_container`).
  */
 template <
   class Tr,

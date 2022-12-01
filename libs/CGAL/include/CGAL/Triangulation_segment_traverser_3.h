@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_3/include/CGAL/Triangulation_segment_traverser_3.h $
-// $Id: Triangulation_segment_traverser_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Thijs van Lankveld, Jane Tournois
@@ -19,7 +19,7 @@
 #include <utility>
 #include <tuple>
 
-#include <CGAL/triangulation_assertions.h>
+#include <CGAL/assertions.h>
 #include <CGAL/Triangulation_utils_3.h>
 
 #include <CGAL/Triangulation_data_structure_3.h>
@@ -379,7 +379,7 @@ public:
     }
 // \}
 
-        bool            operator==( Nullptr_t CGAL_triangulation_assertion_code(n) ) const;
+        bool            operator==( Nullptr_t CGAL_assertion_code(n) ) const;
         bool            operator!=( Nullptr_t n ) const;
 
 protected:
@@ -422,9 +422,9 @@ private:
 
 private:
     inline int      edgeIndex( int i, int j ) const {
-        CGAL_triangulation_precondition( i>=0 && i<=3 );
-        CGAL_triangulation_precondition( j>=0 && j<=3 );
-        CGAL_triangulation_precondition( i != j );
+        CGAL_precondition( i>=0 && i<=3 );
+        CGAL_precondition( j>=0 && j<=3 );
+        CGAL_precondition( i != j );
         return ( i==0 || j==0 ) ? i+j-1 : i+j;
     }
 

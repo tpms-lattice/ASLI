@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/AABB_tree/include/CGAL/AABB_traits.h $
-// $Id: AABB_traits.h 2dda84c 2021-09-28T15:34:25+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

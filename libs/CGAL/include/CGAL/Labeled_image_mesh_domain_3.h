@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Labeled_image_mesh_domain_3.h $
-// $Id: Labeled_image_mesh_domain_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -75,9 +75,9 @@ public:
                               Subdomain_index value_outside = 0,
                               Null null = Null(),
                               CGAL::Random* p_rng = nullptr)
-    : Base(Wrapper(image, Identity(), value_outside),
-           compute_bounding_box(image),
-           error_bound,
+    : Base(parameters::function = Wrapper(image, Identity(), value_outside),
+           parameters::bounding_object = compute_bounding_box(image),
+           parameters::relative_error_bound = error_bound,
            parameters::null_subdomain_index = null,
            parameters::p_rng = p_rng)
   {}
@@ -85,10 +85,10 @@ public:
   Labeled_image_mesh_domain_3(const Image& image,
                               const FT error_bound,
                               CGAL::Random* p_rng)
-    : Base(Wrapper(image),
-           compute_bounding_box(image),
-           error_bound,
-           p_rng)
+    : Base(parameters::function = Wrapper(image),
+           parameters::bounding_object = compute_bounding_box(image),
+           parameters::relative_error_bound = error_bound,
+           parameters::p_rng = p_rng)
   {}
 
   /// Destructor
@@ -97,7 +97,7 @@ public:
   using Base::bbox;
 
 private:
-  /// Returns a box enclosing image \c im
+  /// Returns a box enclosing image `im`
   Bbox_3 compute_bounding_box(const Image& im) const
   {
     return Bbox_3(-im.vx()+im.tx(),

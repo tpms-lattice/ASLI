@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/Iterator_range.h $
-// $Id: Iterator_range.h a88a84b 2021-08-13T15:46:50+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

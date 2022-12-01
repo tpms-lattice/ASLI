@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_edge_criteria_3.h $
-// $Id: Mesh_edge_criteria_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -111,7 +111,7 @@ public:
   Mesh_edge_criteria_3
   (
    const Sizing_field& size,
-   typename std::enable_if<Mesh_3::Is_mesh_domain_field_3<Tr, Sizing_field>::value>::type* = 0
+   std::enable_if_t<Mesh_3::Is_mesh_domain_field_3<Tr, Sizing_field>::value>* = 0
    )
   {
     p_size_ = new Mesh_3::internal::Sizing_field_container<Sizing_field,

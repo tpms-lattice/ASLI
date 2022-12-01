@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/mouseGrabber_impl.h $
-// $Id: mouseGrabber_impl.h 1ef976e 2019-10-19T16:09:56+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY

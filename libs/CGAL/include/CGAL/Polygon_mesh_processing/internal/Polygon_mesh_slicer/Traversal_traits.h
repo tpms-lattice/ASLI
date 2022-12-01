@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Polygon_mesh_slicer/Traversal_traits.h $
-// $Id: Traversal_traits.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -73,7 +73,7 @@ public:
     , do_intersect_3( m_traits.do_intersect_3_object() )
   {}
 
-  bool go_further() const { return true; }
+  constexpr bool go_further() const { return true; }
 
   void intersection(const typename Traits::Plane_3& plane, const typename AABBTraits::Primitive& primitive)
   {

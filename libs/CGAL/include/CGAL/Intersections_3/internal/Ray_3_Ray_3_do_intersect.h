@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/Ray_3_Ray_3_do_intersect.h $
-// $Id: Ray_3_Ray_3_do_intersect.h 3afa3b5 2021-06-29T09:25:40+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

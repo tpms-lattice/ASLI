@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/In_place_list.h $
-// $Id: In_place_list.h 18ca811 2021-05-27T12:36:17+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -575,14 +575,14 @@ public:
 
   void merge(Self& x);
   // merges the list x into the list `l' and x becomes empty. It is
-  // stable. Precondition: Both lists are increasingly sorted. A
-  // suitable `operator<' for the type T.
+  // stable. Precondition: Both lists are sorted in increasing order
+  // by means of a suitable `operator<` for the type `T`.
 
   template < class StrictWeakOrdering >
   void merge(Self& x, StrictWeakOrdering ord)
   // merges the list x into the list `l' and x becomes empty.
   // It is stable.
-  // Precondition: Both lists are increasingly sorted wrt. ord.
+  // Precondition: Both lists are sorted in increasing order wrt. `ord`.
   {
     iterator first1 = begin();
     iterator last1 = end();

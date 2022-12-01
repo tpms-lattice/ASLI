@@ -23,8 +23,8 @@
  *      - added comments
  *      - copied Conjugate Gradient algorithm WITH preconditioner from Graphite 1.9 code
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
- * $Id: conjugate_gradient.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+ * $URL$
+ * $Id$
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 

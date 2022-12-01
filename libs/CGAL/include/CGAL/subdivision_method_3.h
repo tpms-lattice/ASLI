@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Subdivision_method_3/include/CGAL/subdivision_method_3.h $
-// $Id: subdivision_method_3.h e893ac1 2020-08-18T10:06:51+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

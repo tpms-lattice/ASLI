@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_2/include/CGAL/Intersections_2/Line_2_Ray_2.h $
-// $Id: Line_2_Ray_2.h 9b19c5f 2021-09-23T15:11:18+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

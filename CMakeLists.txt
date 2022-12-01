@@ -76,8 +76,8 @@ endif()
 
 # Compiler requirements
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 8.3)
-    message(FATAL_ERROR "GCC version must be at least v8.3!")
+  if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS 10.2.1)
+    message(FATAL_ERROR "GCC version must be at least v10.2.1!")
   endif()
 else()
   message(WARNING "You are using an unsupported compiler! Compilation has only been tested with GCC.")
@@ -98,7 +98,7 @@ if(CGAL_MESH)
   add_definitions(-DCGAL_MESH)
 
   # CGAL
-  find_package(CGAL 5.1.1 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR}/libs/CGAL) #Needs -frounding-math with gcc
+  find_package(CGAL 5.5.1 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR}/libs/CGAL) #Needs -frounding-math with gcc
   include_directories(${CGAL_DIR}/include)
 
   # Eigen (CGAL support)
@@ -219,8 +219,8 @@ set(ASLI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc)
 
 if(CGAL_MESH)
-  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp 
-                                   ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp) # TEMP!
+  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp) 
+#                                   ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp) # TEMP!
 endif()
 
 if(MMG_MESH)

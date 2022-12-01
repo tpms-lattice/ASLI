@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Discrete_authalic_parameterizer_3.h $
-// $Id: Discrete_authalic_parameterizer_3.h cac04ed 2021-06-08T13:36:09+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez, Bruno Levy
@@ -54,7 +54,7 @@ namespace Surface_mesh_parameterization {
 ///
 /// \tparam TriangleMesh_ must be a model of `FaceGraph`.
 ///
-/// \tparam BorderParameterizer_ is a Strategy to parameterize the surface border
+/// \tparam BorderParameterizer_ is a strategy to parameterize the surface border
 ///         and must be a model of `Parameterizer_3`.<br>
 ///         <b>%Default:</b>
 /// \code

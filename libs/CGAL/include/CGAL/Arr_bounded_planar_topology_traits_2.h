@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_bounded_planar_topology_traits_2.h $
-// $Id: Arr_bounded_planar_topology_traits_2.h 3849f5e 2020-06-14T00:41:25+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein        <wein@post.tau.ac.il>
@@ -90,14 +90,10 @@ public:
   typedef typename Gt_adaptor_2::Top_side_category    Top_side_category;
   typedef typename Gt_adaptor_2::Right_side_category  Right_side_category;
 
-  BOOST_MPL_ASSERT
-  ((boost::is_same< Left_side_category, Arr_oblivious_side_tag >));
-  BOOST_MPL_ASSERT
-  ((boost::is_same< Bottom_side_category, Arr_oblivious_side_tag >));
-  BOOST_MPL_ASSERT
-  ((boost::is_same< Top_side_category, Arr_oblivious_side_tag >));
-  BOOST_MPL_ASSERT
-  ((boost::is_same< Right_side_category, Arr_oblivious_side_tag >));
+  CGAL_static_assertion((std::is_same< Left_side_category, Arr_oblivious_side_tag >::value));
+  CGAL_static_assertion((std::is_same< Bottom_side_category, Arr_oblivious_side_tag >::value));
+  CGAL_static_assertion((std::is_same< Top_side_category, Arr_oblivious_side_tag >::value));
+  CGAL_static_assertion((std::is_same< Right_side_category, Arr_oblivious_side_tag >::value));
   //@}
 
   /*! \struct

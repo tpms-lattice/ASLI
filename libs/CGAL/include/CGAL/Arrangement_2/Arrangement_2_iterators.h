@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_2_iterators.h $
-// $Id: Arrangement_2_iterators.h 3448035 2021-03-24T08:25:29+01:00 Simon Giraudot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

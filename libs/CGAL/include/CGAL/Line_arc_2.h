@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_2/include/CGAL/Line_arc_2.h $
-// $Id: Line_arc_2.h 059bc60 2020-07-22T15:13:09+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Julien Hazebrouck, Pedro Machado

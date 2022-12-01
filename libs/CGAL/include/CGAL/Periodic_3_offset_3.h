@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_triangulation_3/include/CGAL/Periodic_3_offset_3.h $
-// $Id: Periodic_3_offset_3.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 #include <CGAL/license/Periodic_3_triangulation_3.h>
 
 #include <CGAL/basic.h>
-#include <CGAL/triangulation_assertions.h>
+#include <CGAL/assertions.h>
 #include <CGAL/Cartesian.h>
 
 namespace CGAL {
@@ -46,13 +46,13 @@ public:
   int &operator[](int i) {
     if (i==0) return _offx;
     if (i==1) return _offy;
-    CGAL_triangulation_assertion(i==2);
+    CGAL_assertion(i==2);
     return _offz;
   }
   int operator[](int i) const {
     if (i==0) return _offx;
     if (i==1) return _offy;
-    CGAL_triangulation_assertion(i==2);
+    CGAL_assertion(i==2);
     return _offz;
   }
   void operator+=(const Periodic_3_offset_3 &other) {

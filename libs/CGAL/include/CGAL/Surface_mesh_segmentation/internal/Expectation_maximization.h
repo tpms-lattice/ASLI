@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_segmentation/include/CGAL/Surface_mesh_segmentation/internal/Expectation_maximization.h $
-// $Id: Expectation_maximization.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz

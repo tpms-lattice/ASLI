@@ -21,8 +21,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_Core/include/CGAL/CORE/Promote.h $
- * $Id: Promote.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+ * $URL$
+ * $Id$
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 

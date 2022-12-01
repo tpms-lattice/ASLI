@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/BGL/include/CGAL/boost/graph/internal/Has_member_clear.h $
-// $Id: Has_member_clear.h 52164b1 2019-10-19T15:34:59+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Philipp Moeller
@@ -19,17 +19,17 @@ template<class T>
 class Has_member_clear
 {
 private:
-  template<class U, U>
-  class check {};
-
-  template<class C>
-  static char f(check<void(C::*)(void), &C::clear>*);
+  template <class C>
+  static auto f(int) -> decltype(std::declval<C>().clear(), char());
 
   template<class C>
   static int f(...);
 public:
   static const bool value = (sizeof(f<T>(0)) == sizeof(char));
 };
+
+template<class T>
+CGAL_CPP17_INLINE constexpr bool Has_member_clear_v = Has_member_clear<T>::value;
 
 }  // internal
 }  // cgal

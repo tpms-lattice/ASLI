@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_approximation/include/CGAL/Surface_mesh_approximation/L2_metric_plane_proxy.h $
-// $Id: L2_metric_plane_proxy.h fbbff67 2021-01-08T10:15:12+01:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,7 @@
 #include <CGAL/Dynamic_property_map.h>
 
 #include <boost/graph/graph_traits.hpp>
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 
 #include <list>
 

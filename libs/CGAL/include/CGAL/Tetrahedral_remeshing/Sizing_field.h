@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/Sizing_field.h $
-// $Id: Sizing_field.h ab05dde 2020-06-12T08:08:56+02:00 Jane Tournois
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

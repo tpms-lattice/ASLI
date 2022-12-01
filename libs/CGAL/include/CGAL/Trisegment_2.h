@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/Trisegment_2.h $
-// $Id: Trisegment_2.h b43e578 2020-11-27T14:00:24+01:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>

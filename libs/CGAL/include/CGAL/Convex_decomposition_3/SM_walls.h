@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/SM_walls.h $
-// $Id: SM_walls.h 30e536b 2021-03-01T08:06:48+00:00 Giles Bathgate
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

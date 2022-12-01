@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/tetrahedral_remeshing_io.h $
-// $Id: tetrahedral_remeshing_io.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

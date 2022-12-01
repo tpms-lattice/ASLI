@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Line_3_do_intersect.h $
-// $Id: Iso_cuboid_3_Line_3_do_intersect.h e70a62a 2021-06-25T20:16:29+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

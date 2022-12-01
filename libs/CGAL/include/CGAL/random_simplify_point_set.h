@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/random_simplify_point_set.h $
-// $Id: random_simplify_point_set.h 9939011 2020-06-21T15:54:21+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret
@@ -19,10 +19,10 @@
 #include <CGAL/algorithm.h>
 #include <CGAL/Kernel_traits.h>
 #include <CGAL/property_map.h>
-#include <CGAL/point_set_processing_assertions.h>
+#include <CGAL/assertions.h>
 #include <CGAL/Iterator_range.h>
 
-#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/Named_function_parameters.h>
 #include <CGAL/boost/graph/named_params_helper.h>
 
 #include <iterator>
@@ -53,7 +53,7 @@ random_simplify_point_set(
   PointRange& points,
   double removed_percentage)
 {
-  CGAL_point_set_processing_precondition(removed_percentage >= 0 && removed_percentage <= 100);
+  CGAL_precondition(removed_percentage >= 0 && removed_percentage <= 100);
 
   // Random shuffle
   CGAL::cpp98::random_shuffle (points.begin(), points.end());

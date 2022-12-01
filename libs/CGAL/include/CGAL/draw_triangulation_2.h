@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation_2/include/CGAL/draw_triangulation_2.h $
-// $Id: draw_triangulation_2.h 2bbcabe 2021-11-11T17:23:37+01:00 Guillaume Damiand
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -15,10 +15,13 @@
 #include <CGAL/license/Triangulation_2.h>
 #include <CGAL/Qt/Basic_viewer_qt.h>
 
+#include <CGAL/draw_constrained_triangulation_2.h>
+
+#include <CGAL/Triangulation_2.h>
+
 #ifdef CGAL_USE_BASIC_VIEWER
 
 #include <CGAL/Qt/init_ogl_context.h>
-#include <CGAL/Triangulation_2.h>
 #include <CGAL/Random.h>
 
 namespace CGAL
@@ -133,10 +136,10 @@ protected:
 #define CGAL_T2_TYPE CGAL::Triangulation_2<Gt, Tds>
 
 template<class Gt, class Tds>
-void draw(const CGAL_T2_TYPE& at2,
-          const char* title="Triangulation_2 Basic Viewer",
-          bool nofill=false)
+void draw(const CGAL_T2_TYPE& at2)
 {
+  const char* title="Triangulation_2 Basic Viewer";
+  bool nofill=false;
 #if defined(CGAL_TEST_SUITE)
   bool cgal_test_suite=true;
 #else

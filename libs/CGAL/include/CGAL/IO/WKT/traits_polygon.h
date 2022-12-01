@@ -6,8 +6,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Stream_support/include/CGAL/IO/WKT/traits_polygon.h $
-// $Id: traits_polygon.h e6c767d 2021-05-12T15:45:07+02:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno

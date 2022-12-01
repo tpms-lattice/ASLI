@@ -20,8 +20,8 @@
  * WWW URL: http://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_Core/include/CGAL/CORE/Real_impl.h $
- * $Id: Real_impl.h b6e2656 2021-09-15T11:36:00+01:00 Andreas Fabri
+ * $URL$
+ * $Id$
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -237,7 +237,7 @@ std::istream& operator >>(std::istream& i, Real& x) {
     if (c == '.')
       d = 1;
     // Chen Li: fix a bug -- the sign of exponent can not happen before
-    // the character "e" appears! It must follow the "e' actually.
+    // the character "e" appears! It must follow the "e" actually.
     //    if (e || c == '-' || c == '+') s = 1;
     if (e)
       s = 1;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/Vertex_base_2.h $
-// $Id: Vertex_base_2.h 53cb7cd 2021-02-16T13:41:28+00:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Philipp Moeller

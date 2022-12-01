@@ -379,8 +379,8 @@ void MeshCGAL::implicitPoissonReconstruction(outerShell &shell, double offset,
 
 	PointList scaledPoints;
 	boundingBox = {HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL};
-	bool useFaster = true; // TEMP!! Note: The faster offset is much faster but not completelly correct (although it usually works just fine). The slower one is significantlly slower but correct.
-	if (useFaster == 1) {
+//	bool useFaster = true; // TEMP!! Note: The faster offset is much faster but not completelly correct (although it usually works just fine). The slower one is significantlly slower but correct.
+//	if (useFaster == 1) {
 		// Convert points to Point_with_normal and scale
 		PointList pointsCGAL; // scaled points
 		for (size_t i=0; i<shell.points.size(); ++i) {
@@ -433,78 +433,78 @@ void MeshCGAL::implicitPoissonReconstruction(outerShell &shell, double offset,
 			boundingBox[5] = std::max(boundingBox[5], scaledPoints[i].first.z());
 		}
 
-	} else {
-		TriangleMesh triangle_mesh;
-		CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, triangle_mesh);
-		const double averageSpacing = CGAL::compute_average_spacing<CGAL::Sequential_tag>(shell.points, nNeighbors);
-
-//	// Check if points bound a volume
-//	if (CGAL::is_closed(triangle_mesh) == false)
-//		throw "ERROR: Input outer surface is not closed";
-//	if (CGAL::Polygon_mesh_processing::does_bound_a_volume(triangle_mesh) == false)
-//		throw "ERROR: Input outer surface does not bound a volume";
-
-		// Compute offset
-		outerShell offset_shell;
-		if (offset > 0) {
-			double facetAngle = 30;
-			double facetSize = averageSpacing/2;
-			double facetDistance = 0.1;
-			offset_shell = cgal_off_meshing(triangle_mesh, offset, facetAngle, facetSize, facetDistance);
-
-		} else {
-			offset_shell = shell;
-		}
-
-		// Convert to Point_with_normal
-		for (size_t i=0; i<offset_shell.points.size(); ++i) {
-			Point_with_normal p(Point_3(offset_shell.points[i].x(), offset_shell.points[i].y(), offset_shell.points[i].z()), 
-													Vector_3(0.0, 0.0, 0.0));
-			scaledPoints.push_back(p);
-
-			// Compute bounding box of scaled point cloud
-			boundingBox[0] = std::min(boundingBox[0], scaledPoints[i].first.x());
-			boundingBox[1] = std::max(boundingBox[1], scaledPoints[i].first.x());
-			boundingBox[2] = std::min(boundingBox[2], scaledPoints[i].first.y());
-			boundingBox[3] = std::max(boundingBox[3], scaledPoints[i].first.y());
-			boundingBox[4] = std::min(boundingBox[4], scaledPoints[i].first.z());
-			boundingBox[5] = std::max(boundingBox[5], scaledPoints[i].first.z());
-		}
-
-		// Estimate and orient normals
-		CGAL::jet_estimate_normals<Concurrency_tag>(scaledPoints, nNeighbors,
-																								CGAL::parameters::
-																									point_map(CGAL::First_of_pair_property_map<Point_with_normal>()).
-																									normal_map(CGAL::Second_of_pair_property_map<Point_with_normal>()));
-
-		std::vector<Point_with_normal>::iterator unoriented_points_begin = 
-			CGAL::mst_orient_normals(scaledPoints, nNeighbors,
-															CGAL::parameters::
-																point_map(CGAL::First_of_pair_property_map<Point_with_normal>()).
-																normal_map(CGAL::Second_of_pair_property_map<Point_with_normal>()));
-
-		// Remove points with an unoriented normal
-		scaledPoints.erase(unoriented_points_begin, scaledPoints.end());
-
-		// Scott Meyer's "swap trick" to trim excess capacity (Seems to solve the occasional 'CGAL ERROR: assertion violation! .../Refine_facets_3.h Line: 862')
-		std::vector<Point_with_normal>(scaledPoints).swap(scaledPoints);
-
-//	{
-//			// Save surface to .stl file (FOR DEBUG PURPOSES!)
-//			TriangleMesh triangle_mesh_temp;
-//			CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(offset_shell.points, offset_shell.polygons, triangle_mesh_temp);
+//	} else {
+//		TriangleMesh triangle_mesh;
+//		CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, triangle_mesh);
+//		const double averageSpacing = CGAL::compute_average_spacing<CGAL::Sequential_tag>(shell.points, nNeighbors);
 //
-//			std::ofstream stl_fileOut("out_test.stl", std::ios::out | std::ios::binary);
-//			if ( me_settings.STLFormat == "ASCII" ) {
-//				CGAL::set_mode(stl_fileOut, CGAL::IO::ASCII);
-//				stl_fileOut.precision(std::numeric_limits<double>::digits10 + 2);
-//			} else {
-//				CGAL::set_mode(stl_fileOut, CGAL::IO::BINARY);
-//			}
-//			CGAL::IO::write_STL(stl_fileOut, triangle_mesh_temp);
-//			stl_fileOut.close();
+////	// Check if points bound a volume
+////	if (CGAL::is_closed(triangle_mesh) == false)
+////		throw "ERROR: Input outer surface is not closed";
+////	if (CGAL::Polygon_mesh_processing::does_bound_a_volume(triangle_mesh) == false)
+////		throw "ERROR: Input outer surface does not bound a volume";
+//
+//		// Compute offset
+//		outerShell offset_shell;
+//		if (offset > 0) {
+//			double facetAngle = 30;
+//			double facetSize = averageSpacing/2;
+//			double facetDistance = 0.1;
+//			offset_shell = cgal_off_meshing(triangle_mesh, offset, facetAngle, facetSize, facetDistance);
+//
+//		} else {
+//			offset_shell = shell;
+//		}
+//
+//		// Convert to Point_with_normal
+//		for (size_t i=0; i<offset_shell.points.size(); ++i) {
+//			Point_with_normal p(Point_3(offset_shell.points[i].x(), offset_shell.points[i].y(), offset_shell.points[i].z()), 
+//													Vector_3(0.0, 0.0, 0.0));
+//			scaledPoints.push_back(p);
+//
+//			// Compute bounding box of scaled point cloud
+//			boundingBox[0] = std::min(boundingBox[0], scaledPoints[i].first.x());
+//			boundingBox[1] = std::max(boundingBox[1], scaledPoints[i].first.x());
+//			boundingBox[2] = std::min(boundingBox[2], scaledPoints[i].first.y());
+//			boundingBox[3] = std::max(boundingBox[3], scaledPoints[i].first.y());
+//			boundingBox[4] = std::min(boundingBox[4], scaledPoints[i].first.z());
+//			boundingBox[5] = std::max(boundingBox[5], scaledPoints[i].first.z());
+//		}
+//
+//		// Estimate and orient normals
+//		CGAL::jet_estimate_normals<Concurrency_tag>(scaledPoints, nNeighbors,
+//																								CGAL::parameters::
+//																									point_map(CGAL::First_of_pair_property_map<Point_with_normal>()).
+//																									normal_map(CGAL::Second_of_pair_property_map<Point_with_normal>()));
+//
+//		std::vector<Point_with_normal>::iterator unoriented_points_begin = 
+//			CGAL::mst_orient_normals(scaledPoints, nNeighbors,
+//															CGAL::parameters::
+//																point_map(CGAL::First_of_pair_property_map<Point_with_normal>()).
+//																normal_map(CGAL::Second_of_pair_property_map<Point_with_normal>()));
+//
+//		// Remove points with an unoriented normal
+//		scaledPoints.erase(unoriented_points_begin, scaledPoints.end());
+//
+//		// Scott Meyer's "swap trick" to trim excess capacity (Seems to solve the occasional 'CGAL ERROR: assertion violation! .../Refine_facets_3.h Line: 862')
+//		std::vector<Point_with_normal>(scaledPoints).swap(scaledPoints);
+//
+////	{
+////			// Save surface to .stl file (FOR DEBUG PURPOSES!)
+////			TriangleMesh triangle_mesh_temp;
+////			CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(offset_shell.points, offset_shell.polygons, triangle_mesh_temp);
+////
+////			std::ofstream stl_fileOut("out_test.stl", std::ios::out | std::ios::binary);
+////			if ( me_settings.STLFormat == "ASCII" ) {
+////				CGAL::set_mode(stl_fileOut, CGAL::IO::ASCII);
+////				stl_fileOut.precision(std::numeric_limits<double>::digits10 + 2);
+////			} else {
+////				CGAL::set_mode(stl_fileOut, CGAL::IO::BINARY);
+////			}
+////			CGAL::IO::write_STL(stl_fileOut, triangle_mesh_temp);
+////			stl_fileOut.close();
+////	}
 //	}
-	}
 
 	// Create implicit function
 	*poissonSurfaceReconstruction = new Poisson_reconstruction_function(scaledPoints.begin(), scaledPoints.end(),

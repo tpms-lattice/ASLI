@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/IO/File_medit.h $
-// $Id: File_medit.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
@@ -308,7 +308,7 @@ void output_to_medit(std::ostream& os,
 #endif
   CGAL_precondition(c3t3.triangulation().is_1_cover());
 
-  typedef CGAL::Mesh_3::Medit_pmap_generator<C3T3, rebind, no_patch>  Generator;
+  typedef CGAL::SMDS_3::Medit_pmap_generator<C3T3, rebind, no_patch>  Generator;
   typedef typename Generator::Cell_pmap                               Cell_pmap;
   typedef typename Generator::Facet_pmap                              Facet_pmap;
   typedef typename Generator::Facet_pmap_twice                        Facet_pmap_twice;

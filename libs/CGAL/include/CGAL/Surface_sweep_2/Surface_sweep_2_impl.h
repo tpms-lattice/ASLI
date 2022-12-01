@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/Surface_sweep_2_impl.h $
-// $Id: Surface_sweep_2_impl.h 89e6a98 2021-03-26T09:26:36+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Baruch Zukerman <baruchzu@post.tau.ac.il>

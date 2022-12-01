@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/AABB_tree/include/CGAL/AABB_tree/internal/AABB_traversal_traits.h $
-// $Id: AABB_traversal_traits.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -120,7 +120,7 @@ public:
   Listing_intersection_traits(Output_iterator out_it, const AABBTraits& traits)
     : m_out_it(out_it), m_traits(traits) {}
 
-  bool go_further() const { return true; }
+  constexpr bool go_further() const { return true; }
 
   void intersection(const Query& query, const Primitive& primitive)
   {
@@ -163,7 +163,7 @@ public:
   Listing_primitive_traits(Output_iterator out_it, const AABBTraits& traits)
     : m_out_it(out_it), m_traits(traits) {}
 
-  bool go_further() const { return true; }
+  constexpr bool go_further() const { return true; }
 
   void intersection(const Query& query, const Primitive& primitive)
   {
@@ -295,7 +295,7 @@ public:
       m_traits(traits)
   {}
 
-  bool go_further() const { return true; }
+  constexpr bool go_further() const { return true; }
 
   void intersection(const Point& query, const Primitive& primitive)
   {

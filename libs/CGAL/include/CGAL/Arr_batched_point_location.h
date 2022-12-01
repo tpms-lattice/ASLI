@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_batched_point_location.h $
-// $Id: Arr_batched_point_location.h 0626eb0 2020-06-11T12:32:33+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -120,7 +120,7 @@ locate(const Arrangement_on_surface_2<GeometryTraits_2, TopologyTraits>& arr,
    * Use the form 'A a(*b);' and not ''A a = b;' to handle the case where A has
    * only an implicit constructor, (which takes *b as a parameter).
    */
-  typename boost::mpl::if_<boost::is_same<Gt2, Bgt2>, const Bgt2&, Bgt2>::type
+  typename boost::mpl::if_<std::is_same<Gt2, Bgt2>, const Bgt2&, Bgt2>::type
     ex_traits(*geom_traits);
 
   // Define the sweep-line visitor and perform the sweep.

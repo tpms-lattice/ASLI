@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Advancing_front_surface_reconstruction/include/CGAL/Advancing_front_surface_reconstruction.h $
-// $Id: Advancing_front_surface_reconstruction.h ec573af 2022-01-04T15:29:20+00:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Frank Da, David Cohen-Steiner, Andreas Fabri
@@ -394,7 +394,7 @@ namespace CGAL {
     bool deal_with_2d;
     Priority priority;
     int max_connected_component;
-    double K_init, K_step;
+    coord_type K_init, K_step;
     std::list<Vertex_handle> interior_edges;
     std::list< Incidence_request_elt > incidence_requests;
     typename std::list< Incidence_request_elt >::iterator sentinel;

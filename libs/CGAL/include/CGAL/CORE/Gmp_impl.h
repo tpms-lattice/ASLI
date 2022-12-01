@@ -8,8 +8,8 @@
  *
  * Zilin Du, 2003
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_Core/include/CGAL/CORE/Gmp_impl.h $
- * $Id: Gmp_impl.h 12fd01d 2020-09-21T08:54:29+02:00 Ahmed Essam
+ * $URL$
+ * $Id$
  * SPDX-License-Identifier: LGPL-3.0-only
  ***************************************************************************/
 

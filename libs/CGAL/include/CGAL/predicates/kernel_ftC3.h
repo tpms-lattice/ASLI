@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/predicates/kernel_ftC3.h $
-// $Id: kernel_ftC3.h 68dc09b 2021-04-10T07:10:29+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

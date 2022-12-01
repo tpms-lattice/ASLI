@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Isotropic_remeshing/AABB_filtered_projection_traits.h $
-// $Id: AABB_filtered_projection_traits.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -76,7 +76,7 @@ public:
     set_of_indices.insert(index);
   }
 
-  bool go_further() const { return true; }
+  constexpr bool go_further() const { return true; }
 
   void intersection(const Point_3& query, const Primitive& primitive)
   {

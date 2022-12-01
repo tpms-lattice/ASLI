@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/IO/Arr_with_history_text_formatter.h $
-// $Id: Arr_with_history_text_formatter.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

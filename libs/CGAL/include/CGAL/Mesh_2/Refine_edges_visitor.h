@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Mesh_2/Refine_edges_visitor.h $
-// $Id: Refine_edges_visitor.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -65,7 +65,7 @@ public:
   Null_mesh_visitor previous_level() const { return null_mesh_visitor; }
 
   /**
-   * Store vertex handles and markers at left and right of the edge \c e.
+   * Store vertex handles and markers at left and right of the edge `e`.
    */
   void before_conflicts(const Edge& e, const Point&)
   {
@@ -84,7 +84,7 @@ public:
     faces_mesher.before_insertion_impl(Face_handle(), p, z);
   }
 
-  /** Restore markers in the star of \c v. */
+  /** Restore markers in the star of `v`. */
   void after_insertion(const Vertex_handle& v)
   {
     Tr& tr = faces_mesher.triangulation_ref_impl();

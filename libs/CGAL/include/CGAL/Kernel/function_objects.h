@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/function_objects.h $
-// $Id: function_objects.h f29015e 2022-05-25T00:22:24+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1811,7 +1811,8 @@ namespace CommonKernelFunctors {
     {
       CGAL_kernel_precondition(! K().collinear_3_object()(p,q,r) );
       Vector_3 res = CGAL::cross_product(q-p, r-p);
-      return res; }
+      return res;
+    }
   };
 
   template <typename K>
@@ -2045,6 +2046,10 @@ namespace CommonKernelFunctors {
     Rep // Plane_3
     operator()(Return_base_tag, const Point_3& p, const Vector_3& v) const
     { return Rep(p, v); }
+
+    Rep // Plane_3
+    operator()(Return_base_tag, Origin o, const Vector_3& v) const
+    { return Rep(o, v); }
 
     Rep // Plane_3
     operator()(Return_base_tag, const Line_3& l, const Point_3& p) const
@@ -2578,7 +2583,7 @@ namespace CommonKernelFunctors {
       Vector_3 res = CGAL::cross_product(q-p, r-p);
       res = res / CGAL::sqrt(res.squared_length());
       return res;
-        }
+    }
   };
 
   template <typename K>

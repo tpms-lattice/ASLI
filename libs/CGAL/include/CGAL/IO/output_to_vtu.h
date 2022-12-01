@@ -5,8 +5,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/IO/output_to_vtu.h $
-// $Id: output_to_vtu.h fb6f703 2021-05-04T14:07:49+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent RINEAU, Stephane Tayeb, Maxime Gimeno
@@ -14,7 +14,7 @@
 #ifndef CGAL_OUTPUT_TO_VTU_H
 #define CGAL_OUTPUT_TO_VTU_H
 
-#include <CGAL/license/Mesh_3.h>
+#include <CGAL/license/SMDS_3.h>
 
 #include <CGAL/assertions.h>
 #include <CGAL/IO/io.h>
@@ -351,7 +351,19 @@ void output_to_vtu_with_attributes(std::ostream& os,
 
 } // namespace internal
 
-//public API
+//! \ingroup PkgSMDS3ExportFunctions
+//!
+//! \brief exports a tetrahedral mesh complex using the `UnstructuredGrid` XML format.
+//!
+//! \tparam C3T3 a model of `MeshComplexWithFeatures_3InTriangulation_3`.
+//!
+//! \param os the stream used for writing
+//! \param c3t3 the mesh complex
+//! \param mode decides if the data should be written in binary (`IO::BINARY`)
+//!   or in ASCII (`IO::ASCII`).
+//!  If the mode is binary, then the stream `os` must be opened in binary mode.
+//! \see \ref IOStreamVTK
+//!
 template <class C3T3>
 void output_to_vtu(std::ostream& os,
                const C3T3& c3t3,

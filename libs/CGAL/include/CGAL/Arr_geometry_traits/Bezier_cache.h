@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Bezier_cache.h $
-// $Id: Bezier_cache.h 6d949cd 2020-08-08T17:29:55+02:00 Ahmed Essam
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

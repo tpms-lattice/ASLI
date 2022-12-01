@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/refine_impl.h $
-// $Id: refine_impl.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -103,7 +103,7 @@ private:
   {
     for(face_descriptor fd : faces)
     {
-      CGAL_assertion(fd  != boost::graph_traits<PolygonMesh>::null_face());
+      CGAL_assertion(is_valid_face_descriptor(fd, pmesh));
 
       vertex_descriptor vi = target(halfedge(fd,pmesh),pmesh);
       vertex_descriptor vj = target(next(halfedge(fd,pmesh),pmesh),pmesh);

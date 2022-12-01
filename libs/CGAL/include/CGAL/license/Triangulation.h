@@ -3,13 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/license/Triangulation.h $
-// $Id: Triangulation.h 8bc8f70 2021-06-17T11:44:41+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Andreas Fabri
 //
-// Warning: this file is generated, see include/CGAL/licence/README.md
+// Warning: this file is generated, see include/CGAL/license/README.md
 
 #ifndef CGAL_LICENSE_TRIANGULATION_H
 #define CGAL_LICENSE_TRIANGULATION_H

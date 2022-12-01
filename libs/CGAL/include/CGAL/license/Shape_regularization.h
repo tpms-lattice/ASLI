@@ -3,13 +3,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/license/Shape_regularization.h $
-// $Id: Shape_regularization.h 542f67b 2021-06-11T12:59:00+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Andreas Fabri
 //
-// Warning: this file is generated, see include/CGAL/licence/README.md
+// Warning: this file is generated, see include/CGAL/license/README.md
 
 #ifndef CGAL_LICENSE_SHAPE_REGULARIZATION_H
 #define CGAL_LICENSE_SHAPE_REGULARIZATION_H

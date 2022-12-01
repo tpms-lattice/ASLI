@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Surface_sweep_2/Arr_vert_decomp_ss_visitor.h $
-// $Id: Arr_vert_decomp_ss_visitor.h 5985db1 2021-07-28T16:17:10+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein <wein@post.tau.ac.il>

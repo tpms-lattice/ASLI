@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/transforming_pair_iterator.h $
-// $Id: transforming_pair_iterator.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -97,9 +97,9 @@ private internal::Functor_as_base<F>
         template<class F2,class J1,class J2,class R2,class V2>
         transforming_pair_iterator(
                 transforming_pair_iterator<F2,J1,J2,R2,V2> const&i,
-                typename boost::enable_if_convertible<J1, It1>::type* = 0,
-                typename boost::enable_if_convertible<J2, It2>::type* = 0,
-                typename boost::enable_if_convertible<F2, F>::type* = 0)
+                std::enable_if_t<boost::is_convertible<J1, It1>::value>* = 0,
+                std::enable_if_t<boost::is_convertible<J2, It2>::value>* = 0,
+                std::enable_if_t<boost::is_convertible<F2, F>::value>* = 0)
                 : Functor_base(i.functor()),iter1(i.iter1),iter2(i.iter2) {}
 
 };

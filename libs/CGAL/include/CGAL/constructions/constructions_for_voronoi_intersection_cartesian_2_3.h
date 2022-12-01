@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Interpolation/include/CGAL/constructions/constructions_for_voronoi_intersection_cartesian_2_3.h $
-// $Id: constructions_for_voronoi_intersection_cartesian_2_3.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

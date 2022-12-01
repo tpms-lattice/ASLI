@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/GMP/Gmpz_type.h $
-// $Id: Gmpz_type.h eb81d59 2020-11-18T07:43:12+00:00 Giles Bathgate
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

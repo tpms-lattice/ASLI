@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Interpolation/include/CGAL/interpolation_functions.h $
-// $Id: interpolation_functions.h d7224e5 2020-05-24T11:08:44+02:00 Marc Glisse
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Julia Floetotto

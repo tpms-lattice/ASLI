@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_zone_2.h $
-// $Id: Arrangement_zone_2.h 6b64dc8 2020-11-11T09:38:55+02:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein          <wein@post.tau.ac.il>
@@ -67,11 +67,10 @@ protected:
   typedef typename Traits_adaptor_2::Top_side_category    Top_side_category;
   typedef typename Traits_adaptor_2::Right_side_category  Right_side_category;
 
-  BOOST_MPL_ASSERT
-  ((typename Arr_sane_identified_tagging<Left_side_category,
-                                         Bottom_side_category,
-                                         Top_side_category,
-                                         Right_side_category>::result));
+  CGAL_static_assertion((Arr_sane_identified_tagging<Left_side_category,
+                                                    Bottom_side_category,
+                                                    Top_side_category,
+                                                    Right_side_category>::value));
 
 public:
   typedef ZoneVisitor_                                   Visitor;

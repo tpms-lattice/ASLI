@@ -3,8 +3,8 @@
 // This file is part of CGAL (www.cgal.org).
 //
 
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/create_straight_skeleton_from_polygon_with_holes_2.h $
-// $Id: create_straight_skeleton_from_polygon_with_holes_2.h 9051fc1 2020-10-08T22:54:11+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -31,8 +31,8 @@ boost::shared_ptr< Straight_skeleton_2<K> >
 inline
 create_interior_straight_skeleton_2 ( Polygon const& aPolyWithHoles,
                                       K const& k,
-                                      typename std::enable_if<
-                                        CGAL_SS_i::has_Hole_const_iterator<Polygon>::value>::type* = nullptr)
+                                      std::enable_if_t<
+                                        CGAL_SS_i::has_Hole_const_iterator<Polygon>::value>* = nullptr)
 {
   return create_interior_straight_skeleton_2(aPolyWithHoles.outer_boundary().vertices_begin()
                                             ,aPolyWithHoles.outer_boundary().vertices_end  ()

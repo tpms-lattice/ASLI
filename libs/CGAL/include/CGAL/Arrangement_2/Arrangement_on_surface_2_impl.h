@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arrangement_on_surface_2_impl.h $
-// $Id: Arrangement_on_surface_2_impl.h 30da4eb 2021-03-22T13:35:23+02:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein          <wein@post.tau.ac.il>

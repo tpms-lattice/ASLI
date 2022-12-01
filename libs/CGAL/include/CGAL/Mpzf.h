@@ -4,18 +4,19 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Mpzf.h $
-// $Id: Mpzf.h 6481cb2 2021-08-13T16:44:53+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)        :  Marc Glisse
+
+#ifndef CGAL_MPZF_H
+#define CGAL_MPZF_H
 
 #ifndef CGAL_NO_MPZF_DIVISION_OPERATOR
 #define CGAL_MPZF_DIVISION_OPERATOR 1
 #endif
 
-#ifndef CGAL_MPZF_H
-#define CGAL_MPZF_H
 #include <cstdlib>
 #include <algorithm>
 #include <climits>

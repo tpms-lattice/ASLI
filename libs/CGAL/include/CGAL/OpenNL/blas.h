@@ -21,8 +21,8 @@
  *  Andreas Meyer 2007 changes for CGAL:
  *      - replaced assert with CGAL_assertion/CGAL_error etc.
  *
- * $URL: https://github.com/CGAL/cgal/blob/v5.4.1/OpenNL/include/CGAL/OpenNL/blas.h $
- * $Id: blas.h fcd0529 2019-10-20T00:47:56+02:00 Sébastien Loriot
+ * $URL$
+ * $Id$
  * SPDX-License-Identifier: LGPL-3.0-or-later
 */
 

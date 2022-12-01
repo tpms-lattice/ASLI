@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_ImageIO/include/CGAL/IO/read_vtk_image_data.h $
-// $Id: read_vtk_image_data.h 22be867 2021-05-04T14:59:28+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

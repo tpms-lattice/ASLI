@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/experimental/Lipschitz_sizing_experimental.h $
-// $Id: Lipschitz_sizing_experimental.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -104,7 +104,7 @@ private:
 
 #ifdef CGAL_MESH_3_EXPERIMENTAL_USE_PATCHES_IDS
   //help to accelerate aabb_tree queries in m_ptree
-  std::shared_ptr<Kd_tree> m_kd_tree;
+  mutable std::shared_ptr<Kd_tree> m_kd_tree;
 
   Facet_patch_id_map m_facet_patch_id_map;
   const Patches_ids_map& patches_ids_map;
@@ -387,7 +387,7 @@ private:
   }
 
 #ifdef CGAL_MESH_3_EXPERIMENTAL_USE_PATCHES_IDS
-  void kd_tree()
+  void kd_tree() const
   {
     typedef typename MeshDomain::Polyhedron Polyhedron;
     if(m_kd_tree.get() == 0) {

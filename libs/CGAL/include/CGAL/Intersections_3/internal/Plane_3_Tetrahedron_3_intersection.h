@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_3/include/CGAL/Intersections_3/internal/Plane_3_Tetrahedron_3_intersection.h $
-// $Id: Plane_3_Tetrahedron_3_intersection.h eb86d35 2022-02-24T09:44:47+01:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

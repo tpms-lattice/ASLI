@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Installation/include/CGAL/config.h $
-// $Id: config.h ab7aa75 2022-04-28T13:59:14+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -111,17 +111,6 @@
 #undef CGAL_LINKED_WITH_TBB
 #endif
 #endif
-
-// Macro used by Boost Parameter. Mesh_3 needs at least 12, before the
-// Boost Parameter headers are included: <boost/parameter/config.hpp>
-// defines the value to 8, if it is not yet defined.
-// The CGAL BGL properties mechanism includes
-// <boost/graph/named_function_params.hpp>, that includes
-// <boost/parameter/name.hpp>, and maybe other Boost libraries may use
-// Boost Parameter as well.
-// That is why that is important to define that macro as early as possible,
-// in <CGAL/config.h>
-#define BOOST_PARAMETER_MAX_ARITY 12
 
 // The following header file defines among other things  BOOST_PREVENT_MACRO_SUBSTITUTION
 #include <boost/config.hpp>
@@ -499,6 +488,12 @@ namespace cpp11{
 #  define CGAL_FALLTHROUGH while(false){}
 #endif
 
+#if CGAL_CXX17
+#  define CGAL_CPP17_INLINE inline
+#else
+#  define CGAL_CPP17_INLINE
+#endif
+
 #ifndef CGAL_NO_ASSERTIONS
 #  define CGAL_NO_ASSERTIONS_BOOL false
 #else
@@ -523,7 +518,7 @@ namespace cpp11{
 /// Macro `CGAL_WARNING`.
 /// Must be used with `#pragma`, this way:
 ///
-///     #pragma CGAL_WARNING(This line should trigger a warning)
+///     #pragma CGAL_WARNING("This line should trigger a warning")
 ///
 /// @{
 #ifdef BOOST_MSVC

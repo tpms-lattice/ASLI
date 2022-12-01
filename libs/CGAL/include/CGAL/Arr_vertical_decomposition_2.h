@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_vertical_decomposition_2.h $
-// $Id: Arr_vertical_decomposition_2.h 3c5552b 2020-06-30T21:22:40+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein <wein@post.tau.ac.il>
@@ -124,7 +124,7 @@ decompose(const Arrangement_on_surface_2<GeometryTraits_2, TopologyTraits>& arr,
    * Use the form 'A a(*b);' and not ''A a = b;' to handle the case where A has
    * only an implicit constructor, (which takes *b as a parameter).
    */
-  typename boost::mpl::if_<boost::is_same<Gt2, Vgt2>, const Vgt2&, Vgt2>::type
+  typename boost::mpl::if_<std::is_same<Gt2, Vgt2>, const Vgt2&, Vgt2>::type
     ex_traits(*geom_traits);
 
   // Define the sweep-line visitor and perform the sweep.

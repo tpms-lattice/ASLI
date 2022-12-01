@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_constant_domain_field_3.h $
-// $Id: Mesh_constant_domain_field_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -57,7 +57,7 @@ public:
     return d_;
   }
 
-  /// Sets size at any point of dimension \c dim and index \c index
+  /// Sets size at any point of dimension `dim` and index `index`.
   void set_size(const FT& size, const int dim, const Index& index)
   {
     values_.insert(std::make_pair(std::make_pair(dim,index),size));

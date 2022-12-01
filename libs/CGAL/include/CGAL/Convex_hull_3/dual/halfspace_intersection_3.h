@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Convex_hull_3/include/CGAL/Convex_hull_3/dual/halfspace_intersection_3.h $
-// $Id: halfspace_intersection_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,7 +29,7 @@
 #include <CGAL/Convex_hull_3/dual/halfspace_intersection_interior_point_3.h>
 #include <CGAL/Number_types/internal/Exact_type_selector.h>
 
-#include <boost/unordered_map.hpp>
+#include <unordered_map>
 #include <boost/type_traits/is_floating_point.hpp>
 #include <deque>
 
@@ -72,8 +72,7 @@ namespace CGAL
                                                        Plane_3 > > result_inter;
 
 
-              boost::unordered_map <Facet_const_handle, vertex_descriptor> primal_vertices;
-              size_t n = 0;
+              std::unordered_map <Facet_const_handle, vertex_descriptor> primal_vertices;
 
               // First, computing the primal vertices
               for(Facet_const_handle fd : faces(_dual)){
@@ -111,7 +110,6 @@ namespace CGAL
                 vertex_descriptor vd = add_vertex(primal);
                 primal_vertices[fd] = vd;
                 put(vpm, vd, ppp);
-                ++n;
               }
 
               // Then, add facets to the primal polyhedron
@@ -283,4 +281,3 @@ namespace CGAL
 #include <CGAL/enable_warnings.h>
 
 #endif // CGAL_HALFSPACE_INTERSECTION_3_H
-

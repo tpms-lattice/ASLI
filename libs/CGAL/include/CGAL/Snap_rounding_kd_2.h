@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Snap_rounding_2/include/CGAL/Snap_rounding_kd_2.h $
-// $Id: Snap_rounding_kd_2.h 3c7eb2c 2020-01-07T15:31:07+01:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,6 @@
 
 #include <list>
 #include <CGAL/basic.h>
-#include <CGAL/predicates_on_points_2.h>
 #include <iostream>
 #include <CGAL/predicates_on_points_2.h>
 #include <CGAL/utility.h>

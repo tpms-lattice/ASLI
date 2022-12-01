@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Arc_2.h $
-// $Id: Arc_2.h bfc5b7e 2021-08-10T10:49:11+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Eric Berberich <eric@mpi-inf.mpg.de>
@@ -22,9 +22,9 @@
 #include <CGAL/Handle_with_policy.h>
 
 #include <iostream>
+#include <type_traits>
 #include <boost/optional.hpp>
 #include <boost/none.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Arr_enums.h>
@@ -232,7 +232,7 @@ public:
     //!@}
 
     #if !defined(CGAL_NO_ASSERTIONS)
-    static const bool Kernel_arc_2_equals_Arc_2 = boost::is_same<Arc_2, Kernel_arc_2>::value;
+    static const bool Kernel_arc_2_equals_Arc_2 = std::is_same<Arc_2, Kernel_arc_2>::value;
     #endif
 
 public:

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Sqrt_extension/Fraction_traits.h $
-// $Id: Fraction_traits.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -147,7 +147,7 @@ template <class COEFF, class ROOT, class ACDE_TAG, class FP_TAG>
 class Sqrt_ext_Ftr_base_1< Sqrt_extension<COEFF,ROOT,ACDE_TAG,FP_TAG>, CGAL::Tag_true >
     : public Sqrt_ext_Ftr_base_2<
     Sqrt_extension<COEFF,ROOT,ACDE_TAG,FP_TAG>,
-    ::boost::is_same< typename CGAL::Coercion_traits<ROOT,typename CGAL::Fraction_traits<COEFF>::Numerator_type>::Type,
+    ::std::is_same< typename CGAL::Coercion_traits<ROOT,typename CGAL::Fraction_traits<COEFF>::Numerator_type>::Type,
                         typename CGAL::Fraction_traits<COEFF>::Numerator_type>::value >
 {
     //nothing new

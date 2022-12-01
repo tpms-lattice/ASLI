@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cone_spanners_2/include/CGAL/Cone_spanners_2/Plane_scan_tree.h $
-// $Id: Plane_scan_tree.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

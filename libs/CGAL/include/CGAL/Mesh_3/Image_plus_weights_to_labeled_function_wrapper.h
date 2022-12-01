@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/Image_plus_weights_to_labeled_function_wrapper.h $
-// $Id: Image_plus_weights_to_labeled_function_wrapper.h ac7b637 2021-10-05T10:27:03+02:00 Jane Tournois
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -107,9 +107,9 @@ public:
   ~Image_plus_weights_to_labeled_function_wrapper() {}
 
   /**
-   * Returns an int corresponding to the label at point \c p
+   * Returns an int corresponding to the label at point `p`.
    * @param p the input point
-   * @return the label at point \c p
+   * @return the label at point `p`
    */
   template <typename Point_3>
   return_type operator()(const Point_3& p) const

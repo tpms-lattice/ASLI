@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/IO/Complex_2_in_triangulation_3_to_vtk.h $
-// $Id: Complex_2_in_triangulation_3_to_vtk.h 2402f3f 2020-09-10T16:14:58+01:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

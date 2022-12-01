@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Point_2.h $
-// $Id: Point_2.h a3d1765 2021-07-19T14:18:40+02:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,13 +23,14 @@
 
 #include <boost/optional.hpp>
 #include <boost/optional/optional_io.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <CGAL/Handle_with_policy.h>
 
 #include <CGAL/Arr_enums.h>
 
 #include <CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h>
+
+#include <type_traits>
 
 namespace CGAL {
 
@@ -170,7 +171,7 @@ public:
     //!@}
 
     #if !defined(CGAL_NO_ASSERTIONS)
-    static const bool Kernel_point_2_equals_Point_2 = boost::is_same<Point_2, Kernel_point_2>::value;
+    static const bool Kernel_point_2_equals_Point_2 = std::is_same<Point_2, Kernel_point_2>::value;
     #endif
 
 public:

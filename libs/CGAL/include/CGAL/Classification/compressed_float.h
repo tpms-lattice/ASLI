@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Classification/include/CGAL/Classification/compressed_float.h $
-// $Id: compressed_float.h e9d41d7 2020-04-21T10:03:00+02:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot

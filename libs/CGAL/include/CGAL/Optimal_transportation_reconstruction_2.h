@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Optimal_transportation_reconstruction_2/include/CGAL/Optimal_transportation_reconstruction_2.h $
-// $Id: Optimal_transportation_reconstruction_2.h 9847fd7 2022-01-03T19:15:11+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin

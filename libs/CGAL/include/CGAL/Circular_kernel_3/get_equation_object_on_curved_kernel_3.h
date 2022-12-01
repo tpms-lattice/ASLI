@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Circular_kernel_3/include/CGAL/Circular_kernel_3/get_equation_object_on_curved_kernel_3.h $
-// $Id: get_equation_object_on_curved_kernel_3.h ad813b4 2020-07-30T16:19:02+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,

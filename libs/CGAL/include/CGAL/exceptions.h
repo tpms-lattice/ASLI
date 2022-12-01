@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/STL_Extension/include/CGAL/exceptions.h $
-// $Id: exceptions.h 04305dc 2020-06-13T23:39:35+05:30 Abhay Raj Singh
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

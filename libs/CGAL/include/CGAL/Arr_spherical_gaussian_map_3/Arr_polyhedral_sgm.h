@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
-// $Id: Arr_polyhedral_sgm.h 74a0e95 2021-03-03T11:01:18+02:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -84,7 +84,7 @@ private:
 
   typedef typename Polyhedron::Halfedge_around_vertex_circulator
     Polyhedron_halfedge_around_vertex_circulator;
-  typedef boost::is_same<typename Polyhedron::Plane_3, Vector_3>
+  typedef std::is_same<typename Polyhedron::Plane_3, Vector_3>
     Polyhedron_has_normal;
 
   typedef typename Polyhedron::HalfedgeDS             HDS;
@@ -103,7 +103,7 @@ private:
     }
   };
 
-  void compute_planes(Polyhedron& polyhedron, boost::true_type)
+  void compute_planes(Polyhedron& polyhedron, std::true_type)
   {
     std::transform(polyhedron.facets_begin(), polyhedron.facets_end(),
                    polyhedron.planes_begin(), Normal_equation());
@@ -120,7 +120,7 @@ private:
     }
   };
 
-  void compute_planes(Polyhedron& polyhedron, boost::false_type)
+  void compute_planes(Polyhedron& polyhedron, std::false_type)
   {
     std::transform(polyhedron.facets_begin(), polyhedron.facets_end(),
                    polyhedron.planes_begin(), Plane_equation());
@@ -350,12 +350,12 @@ private:
 
   /*! Obtain the normal of a facet of a polyhedron that supports normals */
   template <typename Facet>
-  const Vector_3& get_normal(const Facet& facet, boost::true_type) const
+  const Vector_3& get_normal(const Facet& facet, std::true_type) const
   { return facet->plane(); }
 
   /*! Obtain the normal of a facet of a polyhedron that supports planes */
   template <typename Facet>
-  Vector_3 get_normal(const Facet& facet, boost::false_type) const
+  Vector_3 get_normal(const Facet& facet, std::false_type) const
   { return facet->plane().orthogonal_vector(); }
 
   /*! Process a polyhedron vertex recursively constructing the Gaussian map

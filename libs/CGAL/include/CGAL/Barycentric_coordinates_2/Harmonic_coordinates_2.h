@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Harmonic_coordinates_2.h $
-// $Id: Harmonic_coordinates_2.h d03c669 2021-08-13T11:33:47+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

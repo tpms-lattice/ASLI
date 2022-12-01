@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Polynomial/Polynomial_type.h $
-// $Id: Polynomial_type.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -487,7 +487,7 @@ public:
       typedef typename Fraction_traits<NTX>::Is_fraction Is_fraction;
       typedef typename Coercion_traits<NT,NTX>::Type Type;
       typedef typename ::boost::mpl::if_c<
-      ::boost::is_same<Type,NT>::value, Is_fraction, CGAL::Tag_false
+      ::std::is_same<Type,NT>::value, Is_fraction, CGAL::Tag_false
         >::type If_decomposable_AND_Type_equals_NT;
 
       return sign_at_(x,If_decomposable_AND_Type_equals_NT());
@@ -545,7 +545,7 @@ public:
      *  Also available as non-member function.
      */
     CGAL::Sign sign() const {
-//        CGAL_static_assertion( (boost::is_same< typename Real_embeddable_traits<NT>::Is_real_embeddable,
+//        CGAL_static_assertion( (std::is_same< typename Real_embeddable_traits<NT>::Is_real_embeddable,
 //                              CGAL::Tag_true>::value) );
       return CGAL::sign(lcoeff());
     }

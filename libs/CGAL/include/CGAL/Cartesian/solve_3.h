@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Cartesian_kernel/include/CGAL/Cartesian/solve_3.h $
-// $Id: solve_3.h a4c57e6 2021-03-21T19:35:41+01:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

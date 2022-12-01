@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_non_caching_segment_traits_2.h $
-// $Id: Arr_non_caching_segment_traits_2.h 436ba5f 2020-06-30T21:23:16+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel    <efif@post.tau.ac.il>
@@ -402,6 +402,18 @@ public:
   /*! Obtain a Compare_endpoints_xy_2 functor object */
   Compare_endpoints_xy_2 compare_endpoints_xy_2_object() const
   { return Compare_endpoints_xy_2(); }
+  //@}
+
+  //! \name Functor definitions for constructions.
+  //@{
+
+  //! Functor
+  typedef typename Kernel::Construct_segment_2    Construct_curve_2;
+
+  /*! Obtain a Construct_curve_2 functor object. */
+  Construct_curve_2 construct_curve_2_object() const
+  { return this->construct_segment_2_object(); }
+
   //@}
 };
 

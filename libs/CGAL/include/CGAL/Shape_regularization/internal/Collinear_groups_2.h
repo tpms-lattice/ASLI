@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_regularization/include/CGAL/Shape_regularization/internal/Collinear_groups_2.h $
-// $Id: Collinear_groups_2.h d04c97e 2021-08-04T12:02:24+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,7 +18,7 @@
 
 // Boost includes.
 #include <CGAL/boost/graph/named_params_helper.h>
-#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/Named_function_parameters.h>
 
 // Internal includes.
 #include <CGAL/Shape_regularization/internal/utils.h>

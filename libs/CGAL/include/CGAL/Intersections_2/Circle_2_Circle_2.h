@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Intersections_2/include/CGAL/Intersections_2/Circle_2_Circle_2.h $
-// $Id: Circle_2_Circle_2.h 7e62c02 2021-04-12T14:02:37+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

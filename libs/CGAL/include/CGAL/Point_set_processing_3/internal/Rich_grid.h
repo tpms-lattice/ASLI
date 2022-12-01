@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Rich_grid.h $
-// $Id: Rich_grid.h 67b53fa 2020-04-29T14:06:37+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Shihao Wu, Clement Jamin, Pierre Alliez
@@ -16,7 +16,7 @@
 
 
 #include <CGAL/property_map.h>
-#include <CGAL/point_set_processing_assertions.h>
+#include <CGAL/assertions.h>
 #include <CGAL/Point_3.h>
 #include <CGAL/Vector_3.h>
 #include <CGAL/Origin.h>
@@ -454,7 +454,7 @@ void compute_ball_neighbors_one_self(
   CGAL::Bbox_3 bbox, ///< bounding box
   const typename Kernel::FT radius)
 {
-  CGAL_point_set_processing_precondition(radius > 0);
+  CGAL_precondition(radius > 0);
 
   for (unsigned int i = 0; i < points.size(); ++i)
   {

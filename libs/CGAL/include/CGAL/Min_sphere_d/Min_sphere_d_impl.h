@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Bounding_volumes/include/CGAL/Min_sphere_d/Min_sphere_d_impl.h $
-// $Id: Min_sphere_d_impl.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -62,7 +62,7 @@ operator << ( std::ostream& os, const Min_sphere_d<Traits>& min_sphere)
         break;
 
       default:
-        CGAL_optimisation_assertion_msg
+        CGAL_assertion_msg
             ( false, "IO::get_mode( os) invalid!");
         break; }
 
@@ -93,7 +93,7 @@ operator >> ( std::istream& is, Min_sphere_d<Traits>& min_sphere)
       } break;
 
       default:
-        CGAL_optimisation_assertion_msg( false, "IO::mode invalid!");
+        CGAL_assertion_msg( false, "IO::mode invalid!");
         break;
  }
 

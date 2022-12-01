@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_triangulation_vertex_base_2.h $
-// $Id: Periodic_4_hyperbolic_triangulation_vertex_base_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Iordan Iordanov  <Iordan.Iordanov@loria.fr>

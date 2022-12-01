@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/camera_impl.h $
-// $Id: camera_impl.h 225e3c2 2022-05-12T12:39:21+02:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY

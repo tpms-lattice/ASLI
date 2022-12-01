@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/FPU.h $
-// $Id: FPU.h c9f5620 2021-09-20T11:20:07+01:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -278,7 +278,7 @@ inline __m128d swap_m128d(__m128d x){
 # ifdef __llvm__
   return __builtin_shufflevector(x, x, 1, 0);
 # elif defined __GNUC__ && !defined __INTEL_COMPILER
-  return __builtin_shuffle(x, (__m128i){ 1, 0 });
+  return __extension__ __builtin_shuffle(x, (__m128i){ 1, 0 });
 # else
   return _mm_shuffle_pd(x, x, 1);
 # endif
@@ -500,6 +500,7 @@ void
 FPU_set_cw (FPU_CW_t cw)
 {
 #ifdef CGAL_ALWAYS_ROUND_TO_NEAREST
+  CGAL_USE(cw);
   CGAL_assertion(cw == CGAL_FE_TONEAREST);
 #else
   CGAL_IA_SETFPCW(cw);
@@ -511,6 +512,7 @@ FPU_CW_t
 FPU_get_and_set_cw (FPU_CW_t cw)
 {
 #ifdef CGAL_ALWAYS_ROUND_TO_NEAREST
+    CGAL_USE(cw);
     CGAL_assertion(cw == CGAL_FE_TONEAREST);
     return CGAL_FE_TONEAREST;
 #else

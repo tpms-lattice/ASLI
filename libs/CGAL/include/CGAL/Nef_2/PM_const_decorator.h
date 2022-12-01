@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/PM_const_decorator.h $
-// $Id: PM_const_decorator.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -485,6 +485,8 @@ check_integrity_and_topological_planarity(bool faces) const
   std::size_t e_num = number_of_edges();
   std::size_t c_num = number_of_connected_components() - iso_vert_num;
   std::size_t f_num = number_of_face_cycles() - c_num + 1;
+  CGAL_USE(fc_num);
+  CGAL_USE(iv_num);
   CGAL_USE(v_num);
   CGAL_USE(e_num);
   CGAL_USE(f_num);

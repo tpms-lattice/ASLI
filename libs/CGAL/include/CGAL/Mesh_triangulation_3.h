@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_triangulation_3.h $
-// $Id: Mesh_triangulation_3.h 91d862d 2021-12-23T11:58:19+01:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -28,7 +28,7 @@
 
 #include <CGAL/Mesh_vertex_base_3.h>
 #include <CGAL/Compact_mesh_cell_base_3.h>
-#include <CGAL/Mesh_3/io_signature.h>
+#include <CGAL/SMDS_3/io_signature.h>
 
 namespace CGAL {
 

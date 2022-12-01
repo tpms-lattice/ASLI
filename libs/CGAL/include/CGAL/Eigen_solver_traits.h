@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Solver_interface/include/CGAL/Eigen_solver_traits.h $
-// $Id: Eigen_solver_traits.h b905482 2021-06-11T15:24:49+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud

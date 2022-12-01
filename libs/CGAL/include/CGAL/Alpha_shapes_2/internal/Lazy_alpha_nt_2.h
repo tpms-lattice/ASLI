@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Alpha_shapes_2/include/CGAL/Alpha_shapes_2/internal/Lazy_alpha_nt_2.h $
-// $Id: Lazy_alpha_nt_2.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sébastien Loriot <sebastien.loriot@geometryfactory.com>

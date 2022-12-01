@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesher/include/CGAL/Surface_mesher/Combining_oracle.h $
-// $Id: Combining_oracle.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -51,7 +51,7 @@ namespace CGAL {
 
     typedef typename Oracle_a::Intersection_point Intersection_point;
 
-    CGAL_static_assertion((::boost::is_same<
+    CGAL_static_assertion((::std::is_same<
                          Intersection_point,
                          typename Oracle_b::Intersection_point>::value));
 

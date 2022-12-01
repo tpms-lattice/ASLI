@@ -3,8 +3,8 @@
 // This file is part of CGAL (www.cgal.org).
 //
 
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/arrange_offset_polygons_2.h $
-// $Id: arrange_offset_polygons_2.h 314db57 2020-11-06T12:03:15+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -46,8 +46,9 @@ bool arrange_offset_polygons_2 ( InputPolygonPtrIterator           aBegin
                                , const K&
                                )
 {
-  bool bk_poly_assert_mode = get_use_polygon_assertions();
-  set_use_polygon_assertions(false); // disable assertions in Polygon_2 function as we may manipulate strictly simple polygons
+  bool bk_poly_assert_mode = get_use_assertions();
+  set_use_assertions(false); // disable assertions in Polygon_2 function as we may
+                             // manipulate strictly simple polygons
 
   typedef typename std::iterator_traits<InputPolygonPtrIterator>::difference_type difference_type ;
   typedef typename std::iterator_traits<InputPolygonPtrIterator>::value_type PolygonPtr ;
@@ -100,14 +101,14 @@ bool arrange_offset_polygons_2 ( InputPolygonPtrIterator           aBegin
 
       if (lParent == nullptr)
       {
-        set_use_polygon_assertions(bk_poly_assert_mode);
+        set_use_assertions(bk_poly_assert_mode);
         return false;
       }
 
       lParent->add_hole(*lPoly);
     }
   }
-  set_use_polygon_assertions(bk_poly_assert_mode);
+  set_use_assertions(bk_poly_assert_mode);
   return true;
 }
 

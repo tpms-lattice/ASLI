@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/Mesh_sizing_field.h $
-// $Id: Mesh_sizing_field.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -107,42 +107,42 @@ public:
   Mesh_sizing_field(Tr& tr);
 
   /**
-   * Fill sizing field, using size associated to point in \c value_map
+   * Fills sizing field, using size associated to point in `value_map`
    */
   void fill(const std::map<Bare_point, FT>& value_map);
 
   /**
-   * Returns size at point \c p.
+   * Returns size at point `p`.
    */
   FT operator()(const Bare_point& p) const
   { return this->operator()(p, this->get_last_cell()); }
 
   /**
-   * Returns size at point \c p, using \c v to accelerate \c p location
+   * Returns size at point `p`, using `v` to accelerate `p` location
    * in triangulation
    */
   FT operator()(const Bare_point& p, const Vertex_handle& v) const
   { return this->operator()(p, v->cell()); }
 
   /**
-   * Returns size at point \c p.
+   * Returns size at point `p`.
    */
   FT operator()(const Bare_point& p, const Cell_handle& c) const;
 
   /**
-   * Returns size at point \c p. Assumes that p is the centroid of c.
+   * Returns size at point `p`. Assumes that p is the centroid of c.
    */
   FT operator()(const Bare_point& p, const std::pair<Cell_handle, bool>& c) const;
 
 private:
   /**
-   * Returns size at point \c p, by interpolation into tetrahedron.
+   * Returns size at point `p`, by interpolation into tetrahedron.
    */
   FT interpolate_on_cell_vertices(const Bare_point& p,
                                   const Cell_handle& cell) const;
 
   /**
-   * Returns size at point \c p, by interpolation into facet (\c cell is assumed
+   * Returns size at point `p`, by interpolation into facet (`cell` is assumed
    * to be an infinite cell).
    */
   FT interpolate_on_facet_vertices(const Bare_point& p,

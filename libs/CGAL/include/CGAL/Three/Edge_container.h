@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Three/include/CGAL/Three/Edge_container.h $
-// $Id: Edge_container.h f79ec02 2021-06-28T13:11:28+02:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -63,8 +63,8 @@ struct DEMO_FRAMEWORK_EXPORT Edge_container :public Primitive_container
   //! \brief initGL creates the `Vbo`s and `Vao`s of this `Edge_container`.
   //! \attention It must be called within a valid OpenGL context. The `draw()` function of an item is always a safe place to call this.
   //!
-  //! \todo Is it a good idea to call InitGL of each item in the scene so the developper doesn't have to worry about this in each draw() of each item ?
-  //!`.
+  //! \todo Is it a good idea to call InitGL of each item in the scene so the developer doesn't have to worry about this in each draw() of each item ?
+  //!
   //! \param viewer the active `Viewer_interface`.
   //!
   void initGL(Viewer_interface *viewer)  Q_DECL_OVERRIDE;

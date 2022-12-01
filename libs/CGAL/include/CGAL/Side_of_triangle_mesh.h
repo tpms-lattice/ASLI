@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Side_of_triangle_mesh.h $
-// $Id: Side_of_triangle_mesh.h c30056b 2021-02-05T13:51:21+01:00 Sebastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,7 +29,7 @@
 namespace CGAL {
 
 /**
- * \ingroup PkgPolygonMeshProcessingRef
+ * \ingroup PMP_predicates_grp
  * This class provides an efficient point location functionality with respect to a domain bounded
  * by one or several disjoint closed triangle meshes.
  *

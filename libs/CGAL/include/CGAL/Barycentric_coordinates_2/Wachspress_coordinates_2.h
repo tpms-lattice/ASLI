@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Wachspress_coordinates_2.h $
-// $Id: Wachspress_coordinates_2.h 9832893 2021-06-28T16:19:29+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

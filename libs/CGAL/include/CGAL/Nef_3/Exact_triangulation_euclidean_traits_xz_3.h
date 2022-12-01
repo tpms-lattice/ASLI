@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_3/include/CGAL/Nef_3/Exact_triangulation_euclidean_traits_xz_3.h $
-// $Id: Exact_triangulation_euclidean_traits_xz_3.h 5ea5e93 2021-01-20T15:17:41+00:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ralf Osbild <osbild@mpi-sb.mpg.de>

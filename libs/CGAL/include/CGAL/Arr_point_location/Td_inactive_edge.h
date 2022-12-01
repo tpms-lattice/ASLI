@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_edge.h $
-// $Id: Td_inactive_edge.h 97cac65 2021-07-23T10:59:49+02:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>

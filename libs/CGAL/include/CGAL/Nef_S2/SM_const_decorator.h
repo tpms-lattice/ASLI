@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_S2/include/CGAL/Nef_S2/SM_const_decorator.h $
-// $Id: SM_const_decorator.h 9c6712c 2021-02-08T19:32:33+00:00 Giles Bathgate
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -358,6 +358,8 @@ check_integrity_and_topological_planarity(bool faces) const
                       iso_vert_num
                       + number_of_sloops());
   CGAL_assertion_code(std::size_t f_num = number_of_sface_cycles() - c_num + 1);
+  CGAL_USE(fc_num);
+  CGAL_USE(iv_num);
   CGAL_assertion_code(CGAL_NEF_TRACEV(fc_num));
   CGAL_assertion_code(CGAL_NEF_TRACEV(iv_num));
   CGAL_assertion_code(CGAL_NEF_TRACEV(iso_vert_num));

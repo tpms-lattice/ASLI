@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Weights/include/CGAL/Weights/tangent_weights.h $
-// $Id: tangent_weights.h 12bf0e9 2021-10-18T17:31:59+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -461,7 +461,7 @@ namespace Weights {
       const auto v1 = construct_vector_2(q, r);
       const auto v2 = construct_vector_2(q, p);
 
-      const auto A = internal::area_2(traits, p, q, r);
+      const auto A = internal::positive_area_2(traits, p, q, r);
       CGAL_assertion(A != FT(0)); // three points are identical!
       const auto S = scalar_product_2(v1, v2);
       m_w_base = -tangent_half_angle(m_d_r, m_d_p, A, S);

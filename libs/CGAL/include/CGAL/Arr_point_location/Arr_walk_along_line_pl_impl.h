@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_walk_along_line_pl_impl.h $
-// $Id: Arr_walk_along_line_pl_impl.h f73d067 2020-06-15T20:11:46+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -776,7 +776,7 @@ _is_in_connected_component (const Point_2& p,
 //-----------------------------------------------------------------------------
 // Find the first halfedge around a given target vertex, when going clockwise
 // from "6 o'clock" around this vertex (when shooting up) or starting from
-// "12 o'clock (when shooting down).
+// "12 o'clock" (when shooting down).
 //
 template <class Arrangement>
 typename Arr_walk_along_line_point_location<Arrangement>::Halfedge_const_handle

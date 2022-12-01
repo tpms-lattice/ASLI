@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Ridges_3/include/CGAL/Umbilics.h $
-// $Id: Umbilics.h 1faa0e2 2021-04-28T10:55:26+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Pouget and Frédéric Cazals
@@ -110,10 +110,10 @@ class Umbilic_approximation
   typedef typename boost::graph_traits<TriangleMesh>::vertex_iterator  Vertex_const_iterator;
 
   //requirements for the templates TriangleMesh and VertexFTMap or VertexVectorMap
-  CGAL_static_assertion((boost::is_same<vertex_descriptor, typename VertexFTMap::key_type>::value));
-  CGAL_static_assertion((boost::is_same<vertex_descriptor, typename VertexVectorMap::key_type>::value));
-  CGAL_static_assertion((boost::is_same<FT, typename VertexFTMap::value_type>::value));
-  CGAL_static_assertion((boost::is_same<Vector_3, typename VertexVectorMap::value_type>::value));
+  CGAL_static_assertion((std::is_same<vertex_descriptor, typename VertexFTMap::key_type>::value));
+  CGAL_static_assertion((std::is_same<vertex_descriptor, typename VertexVectorMap::key_type>::value));
+  CGAL_static_assertion((std::is_same<FT, typename VertexFTMap::value_type>::value));
+  CGAL_static_assertion((std::is_same<Vector_3, typename VertexVectorMap::value_type>::value));
 
   typedef CGAL::Umbilic<TriangleMesh> Umbilic;
 

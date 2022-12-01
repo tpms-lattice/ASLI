@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_overlay_2.h $
-// $Id: Arr_overlay_2.h 4afc249 2021-09-09T15:58:00+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -247,7 +247,7 @@ overlay(const Arrangement_on_surface_2<GeometryTraitsA_2, TopologyTraitsA>& arr1
    * Use the form 'A a(*b);' and not ''A a = b;' to handle the case where A has
    * only an implicit constructor, (which takes *b as a parameter).
    */
-  typename boost::mpl::if_<boost::is_same<Gt_adaptor_2, Ovl_gt2>,
+  typename boost::mpl::if_<std::is_same<Gt_adaptor_2, Ovl_gt2>,
                            const Ovl_gt2&, Ovl_gt2>::type
     ex_traits(*traits_adaptor);
 

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh/include/CGAL/Surface_mesh/Surface_mesh.h $
-// $Id: Surface_mesh.h 625848e 2021-10-04T13:21:47+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 
@@ -26,9 +26,10 @@
 #include <CGAL/boost/graph/Euler_operations.h>
 #include <CGAL/boost/graph/iterator.h>
 #include <CGAL/boost/graph/named_params_helper.h>
-#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/Named_function_parameters.h>
 #include <CGAL/circulator.h>
 #include <CGAL/Handle_hash_function.h>
+#include <CGAL/IO/Verbose_ostream.h>
 #include <CGAL/Iterator_range.h>
 #include <CGAL/property_map.h>
 
@@ -80,6 +81,10 @@ namespace CGAL {
 
         // Compatibility with OpenMesh handle
         size_type idx() const {
+          return idx_;
+        }
+        // For convenience
+        size_type id() const {
           return idx_;
         }
 
@@ -341,7 +346,7 @@ public:
   {
     typedef Properties::Property_map_base<I, T, Property_map<I, T> > Base;
     typedef typename Base::reference reference;
-    Property_map() : Base() {}
+    Property_map() = default;
     Property_map(const Base& pm): Base(pm) {}
   };
 
@@ -914,8 +919,58 @@ public:
     /// Copy constructor: copies `rhs` to `*this`. Performs a deep copy of all properties.
     Surface_mesh(const Surface_mesh& rhs) { *this = rhs; }
 
+    /// Move constructor.
+    Surface_mesh(Surface_mesh&& sm)
+      : vprops_(std::move(sm.vprops_))
+      , hprops_(std::move(sm.hprops_))
+      , eprops_(std::move(sm.eprops_))
+      , fprops_(std::move(sm.fprops_))
+      , vconn_(std::move(sm.vconn_))
+      , hconn_(std::move(sm.hconn_))
+      , fconn_(std::move(sm.fconn_))
+      , vremoved_(std::move(sm.vremoved_))
+      , eremoved_(std::move(sm.eremoved_))
+      , fremoved_(std::move(sm.fremoved_))
+      , vpoint_(std::move(sm.vpoint_))
+      , removed_vertices_(std::exchange(sm.removed_vertices_, 0))
+      , removed_edges_(std::exchange(sm.removed_edges_, 0))
+      , removed_faces_(std::exchange(sm.removed_faces_, 0))
+      , vertices_freelist_(std::exchange(sm.vertices_freelist_,(std::numeric_limits<size_type>::max)()))
+      , edges_freelist_(std::exchange(sm.edges_freelist_,(std::numeric_limits<size_type>::max)()))
+      , faces_freelist_(std::exchange(sm.faces_freelist_,(std::numeric_limits<size_type>::max)()))
+      , garbage_(std::exchange(sm.garbage_, false))
+      , recycle_(std::exchange(sm.recycle_, true))
+      , anonymous_property_(std::exchange(sm.anonymous_property_, 0))
+    {}
+
     /// assigns `rhs` to `*this`. Performs a deep copy of all properties.
     Surface_mesh& operator=(const Surface_mesh& rhs);
+
+    /// move assignment
+    Surface_mesh& operator=(Surface_mesh&& sm)
+    {
+      vprops_ = std::move(sm.vprops_);
+      hprops_ = std::move(sm.hprops_);
+      eprops_ = std::move(sm.eprops_);
+      fprops_ = std::move(sm.fprops_);
+      vconn_ = std::move(sm.vconn_);
+      hconn_ = std::move(sm.hconn_);
+      fconn_ = std::move(sm.fconn_);
+      vremoved_ = std::move(sm.vremoved_);
+      eremoved_ = std::move(sm.eremoved_);
+      fremoved_ = std::move(sm.fremoved_);
+      vpoint_ = std::move(sm.vpoint_);
+      removed_vertices_ = std::exchange(sm.removed_vertices_, 0);
+      removed_edges_ = std::exchange(sm.removed_edges_, 0);
+      removed_faces_ = std::exchange(sm.removed_faces_, 0);
+      vertices_freelist_ = std::exchange(sm.vertices_freelist_, (std::numeric_limits<size_type>::max)());
+      edges_freelist_ = std::exchange(sm.edges_freelist_,(std::numeric_limits<size_type>::max)());
+      faces_freelist_ = std::exchange(sm.faces_freelist_,(std::numeric_limits<size_type>::max)());
+      garbage_ = std::exchange(sm.garbage_, false);
+      recycle_ = std::exchange(sm.recycle_, true);
+      anonymous_property_ = std::exchange(sm.anonymous_property_, 0);
+      return *this;
+    }
 
     /// assigns `rhs` to `*this`. Does not copy custom properties.
     Surface_mesh& assign(const Surface_mesh& rhs);
@@ -1416,7 +1471,7 @@ public:
 
     /// perform an expensive validity check on the data structure and
     /// print found errors to `std::cerr` when `verbose == true`.
-  bool is_valid(bool verbose = true) const
+    bool is_valid(bool verbose = false) const
     {
         bool valid = true;
         size_type vcount = 0, hcount = 0, fcount = 0;
@@ -1528,18 +1583,38 @@ public:
     }
 
     /// performs a validity check on a single vertex.
-    bool is_valid(Vertex_index v) const {
+    bool is_valid(Vertex_index v,
+                  bool verbose = false) const
+    {
+        Verbose_ostream verr(verbose);
+
+        if(!has_valid_index(v))
+        {
+          verr << "Vertex has invalid index: " << (size_type)v << std::endl;
+          return false;
+        }
+
         Halfedge_index h = vconn_[v].halfedge_;
-        if(h!= null_halfedge() && (!has_valid_index(h) || is_removed(h))) {
-          std::cerr << "Vertex connectivity halfedge error in " << (size_type)v
-                    << " with " << (size_type)h << std::endl;
-            return false;
+        if(h != null_halfedge() && (!has_valid_index(h) || is_removed(h))) {
+          verr << "Vertex connectivity halfedge error: Vertex " << (size_type)v
+               << " with " << (size_type)h << std::endl;
+          return false;
         }
         return true;
     }
 
     /// performs a validity check on a single halfedge.
-    bool is_valid(Halfedge_index h) const {
+    bool is_valid(Halfedge_index h,
+                  bool verbose = false) const
+    {
+        Verbose_ostream verr(verbose);
+
+        if(!has_valid_index(h))
+        {
+          verr << "Halfedge has invalid index: " << (size_type)h << std::endl;
+          return false;
+        }
+
         Face_index f = hconn_[h].face_;
         Vertex_index v = hconn_[h].vertex_;
         Halfedge_index hn = hconn_[h].next_halfedge_;
@@ -1549,30 +1624,30 @@ public:
         // don't validate the face if this is a border halfedge
         if(!is_border(h)) {
             if(!has_valid_index(f) || is_removed(f)) {
-                std::cerr << "Halfedge connectivity Face "
-                          << (!has_valid_index(f) ? "invalid" : "removed")
-                          << " in " << (size_type)h << std::endl;
+                verr << "Halfedge connectivity error: Face "
+                     << (!has_valid_index(f) ? "invalid" : "removed")
+                     << " in " << (size_type)h << std::endl;
                 valid = false;
             }
         }
 
         if(!has_valid_index(v) || is_removed(v)) {
-            std::cerr << "Halfedge connectivity Vertex "
-                      << (!has_valid_index(v) ? "invalid" : "removed")
-                      << " in " << (size_type)h << std::endl;
+            verr << "Halfedge connectivity error: Vertex "
+                 << (!has_valid_index(v) ? "invalid" : "removed")
+                 << " in " << (size_type)h << std::endl;
             valid = false;
         }
 
         if(!has_valid_index(hn) || is_removed(hn)) {
-            std::cerr << "Halfedge connectivity hnext "
-                      << (!has_valid_index(hn) ? "invalid" : "removed")
-                      << " in " << (size_type)h << std::endl;
+            verr << "Halfedge connectivity error: hnext "
+                 << (!has_valid_index(hn) ? "invalid" : "removed")
+                 << " in " << (size_type)h << std::endl;
             valid = false;
         }
         if(!has_valid_index(hp) || is_removed(hp)) {
-            std::cerr << "Halfedge connectivity hprev "
-                      << (!has_valid_index(hp) ? "invalid" : "removed")
-                      << " in " << (size_type)h << std::endl;
+            verr << "Halfedge connectivity error: hprev "
+                 << (!has_valid_index(hp) ? "invalid" : "removed")
+                 << " in " << (size_type)h << std::endl;
             valid = false;
         }
         return valid;
@@ -1580,19 +1655,39 @@ public:
 
 
     /// performs a validity check on a single edge.
-    bool is_valid(Edge_index e) const {
+    bool is_valid(Edge_index e,
+                  bool verbose = false) const
+    {
+      Verbose_ostream verr(verbose);
+
+      if(!has_valid_index(e))
+      {
+        verr << "Edge has invalid index: " << (size_type)e << std::endl;
+        return false;
+      }
+
       Halfedge_index h = halfedge(e);
-      return is_valid(h) && is_valid(opposite(h));
+      return is_valid(h, verbose) && is_valid(opposite(h), verbose);
     }
 
 
     /// performs a validity check on a single face.
-    bool is_valid(Face_index f) const {
+    bool is_valid(Face_index f,
+                  bool verbose = false) const
+    {
+        Verbose_ostream verr(verbose);
+
+        if(!has_valid_index(f))
+        {
+          verr << "Face has invalid index: " << (size_type)f << std::endl;
+          return false;
+        }
+
         Halfedge_index h = fconn_[f].halfedge_;
         if(!has_valid_index(h) || is_removed(h)) {
-          std::cerr << "Face connectivity halfedge error in " << (size_type)f
-                      << " with " << (size_type)h << std::endl;
-            return false;
+          verr << "Face connectivity halfedge error: Face " << (size_type)f
+               << " with " << (size_type)h << std::endl;
+          return false;
         }
         return true;
     }

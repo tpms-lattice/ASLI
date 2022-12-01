@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/CGAL_ImageIO/include/CGAL/ImageIO/gif_impl.h $
-// $Id: gif_impl.h bdecbc9 2020-10-16T10:47:54+02:00 Raphael Grimm
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //

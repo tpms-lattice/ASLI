@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Homogeneous_kernel/include/CGAL/Homogeneous/function_objects.h $
-// $Id: function_objects.h 1fb32e7 2021-10-27T17:20:28+02:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -4090,7 +4090,7 @@ namespace HomogeneousKernelFunctors {
 
     result_type
     operator()( const Segment_3& s, const Point_3& p) const
-    { return s.has_on(p); }
+    { return s.rep().has_on(p); }
 
     result_type
     operator()( const Plane_3& pl, const Point_3& p) const

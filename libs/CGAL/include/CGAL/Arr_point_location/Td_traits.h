@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_traits.h $
-// $Id: Td_traits.h 6642407 2020-07-29T18:08:32+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Oren Nechushtan <theoren@math.tau.ac.il>
@@ -352,14 +352,11 @@ public:
 
   };
 
-  /*! Obtain a Compare_y_at_x_2 functor object. */
+  /*! Obtain a Compare_curve_end_x_2 functor object. */
   Compare_curve_end_x_2 compare_curve_end_x_2_object () const
   {
     return Compare_curve_end_x_2(this);
   }
-
-
-
 
  /*! A functor that compares the y-coordinates of an edge end and a curve at
    * the point x-coordinate

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polygon_mesh_processing/include/CGAL/Polygon_mesh_slicer.h $
-// $Id: Polygon_mesh_slicer.h 263ad6b 2020-08-20T18:25:01+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,6 +23,7 @@
 
 #include <vector>
 #include <set>
+#include <type_traits>
 
 #include <boost/graph/adjacency_list.hpp>
 #include <CGAL/Polygon_mesh_processing/internal/Polygon_mesh_slicer/Traversal_traits.h>
@@ -30,7 +31,6 @@
 
 #include <boost/variant.hpp>
 #include <boost/mpl/if.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <CGAL/boost/graph/split_graph_into_polylines.h>
 #include <CGAL/boost/graph/helpers.h>
@@ -80,7 +80,7 @@ template<class TriangleMesh,
                        AABB_traits<Traits,
                          AABB_halfedge_graph_segment_primitive<TriangleMesh,
                                                                 typename boost::mpl::if_<
-                                                                  typename boost::is_same<
+                                                                  typename std::is_same<
                                                                     VertexPointMap,
                                                                     typename boost::property_map< TriangleMesh, vertex_point_t>::type >::type,
                                                                   Default,

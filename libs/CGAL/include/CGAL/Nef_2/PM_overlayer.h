@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Nef_2/include/CGAL/Nef_2/PM_overlayer.h $
-// $Id: PM_overlayer.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,7 +32,7 @@
 #include <CGAL/assertions.h>
 #include <CGAL/use.h>
 
-#include <boost/type_traits/is_same.hpp>
+#include <type_traits>
 
 #ifndef CGAL_USE_LEDA
 #define LEDA_MEMORY(t)
@@ -959,7 +959,7 @@ bool is_forward_edge(const Const_decorator& N,
 
 void assert_type_precondition() const
 { typename PM_decorator_::Point p1; Point p2;
-  CGAL_static_assertion((boost::is_same<typename PM_decorator_::Point, Point>::value)); }
+  CGAL_static_assertion((std::is_same<typename PM_decorator_::Point, Point>::value)); }
 
 
 

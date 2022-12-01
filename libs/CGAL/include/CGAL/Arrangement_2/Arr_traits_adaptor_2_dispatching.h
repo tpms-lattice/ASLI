@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_traits_adaptor_2_dispatching.h $
-// $Id: Arr_traits_adaptor_2_dispatching.h 2a3fbc0 2019-11-19T09:47:44+02:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -63,11 +63,11 @@ private:
   typedef boost::mpl::bool_< false > false_;
 
   typedef boost::mpl::if_<
-       boost::is_same< Arr_smaller_implementation_tag, Arr_use_traits_tag >,
+       std::is_same< Arr_smaller_implementation_tag, Arr_use_traits_tag >,
        true_, false_ > Smaller_traits;
 
   typedef boost::mpl::if_<
-       boost::is_same< Arr_larger_implementation_tag, Arr_use_traits_tag >,
+       std::is_same< Arr_larger_implementation_tag, Arr_use_traits_tag >,
        true_, false_ > Larger_traits;
 
 public:

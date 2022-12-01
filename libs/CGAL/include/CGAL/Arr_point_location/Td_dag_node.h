@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag_node.h $
-// $Id: Td_dag_node.h 319383c 2020-05-20T09:47:58+02:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michal Balas <balasmic@post.tau.ac.il>

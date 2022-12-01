@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/Delaunay_triangulation.h $
-// $Id: Delaunay_triangulation.h ec01356 2020-12-15T22:18:12+01:00 Marc Glisse
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus

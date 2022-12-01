@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_23/include/CGAL/Kernel/global_functions_3.h $
-// $Id: global_functions_3.h d3b26a6 2021-04-22T17:35:27+01:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

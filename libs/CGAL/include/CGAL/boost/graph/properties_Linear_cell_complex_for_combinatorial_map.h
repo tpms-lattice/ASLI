@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Linear_cell_complex/include/CGAL/boost/graph/properties_Linear_cell_complex_for_combinatorial_map.h $
-// $Id: properties_Linear_cell_complex_for_combinatorial_map.h f3db661 2022-03-09T14:13:31+00:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>

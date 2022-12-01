@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_d_1.h $
-// $Id: Algebraic_real_d_1.h 4e519a3 2021-05-05T13:15:37+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -72,7 +72,7 @@ class Algebraic_real_d_1 :
 
   // currently Rational is the only supported Bound type.
   CGAL_static_assertion(
-      (   ::boost::is_same <Rational_,
+      (   ::std::is_same <Rational_,
           typename Get_arithmetic_kernel<Coefficient_>::Arithmetic_kernel::Rational>::value));
 
 
@@ -579,7 +579,7 @@ struct Coercion_traits<
     typedef Type result_type;
     Type operator()(const Type& a) const { return a; }
     Type operator()(const Coefficient& a) const {
-      static const bool b = boost::is_same<Rational,typename CTCR::Type>::value;
+      static const bool b = std::is_same<Rational,typename CTCR::Type>::value;
       return (*this)(a,Boolean_tag<b>());
     }
   };

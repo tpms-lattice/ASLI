@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_regularization/include/CGAL/Shape_regularization/internal/Contour_base_2.h $
-// $Id: Contour_base_2.h fb8313a 2022-05-05T18:50:46+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

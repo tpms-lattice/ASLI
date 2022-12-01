@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curve_renderer_facade.h $
-// $Id: Curve_renderer_facade.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pavel Emeliyanenko <asm@mpi-sb.mpg.de>
@@ -279,7 +279,7 @@ Lrestart:
             std::cerr << "Switching to multi-precision arithmetic" <<
                 std::endl;
 #ifdef CGAL_CKVA_USE_MULTIPREC_ARITHMETIC
-            if(::boost::is_same<typename Algebraic_structure_traits< Float >::
+            if(::std::is_same<typename Algebraic_structure_traits< Float >::
                     Is_exact, CGAL::Tag_true>::value)
                 goto Lexit;
 
@@ -298,7 +298,7 @@ Lrestart:
                 std::cerr << "Switching to exact arithmetic" << std::endl;
 #ifdef CGAL_CKVA_USE_RATIONAL_ARITHMETIC
 
-                if(::boost::is_same<
+                if(::std::is_same<
                     typename Algebraic_structure_traits< Float >::Is_exact,
                          CGAL::Tag_true>::value)
                     goto Lexit;

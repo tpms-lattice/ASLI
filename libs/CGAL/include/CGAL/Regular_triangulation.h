@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Triangulation/include/CGAL/Regular_triangulation.h $
-// $Id: Regular_triangulation.h e511b68 2021-02-09T17:32:00+01:00 ROUVREAU Vincent
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Clement Jamin

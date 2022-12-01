@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Filtered_kernel/include/CGAL/Filtered_kernel.h $
-// $Id: Filtered_kernel.h 5945e48 2021-09-17T08:14:06+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -76,6 +76,9 @@ struct Filtered_kernel_base
     struct Feature_dimension {
         typedef typename T::Feature_dimension type; // maybe not the right way...
     };
+
+    Exact_kernel exact_kernel() const { return {}; }
+    Approximate_kernel approximate_kernel() const { return {}; }
 
     // We change the predicates.
 #define CGAL_Kernel_pred(P, Pf) \

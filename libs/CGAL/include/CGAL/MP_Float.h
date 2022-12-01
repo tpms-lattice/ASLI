@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/MP_Float.h $
-// $Id: MP_Float.h 12c7bb2 2020-05-19T11:24:12+02:00 Marc Glisse
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -762,7 +762,7 @@ namespace INTERN_MP_FLOAT {
     while (true) {
       x = x % y;
       if (x == 0) {
-        CGAL_postcondition(internal::divides(y, a) & internal::divides(y, b));
+        CGAL_postcondition(internal::divides(y, a) && internal::divides(y, b));
         y.gcd_normalize();
         return y;
       }

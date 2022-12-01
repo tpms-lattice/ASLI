@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Mesh_3/config.h $
-// $Id: config.h 4dda7b6 2020-05-27T15:53:05+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -12,21 +12,20 @@
 #ifndef CGAL_MESH_3_CONFIG_H
 #define CGAL_MESH_3_CONFIG_H 1
 
-#include <CGAL/license/Triangulation_3.h>
-
+#include <CGAL/license/Mesh_3.h>
 
 #include <CGAL/config.h>
 
 //#define CGAL_MESH_3_VERBOSE 1
 
 // Use optimisations of Mesh_3
-#  define CGAL_INTRUSIVE_LIST 1
 #  define CGAL_CONSTRUCT_INTRUSIVE_LIST_RANGE_CONSTRUCTOR 1
 #  define CGAL_MESH_3_NEW_GET_FACETS 1
 #  define CGAL_MESH_3_GET_FACETS_USING_INTRUSIVE_LIST 1
 #  define CGAL_MESH_3_SIZING_FIELD_INEXACT_LOCATE 1
 #  define FORCE_STRUCTURAL_FILTERING 1
 #  define CGAL_NEW_INCIDENT_SLIVERS 1
+#  define CGAL_INTRUSIVE_LIST 1
 
 //experimental
 #  define CGAL_FASTER_BUILD_QUEUE 1

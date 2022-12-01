@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Bounding_volumes/include/CGAL/Min_circle_2/Optimisation_circle_2_impl.h $
-// $Id: Optimisation_circle_2_impl.h 78ff918 2021-06-23T23:34:14+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Sven Schoenherr <sven@inf.ethz.ch>, Bernd Gaertner
 
 // includes
-#  include <CGAL/Optimisation/assertions.h>
+#  include <CGAL/assertions.h>
 
 namespace CGAL {
 
@@ -42,7 +42,7 @@ operator << ( std::ostream& os, const CGAL::Optimisation_circle_2<K_>& c)
         break;
 
       default:
-        CGAL_optimisation_assertion_msg( false,
+        CGAL_assertion_msg( false,
                                          "CGAL::IO::get_mode( os) invalid!");
         break; }
 
@@ -79,7 +79,7 @@ operator >> ( std::istream& is, CGAL::Optimisation_circle_2<K_>& c)
         break;
 
       default:
-        CGAL_optimisation_assertion_msg( false,
+        CGAL_assertion_msg( false,
                                          "CGAL::IO::get_mode( is) invalid!");
         break; }
 

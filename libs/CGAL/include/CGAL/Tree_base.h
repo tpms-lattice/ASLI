@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/SearchStructures/include/CGAL/Tree_base.h $
-// $Id: Tree_base.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,7 +22,6 @@
 #include <list>
 #include <vector>
 #include <CGAL/assertions.h>
-#include <CGAL/Tree_assertions.h>
 
 #ifndef CGAL_TREE_BASE_nullptr
 #define CGAL_TREE_BASE_nullptr 0

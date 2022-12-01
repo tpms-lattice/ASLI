@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_detection/include/CGAL/Shape_detection/Region_growing/Region_growing.h $
-// $Id: Region_growing.h 393f547 2020-11-26T14:21:10+01:00 Maxime Gimeno
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

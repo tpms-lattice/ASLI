@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Matrix_search/include/CGAL/Cartesian_matrix.h $
-// $Id: Cartesian_matrix.h 557cf7f 2021-01-29T10:36:59+00:00 Andreas Fabri
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,7 +17,7 @@
 
 
 #include <CGAL/basic.h>
-#include <CGAL/Optimisation/assertions.h>
+#include <CGAL/assertions.h>
 #include <type_traits>
 
 namespace CGAL {
@@ -67,8 +67,8 @@ public:
   Value
   operator()(int r, int c) const
   {
-    CGAL_optimisation_precondition(r >= 0 && r < number_of_rows());
-    CGAL_optimisation_precondition(c >= 0 && c < number_of_columns());
+    CGAL_precondition(r >= 0 && r < number_of_rows());
+    CGAL_precondition(c >= 0 && c < number_of_columns());
     return op(row_vec[r], column_vec[c]);
   }
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Shape_regularization/include/CGAL/Shape_regularization/internal/utils.h $
-// $Id: utils.h 542f67b 2021-06-11T12:59:00+02:00 Dmitry Anisimov
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,7 +41,7 @@
 #include <CGAL/assertions.h>
 
 // Named parameters.
-#include <CGAL/boost/graph/Named_function_parameters.h>
+#include <CGAL/Named_function_parameters.h>
 #include <CGAL/boost/graph/named_params_helper.h>
 
 namespace CGAL {
@@ -508,7 +508,7 @@ namespace internal {
 
     std::vector< std::vector<Point> > listp(nb_planes);
     for (std::size_t i = 0; i < points.size(); ++i) {
-      const int idx = get(index_map, i);
+      const int idx = static_cast<int>(get(index_map, i));
       if (idx != -1) {
         listp[std::size_t(idx)].push_back(
           get(point_map, *(points.begin() + i)));

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Property_map/include/CGAL/Dynamic_property_map.h $
-// $Id: Dynamic_property_map.h 8166579 2021-10-11T19:58:07+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,9 +19,9 @@
 #include <CGAL/property_map.h>
 
 #include <memory>
-#include <boost/unordered_map.hpp>
-#include <boost/type_traits/is_same.hpp>
 #include <boost/mpl/if.hpp>
+
+#include <unordered_map>
 
 namespace CGAL {
 
@@ -69,7 +69,7 @@ struct Dynamic_property_map {
   }
 
 
-  typedef boost::unordered_map<K,V> Map;
+  typedef std::unordered_map<K,V> Map;
   std::shared_ptr<Map> map_;
   V default_value_;
 };
@@ -127,7 +127,7 @@ struct Dynamic_with_index
 {
   typedef Key key_type;
   typedef Value value_type;
-  typedef typename boost::mpl::if_<  boost::is_same<bool, Value>,
+  typedef typename boost::mpl::if_<  std::is_same<bool, Value>,
                                      value_type,
                                      value_type&>::type  reference;
   typedef boost::read_write_property_map_tag category;

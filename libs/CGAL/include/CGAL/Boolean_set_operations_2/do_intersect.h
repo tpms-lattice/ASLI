@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/do_intersect.h $
-// $Id: do_intersect.h 420f37a 2021-09-23T16:28:23+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -17,8 +17,6 @@
 #define CGAL_BOOLEAN_SET_OPERATIONS_2_DO_INTERSECT_H
 
 #include <CGAL/license/Boolean_set_operations_2.h>
-
-#include <boost/utility/enable_if.hpp>
 
 #include <CGAL/disable_warnings.h>
 
@@ -33,7 +31,7 @@
 #include <CGAL/iterator.h>
 #include <CGAL/Boolean_set_operations_2/Bso_internal_functions.h>
 #include <CGAL/Boolean_set_operations_2/Polygon_conversions.h>
-#include <CGAL/is_iterator.h>
+#include <CGAL/type_traits/is_iterator.h>
 
 namespace CGAL
 {
@@ -237,7 +235,8 @@ inline bool do_intersect(const General_polygon_with_holes_2<Polygon_>& pgn1,
 // With Traits
 template <typename InputIterator, typename Traits>
 inline bool do_intersect(InputIterator begin, InputIterator end, Traits& traits,
-                         unsigned int k=5)
+                         unsigned int k=5,
+                         std::enable_if_t<CGAL::is_iterator<InputIterator>::value>* = 0)
 { return r_do_intersect(begin, end, traits, k); }
 
 // Without Traits
@@ -245,6 +244,7 @@ inline bool do_intersect(InputIterator begin, InputIterator end, Traits& traits,
 template <typename InputIterator>
 inline bool do_intersect(InputIterator begin, InputIterator end,
                          Tag_true = Tag_true(), unsigned int k=5,
+                         std::enable_if_t<CGAL::is_iterator<InputIterator>::value>* = 0,
                          Enable_if_Polygon_2_iterator<InputIterator>* = 0)
 { return r_do_intersect(begin, end, k); }
 
@@ -252,6 +252,7 @@ inline bool do_intersect(InputIterator begin, InputIterator end,
 template <typename InputIterator>
 inline bool do_intersect(InputIterator begin, InputIterator end,
                          Tag_false, unsigned int k=5,
+                         std::enable_if_t<CGAL::is_iterator<InputIterator>::value>* = 0,
                          Enable_if_Polygon_2_iterator<InputIterator>* = 0)
 {
   typename Iterator_to_gps_traits<InputIterator>::Traits traits;
@@ -262,6 +263,7 @@ inline bool do_intersect(InputIterator begin, InputIterator end,
 template <typename InputIterator>
 inline bool do_intersect(InputIterator begin, InputIterator end,
                          unsigned int k=5,
+                         std::enable_if_t<CGAL::is_iterator<InputIterator>::value>* = 0,
                          Disable_if_Polygon_2_iterator<InputIterator>* = 0)
 {
   typename Iterator_to_gps_traits<InputIterator>::Traits traits;

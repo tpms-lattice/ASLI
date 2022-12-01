@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Kernel_d/include/CGAL/Kernel_d/Iso_box_d.h $
-// $Id: Iso_box_d.h ab5517e 2021-02-09T09:27:30+01:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Straight_skeleton_2/include/CGAL/Straight_skeleton_2/Straight_skeleton_aux.h $
-// $Id: Straight_skeleton_aux.h 5ecd852 2021-04-26T21:37:02+01:00 Giles Bathgate
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -21,9 +21,9 @@
 #include <boost/mpl/or.hpp>
 #include <boost/none.hpp>
 #include <boost/optional/optional.hpp>
-#include <boost/type_traits/is_same.hpp>
 
 #include <iostream>
+#include <type_traits>
 
 // The heap objects used in this implementation are intrusively reference counted. Thus, they inherit from Ref_counted_base.
 namespace CGAL {
@@ -34,8 +34,8 @@ template<class K> struct Has_inexact_constructions
 {
   typedef typename K::FT FT ;
 
-  typedef typename boost::mpl::if_< boost::mpl::or_< boost::is_same<FT,double>
-                                                   , boost::is_same<FT,Interval_nt_advanced>
+  typedef typename boost::mpl::if_< boost::mpl::or_< std::is_same<FT,double>
+                                                   , std::is_same<FT,Interval_nt_advanced>
                                                    >
                                   , Tag_true
                                   , Tag_false

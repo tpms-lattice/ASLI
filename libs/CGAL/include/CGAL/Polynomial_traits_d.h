@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Polynomial/include/CGAL/Polynomial_traits_d.h $
-// $Id: Polynomial_traits_d.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -566,7 +566,7 @@ public:
     template <class Input_iterator, class NT> Polynomial_d
     construct_value_type(Input_iterator begin, Input_iterator end, NT) const {
       typedef CGAL::Coercion_traits<NT,Coefficient_type> CT;
-      CGAL_static_assertion((boost::is_same<typename CT::Type,Coefficient_type>::value));
+      CGAL_static_assertion((std::is_same<typename CT::Type,Coefficient_type>::value));
       typename CT::Cast cast;
       return Polynomial_d(
           boost::make_transform_iterator(begin,cast),
@@ -618,7 +618,7 @@ public:
     operator()( Input_iterator begin, Input_iterator end ) const {
       if(begin == end ) return Polynomial_d(0);
       typedef typename std::iterator_traits<Input_iterator>::value_type value_type;
-      typedef Boolean_tag<boost::is_same<value_type,Coefficient_type>::value>
+      typedef Boolean_tag<std::is_same<value_type,Coefficient_type>::value>
         Is_coeff;
       std::vector<value_type> vec(begin,end);
       return construct(vec.begin(),vec.end(),Is_coeff());

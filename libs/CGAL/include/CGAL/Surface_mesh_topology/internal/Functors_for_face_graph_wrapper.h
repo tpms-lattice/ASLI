@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Functors_for_face_graph_wrapper.h $
-// $Id: Functors_for_face_graph_wrapper.h 3fb644e 2020-04-10T17:40:30+02:00 Guillaume Damiand
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -20,7 +20,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /** This file contains the following functors for Face_graph_wrapper:
  * Get_beta<typename HEG, unsigned int i>::
-         operator() (const HEG& heg, Dart_const_handle dh)
+         operator() (const HEG& heg, Dart_const_descriptor dh)
  * Index_from_halfedge_descriptor<Mesh>::run(m, h)
  * Halfedge_descriptor_from_index<Mesh>::run(m, i)
  * Is_index_used<Mesh>::run(m, i)
@@ -37,9 +37,9 @@ namespace internal {
 template<typename HEG, unsigned int i>
 struct Get_beta
 {
-  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_handle;
+  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_descriptor;
 
-  static Dart_const_handle value(const HEG& /*heg*/, Dart_const_handle /*dh*/)
+  static Dart_const_descriptor value(const HEG& /*heg*/, Dart_const_descriptor /*dh*/)
   {
     std::cout<<"ERROR Get_beta<HEG, "<<i<<">"<<std::endl;
     CGAL_assertion(false);
@@ -49,22 +49,22 @@ struct Get_beta
 template<typename HEG>
 struct Get_beta<HEG, 0>
 {
-  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_handle;
-  static Dart_const_handle value(const HEG& heg, Dart_const_handle dh)
+  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_descriptor;
+  static Dart_const_descriptor value(const HEG& heg, Dart_const_descriptor dh)
   { return prev(dh, heg); }
 };
 template<typename HEG>
 struct Get_beta<HEG, 1>
 {
-  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_handle;
-  static Dart_const_handle value(const HEG& heg, Dart_const_handle dh)
+  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_descriptor;
+  static Dart_const_descriptor value(const HEG& heg, Dart_const_descriptor dh)
   { return next(dh, heg); }
 };
 template<typename HEG>
 struct Get_beta<HEG, 2>
 {
-  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_handle;
-  static Dart_const_handle value(const HEG& heg, Dart_const_handle dh)
+  typedef typename boost::graph_traits<HEG>::halfedge_descriptor Dart_const_descriptor;
+  static Dart_const_descriptor value(const HEG& heg, Dart_const_descriptor dh)
   { return opposite(dh, heg); }
 };
 ////////////////////////////////////////////////////////////////////////////////

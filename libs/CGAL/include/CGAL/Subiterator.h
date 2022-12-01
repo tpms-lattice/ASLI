@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Principal_component_analysis/include/CGAL/Subiterator.h $
-// $Id: Subiterator.h 3efe2ec 2021-03-31T09:40:19+02:00 Simon Giraudot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Simon Giraudot

@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/GraphicsView/include/CGAL/Qt/keyFrameInterpolator_impl.h $
-// $Id: keyFrameInterpolator_impl.h 5efa544 2021-02-22T17:19:40+01:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-only
 #ifdef CGAL_HEADER_ONLY
 #define CGAL_INLINE_FUNCTION inline

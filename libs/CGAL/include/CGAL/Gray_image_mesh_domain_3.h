@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_3/include/CGAL/Gray_image_mesh_domain_3.h $
-// $Id: Gray_image_mesh_domain_3.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -64,12 +64,12 @@ public:
                            const Image_word_type value_outside = 0.,
                            const FT& error_bound = FT(1e-3),
                            CGAL::Random* p_rng = nullptr)
-    : Base(Wrapper(image,
+    : Base(parameters::function = Wrapper(image,
                    Transform(iso_value),
                    Transform(iso_value)(value_outside)),
-           Mesh_3::internal::compute_bounding_box(image),
-           error_bound,
-           p_rng)
+           parameters::bounding_object = Mesh_3::internal::compute_bounding_box(image),
+           parameters::relative_error_bound = error_bound,
+           parameters::p_rng = p_rng)
   {
     CGAL_assertion(Transform(iso_value)(value_outside) == 0);
   }
@@ -79,10 +79,10 @@ public:
                            const Image_word_type value_outside = 0.,
                            const FT& error_bound = FT(1e-3),
                            CGAL::Random* p_rng = nullptr)
-    : Base(Wrapper(image, transform, transform(value_outside)),
-           Mesh_3::internal::compute_bounding_box(image),
-           error_bound,
-           p_rng)
+    : Base(parameters::function = Wrapper(image, transform, transform(value_outside)),
+           parameters::bounding_object = Mesh_3::internal::compute_bounding_box(image),
+           parameters::relative_error_bound = error_bound,
+           parameters::p_rng = p_rng)
   {
     CGAL_assertion(transform(value_outside) == 0);
   }

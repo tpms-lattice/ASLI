@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Distance_2/include/CGAL/Distance_2/Point_2_Line_2.h $
-// $Id: Point_2_Line_2.h cf15bbe 2021-05-07T19:22:00+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

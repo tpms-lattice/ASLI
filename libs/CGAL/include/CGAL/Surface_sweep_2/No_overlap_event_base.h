@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event_base.h $
-// $Id: No_overlap_event_base.h efa642a 2021-03-25T15:43:48+02:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi        <talizvi@post.tau.ac.il>,

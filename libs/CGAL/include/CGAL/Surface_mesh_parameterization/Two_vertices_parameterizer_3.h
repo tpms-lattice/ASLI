@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Two_vertices_parameterizer_3.h $
-// $Id: Two_vertices_parameterizer_3.h bdd4efe 2021-01-15T10:06:56+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez, Bruno Levy
@@ -288,9 +288,9 @@ public:
   ///
   /// \param mesh a triangulated surface.
   /// \param bhd a halfedge descriptor on the boundary of `mesh`.
-  /// \param uvmap an instanciation of the class `VertexUVmap`.
-  /// \param vimap an instanciation of the class `VertexIndexMap`.
-  /// \param vpmap an instanciation of the class `VertexParameterizedMap`.
+  /// \param uvmap an instantiation of the class `VertexUVmap`.
+  /// \param vimap an instantiation of the class `VertexIndexMap`.
+  /// \param vpmap an instantiation of the class `VertexParameterizedMap`.
   ///
   /// \pre `mesh` must be a triangular mesh.
   /// \pre The vertices must be indexed (vimap must be initialized).
@@ -305,7 +305,7 @@ public:
                           VertexParameterizedMap vpmap)
   {
     // Fill containers
-    boost::unordered_set<vertex_descriptor> vertices;
+    std::unordered_set<vertex_descriptor> vertices;
     internal::Containers_filler<Triangle_mesh> fc(mesh, vertices);
     Polygon_mesh_processing::connected_component(
                                       face(opposite(bhd, mesh), mesh),

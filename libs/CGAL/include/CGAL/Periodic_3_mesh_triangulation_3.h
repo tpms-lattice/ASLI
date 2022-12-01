@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_triangulation_3.h $
-// $Id: Periodic_3_mesh_triangulation_3.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mikhail Bogdanov
@@ -38,7 +38,7 @@
 #include <CGAL/Cartesian_converter.h>
 #include <CGAL/Exact_predicates_exact_constructions_kernel.h>
 #include <CGAL/Kernel_traits.h>
-#include <CGAL/Mesh_3/io_signature.h>
+#include <CGAL/SMDS_3/io_signature.h>
 #include <CGAL/tags.h>
 
 #include <iostream>
@@ -715,8 +715,8 @@ public:
                  const Facet* /* this_facet_must_be_in_the_cz */ = nullptr,
                  bool* /* the_facet_is_in_its_cz */ = nullptr) const
   {
-    CGAL_triangulation_precondition(could_lock_zone == nullptr);
-    CGAL_triangulation_precondition(number_of_vertices() != 0);
+    CGAL_precondition(could_lock_zone == nullptr);
+    CGAL_precondition(number_of_vertices() != 0);
 
     clear_v_offsets();
 

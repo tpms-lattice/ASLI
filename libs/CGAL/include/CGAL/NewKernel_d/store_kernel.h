@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/store_kernel.h $
-// $Id: store_kernel.h a03eff6 2020-04-08T16:03:18+02:00 Marc Glisse
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse

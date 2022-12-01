@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Number_types/include/CGAL/Sqrt_extension/Sqrt_extension_type.h $
-// $Id: Sqrt_extension_type.h 0d66e19 2020-07-24T17:05:10+02:00 Mael Rouxel-Labbé
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,8 +33,9 @@
 #include <CGAL/Interval_arithmetic.h>
 #include <CGAL/Sqrt_extension_fwd.h>
 #include <boost/optional.hpp>
-#include <boost/type_traits/is_same.hpp>
 #include <CGAL/NT_converter.h>
+
+#include <type_traits>
 
 #define CGAL_int(T)    typename First_if_different<int,    T>::Type
 
@@ -177,10 +178,10 @@ public:
      */
   template <class NTX>
   explicit Sqrt_extension(const NTX& a, const NTX& b, const NTX& c, const bool is_smaller,
-    typename boost::enable_if< boost::mpl::and_<
-      boost::is_same< typename Fraction_traits<NT>::Numerator_type,NTX >,
-      boost::is_same< typename Fraction_traits<ROOT>::Numerator_type,NTX >
-    > >::type* = 0  )
+    std::enable_if_t< boost::mpl::and_<
+      std::is_same< typename Fraction_traits<NT>::Numerator_type,NTX >,
+      std::is_same< typename Fraction_traits<ROOT>::Numerator_type,NTX >
+    >::value >* = 0  )
   {
     typename Fraction_traits<NT>::Compose compose_nt;
     typename Fraction_traits<ROOT>::Compose compose_root;
@@ -228,7 +229,7 @@ public:
     //! Access operator for is_extended_, \c const
     inline const bool& is_extended() const { return is_extended_; }
     inline bool is_rational() const {
-      CGAL_precondition( (boost::is_same<NT,ROOT>::value) || !"NT and ROOT should be identical and rational");
+      CGAL_precondition( (std::is_same<NT,ROOT>::value) || !"NT and ROOT should be identical and rational");
       return !is_extended_;} //for backward compatibility
 
     //!check if the number is an extension (test the values) and update the internal flag

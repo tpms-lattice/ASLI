@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_intersection_surface_sweep_2_impl.h $
-// $Id: No_intersection_surface_sweep_2_impl.h facabca 2021-09-10T17:47:17+02:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman  <baruchzu@post.tau.ac.il>

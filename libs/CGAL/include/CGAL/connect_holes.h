@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Boolean_set_operations_2/include/CGAL/connect_holes.h $
-// $Id: connect_holes.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein   <wein@post.tau.ac.il>
@@ -432,7 +432,7 @@ OutputIterator connect_holes(const Polygon_with_holes_2<Kernel,
       } else {
         /*the case where target() is a part of several holes, and next is a
         boundary of a hole that has been traversed. This requires
-        to continue "traversal alongside all edges whose target is also
+        to continue traversal alongside all edges whose target is also
         curr->target() to keep looking for a hole that hasn't been traversed.
         we do not insert the target to the output set to avoid duplication
         with cases 2 and 3*/

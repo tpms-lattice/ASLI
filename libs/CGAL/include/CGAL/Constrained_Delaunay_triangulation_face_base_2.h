@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Mesh_2/include/CGAL/Constrained_Delaunay_triangulation_face_base_2.h $
-// $Id: Constrained_Delaunay_triangulation_face_base_2.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos
@@ -17,7 +17,7 @@
 #include <CGAL/license/Mesh_2.h>
 
 
-#include <CGAL/triangulation_assertions.h>
+#include <CGAL/assertions.h>
 #include <CGAL/Constrained_triangulation_face_base_2.h>
 
 namespace CGAL {

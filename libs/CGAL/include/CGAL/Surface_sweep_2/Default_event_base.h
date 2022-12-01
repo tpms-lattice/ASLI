@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_event_base.h $
-// $Id: Default_event_base.h 092cf8e 2019-10-25T16:26:17+02:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,

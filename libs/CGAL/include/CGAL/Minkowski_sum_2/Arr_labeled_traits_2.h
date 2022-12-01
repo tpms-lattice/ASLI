@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/Arr_labeled_traits_2.h $
-// $Id: Arr_labeled_traits_2.h 3863b96 2020-04-06T02:01:25+03:00 Efi Fogel
+// $URL$
+// $Id$
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein   <wein_r@yahoo.com>

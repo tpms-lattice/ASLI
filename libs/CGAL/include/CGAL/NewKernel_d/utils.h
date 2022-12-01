@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL: https://github.com/CGAL/cgal/blob/v5.4.1/NewKernel_d/include/CGAL/NewKernel_d/utils.h $
-// $Id: utils.h 9c28a54 2021-03-18T09:38:30+01:00 Laurent Rineau
+// $URL$
+// $Id$
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -22,7 +22,6 @@
 
 #include <type_traits>
 #include <utility>
-#include <boost/utility/enable_if.hpp>
 #include <boost/preprocessor/repetition.hpp>
 #include <CGAL/Rational_traits.h>
 #include <CGAL/tuple.h>
@@ -39,7 +38,7 @@ template <class T, class No, bool=internal::has_type<T>::value /*false*/>
 struct Has_type_different_from : boost::false_type {};
 template <class T, class No>
 struct Has_type_different_from <T, No, true>
-: boost::mpl::not_<boost::is_same<typename T::type, No> > {};
+: boost::mpl::not_<std::is_same<typename T::type, No> > {};
 
 
         template <class T> struct Wrap_type { typedef T type; };
@@ -139,7 +138,7 @@ struct Has_type_different_from <T, No, true>
 }
 
 // TODO: make a Cartesian-only variant
-// WARNING: do not use the Req* parameters too much, they can cause circular instanciations and are only useful for dispatching.
+// WARNING: do not use the Req* parameters too much, they can cause circular instantiations and are only useful for dispatching.
 #define CGAL_STRIP_PAREN_(...) __VA_ARGS__
 #define CGAL_STRIP_PAREN(...) CGAL_STRIP_PAREN_ __VA_ARGS__
 // What to do with O? pass it down to other functors or drop it?
