@@ -170,10 +170,10 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	// Postprocessing
 	std::cout << "  Post-processing mesh... " << std::flush; TicToc::tic();
 
-	PolygonMesh processedScaffold;
+	SurfaceMesh processedScaffold;
 	if (me_settings.CGAL_preserveEdges == TRUE) {
 		// Extract surface triangulation
-		PolygonMesh scaffold;
+		SurfaceMesh scaffold;
 		CGAL::facets_in_complex_3_to_triangle_mesh(c3t3, scaffold);
 //		std::ofstream("scaffold_dump.off") << std::setprecision(17) << scaffold; // UNCOMMENT FOR DEBUGING...
 
@@ -187,8 +187,8 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 		}
 
 		// Clip scaffold (using intersection)
-		PolygonMesh outer_shell;
-		CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, outer_shell);
+		SurfaceMesh outer_shell;
+		surfaceRemesh(shell, lt_type, lt_size, lt_feature, me_settings, outer_shell); // Remesh outer shell to hopefully ensure assertion violations due to overly large elements are avoided
 
 		if( CGAL::Polygon_mesh_processing::corefine_and_compute_intersection(scaffold, outer_shell, processedScaffold) == false)
 			std::cout << "\n  WARNING: corefine_and_compute_intersection output may have only been corefined!" << std::endl;
@@ -237,8 +237,8 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	stl_fileOut.close();
 
 	std::cout << "\n  SURFACE TRIANGULATION: " << std::endl;
-	std::cout << "  Number of vertices: " << processedScaffold.size_of_vertices() << std::endl;
-	std::cout << "  Number of facets: " << processedScaffold.size_of_facets() << "\n" << std::endl;
+	std::cout << "  Number of vertices: " << processedScaffold.number_of_vertices() << std::endl;
+	std::cout << "  Number of facets: " << processedScaffold.number_of_faces() << "\n" << std::endl;
 
 	// Compute/Recompute volume mesh (when surface was meshed and edges are to be preserved)
 	if (me_settings.CGAL_preserveEdges == TRUE && me_settings.volumeMesh == TRUE) {
@@ -365,6 +365,92 @@ bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
 	//std::cout << "  Number of edges: " << c3t3.number_of_edges() << std::endl; // Returns incorrect value
 	//std::cout << "  Number of facets: " << 2 * c3t3.number_of_facets() << std::endl; // ???
 	std::cout << "  Number of tetrahedra: " << c3t3.number_of_cells() << std::endl;
+
+	return EXIT_SUCCESS;
+}
+
+bool MeshCGAL::surfaceRemesh(outerShell &shell, latticeType lt_type, latticeSize lt_size, 
+                             latticeFeature lt_feature, meshSettings me_settings,
+							 SurfaceMesh &surfaceMeshOut) {
+
+	// Mesh user settings
+	FT me_facetSize = 0.42;
+	FT me_facetAngle = me_settings.CGAL_facetAngle;
+	FT me_facet_distance = 0.001;
+
+	FT edgesProtectionAngle = me_settings.CGAL_edgesProtectionAngle;
+
+	// Concurrency settings
+	int n_threads = 1;
+	#ifdef CGAL_CONCURRENT_MESH_3
+		if (me_settings.n_threads < 1) {
+			me_settings.n_threads = 1;
+		} else if (me_settings.n_threads > tbb::global_control::active_value(tbb::global_control::max_allowed_parallelism)) {
+			me_settings.n_threads = tbb::global_control::active_value(tbb::global_control::max_allowed_parallelism); // tbb::this_task_arena::max_concurrency()
+			std::cout << "  Warning: Requested number of threads exceeds the maximum allowed " 
+			          << "parallelism. Number of threads set to the maximum allowed parallelism." << std::endl;
+		}
+		//tbb::task_scheduler_init init(me_settings.n_threads); // Deprecated
+		//n_threads = tbb::this_task_arena::max_concurrency();
+		
+		tbb::global_control control(tbb::global_control::max_allowed_parallelism, me_settings.n_threads);
+		n_threads = tbb::global_control::active_value(tbb::global_control::max_allowed_parallelism);
+	#endif
+
+	#ifdef ASLI_VERBOSE
+		std::cout << "  Remeshing bounding geometry (using " << n_threads << " threads)... " << std::flush; TicToc::tic();
+	#endif
+
+	F_Polyhedron polygonSurface;
+	CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, polygonSurface);
+
+	// Create a polyhedral domain with one polyhedron (and no "bounding polyhedron") such that the volumetric part of the domain stays empty
+	std::vector<F_Polyhedron*> poly_ptrs_vector(1, &polygonSurface);
+	F_Polyhedron_domain domain(poly_ptrs_vector.begin(), poly_ptrs_vector.end());
+
+	// Get sharp features
+	domain.detect_features(edgesProtectionAngle);
+
+	// Define sizing field
+	TPMS_dependent_wallsize_field_P facetSize;
+	facetSize.lt_type = &lt_type;
+	facetSize.lt_size = &lt_size;
+	facetSize.lt_feature = &lt_feature;
+	facetSize.parameter = &me_facetSize;
+
+	// Mesh criteria
+	F_Mesh_criteria criteria(CGAL::parameters::edge_size = facetSize,
+	                         CGAL::parameters::facet_angle = me_facetAngle,
+	                         CGAL::parameters::facet_size = facetSize,
+	                         CGAL::parameters::facet_distance = me_facet_distance);
+
+	// Mesh generation
+	F_C3t3 c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria,
+	                                        CGAL::parameters::no_exude(),
+	                                        CGAL::parameters::no_perturb(),
+	                                        CGAL::parameters::no_lloyd(),
+	                                        CGAL::parameters::no_odt(),
+	                                        CGAL::parameters::manifold());
+
+	// Extract surface triangulation
+	CGAL::facets_in_complex_3_to_triangle_mesh(c3t3, surfaceMeshOut);
+
+	// Reorient all face normals to point outward
+	if (CGAL::is_closed(surfaceMeshOut) == true) {
+		CGAL::Polygon_mesh_processing::orient(surfaceMeshOut, CGAL::parameters::outward_orientation(true));
+	} else {
+		std::cout << "\n  WARNING: Polygon has border edges!" << std::endl;
+	}
+
+	#ifdef ASLI_VERBOSE
+		std::cout << "Finished!" << std::endl; TicToc::toc();
+	#endif
+	
+	// ...
+	//#ifdef CGAL_CONCURRENT_MESH_3
+	//	//init.~task_scheduler_init(); // Deprecated
+	//	//control.~global_control();
+	//#endif
 
 	return EXIT_SUCCESS;
 }

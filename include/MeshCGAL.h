@@ -239,6 +239,11 @@ namespace MeshCGAL {
 		latticeSize lt_size, latticeFeature lt_feature, meshSettings me_settings,
 		std::filesystem::path outputFile);
 
+	// Polehedral surface meshing
+	bool surfaceRemesh(outerShell &shell, latticeType lt_type,
+		latticeSize lt_size, latticeFeature lt_feature,
+		meshSettings me_settings, SurfaceMesh &surfaceMeshOut);
+
 	// Implicit poisson surface reconstruction
 	void implicitPoissonReconstruction(outerShell &shell,
 		 double offset, std::vector<double> &boundingBox, 
