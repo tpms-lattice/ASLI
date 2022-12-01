@@ -180,6 +180,12 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 		// Remove all but the largest component
 		CGAL::Polygon_mesh_processing::keep_largest_connected_components(scaffold, 1);
 
+		// Check if scaffold surface is closed and try to fix if not
+		if (CGAL::is_closed(scaffold) == false) {
+			CGAL::Polygon_mesh_processing::experimental::snap_borders(scaffold);
+			CGAL::Polygon_mesh_processing::stitch_borders(scaffold);
+		}
+
 		// Clip scaffold (using intersection)
 		PolygonMesh outer_shell;
 		CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, outer_shell);

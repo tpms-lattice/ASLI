@@ -48,6 +48,8 @@
 #include <CGAL/Polygon_mesh_processing/connected_components.h>
 #include <CGAL/Polygon_mesh_processing/orientation.h>
 #include <CGAL/Polygon_mesh_processing/corefinement.h>
+#include <CGAL/Polygon_mesh_processing/stitch_borders.h>
+#include <CGAL/Polygon_mesh_processing/internal/Snapping/snap.h>
 
 #include <CGAL/Polygon_mesh_processing/repair.h> // Used as temporary fix for a bug, i.e. remove isolated vertices from polygon mesh
 
