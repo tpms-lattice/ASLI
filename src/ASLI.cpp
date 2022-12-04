@@ -213,14 +213,31 @@ void ASLI::SetUpLattice() {
 	
 	// Determine the bounding box of the outer shell 
 	std::vector<double> bounds = {HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL};
-	for (size_t i=0; i<shell.tetgenPoints.numberofpoints; i+=3) {
-		bounds[0] = std::min(bounds[0], shell.tetgenPoints.pointlist[i]);
-		bounds[1] = std::max(bounds[1], shell.tetgenPoints.pointlist[i]);
-		bounds[2] = std::min(bounds[2], shell.tetgenPoints.pointlist[i+1]);
-		bounds[3] = std::max(bounds[3], shell.tetgenPoints.pointlist[i+1]);
-		bounds[4] = std::min(bounds[4], shell.tetgenPoints.pointlist[i+2]);
-		bounds[5] = std::max(bounds[5], shell.tetgenPoints.pointlist[i+2]);
-	}
+	#ifdef CGAL_MESH // Place somewhere else
+		if( me_settings.mesher == "CGAL" ) {
+			for (size_t i=0; i<shell.points.size(); ++i) {
+				bounds[0] = std::min(bounds[0], shell.points[i].x());
+				bounds[1] = std::max(bounds[1], shell.points[i].x());
+				bounds[2] = std::min(bounds[2], shell.points[i].y());
+				bounds[3] = std::max(bounds[3], shell.points[i].y());
+				bounds[4] = std::min(bounds[4], shell.points[i].z());
+				bounds[5] = std::max(bounds[5], shell.points[i].z());
+			}
+		}
+	#endif
+	#ifdef MMG_MESH // Place somewhere else
+		if( me_settings.mesher == "MMG" ) {
+			for (size_t i=0; i<shell.tetgenPoints.numberofpoints; i+=3) {
+				bounds[0] = std::min(bounds[0], shell.tetgenPoints.pointlist[i]);
+				bounds[1] = std::max(bounds[1], shell.tetgenPoints.pointlist[i]);
+				bounds[2] = std::min(bounds[2], shell.tetgenPoints.pointlist[i+1]);
+				bounds[3] = std::max(bounds[3], shell.tetgenPoints.pointlist[i+1]);
+				bounds[4] = std::min(bounds[4], shell.tetgenPoints.pointlist[i+2]);
+				bounds[5] = std::max(bounds[5], shell.tetgenPoints.pointlist[i+2]);
+			}
+		}
+	#endif
+
 
 	std::vector<double> boundingBoxDimensions;
 	for (size_t i = 0; i < bounds.size(); i+=2)
@@ -442,23 +459,28 @@ void ASLI::LoadInputFiles() {
 	 */
 
 	// Read the stl file
-	// The 'pointlist' and 'facetlist' together return the polyhedron. Note: After
-	// calling load_stl() or read_stl() there will be many duplicated points in 
-	// 'pointlist'. These are unified during the Delaunay tetrahedralization process.
-	char* stlFileChar = new char[stlFile.size() + 1]; //char stlFileChar[stlFile.size() + 1]; delete stlFileChar;
-	strcpy(stlFileChar, stlFile.c_str());
-	std::cout << "  " << std::flush;
-	if (shell.tetgenPoints.load_stl(stlFileChar) == 0) { //1.6
-	//if (shell.tetgenPoints.read_stl(stlFileChar) == 0) { //1.4
-		delete stlFileChar;
-		exit(EXIT_FAILURE);
-	}
-	delete stlFileChar;
-
-	#ifdef CGAL_MESH // Place somewhere else
-		std::ifstream stl_file(stlFile, std::ios::binary);
-		CGAL::IO::read_STL(stl_file, shell.points, shell.polygons);
-		stl_file.close();
+	#ifdef CGAL_MESH
+		if( me_settings.mesher == "CGAL" ) {
+			std::cout << "  Opening " << stlFile << std::endl;
+			std::ifstream stl_file(stlFile, std::ios::binary);
+			CGAL::IO::read_STL(stl_file, shell.points, shell.polygons);
+			stl_file.close();
+		}
+	#endif
+	#ifdef MMG_MESH
+		if( me_settings.mesher == "MMG" ) {
+			// The 'pointlist' and 'facetlist' together return the polyhedron. Note: After
+			// calling load_stl() or read_stl() there will be many duplicated points in 
+			// 'pointlist'. These are unified during the Delaunay tetrahedralization process.
+			char* stlFileChar = new char[stlFile.size() + 1];
+			strcpy(stlFileChar, stlFile.c_str());
+			std::cout << "  " << std::flush;
+			if (shell.tetgenPoints.load_stl(stlFileChar) == 0) { // For 1.6 (if 1.4 use read_stl instead)
+				delete stlFileChar;
+				exit(EXIT_FAILURE);
+			}
+			delete stlFileChar;
+		}
 	#endif
 
 	// Read the unit cell typing file (.tap file)

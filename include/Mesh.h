@@ -21,25 +21,37 @@
 #ifndef MESH_H
 #define MESH_H
 
+/* CGAL headers */
+#ifdef CGAL_MESH
+	#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
+	#include <CGAL/IO/STL.h>
+#endif
+
 /* tetgen headers */
-#include "tetgen.h"
+#ifdef MMG_MESH
+	#include "tetgen.h"
+#endif
 
 /* Standard library headers */
 #include <string>
 
 #ifdef CGAL_MESH
-  #include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-	#include <CGAL/IO/STL.h>
+	typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
+	typedef K::Point_3 Point_3_;
+#endif
 
-	typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel_;
-	typedef Kernel_::Point_3 Point_3_;
-
+#if defined CGAL_MESH && MMG_MESH
 	struct outerShell {
 		tetgenio tetgenPoints;
 		std::vector<Point_3_> points;
 		std::vector<std::vector<std::size_t>> polygons;
 	};
-#else
+#elif defined CGAL_MESH
+	struct outerShell {
+		std::vector<Point_3_> points;
+		std::vector<std::vector<std::size_t>> polygons;
+	};
+#elif defined MMG_MESH
 	struct outerShell {
 		tetgenio tetgenPoints;
 	};

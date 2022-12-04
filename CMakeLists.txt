@@ -170,6 +170,14 @@ if(MMG_MESH)
     include_directories(PUBLIC ${SCOTCH_INCLUDE_DIRS})
   endif()
 
+  # tetgen
+  add_library(tet STATIC 
+              ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/predicates.cxx 
+              ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/tetgen.cxx
+  )
+  target_include_directories(tet PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen)
+  target_compile_definitions(tet PUBLIC TETLIBRARY) # -DTETLIBRARY: flag to compile tetgen as a library
+
 endif()
 
 # alglib
@@ -182,14 +190,6 @@ target_include_directories(alg PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/alglib/sr
 
 # mTT
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs/mTT/include)
-
-# tetgen
-add_library(tet STATIC 
-            ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/predicates.cxx 
-            ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/tetgen.cxx
-)
-target_include_directories(tet PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen)
-target_compile_definitions(tet PUBLIC TETLIBRARY) # -DTETLIBRARY: flag to compile tetgen as a library
 
 # yaml
 file(GLOB yaml_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libs/yaml/src/*.cpp) # Using file GLOB is not recomended!
@@ -240,7 +240,7 @@ if(MARCH_NATIVE)
 endif()
 
 # Create entries for C++ files in "ASLI" routine
-target_link_libraries(ASLI PUBLIC alg tet yaml)
+target_link_libraries(ASLI PUBLIC alg yaml)
 if(NOT MSVC)
   target_link_libraries(ASLI PUBLIC stdc++fs)
 endif()
@@ -254,7 +254,7 @@ endif()
 
 if(MMG_MESH)
   add_dependencies(ASLI ${MMG_PREFIX} ${MSHMET_PREFIX})
-  target_link_libraries(ASLI PUBLIC ${MMG3D_LIBRARIES} ${MSHMET_LIBRARIES})
+  target_link_libraries(ASLI PUBLIC ${MMG3D_LIBRARIES} ${MSHMET_LIBRARIES} tet)
   if(SCOTCH_FOUND)
     target_link_libraries(ASLI PUBLIC ${SCOTCH_LIBRARIES} scotch)
   endif()
