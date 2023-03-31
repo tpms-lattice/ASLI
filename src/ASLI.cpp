@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2023
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -175,10 +175,10 @@ void ASLI::SetUp(std::string configFile) {
 		if (me_settings.CGAL_cellRadiusEdgeRatio <= 2) me_settings.CGAL_cellRadiusEdgeRatio = 3.0;
 		me_settings.CGAL_cellSize = config["me_cellSize"].as<double>();
 		if (me_settings.CGAL_cellSize <= 0) me_settings.CGAL_cellSize = 1.0;
-		me_settings.CGAL_preserveEdges = config["me_preserveEdges"].as<bool>();
+		me_settings.CGAL_preserveEdges = true;//config["me_preserveEdges"].as<bool>();
 		me_settings.CGAL_poissonOffset = config["me_poissonOffset"].as<double>();
 		if (me_settings.CGAL_poissonOffset < 0.1) me_settings.CGAL_poissonOffset = 0.5;
-		me_settings.CGAL_edgesProtectionAngle = 45; //config["me_edgesProtectionAngle"].as<double>();
+		me_settings.CGAL_edgesProtectionAngle = 60; //config["me_edgesProtectionAngle"].as<double>();
 
 		me_settings.TETGEN_hvol = config["me_hvol"].as<double>();
 		if (me_settings.TETGEN_hvol <= 0) me_settings.TETGEN_hvol = 1.5;

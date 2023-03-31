@@ -1,6 +1,6 @@
  # ============================================================================
  #  This file is part of ASLI (A Simple Lattice Infiller)
- #  Copyright (C) KU Leuven, 2019-2022
+ #  Copyright (C) KU Leuven, 2019-2023
  #
  #  ASLI is free software: you can redistribute it and/or modify it under the 
  #  terms of the GNU Affero General Public License as published by the Free 
@@ -58,9 +58,8 @@ me_facetAngle: 0 # Surface facet shape (optional, default facet angle is 30 degr
 me_facetSize: 0 # Surface facet size. Scales with unit cell size. (optional, defaults to the local unit cell size) [Upper bound for the radii of surface Delaunay balls]
 me_facetDistance: 0.015 # Surface approximation error. Scales with the unit cell size [Upper bound for the distance between the circumcenter of a surface facet and the center of a surface Delaunay ball of this facet]
 me_cellRadiusEdgeRatio: 0 # Tetrahedron shape quality measure. Value must be larger than 2. (optional, default edge ratio is 3.0. Only used when preserve edges is set to FALSE) [Upper bound for the ratio between the circumradius of a mesh tetrahedron and its shortest edge]
-me_cellSize: 0 # Tetrahedra size. Scales with wall size. (optional, defaults to the local wall size . Only used when preserve edges is set to FALSE) [Upper bound on the circumradii of the mesh tetrahedra]
-me_preserveEdges: TRUE # Set to TRUE to preserve edges, otherwise set to FALSE.
-me_poissonOffset: 0 # Poisson reconstruction offset. Scales with largest unit cell size in the design. Set to value >= 0.1 (optional, default offset is 0.5. Only used when preserve edges is set to TRUE)
+me_cellSize: 0 # Tetrahedra size. Scales with wall size and overrides me_facetSize if me_volumeMesh if set to TRUE. (optional, defaults to the local wall size . Only used when preserve edges is set to FALSE) [Upper bound on the circumradii of the mesh tetrahedra]
+me_poissonOffset: 0 # Poisson reconstruction offset. Scales with largest unit cell size in the design. Set to value >= 0.1 (optional, default offset is 0.5)
 
 # Mesh settings (MMG)
 me_hvol: 0 # Tetgen max. volume constraint. Scales with the the smallest unit cell size in the design. (optional)

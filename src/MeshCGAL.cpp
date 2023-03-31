@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2023
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -46,6 +46,8 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	// Mesh user settings
 	FT me_facetAngle = me_settings.CGAL_facetAngle;
 	FT me_facetSize = me_settings.CGAL_facetSize;
+	if (me_settings.volumeMesh == true)
+		me_facetSize = me_settings.CGAL_cellSize;
 	FT me_facetDistance = me_settings.CGAL_facetDistance;
 
 	FT me_cellRadiusEdgeRatio = me_settings.CGAL_cellRadiusEdgeRatio;
@@ -191,12 +193,13 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 		
 		// Clip scaffold (using intersection) and collect constrained edges in a property map
 		SurfaceMesh outer_shell;
-		surfaceRemesh(shell, lt_type, lt_size, lt_feature, me_settings, outer_shell); // Remesh outer shell to hopefully ensure assertion violations due to overly large elements are avoided
+		SurfaceMesh::Property_map<edge_descriptor, bool> ecmap_shell = outer_shell.add_property_map<edge_descriptor, bool>("e:is_constrained", false).first;
 
-		if(CGAL::Polygon_mesh_processing::corefine_and_compute_intersection(scaffold, outer_shell, processedScaffold, CGAL::parameters::default_values(), CGAL::parameters::default_values(), CGAL::parameters::edge_is_constrained_map(ecmap)) == false)
+		surfaceRemesh(shell, lt_type, lt_size, lt_feature, me_settings, outer_shell); // Remesh outer shell to avoid assertion violations due to overly large elements when computing the intersection
+		CGAL::Polygon_mesh_processing::detect_sharp_edges(outer_shell, edgesProtectionAngle, ecmap_shell);
+
+		if(CGAL::Polygon_mesh_processing::corefine_and_compute_intersection(scaffold, outer_shell, processedScaffold, CGAL::parameters::default_values(), CGAL::parameters::edge_is_constrained_map(ecmap_shell), CGAL::parameters::edge_is_constrained_map(ecmap)) == false)
 			std::cout << "\n  WARNING: corefine_and_compute_intersection output may have only been corefined!" << std::endl;
-
-		CGAL::Polygon_mesh_processing::detect_sharp_edges(processedScaffold, edgesProtectionAngle, ecmap);
 
 	} else { // If preserveEdges == FALSE
 		// Save volume mesh
@@ -247,15 +250,19 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 
 	// Compute/Recompute volume mesh (when surface was meshed and edges are to be preserved)
 	if (me_settings.CGAL_preserveEdges == TRUE && me_settings.volumeMesh == TRUE) {
-//		std::string testFile = me_settings.output + currentTime + "_cgal.stl";
-//		std::filesystem::path testFileOut = me_settings.output + currentTime + "_cgal_mmg_test.mesh";
-//		MeshMMG::surface2volume(testFile, lt_type, lt_size, lt_feature, me_settings, testFileOut);
+		F_C3t3 c3t3_with_edges;
+		polehedral2volume(processedScaffold, ecmap, lt_type, lt_size, lt_feature, me_settings,
+		                  c3t3_with_edges);
 
-		std::vector<Point_3> points;
-		std::vector<std::vector<std::size_t>> polygons;
-		CGAL::Polygon_mesh_processing::polygon_mesh_to_polygon_soup(processedScaffold, points, polygons);
-		polehedral2volume(points, polygons, lt_type, lt_size, lt_feature, me_settings,
-		                  me_settings.output + currentTime + "_cgal.mesh");
+		// Write output to .mesh file
+		std::ofstream medit_file(me_settings.output + currentTime + "_cgal.mesh");
+		c3t3_with_edges.output_to_medit(medit_file);
+		medit_file.close();
+
+		//// Write output to .vtu file
+		//std::ofstream vtu_file(me_settings.output + currentTime + "_cgal.vtu");
+		//CGAL::output_to_vtu(vtu_file, c3t3);
+		//vtu_file.close();
 	}
 
 	// ...
@@ -270,19 +277,21 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 	return EXIT_SUCCESS;
 }
 
-bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
-                                  std::vector<std::vector<std::size_t>> polygons,
+bool MeshCGAL::polehedral2volume (SurfaceMesh surfaceMesh, 
+                                  SurfaceMesh::Property_map<edge_descriptor, bool> ecmap, 
                                   latticeType lt_type, latticeSize lt_size, 
 	                                latticeFeature lt_feature, meshSettings me_settings,
-                                  std::filesystem::path outputFile) {
+                                  F_C3t3 &c3t3) {
 	/* Discretizes the volume of a closed triangulation.
 	 * Inputs:
-	 *  points         : Structure containing the outer shell geometry
-	 *  polygons       : Lattice type data
-	 *  outputFile     : Output filename
-	 *  surf           : Lattice size data
+	 *  surfaceMesh    : Surface mesh
+	 *  ecmap          : Edge is constrained map
+	 *  lt_type        : Lattice type data
+	 *  lt_size        : Lattice size data
+	 *  lt_feature     : Lattice feature data
+	 *  me_settings    : Mesh settings
 	 * Outputs:
-	 *  .mesh file containing the volume mesh
+	 *  c3t3           : F_C3t3 containing the triangulated volume
 	 */
 
 	// Mesh user settings
@@ -292,8 +301,6 @@ bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
 
 	FT me_cellRadiusEdgeRatio = me_settings.CGAL_cellRadiusEdgeRatio;
 	FT me_cellSize = me_settings.CGAL_cellSize;     
-
-	FT edgesProtectionAngle = me_settings.CGAL_edgesProtectionAngle;
 
 	// Concurrency settings
 	int n_threads = 1;
@@ -316,19 +323,39 @@ bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
 
 	// Convert to polygon mesh
 	F_Polyhedron polygonSurface;
-	CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(points, polygons, polygonSurface);
+	CGAL::copy_face_graph(surfaceMesh, polygonSurface);
 
 	// Create domain
 	F_Polyhedron_domain domain(polygonSurface);
 
-  // Get sharp features
-  domain.detect_features(edgesProtectionAngle);
+	// Construct polyline with edges to protect
+	typedef SurfaceMesh::Property_map<edge_descriptor, bool> ECMap;
+	typedef SurfaceMesh::Property_map<vertex_descriptor, bool> VPMap;
+	typedef boost::filtered_graph<SurfaceMesh, Is_constrained<ECMap>, Is_feature<VPMap>> FG;
+
+	std::vector<std::vector<Point_3>> protected_features;
+
+	auto v_pmap = surfaceMesh.add_property_map<vertex_descriptor, bool>("v:on_feature_curve", false).first;
+	for(auto e : edges(surfaceMesh)) {
+		auto v1 = source(e, surfaceMesh);
+		auto v2 = target(e, surfaceMesh);
+		if (get(ecmap, e)) {
+			put(v_pmap, v1, true);
+			put(v_pmap, v2, true);
+		}
+	}
+
+	Polyline_visitor visitor{protected_features, surfaceMesh};
+	Is_constrained<ECMap> is_constrained{ecmap};
+	Is_feature<VPMap> is_feature{v_pmap};
+	
+	FG constrained_edges{surfaceMesh, is_constrained, is_feature};
+	CGAL::split_graph_into_polylines(constrained_edges, visitor);
+
+	// Insert edges in domain
+	domain.add_features(protected_features.begin(), protected_features.end());
 	
 	// Sizing fields
-	TPMS_dependent_unitcellsize_field_P facetSize;
-	facetSize.lt_size = &lt_size;
-	facetSize.parameter = &me_facetSize;
-
 	TPMS_dependent_unitcellsize_field_P facetDistance;
 	facetDistance.lt_size = &lt_size;
 	facetDistance.parameter = &me_facetDistance;
@@ -340,22 +367,16 @@ bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
 	cellSize.parameter = &me_cellSize;
 
 	// Mesh criteria
-	F_Mesh_criteria criteria(CGAL::parameters::edge_size = facetSize,
+	F_Mesh_criteria criteria(CGAL::parameters::edge_size = cellSize,
 	                         CGAL::parameters::facet_angle = me_facetAngle,     // Min triangle angle (degrees)
-	                         CGAL::parameters::facet_size = facetSize,         // Max triangle size
+	                         CGAL::parameters::facet_size = cellSize,         // Max triangle size
 	                         CGAL::parameters::facet_distance = facetDistance, // Surface approximation error
 	                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio,	// Mesh tetrahedra radius|edge ratio upper bound
 	                         CGAL::parameters::cell_size = cellSize);
 
 	// Mesh generation
-	F_C3t3 c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
+	c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
 	                                        //CGAL::parameters::manifold()); // Causes assertion violation error!
-
-	// Write output to .mesh file
-	outputFile.replace_extension(".mesh");
-	std::ofstream medit_file(outputFile.string());
-	c3t3.output_to_medit(medit_file);
-	medit_file.close();
 
 	// ...
 	//#ifdef CGAL_CONCURRENT_MESH_3
@@ -366,9 +387,8 @@ bool MeshCGAL::polehedral2volume (std::vector<Point_3> points,
 	std::cout << "Finished!" << std::endl; TicToc::toc();
 
 	std::cout << "\n  VOLUME MESH: " << std::endl;
-	//std::cout << "  Number of vertices: " << c3t3.number_of_vertices_in_complex() << std::endl; // Returns incorrect value
-	//std::cout << "  Number of edges: " << c3t3.number_of_edges() << std::endl; // Returns incorrect value
-	//std::cout << "  Number of facets: " << 2 * c3t3.number_of_facets() << std::endl; // ???
+	std::cout << "  Number of vertices: " << c3t3.triangulation().number_of_vertices() << std::endl;
+	std::cout << "  Number of facets: " << 2 * c3t3.number_of_facets() << std::endl;
 	std::cout << "  Number of tetrahedra: " << c3t3.number_of_cells() << std::endl;
 
 	return EXIT_SUCCESS;
