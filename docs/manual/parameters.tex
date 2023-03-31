@@ -307,23 +307,9 @@
 	
 	{\it Default:} [The local wall size]
 	
-	{\it Description:} [Standard] Tetrahedra size, i.e. upper bound on the circumradii of the mesh tetrahedra. Only active if {\tt  me\_volumeMesh} is set to TRUE. Scales with wall size.
+	{\it Description:} [Standard] Tetrahedra size, i.e. upper bound on the circumradii of the mesh tetrahedra. Only active if {\tt  me\_volumeMesh} is set to TRUE. Scales with wall size and overrides {\tt me\_facetSize} if {\tt me\_volumeMesh} if set to TRUE.
 		
-	{\it Possible values:} Positive integer number 
-	
-	% me_preserveEdges
-	\item {\it Parameter name:} {\tt me\_preserveEdges}
-	\phantomsection
-	\label{parameters:me_preserveEdges}
-	
-	\index[prmindex]{me\_preserveEdges}
-	\index[prmindexfull]{Mesh!CGAL!preserve edges}
-	
-	{\it Default:} TRUE
-	
-	{\it Description:} [Advanced] Set to TRUE to preserve the edges, otherwise set to FALSE.
-	
-	{\it Possible values:} Boolean value (TRUE or FALSE)
+	{\it Possible values:} Positive integer number
 	
 	% me_poissonOffset
 	\item {\it Parameter name:} {\tt me\_poissonOffset}
