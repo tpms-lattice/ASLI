@@ -282,6 +282,7 @@ add_custom_command(TARGET ASLI POST_BUILD
                           COMMAND ${CMAKE_COMMAND} -E copy_if_different
                             ${CMAKE_CURRENT_SOURCE_DIR}/config.yml
                             ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.*
+                            ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE
                             $<TARGET_FILE_DIR:ASLI>
                           COMMAND ${CMAKE_COMMAND} -E make_directory 
                             $<TARGET_FILE_DIR:ASLI>/inputs
