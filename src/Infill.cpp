@@ -98,6 +98,9 @@ double Infill::internal::unnormalizeLevel(double t_normalized, std::string type)
 	} else if (type == "sheet_IWP") {
 		return (t_normalized * (5.05 - 0)) + 0;
 
+	} else if (type == "cubic") { // Without smoothing
+		return (t_normalized * (0.71 - 0)) + 0;
+
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
 		exit(EXIT_FAILURE);
@@ -149,6 +152,10 @@ double Infill::internal::vFraction2level(double volFraction, std::string type) {
 	} else if (type == "sheet_IWP") {
 		a = -0.0343; b = 6.70; c = -48.91; d = 325.14; e = -1049.81; f = 1749.51;
 		g = -1448.85; h = 471.14;
+
+	} else if (type == "cubic") { // Without smoothing
+		a = 0.005943; b = 2.332; c = -21.46; d = 117.2; e = -332.8; f = 501.8;
+		g = -380.7; h = 114.3;
 
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
@@ -222,6 +229,10 @@ double Infill::internal::wallSize2level(double wallSize, double scaling, std::st
 		g = -18974.65; h = 8707.20;
 		if (wallSize > 0.67) {wallSize = 0.67;}
 
+	} else if (type == "cubic") { // Without smoothing
+		a = 0.01988; b = 0.4993;
+		if (wallSize > 1.356476) {wallSize = 1.356476;}
+
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
 		exit(EXIT_FAILURE);
@@ -292,6 +303,10 @@ double Infill::internal::poreSize2level(double poreSize, double scaling, std::st
 	} else if (type == "sheet_IWP") {
 		a = 4.96; b = -0.511; c = -33.51; d = -32.62; e = 173.24; f = -133.09;
 		if (poreSize > 0.42) {poreSize = 0.42;}
+
+	} else if (type == "cubic") { // Without smoothing
+		a = 0.6783; b = -0.4743;
+		if (poreSize > 1.709269) {poreSize = 1.709269;}
 
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
@@ -374,6 +389,12 @@ double Infill::internal::level2wallSize(double t, double scaling, std::string ty
 
 		a = 0.0212; b = -0.149; c = 0.534; d = -0.518; e = 0.226; f = -0.0437;
 		g = 0.00310;
+
+	} else if (type == "cubic") { // Without smoothing
+		if (t < 0) {t = 0;}
+		else if (t > 0.71) {t = 0.71;}
+
+		a = -0.03956; b = 2.002;
 
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
@@ -460,6 +481,12 @@ double Infill::internal::level2poreSize(double t, double scaling, std::string ty
 
 		a = 0.428; b = -0.0906; c = 0.0434; d = -0.0258; e = 0.00663;
 		f = -0.000627;
+
+	} else if (type == "cubic") { // Without smoothing
+		if (t < 0) {t = 0;}
+		else if (t > 0.71) {t = 0.71;}
+		
+		a = 1.42; b = -2.075;
 
 	} else {
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
@@ -583,6 +610,29 @@ double Infill::TPMS_function(Point p, std::string type, double scaling, double t
 		                   cos(scaling*p.y())*cos(scaling*p.z()) +
 		                   cos(scaling*p.z())*cos(scaling*p.x())), 2) -
 		       std::pow(t, 2);
+
+	} else if (type == "cubic") { // Non-TPMS unit cell
+		bool smooth = false; // If changed all other equations for the cubic unit cell need to be adjusted!
+		double smoothingFactor = 2.5; // If changed all other equations for the cubic unit cell need to be adjusted!
+
+		// Period (2PI is used to make definition similar to that of TPMS unit cells implemented)
+		double period = 2*PI;
+
+		// Construct triply periodic (TP) unit cell from cylinders
+		double x = std::remainder(p.x(), (1/scaling)*period);
+		double y = std::remainder(p.y(), (1/scaling)*period);
+		double z = std::remainder(p.z(), (1/scaling)*period);
+
+		double X1 = (std::sqrt(std::pow(x, 2) + std::pow(y, 2)) / t) / (2*PI/scaling);
+		double X2 = (std::sqrt(std::pow(y, 2) + std::pow(z, 2)) / t) / (2*PI/scaling);
+		double X3 = (std::sqrt(std::pow(x, 2) + std::pow(z, 2)) / t) / (2*PI/scaling);
+
+		// Intersection  smoothing
+		double smoothing = 0;
+		if ( smooth == true )
+			smoothing = std::pow( std::max({smoothingFactor-std::abs(X1-X2)-std::abs(X2-X3)-std::abs(X1-X3), 0.0}), 3 ) / (6*std::pow(smoothingFactor, 2));
+
+		return std::min({X1, X2, X3}) - 1 - smoothing; // Boolean union of individual cylinders (with smoothing)
 
 	} else { 
 		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
