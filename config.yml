@@ -39,13 +39,13 @@ lt_feature: isovalue # Unit cell feature: isovalue, volumeFraction, wallSize or 
 lt_feature_val: 0.5 # Unit cell feature value. Set to a value > 0 for a constant feature value. If a variable feature value is desired set to 0 and provide a .fap file. [If the feature provided is the isovalue it should be specified as a normalized isovalue!]
 lt_feature_mode: relative # Feature size mode: absolute or relative. (Only applies to wall and pore size, default feature_mode is relative) [If set to relative, provide wall and pore sizes for a 1x1x1 unit cell]
 
-# Material properties (Unsupported feature) [Tag: elasticModulus]
-mp_materialModel: gibson_ashby # Material model: gibson_ashby [1]. GyroidYan2015 [Yan2015|Gibson-Ashby model] 
-mp_solid: 110000 # Elastic modulus of solid material
-mp_C: 1 # Gibson, Ashby et al. constant
-mp_n: 2 # Gibson, Ashby et al. constant
-#mp_C1: 0 # Gibson, Ashby et al. constant
-#mp_n1: 0 # Gibson, Ashby et al. constant
+# User defined feature settings (To use set lt_feature to userDefined) [Unsupported]
+udf_userDefinedFeature: elasticModulus # User defined feature label
+udf_A: 110000 # User defined constant 1
+udf_B: 1 # User defined constant 2
+udf_C: 2 # User defined constant 3
+udf_D: 0 # User defined constant 4
+udf_E: 0 # User defined constant 5
 
 # Mesh settings
 me_mesher: CGAL # Mesh library: CGAL or MMG.

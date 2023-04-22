@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2023
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -54,19 +54,19 @@ struct latticeSize {
 	modelData interpModel_linear;
 };
 
-struct latticeMaterial {
-	std::string materialModel; // Material model label
-	double eModulusSolid;      // Elastic modulus of the solid material
-	double C;                  // Gibson & Ashby constant
-	double n;                  // Gibson & Ashby constant
-	double C1;                 // Gibson & Ashby constant
-	double n1;                 // Gibson & Ashby constant
+struct latticeUDF { 
+	std::string userDefinedFeature; // User defined feature label
+	double A;                       // User defined constant 1
+	double B;                       // User defined constant 2
+	double C;                       // User defined constant 3
+	double D;                       // User defined constant 4
+	double E;                       // User defined constant 5
 };
 struct latticeFeature {
 	std::string feature;       // Unit cell feature label
 	double feature_val;        // Unit cell feature value
 	std::string mode;          // Type of sizing specification
-	latticeMaterial mp;        // Material properties structure
+	latticeUDF udf;            // User defined feature parameters
 
 	std::vector<std::vector<double>> data; // Unit cell feature data
 	modelData interpModel_linear;
@@ -124,7 +124,7 @@ namespace Infill {
 	// Parameter conversions
 	namespace internal {
 		double input2level(std::string type, double scaling, std::string feature, 
-		                  double featureValue, latticeMaterial materialParameters,
+		                  double featureValue, latticeUDF userDefinedParameters,
 		                  std::string featureMode);
 
 		// Normalizations
@@ -142,8 +142,8 @@ namespace Infill {
 		double level2poreSize(double t, double scaling, std::string type);
 
 		// Others
-		double eModulus2vFraction(double eModulus, 
-		                          latticeMaterial materialParameters);
+		double userDefinedInput2vFraction(double userDefinedInput, 
+		                                  latticeUDF userDefinedParameters);
 	}
 };
 #endif

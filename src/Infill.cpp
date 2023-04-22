@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2023
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -30,19 +30,19 @@
  */
 
 double Infill::internal::input2level(std::string type, double scaling, std::string feature, 
-                                     double featureValue, latticeMaterial materialParameters,
+                                     double featureValue, latticeUDF userDefinedParameters,
                                      std::string featureMode) {
 	/* Estimates the level-set constant that corresponds to the provided input
 	 * parameter. Estimation avaliable for: gyroid, diamond, primitive and IWP
 	 * in both strut and sheet variants.
 	 * Inputs:
-	 *   type               : Unit cell type
-	 *   scaling            : Unit cell scaling
-	 *   feature            : Feature to be converted
-	 *   featureValue       : Feature value
-	 *   materialParameters : Material model parameters (used if the feature 
-	 *                        provided is the elastic mudulus)
-	 *   featureMode        : 
+	 *   type                  : Unit cell type
+	 *   scaling               : Unit cell scaling
+	 *   feature               : Feature to be converted
+	 *   featureValue          : Feature value
+	 *   userDefinedParameters : User defined feature parameters (Used only 
+	 *                           when making use of a user defined feature)
+	 *   featureMode           : 
 	 * Return:
 	 *   Level-set constant
 	 */
@@ -55,8 +55,8 @@ double Infill::internal::input2level(std::string type, double scaling, std::stri
 		return wallSize2level(featureValue, scaling, type, featureMode);
 	} else if (feature == "poreSize") {
 		return poreSize2level(featureValue, scaling, type, featureMode);
-	} else if (feature == "elasticModulus") {
-		return vFraction2level(eModulus2vFraction(featureValue, materialParameters), type);
+	} else if (feature == "userDefined") {
+		return vFraction2level(userDefinedInput2vFraction(featureValue, userDefinedParameters), type);
 	} else {
 		std::cerr << "ERROR_INVALID_FEATURE_REQUEST" << std::endl;
 		exit(EXIT_FAILURE);
@@ -506,42 +506,51 @@ double Infill::internal::level2poreSize(double t, double scaling, std::string ty
 	else { return poreSize; }
 }
 
-double Infill::internal::eModulus2vFraction(double eModulus, 
-                                          latticeMaterial materialParameters) {
-	/* Converts the elastic modulus to a volume fraction (relative density)
-	 * according to the material model selected. The Gibson & Ashby equations are
-	 * provided with the code. Users are strongly adviced to use their own 
-	 * equations.
+double Infill::internal::userDefinedInput2vFraction(double userDefinedInput, 
+                                                    latticeUDF userDefinedParameters) {
+	/* Converts a user defined input to a volume fraction (relative density)
+	 * according to the user defined model selected. Users can implement 
+	 * the equation(s) that convert from their desired inputs to volume fractions
+	 * by adding an else if statement bellow that contains said conversion 
+	 * equation(s).
 	 * Inputs:
-	 *   eModulus           : Elastic modulus to be converted
-	 *   materialParameters : Material model parameters
+	 *   userDefinedInput      : User defined input to be converted, i.e. 
+	 *                           interpolated FAP file value at point being
+	 *                           evaluated
+	 *   userDefinedParameters : Strucutre containing the user defined model 
+	 *                           parameters
 	 * Return:
 	 *   Volume fraction
 	 */
 
-	double relativeModulus = eModulus/materialParameters.eModulusSolid; // Relative density
-	if (materialParameters.materialModel == "gibson_ashby") { // User defined Gibson-Ashby based model
+	if (userDefinedParameters.userDefinedFeature == "elasticModulus") { // Gibson-Ashby based model
+		double relativeModulus = userDefinedInput/userDefinedParameters.A; // Relative density
 		if (relativeModulus < 0) {
 			return 0;
 		} else if (relativeModulus > 1) {
 			return 1;
 		} else {
-			return std::pow( (eModulus/(materialParameters.C*materialParameters.eModulusSolid)), (1.0/materialParameters.n) );
+			return std::pow( (userDefinedInput/(userDefinedParameters.B*userDefinedParameters.A)), (1.0/userDefinedParameters.C) );
 		}
 
-	} else if (materialParameters.materialModel == "GyroidYan2015") { // Yan2015|Gibson-Ashby model
+	} else if (userDefinedParameters.userDefinedFeature == "elasticModulus_GyroidYan2015") { // Yan2015|Gibson-Ashby model
+		double relativeModulus = userDefinedInput/userDefinedParameters.A; // Relative density
 		if (relativeModulus < 0) {
 			return 0;
 		} else if (relativeModulus <= 0.01) { // Yan2015 model for a Gyroid TPMS (80-95 porosity)
-			return std::pow( (eModulus/(0.19*materialParameters.eModulusSolid)), (1.0/1.71) );
+			return std::pow( (userDefinedInput/(0.19*userDefinedParameters.A)), (1.0/1.71) );
 		} else if (relativeModulus > 1) {
 			return 1;
 		} else {
-			return std::sqrt(eModulus/materialParameters.eModulusSolid); // Gibson-Ashby model
+			return std::sqrt(userDefinedInput/userDefinedParameters.A); // Gibson-Ashby model
 		}
 
+	} else if (userDefinedParameters.userDefinedFeature == "stresses") {
+		std::cerr << "ERROR_NO_STRESS_CONVERSION_DEFINED" << std::endl;
+		exit(EXIT_FAILURE);
+		
 	} else {
-		std::cerr << "ERROR_INVALID_MATERIAL_MODEL_REQUEST" << std::endl;
+		std::cerr << "ERROR_INVALID_USER_DEFINED_FEATURE_REQUEST" << std::endl;
 		exit(EXIT_FAILURE);
 	}
 }
@@ -673,7 +682,7 @@ double Infill::TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size
 	// Detemine the typing and compute the signed distance at point p
 	if (lt_type->type != "hybrid") { // If unit cell is fixed
 		double t = internal::input2level(lt_type->type, scaling, lt_feature->feature, featureVal, 
-		                                 lt_feature->mp, lt_feature->mode);
+		                                 lt_feature->udf, lt_feature->mode);
 		signedDistance = TPMS_function(p, lt_type->type, scaling, t);
 
 	} else { // If unit cell is variable
@@ -697,7 +706,7 @@ double Infill::TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size
 			featureVal = correction * featureVal;
 
 			// Compute the weighted signed distance
-			double t = internal::input2level(lt_type->typeVector[i], scaling, lt_feature->feature, featureVal, lt_feature->mp, lt_feature->mode);
+			double t = internal::input2level(lt_type->typeVector[i], scaling, lt_feature->feature, featureVal, lt_feature->udf, lt_feature->mode);
 			signedDistance += weights[i]/norm * TPMS_function(p, lt_type->typeVector[i], scaling, t);
 		}
 	}
@@ -772,7 +781,7 @@ featureSize Infill::featureSize_function(Point p, latticeType *lt_type,
 	if (lt_type->type != "hybrid") { // If unit cell is fixed
 		// Compute the level-set constant
 		double t = internal::input2level(lt_type->type, scaling, lt_feature->feature, featureVal, 
-		                                 lt_feature->mp, lt_feature->mode);
+		                                 lt_feature->udf, lt_feature->mode);
 	
 		// Compute wall and pore size
 		output.wallSize = internal::level2wallSize(t, scaling, lt_type->type);
@@ -792,7 +801,7 @@ featureSize Infill::featureSize_function(Point p, latticeType *lt_type,
 		for (size_t i = 0; i < lt_type->interpModel_linear.size(); i++) {
 			double t = internal::input2level(lt_type->typeVector[i], scaling, 
 			                                lt_feature->feature, featureVal,
-			                                lt_feature->mp, lt_feature->mode);
+			                                lt_feature->udf, lt_feature->mode);
 			
 			if (weights[i]/norm > 0.1) {
 				output.wallSize = std::min(output.wallSize, internal::level2wallSize(t, scaling, lt_type->typeVector[i]));

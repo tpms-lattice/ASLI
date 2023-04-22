@@ -108,14 +108,14 @@ void ASLI::SetUp(std::string configFile) {
 		exit(EXIT_FAILURE);
   }
 
-	// Set user material input parameters
+	// Set user defined feature parameters
 	try {
-		lt_feature.mp.materialModel = config["mp_materialModel"].as<std::string>();
-		lt_feature.mp.eModulusSolid = config["mp_solid"].as<double>();
-		lt_feature.mp.C = config["mp_C"].as<double>();
-		lt_feature.mp.n = config["mp_n"].as<double>();
-		//lt_feature.mp.C1 = config["mp_C1"].as<double>();
-		//lt_feature.mp.n1 = config["mp_n1"].as<double>();
+		lt_feature.udf.userDefinedFeature = config["udf_userDefinedFeature"].as<std::string>();
+		lt_feature.udf.A = config["udf_A"].as<double>();
+		lt_feature.udf.B = config["udf_B"].as<double>();
+		lt_feature.udf.C = config["udf_C"].as<double>();
+		lt_feature.udf.D = config["udf_D"].as<double>();
+		lt_feature.udf.E = config["udf_E"].as<double>();
 
   } catch (const std::exception& e) {
     std::cerr << e.what() << "\nERROR: Incorrectly defined or missing material parameter(s) in " << configFile << std::endl;
@@ -324,13 +324,13 @@ void ASLI::SetUpLattice() {
 		std::cout << ", Feature mode: " << lt_feature.mode << std::flush;
 	std::cout << ", Feature value: " << lt_feature.feature_val << std::endl;
 
-	if ( lt_feature.feature == "elasticModulus") {
-		std::cout << "  Material model: " << lt_feature.mp.materialModel
-		          << ", Elastic modulus solid: " << lt_feature.mp.eModulusSolid
-		          << ", C: " << lt_feature.mp.C
-		          << ", n: " << lt_feature.mp.n
-		          << ", C1: " << lt_feature.mp.C1
-		          << ", n1: " << lt_feature.mp.n1 << std::endl;
+	if ( lt_feature.feature == "userDefined") {
+		std::cout << "  User defined feature: " << lt_feature.udf.userDefinedFeature
+		          << ", User defined constant 1: " << lt_feature.udf.A
+		          << ", User defined constant 2: " << lt_feature.udf.B
+		          << ", User defined constant 3: " << lt_feature.udf.C
+		          << ", User defined constant 4: " << lt_feature.udf.D
+		          << ", User defined constant 5: " << lt_feature.udf.E << std::endl;
 	}
 
 	std::cout << "  Mesher: " << me_settings.mesher 
