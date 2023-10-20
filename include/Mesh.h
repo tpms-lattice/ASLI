@@ -86,6 +86,7 @@ struct meshSettings {
 	double MMG_hmax;
 	double MMG_hausd;
 	double MMG_hgrad;
+	double MMG_edgesProtectionAngle;
 };
 
 #endif

@@ -101,8 +101,17 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 		double solValueMet;
 		featureSize localFeatureSize;
 		localFeatureSize = Infill::featureSize_function(p, &lt_type, &lt_size, &lt_feature);
-		double minFeature = std::min(localFeatureSize.wallSize, localFeatureSize.poreSize);
-		double maxFeature = std::max(localFeatureSize.wallSize, localFeatureSize.poreSize);
+		double minFeature, maxFeature;
+		if (me_settings.side == "void") {
+			minFeature = localFeatureSize.poreSize;
+			maxFeature = localFeatureSize.poreSize;
+		} else if (me_settings.side == "scaffold") {
+			minFeature = localFeatureSize.wallSize;
+			maxFeature = localFeatureSize.wallSize;
+		} else {
+			minFeature = std::min(localFeatureSize.wallSize, localFeatureSize.poreSize);
+			maxFeature = std::max(localFeatureSize.wallSize, localFeatureSize.poreSize);
+		}
 
 		solValueMet = me_settings.MMG_hinitial * minFeature;
 		if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 ) exit(EXIT_FAILURE);
@@ -361,6 +370,8 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hmax, me_settings.MMG_hmax*maxFeatureSize) != 1 )  exit(EXIT_FAILURE); // Maximal mesh size
 	if (me_settings.MMG_hausd > 0)
 		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hausd, me_settings.MMG_hausd*(minFeatureSize+maxFeatureSize)/2) != 1 )  exit(EXIT_FAILURE); // Control global Hausdorff distance (on all the boundary surfaces of the mesh) CHECK!!
+	if (me_settings.MMG_edgesProtectionAngle > 0)
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_angleDetection, me_settings.MMG_edgesProtectionAngle) != 1 )  exit(EXIT_FAILURE); // Sharp angle detection
 	
 	if (me_settings.volumeMesh == true) {
 		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hgrad, me_settings.MMG_hgrad) != 1 )  exit(EXIT_FAILURE); // 

@@ -192,6 +192,7 @@ void ASLI::SetUp(std::string configFile) {
 		if (me_settings.MMG_hausd <= 0) {std::cerr << "\nERROR: hausd must be positive" << std::endl; exit(EXIT_FAILURE);}
 		me_settings.MMG_hgrad = config["me_hgrad"].as<double>();
 		if (me_settings.MMG_hgrad <= 0) me_settings.MMG_hgrad = 1.3;
+		me_settings.MMG_edgesProtectionAngle = 70; //config["me_edgesProtectionAngle"].as<double>();
 
   } catch (const std::exception& e) {
     std::cerr << e.what() << "\nERROR: Incorrectly defined or missing mesh setting(s) in " << configFile << std::endl;
