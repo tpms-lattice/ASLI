@@ -231,6 +231,9 @@ bool MeshCGAL::implicit2volume(outerShell &shell, latticeType lt_type,
 		std::cout << "\n  WARNING: Polygon has border edges!" << std::endl;
 	}
 
+	// Clean up vertices
+	CGAL::Polygon_mesh_processing::remove_isolated_vertices(processedScaffold);
+
 	std::cout << "Finished!" << std::endl; TicToc::toc();
 
 	// Save surface to .stl file
@@ -377,6 +380,9 @@ bool MeshCGAL::polehedral2volume (SurfaceMesh surfaceMesh,
 	// Mesh generation
 	c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
 	                                        //CGAL::parameters::manifold()); // Causes assertion violation error!
+	
+	// Clean up vertices
+	c3t3.remove_isolated_vertices();
 
 	// ...
 	//#ifdef CGAL_CONCURRENT_MESH_3
