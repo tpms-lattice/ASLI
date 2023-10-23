@@ -357,33 +357,53 @@ bool MeshCGAL::polehedral2volume (SurfaceMesh surfaceMesh,
 
 	// Insert edges in domain
 	domain.add_features(protected_features.begin(), protected_features.end());
-	
-	// Sizing fields
-	TPMS_dependent_unitcellsize_field_P facetDistance;
-	facetDistance.lt_size = &lt_size;
-	facetDistance.parameter = &me_facetDistance;
 
-	TPMS_dependent_wallsize_field_P cellSize;
-	cellSize.lt_type = &lt_type;
-	cellSize.lt_size = &lt_size;
-	cellSize.lt_feature = &lt_feature;
-	cellSize.parameter = &me_cellSize;
+	if (lt_type.type != "hybrid" && lt_size.minUnitCellSize == lt_size.maxUnitCellSize &&  lt_feature.feature_val > 0) { // If lattice is uniform
+		Point point(0, 0, 0);
+		featureSize localSize = Infill::featureSize_function(point, &lt_type, &lt_size, &lt_feature);
 
-	// Mesh criteria
-	F_Mesh_criteria criteria(CGAL::parameters::edge_size = cellSize,
-	                         CGAL::parameters::facet_angle = me_facetAngle,     // Min triangle angle (degrees)
-	                         CGAL::parameters::facet_size = cellSize,         // Max triangle size
-	                         CGAL::parameters::facet_distance = facetDistance, // Surface approximation error
-	                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio,	// Mesh tetrahedra radius|edge ratio upper bound
-	                         CGAL::parameters::cell_size = cellSize);
+		// Mesh criteria
+		F_Mesh_criteria criteria(CGAL::parameters::edge_size = me_cellSize * localSize.wallSize,
+		                         CGAL::parameters::facet_angle = me_facetAngle, // Min triangle angle (degrees)
+		                         CGAL::parameters::facet_size = me_cellSize * localSize.wallSize, // Max triangle size
+		                         CGAL::parameters::facet_distance = me_facetDistance * lt_size.size, // Surface approximation error
+		                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio, // Mesh tetrahedra radius|edge ratio upper bound
+		                         CGAL::parameters::cell_size = me_cellSize * localSize.wallSize, // 
+		                         CGAL::parameters::edge_min_size = me_cellSize * localSize.wallSize / 5); //
 
-	// Mesh generation
-	c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
-	                                        //CGAL::parameters::manifold()); // Causes assertion violation error!
+		// Mesh generation
+		c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
+		                                 //CGAL::parameters::manifold()); // Causes assertion violation errors!
+		
+	} else {
+		// Sizing fields
+		TPMS_dependent_unitcellsize_field_P facetDistance;
+		facetDistance.lt_size = &lt_size;
+		facetDistance.parameter = &me_facetDistance;
+
+		TPMS_dependent_wallsize_field_P cellSize;
+		cellSize.lt_type = &lt_type;
+		cellSize.lt_size = &lt_size;
+		cellSize.lt_feature = &lt_feature;
+		cellSize.parameter = &me_cellSize;
+
+		// Mesh criteria
+		F_Mesh_criteria criteria(CGAL::parameters::edge_size = cellSize,
+		                         CGAL::parameters::facet_angle = me_facetAngle, // Min triangle angle (degrees)
+		                         CGAL::parameters::facet_size = cellSize, // Max triangle size
+		                         CGAL::parameters::facet_distance = facetDistance, // Surface approximation error
+		                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio, // Mesh tetrahedra radius|edge ratio upper bound
+		                         CGAL::parameters::cell_size = cellSize, //
+		                         CGAL::parameters::edge_min_size = me_cellSize * lt_size.minUnitCellSize / 15); // Note: Sizing field not yet suported by CHAL so fixed limit for now ...
+
+		// Mesh generation
+		c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
+		                                 //CGAL::parameters::manifold()); // Causes assertion violation errors!
+	}
 	
 	// Clean up vertices
 	c3t3.remove_isolated_vertices();
-
+	
 	// ...
 	//#ifdef CGAL_CONCURRENT_MESH_3
 	//	//init.~task_scheduler_init(); // Deprecated
