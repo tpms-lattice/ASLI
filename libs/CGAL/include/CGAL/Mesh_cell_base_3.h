@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_cell_base_3.h $
+// $Id: Mesh_cell_base_3.h 35cec9d 2022-03-17T15:18:57+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

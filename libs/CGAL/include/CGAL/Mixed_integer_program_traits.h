@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Solver_interface/include/CGAL/Mixed_integer_program_traits.h $
+// $Id: Mixed_integer_program_traits.h a5b03d5 2022-04-30T14:09:18+02:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/BGL/include/CGAL/boost/graph/kruskal_min_spanning_tree.h $
+// $Id: kruskal_min_spanning_tree.h 5f3e3b2 2022-05-05T08:46:11+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Generator/include/CGAL/random_convex_hull_in_disc_2.h $
+// $Id: random_convex_hull_in_disc_2.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -221,7 +221,7 @@ void random_convex_hull_in_disc_2(std::size_t n, double radius, std::list<typena
     boost::variate_generator<
         GEN&, boost::binomial_distribution<long> > bin(gen, dbin);
 
-    // How many points are falling in the small disc and wont be generated:
+    // How many points are falling in the small disc and won't be generated:
     long k_disc = bin();
     simulated_points += k_disc;
 

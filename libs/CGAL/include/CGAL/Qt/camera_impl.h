@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/camera_impl.h $
+// $Id: camera_impl.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -1301,7 +1301,7 @@ void Camera::setFromProjectionMatrix(const qreal matrix[12]) {
   // divide the first 3 coordinates by the 4th one.
 
   // We derive the 4 dimensional vectorial product formula from the
-  // computation of a 4x4 determinant that is developped according to
+  // computation of a 4x4 determinant that is developed according to
   // its 4th column. This implies some 3x3 determinants.
   const Vec cam_pos =
       Vec(det(matrix[ind(0, 1)], matrix[ind(0, 2)], matrix[ind(0, 3)],

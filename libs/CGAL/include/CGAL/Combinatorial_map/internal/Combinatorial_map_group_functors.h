@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Combinatorial_map/internal/Combinatorial_map_group_functors.h $
+// $Id: Combinatorial_map_group_functors.h 72b356d 2023-03-10T11:30:07+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -33,7 +33,7 @@
  * Group_attribute_functor<CMap> to group the <i>-attributes of two
  *    given i-cells (except for j-adim). If one i-attribute is nullptr, we set the
  *    darts of its i-cell to the second attribute. If both i-attributes are
- *    non nullptr, we overide all the i-attribute of the second i-cell to the
+ *    non nullptr, we override all the i-attribute of the second i-cell to the
  *    first i-attribute.
  *
  * Degroup_attribute_functor_run<CMap> to degroup one i-attributes in two
@@ -566,6 +566,15 @@ void test_split_attribute_functor_one_dart
   Attribute_descriptor_i a1 = amap.template attribute<i>(adart);
   if ( found_attributes.is_defined(a1) )
   {  // Here the attribute was already present in the hash_map
+
+    // We need to call reserve for the cc with index case. Indeed, if the vector
+    // is reallocated, the reference returned by get_attribute<i>(a1) will be
+    // invalidated, and the copy will be wrong. Note that there is no overhead
+    // since the creation of the attribute need one allocation.
+    amap.template attributes<i>().reserve(amap.template attributes<i>().size()+1);
+
+    // Now we are sure that the creation of a new attribute will not imply
+    // a realloc.
     Attribute_descriptor_i a2 = amap.template
       create_attribute<i>(amap.template get_attribute<i>(a1));
 

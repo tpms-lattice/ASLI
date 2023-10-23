@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesher/include/CGAL/Surface_mesher/Implicit_surface_oracle_3.h $
+// $Id: Implicit_surface_oracle_3.h 9bce313 2022-10-04T13:51:50+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

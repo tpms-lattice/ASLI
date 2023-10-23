@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_2/include/CGAL/Nef_2/PM_overlayer.h $
+// $Id: PM_overlayer.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -458,7 +458,7 @@ and |\Mvar.mark(v,1) = D1.mark(f1)|.}*/
   create_face_objects(Out);
 
 
-  CGAL_NEF_TRACEN("transfering marks");
+  CGAL_NEF_TRACEN("transferring marks");
   Face_iterator f = this->faces_begin(); assoc_info(f);
   for (i=0; i<2; ++i) mark(f,i) = PI[i].mark(PI[i].faces_begin());
 

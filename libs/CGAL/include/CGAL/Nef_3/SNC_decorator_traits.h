@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_decorator_traits.h $
+// $Id: SNC_decorator_traits.h 252aab7 2022-03-19T12:16:25+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

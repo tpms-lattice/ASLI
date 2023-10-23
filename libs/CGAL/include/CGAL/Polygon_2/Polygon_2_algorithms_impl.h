@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon/include/CGAL/Polygon_2/Polygon_2_algorithms_impl.h $
+// $Id: Polygon_2_algorithms_impl.h 5b89b81 2023-02-09T23:12:40+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -502,13 +502,17 @@ Bounded_side bounded_side_2(ForwardIterator first,
 // uses Traits::Less_xy_2 (used by left_vertex_2)
 //      Traits::orientation_2_object()
 
-template <class ForwardIterator, class Traits>
-Orientation orientation_2(ForwardIterator first,
-                                    ForwardIterator last,
-                                    const Traits& traits)
-{
-  CGAL_precondition(is_simple_2(first, last, traits));
+namespace Polygon {
+namespace internal {
 
+// This exists because the "is_simple_2" precondition in the orientation_2() function is in fact
+// stronger than necessary: it also works for strictly simple polygons, which matters for
+// Straight line skeletons, as the offset polygons might have non-manifoldness.
+template <class ForwardIterator, class Traits>
+Orientation orientation_2_no_precondition(ForwardIterator first,
+                                          ForwardIterator last,
+                                          const Traits& traits)
+{
   ForwardIterator i = left_vertex_2(first, last, traits);
 
   ForwardIterator prev = (i == first) ? last : i;
@@ -525,6 +529,18 @@ Orientation orientation_2(ForwardIterator first,
   // return the orientation of the triple (prev,i,next)
   typedef typename Traits::Point_2 Point;
   return traits.orientation_2_object()(Point(*prev), Point(*i), Point(*next));
+}
+
+} // namespace internal
+} // namespace Polygon
+
+template <class ForwardIterator, class Traits>
+Orientation orientation_2(ForwardIterator first,
+                          ForwardIterator last,
+                          const Traits& traits)
+{
+  CGAL_precondition(is_simple_2(first, last, traits));
+  return Polygon::internal::orientation_2_no_precondition(first, last, traits);
 }
 
 } //namespace CGAL

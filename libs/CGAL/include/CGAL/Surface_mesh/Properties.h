@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh/include/CGAL/Surface_mesh/Properties.h $
+// $Id: Properties.h 2c7f775 2023-01-30T20:47:18+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 
@@ -538,8 +538,6 @@ class Property_map_base
            CRTP_derived_class>
 /// @endcond
 {
-    typedef void (Property_map_base::*bool_type)() const;
-    void this_type_does_not_support_comparisons() const {}
 public:
     typedef I key_type;
     typedef T value_type;
@@ -596,11 +594,19 @@ public:
     /// can be used, and \c false otherwise.
   operator bool () const;
 #else
-    operator bool_type() const {
-        return parray_ != nullptr ?
-            &Property_map_base::this_type_does_not_support_comparisons : 0;
+    explicit operator bool() const {
+        return parray_ != nullptr;
     }
 #endif
+
+    bool operator==(const Property_map_base& pm) const {
+      return parray_ == pm.parray_;
+    }
+
+    bool operator!=(const Property_map_base& pm) const {
+      return parray_ != pm.parray_;
+    }
+
     /// Access the property associated with the key \c i.
     reference operator[](const I& i)
     {

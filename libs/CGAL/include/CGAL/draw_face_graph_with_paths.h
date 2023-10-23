@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_topology/include/CGAL/draw_face_graph_with_paths.h $
+// $Id: draw_face_graph_with_paths.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -101,7 +101,7 @@ public:
   /// @param alcc the lcc to view
   /// @param title the title of the window
   /// @param anofaces if true, do not draw faces (faces are not computed;
-  ///     this can be usefull for very big object where this time could be long)
+  ///     this can be useful for very big object where this time could be long)
   Face_graph_with_path_viewer(QWidget* parent,
                               const Mesh& amesh,
                               const std::vector

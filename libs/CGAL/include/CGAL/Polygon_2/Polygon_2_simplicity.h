@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon/include/CGAL/Polygon_2/Polygon_2_simplicity.h $
+// $Id: Polygon_2_simplicity.h bdd2fb8 2022-09-27T08:14:30+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

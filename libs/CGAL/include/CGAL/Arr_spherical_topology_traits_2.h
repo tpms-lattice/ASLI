@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_spherical_topology_traits_2.h $
+// $Id: Arr_spherical_topology_traits_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -154,7 +154,7 @@ protected:
   //! The geometry-traits adaptor.
   const Gt_adaptor_2* m_geom_traits;
 
-  //! Inidicates whether the traits object should evetually be freed.
+  //! Indicates whether the traits object should eventually be freed.
   bool m_own_geom_traits;
 
   // Copy constructor and assignment operator - not supported.
@@ -289,7 +289,7 @@ public:
     return (it != m_boundary_vertices.end()) ? it->second : nullptr;
   }
 
-  // TODO remove if all occurences have been replaced with the new signature that queries for a point
+  // TODO remove if all occurrences have been replaced with the new signature that queries for a point
   /*! Obtain a vertex on the line of discontinuity that corresponds to
    *  the given curve-end (or return NULL if no such vertex exists).
    */

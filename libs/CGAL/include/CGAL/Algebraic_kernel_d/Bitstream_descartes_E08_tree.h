@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Bitstream_descartes_E08_tree.h $
+// $Id: Bitstream_descartes_E08_tree.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -446,7 +446,7 @@ private:
     Integer_vector coeff_; // wrt [lower_, upper_], approximate
     int min_var_, max_var_;
     bool coeff_update_delayed_;
-    // "state data" (copied en bloc by .copy_state_from())
+    // "state data" (copied en block by .copy_state_from())
     long subdepth_bound_, subdepth_current_;
     long log_eps_;   // $q - p$
     long log_C_eps_; // $q - p + 4n$

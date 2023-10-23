@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Stream_support/include/CGAL/IO/helpers.h $
+// $Id: helpers.h 988d226 2023-04-11T14:19:09+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -54,7 +54,10 @@ static inline std::string get_file_extension(const std::string fname)
     return std::string();
 
   std::string ext = fname.substr(dot+1, fname.length() - dot - 1);
-  std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+  std::transform(ext.begin(), ext.end(), ext.begin(),
+                 [](char c) {
+                   return static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+                 });
 
   return ext;
 }

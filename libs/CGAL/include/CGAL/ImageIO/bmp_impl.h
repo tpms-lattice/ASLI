@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/bmp_impl.h $
+// $Id: bmp_impl.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -200,7 +200,7 @@ void *_readBmpImage( const char *name,
         numImages = 1;
 
         /*
-         * Now that we have our arrays allocted, read the image into them.
+         * Now that we have our arrays allocated, read the image into them.
          */
         switch (fileType) {
         case TYPE_BMP:

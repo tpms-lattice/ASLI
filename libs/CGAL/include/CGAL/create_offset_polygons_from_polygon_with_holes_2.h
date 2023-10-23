@@ -3,8 +3,8 @@
 // This file is part of CGAL (www.cgal.org).
 //
 
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Straight_skeleton_2/include/CGAL/create_offset_polygons_from_polygon_with_holes_2.h $
+// $Id: create_offset_polygons_from_polygon_with_holes_2.h 66fe079 2023-03-23T11:49:18+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -114,21 +114,9 @@ create_exterior_skeleton_and_offset_polygons_with_holes_2(const FT& aOffset,
     create_exterior_skeleton_and_offset_polygons_2(aOffset, aPoly, ofk, ssk);
 
   // filter offset of the outer frame
-  typename OfK::Point_2 xtrm_pt = *(raw_output[0]->begin());
-  std::size_t outer_id=0;
-  for(std::size_t i=0; i<raw_output.size(); ++i)
-    if (raw_output[i]->orientation() == COUNTERCLOCKWISE)
-    {
-      for (const typename OfK::Point_2& p : raw_output[i]->container())
-        if (p < xtrm_pt)
-        {
-          xtrm_pt=p;
-          outer_id=i;
-        }
-    }
-  if (outer_id != (raw_output.size()-1))
-    std::swap(raw_output[outer_id], raw_output.back());
+  std::swap(raw_output[0], raw_output.back());
   raw_output.pop_back();
+
   for (boost::shared_ptr<Polygon_> ptr : raw_output)
     ptr->reverse_orientation();
 
@@ -190,6 +178,6 @@ create_exterior_skeleton_and_offset_polygons_with_holes_2(const FT& aOffset,
                                                                    Exact_predicates_inexact_constructions_kernel());
 }
 
-} // end namespace CGAL
+} // namespace CGAL
 
-#endif
+#endif // CGAL_CREATE_OFFSET_POLYGONS_FROM_POLYGON_WITH_HOLES_2_H

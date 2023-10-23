@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Optimal_transportation_reconstruction_2/include/CGAL/OTR_2/Cost.h $
+// $Id: Cost.h d6ec192 2022-12-22T14:22:40+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando de Goes, Pierre Alliez, Ivo Vigan, Clément Jamin
@@ -50,13 +50,13 @@ public:
 
   const FT total_weight() const { return m_total_weight; }
 
-  template <typename SampleContainer>
-  void set_total_weight(const SampleContainer& samples)
+  template <typename Samples, typename SampleContainer>
+  void set_total_weight(const Samples& m_samples, const SampleContainer& samples)
   {
     m_total_weight = (FT)0;
     for (typename SampleContainer::const_iterator it = samples.begin();
          it != samples.end(); ++ it)
-      m_total_weight += (*it)->mass();
+      m_total_weight += m_samples[*it].mass();
   }
 
   FT finalize(const FT alpha = FT(0.5)) const

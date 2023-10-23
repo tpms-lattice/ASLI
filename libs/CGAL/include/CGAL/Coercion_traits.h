@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_foundations/include/CGAL/Coercion_traits.h $
+// $Id: Coercion_traits.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -29,7 +29,7 @@
 
 #include <CGAL/tags.h>
 
-// Makro to define an additional operator for binary functors which takes
+// Macro to define an additional operator for binary functors which takes
 // two number types as parameters that are interoperable with the
 // number type
 #define CGAL_IMPLICIT_INTEROPERABLE_BINARY_OPERATOR_WITH_RT( NT, Result_type  ) \

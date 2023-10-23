@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_S2/include/CGAL/Nef_S2/ID_support_handler.h $
+// $Id: ID_support_handler.h 8770c7a 2022-05-10T12:06:32+01:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

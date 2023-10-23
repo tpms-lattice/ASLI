@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Partition_2/include/CGAL/Partition_2/partition_approx_convex_2.h $
+// $Id: partition_approx_convex_2.h 1ad69e0 2022-09-27T08:32:49+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

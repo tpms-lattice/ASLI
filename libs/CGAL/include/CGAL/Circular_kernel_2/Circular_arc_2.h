@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circular_kernel_2/include/CGAL/Circular_kernel_2/Circular_arc_2.h $
+// $Id: Circular_arc_2.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
@@ -740,7 +740,7 @@ public:
 
   Filtered_bbox_circular_arc_2_base(const P_arc& arc) : P_arc(arc), bb(nullptr) {}
 
-  // otherwise it will lead to ambiguos definitions
+  // otherwise it will lead to ambiguous definitions
   explicit Filtered_bbox_circular_arc_2_base(const Circle_2 &c)
     : P_arc(c),bb(nullptr)
   {}

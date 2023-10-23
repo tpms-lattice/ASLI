@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/DemosMainWindow_impl.h $
+// $Id: DemosMainWindow_impl.h 1a6ece1 2023-04-27T17:27:23+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,7 +38,9 @@
 #include <QUrl>
 #include <QDesktopWidget>
 #include <QRegExp>
-#include <QSvgGenerator>
+#if QT_SVG_LIB
+#  include <QSvgGenerator>
+#endif
 #include <QtCore>
 #include <QtOpenGL>
 
@@ -159,6 +161,7 @@ DemosMainWindow::setupOptionsMenu(QMenu* menuOptions)
   actionUse_Antialiasing->setChecked(true);
 }
 
+#if QT_SVG_LIB
 CGAL_INLINE_FUNCTION
 void
 DemosMainWindow::setupExportSVG(QAction* action, QGraphicsView* view)
@@ -189,6 +192,7 @@ void DemosMainWindow::exportSVG()
   this->view->render(&painter);
   painter.end();
 }
+#endif // QT_SVG_LIB
 
 CGAL_INLINE_FUNCTION
 void

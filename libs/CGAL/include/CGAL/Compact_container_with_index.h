@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Compact_container_with_index.h $
+// $Id: Compact_container_with_index.h 52d7876 2023-03-10T13:25:44+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -752,8 +752,14 @@ public:
     return false;
   }
 
-  bool owns_dereferencable(const_iterator cit) const
+  bool owns(size_type i) const
+  { return i<capacity() && is_used(i); }
+
+  bool owns_dereferenceable(const_iterator cit) const
   { return cit!=end() && owns(cit); }
+
+  CGAL_DEPRECATED bool owns_dereferencable(const_iterator cit) const
+  { return owns_dereferenceable(cit); }
 
   /** Reserve method to ensure that the capacity of the Compact_container be
    * greater or equal than a given value n.
@@ -761,7 +767,6 @@ public:
   void reserve(size_type n)
   {
     if(capacity_>=n) return;
-    capacity_=n;
     increase_size();
   }
 

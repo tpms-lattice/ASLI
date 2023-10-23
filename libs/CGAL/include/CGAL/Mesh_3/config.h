@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_3/config.h $
+// $Id: config.h badfc7d 2022-10-11T09:58:02+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau
@@ -54,6 +54,12 @@
 #ifdef CGAL_MESH_3_VERBOSE
 #  ifndef CGAL_MESH_3_OPTIMIZER_VERBOSE
 #    define CGAL_MESH_3_OPTIMIZER_VERBOSE 1
+#  endif
+#endif
+
+#ifdef CGAL_MESH_3_VERY_VERBOSE
+#  ifndef CGAL_MESH_3_OPTIMIZER_VERY_VERBOSE
+#    define CGAL_MESH_3_OPTIMIZER_VERY_VERBOSE 1
 #  endif
 #endif
 

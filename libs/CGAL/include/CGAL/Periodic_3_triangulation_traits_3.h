@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_traits_3.h $
+// $Id: Periodic_3_triangulation_traits_3.h 2cdb908 2022-12-06T15:08:11+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico.Kruithof@sophia.inria.fr>
@@ -78,6 +78,12 @@ public:
       Construct_point_3;
 
   // Triangulation predicates
+  typedef Functor_with_offset_points_adaptor_3<Self, typename Kernel::Compare_x_3>
+      Compare_x_3;
+  typedef Functor_with_offset_points_adaptor_3<Self, typename Kernel::Compare_y_3>
+      Compare_y_3;
+  typedef Functor_with_offset_points_adaptor_3<Self, typename Kernel::Compare_z_3>
+      Compare_z_3;
   typedef Functor_with_offset_points_adaptor_3<Self, typename Kernel::Compare_xyz_3>
       Compare_xyz_3;
   typedef Functor_with_offset_points_adaptor_3<Self, typename Kernel::Orientation_3>
@@ -96,6 +102,15 @@ public:
     return Construct_point_3(&_domain, this->Kernel::construct_point_3_object());
   }
 
+  Compare_x_3 compare_x_3_object() const {
+    return Compare_x_3(this->Kernel::compare_x_3_object(), construct_point_3_object());
+  }
+  Compare_y_3 compare_y_3_object() const {
+    return Compare_y_3(this->Kernel::compare_y_3_object(), construct_point_3_object());
+  }
+  Compare_z_3 compare_z_3_object() const {
+    return Compare_z_3(this->Kernel::compare_z_3_object(), construct_point_3_object());
+  }
   Compare_xyz_3 compare_xyz_3_object() const {
     return Compare_xyz_3(this->Kernel::compare_xyz_3_object(), construct_point_3_object());
   }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_2/include/CGAL/Nef_2/gen_point_location.h $
+// $Id: gen_point_location.h f79d8bb 2022-11-30T10:31:13+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -345,7 +345,7 @@ public:
 /*{\Mtypes}*/
   // define additional types
   typedef GenericLocation<Node, Edge> Location;
-  /*{\Mtypedef usual return value for the point loaction.}*/
+  /*{\Mtypedef usual return value for the point location.}*/
 
   enum Direction { downwards, upwards};
   /*{\Menum used to specify the direction for the point location.}*/

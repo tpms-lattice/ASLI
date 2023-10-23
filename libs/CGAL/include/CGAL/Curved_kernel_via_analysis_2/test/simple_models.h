@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/test/simple_models.h $
+// $Id: simple_models.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -472,7 +472,7 @@ public:
     }
 
     /*!\brief
-     * constructs from a given represenation
+     * constructs from a given representation
      */
     Status_line_CA_1(Rep rep) :
         Base(rep) {
@@ -630,7 +630,7 @@ public:
     }
 
     /*!\brief
-     * constructsa curve analysis from a given represenation
+     * constructs a curve analysis from a given representation
      */
     Curve_analysis_2(Rep rep) :
         Base(rep) {
@@ -776,7 +776,7 @@ public:
     }
 
     /*!\brief
-     * constructs from a given represenation
+     * constructs from a given representation
      */
     Status_line_CPA_1(Rep rep) :
         Base(rep) {

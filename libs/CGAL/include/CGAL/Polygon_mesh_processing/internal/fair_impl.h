@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/fair_impl.h $
+// $Id: fair_impl.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -76,7 +76,7 @@ private:
     vertex_descriptor v,
     int row_id,                            // which row to insert in [ frees stay left-hand side ]
     Solver_matrix& matrix,
-    double& x, double& y, double& z,               // constants transfered to right-hand side
+    double& x, double& y, double& z,               // constants transferred to right-hand side
     double multiplier,
     const std::map<vertex_descriptor, std::size_t>& vertex_id_map,
     unsigned int depth)

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Interpolation/include/CGAL/natural_neighbor_coordinates_3.h $
+// $Id: natural_neighbor_coordinates_3.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -48,7 +48,7 @@ construct_circumcenter(const typename DT::Facet& f,
                        const typename DT::Geom_traits::Point_3& Q,
                        const typename DT::Geom_traits& gt = typename DT::Geom_traits());
 
-// ====================== Natural Neighbors Querries ==========================
+// ====================== Natural Neighbors Queries ==========================
 // === Definitions
 
 // Given a 3D point Q and a 3D Delaunay triangulation dt,
@@ -358,7 +358,7 @@ construct_circumcenter(const typename DT::Facet& f,
                                             f.first->vertex((f.second+2)&3)->point(),
                                             f.first->vertex((f.second+3)&3)->point(),
                                             Q));
-  // else the facet is not on the enveloppe of the conflict cavity associated to P
+  // else the facet is not on the envelope of the conflict cavity associated to P
   return gt.construct_circumcenter_3_object()(
              f.first->vertex((f.second+1)&3)->point(),
              f.first->vertex((f.second+2)&3)->point(),

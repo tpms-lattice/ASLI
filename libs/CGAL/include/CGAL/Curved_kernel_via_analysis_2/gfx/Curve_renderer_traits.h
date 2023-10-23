@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/gfx/Curve_renderer_traits.h $
+// $Id: Curve_renderer_traits.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pavel Emeliyanenko <asm@mpi-sb.mpg.de>
@@ -67,7 +67,7 @@ struct Max_coeff
 };
 
 /*!\brief
- * divides an input value by a contant
+ * divides an input value by a constant
  *
  * provided that there is a coercion between \c Input and \c Result types
  */

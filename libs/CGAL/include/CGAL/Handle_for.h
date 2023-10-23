@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/Handle_for.h $
+// $Id: Handle_for.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,7 +30,7 @@
 
 #if defined(BOOST_MSVC)
 #  pragma warning(push)
-#  pragma warning(disable:4345) // Avoid warning  http://msdn.microsoft.com/en-us/library/wewb47ee(VS.80).aspx
+#  pragma warning(disable:4345) // Avoid warning https://learn.microsoft.com/en-us/previous-versions/wewb47ee(v=vs.120)
 #endif
 namespace CGAL {
 

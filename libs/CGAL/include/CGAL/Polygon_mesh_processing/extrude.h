@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/extrude.h $
+// $Id: extrude.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -148,7 +148,7 @@ struct Identity_functor
  *     \cgalParamDescription{a property map associating points to the vertices of `ouput`}
  *     \cgalParamType{a class model of `ReadWritePropertyMap` with `boost::graph_traits<OutputMesh>::%vertex_descriptor`
  *                    as key type and `%Point_3` as value type}
- *     \cgalParamDefault{`boost::get(CGAL::vertex_point, ouput)`}
+ *     \cgalParamDefault{`boost::get(CGAL::vertex_point, output)`}
  *     \cgalParamExtra{If this parameter is omitted, an internal property map for `CGAL::vertex_point_t`
  *                     should be available for the vertices of `ouput`.}
  *   \cgalParamNEnd

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_skeletonization/include/CGAL/Surface_mesh_skeletonization/internal/Curve_skeleton.h $
+// $Id: Curve_skeleton.h 0f4e66f 2022-05-03T10:03:04+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Xiang Gao <gaox@ethz.ch>

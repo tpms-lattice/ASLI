@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/CORE_algebraic_number_traits.h $
+// $Id: CORE_algebraic_number_traits.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -202,7 +202,7 @@ public:
   /*!
    * Compute the square root of an algebraic number.
    * \param x The number.
-   * \return The sqaure root of x.
+   * \return The square root of x.
    * \pre x is non-negative.
    */
   Algebraic sqrt (const Algebraic& x) const

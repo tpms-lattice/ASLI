@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Linear_cell_complex/include/CGAL/Linear_cell_complex_base.h $
+// $Id: Linear_cell_complex_base.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -834,7 +834,7 @@ namespace CGAL {
       return res;
     }
 
-    /** Set the status of the managment of the attributes of the Map
+    /** Set the status of the management of the attributes of the Map
      */
     void set_update_attributes(bool newval)
     {

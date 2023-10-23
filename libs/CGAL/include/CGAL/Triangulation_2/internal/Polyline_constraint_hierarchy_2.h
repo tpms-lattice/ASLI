@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/Triangulation_2/internal/Polyline_constraint_hierarchy_2.h $
+// $Id: Polyline_constraint_hierarchy_2.h e5ce8a7 2023-03-31T11:10:47+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,9 @@
 #include <CGAL/assertions.h>
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
+#  include <CGAL/IO/io.h>
 #  include <CGAL/Constrained_triangulation_2.h>
+#  include <iostream>
 #endif
 
 namespace CGAL {
@@ -332,7 +334,7 @@ copy(const Polyline_constraint_hierarchy_2& ch1, std::map<Vertex_handle,Vertex_h
     Vertex_list* hvl2 = new Vertex_list;
     vlmap[hvl1] = hvl2;
     Vertex_it vit = hvl1->skip_begin(), end = hvl1->skip_end();
-    for( ; vit != end; ++vit) hvl2->push_back(Node(vmap[*vit]));
+    for( ; vit != end; ++vit) hvl2->push_back(Node(vmap[*vit], vit.input()));
     constraint_set.insert(hvl2);
   }
   // copy sc_to_c_map
@@ -860,12 +862,10 @@ insert_constraint(T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
+  using CGAL::IO::oformat;
   std::cerr << CGAL::internal::cdt_2_indent_level
-            << "C_hierachy.insert_constraint( #"
-              << va->time_stamp()
-              << ", #"
-              << vb->time_stamp()
-              << ")\n";
+            << "C_hierachy.insert_constraint( "
+            << oformat(va) << ", " << oformat(vb) << ")\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
   typename Sc_to_c_map::iterator scit = sc_to_c_map.find(he);
   if(scit == sc_to_c_map.end()){
@@ -897,12 +897,10 @@ insert_constraint_old_API(T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
+  using CGAL::IO::oformat;
   std::cerr << CGAL::internal::cdt_2_indent_level
-            << "C_hierachy.insert_constraint_old_API( #"
-              << va->time_stamp()
-              << ", #"
-              << vb->time_stamp()
-              << ")\n";
+            << "C_hierachy.insert_constraint_old_API( "
+            << oformat(va) << ", " << oformat(vb) << ")\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
   typename Sc_to_c_map::iterator scit = sc_to_c_map.find(he);
   if(scit == sc_to_c_map.end()){
@@ -932,12 +930,10 @@ append_constraint(Constraint_id cid, T va, T vb){
   Context_list* fathers;
 
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
+  using CGAL::IO::oformat;
   std::cerr << CGAL::internal::cdt_2_indent_level
-            << "C_hierachy.append_constraint( ..., #"
-              << va->time_stamp()
-              << ", #"
-              << vb->time_stamp()
-              << ")\n";
+            << "C_hierachy.append_constraint( ..., "
+            << oformat(va) << ", " << oformat(vb) << ")\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
   typename Sc_to_c_map::iterator scit = sc_to_c_map.find(he);
   if(scit == sc_to_c_map.end()){
@@ -1051,14 +1047,11 @@ void
 Polyline_constraint_hierarchy_2<T,Compare,Point>::
 add_Steiner(T va, T vb, T vc){
 #ifdef CGAL_CDT_2_DEBUG_INTERSECTIONS
+  using CGAL::IO::oformat;
   std::cerr << CGAL::internal::cdt_2_indent_level
-            << "C_hierachy.add_Steinter( #"
-              << va->time_stamp()
-              << ", #"
-              << vb->time_stamp()
-              << ", #"
-              << vc->time_stamp()
-              << ")\n";
+            << "C_hierachy.add_Steinter( "
+            << oformat(va) << ", " << oformat(vb) << ", " << oformat(vc)
+            << ")\n";
 #endif // CGAL_CDT_2_DEBUG_INTERSECTIONS
   Context_list* hcl=nullptr;
   if(!get_contexts(va,vb,hcl)) {

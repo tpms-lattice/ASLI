@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/MVC_post_processor_3.h $
+// $Id: MVC_post_processor_3.h 9e137bc 2023-01-31T12:26:55+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -460,7 +460,7 @@ private:
     CGAL_precondition(!ct.is_infinite(fh));
     typedef typename CT::Vertex_handle                    Vertex_handle;
 
-    // Doing it explicitely rather than a loop for clarity
+    // Doing it explicitly rather than a loop for clarity
     Vertex_handle vh0 = fh->vertex(0);
     Vertex_handle vh1 = fh->vertex(1);
     Vertex_handle vh2 = fh->vertex(2);
@@ -598,7 +598,7 @@ private:
   {
     Error_code status = OK;
 
-    NT Du, Dv;
+    double Du, Dv;
     if(!get_linear_algebra_traits().linear_solver(A, Bu, Xu, Du) ||
        !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv)) {
       status = ERROR_CANNOT_SOLVE_LINEAR_SYSTEM;

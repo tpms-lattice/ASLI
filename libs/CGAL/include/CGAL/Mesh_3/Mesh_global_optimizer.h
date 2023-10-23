@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_3/Mesh_global_optimizer.h $
+// $Id: Mesh_global_optimizer.h 5d4e0dd 2023-02-02T10:58:27+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -974,7 +974,7 @@ update_mesh(const Moves_vector& moves,
       {
         FT size = std::get<2>(*it);
 
-#ifdef CGAL_MESH_3_OPTIMIZER_VERBOSE
+#ifdef CGAL_MESH_3_OPTIMIZER_VERY_VERBOSE
         std::cerr << "Moving #" << it - moves.begin()
                   << " addr: " << &*v
                   << " pt: " << tr_.point(v)

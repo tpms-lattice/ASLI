@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/HalfedgeDS/include/CGAL/boost/graph/properties_HalfedgeDS_default.h $
+// $Id: properties_HalfedgeDS_default.h 1e364e5 2022-07-04T11:26:49+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

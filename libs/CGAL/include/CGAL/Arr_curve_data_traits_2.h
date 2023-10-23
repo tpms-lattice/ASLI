@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_curve_data_traits_2.h $
+// $Id: Arr_curve_data_traits_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein          <wein@post.tau.ac.il>
@@ -79,10 +79,10 @@ public:
   typedef typename internal::Arr_complete_right_side_category<Base_traits_2>::
   Category                                           Right_side_category;
 
-  // Representation of a curve with an addtional data field:
+  // Representation of a curve with an additonal data field:
   typedef _Curve_data_ex<Base_curve_2, Curve_data>   Curve_2;
 
-  // Representation of an x-monotone curve with an addtional data field:
+  // Representation of an x-monotone curve with an additonal data field:
   typedef _Curve_data_ex<Base_x_monotone_curve_2, X_monotone_curve_data>
                                                      X_monotone_curve_2;
 
@@ -99,7 +99,7 @@ public:
   Arr_curve_data_traits_2(const Base_traits_2& traits) : Base_traits_2(traits) {}
   //@}
 
-  /// \name Overriden functors.
+  /// \name Overridden functors.
   //@{
 
   //! \name Intersections & subdivisions

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/CORE_coercion_traits.h $
+// $Id: CORE_coercion_traits.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -138,7 +138,7 @@ template <> struct Coercion_traits< ::CORE::Expr, CORE::BigFloat >
 
 
 
-// not provieded by CORE
+// not provided by CORE
 // Note that this is not symmetric to LEDA
 //CGAL_DEFINE_COERCION_TRAITS_FROM_TO(long long  ,::CORE::BigInt)
 //CGAL_DEFINE_COERCION_TRAITS_FROM_TO(long long  ,::CORE::BigRat)

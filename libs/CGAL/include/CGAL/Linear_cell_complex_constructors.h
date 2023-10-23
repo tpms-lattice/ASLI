@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Linear_cell_complex/include/CGAL/Linear_cell_complex_constructors.h $
+// $Id: Linear_cell_complex_constructors.h 612991f 2023-02-01T13:08:51+01:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -13,7 +13,7 @@
 #define CGAL_LINEAR_CELL_COMPLEX_CONSTRUCTORS_H 1
 
 #include <CGAL/IO/OFF.h>
-#include <CGAL/Linear_cell_complex_incremental_builder.h>
+#include <CGAL/Linear_cell_complex_incremental_builder_3.h>
 #include <CGAL/Unique_hash_map.h>
 #include <CGAL/assertions.h>
 
@@ -135,7 +135,7 @@ namespace CGAL {
    *
    * @param alcc the linear cell complex where the graph will be imported.
    * @param ais the istream where read the graph.
-   * @return A dart created during the convertion.
+   * @return A dart created during the conversion.
    */
   template< class LCC >
   typename LCC::Dart_descriptor import_from_plane_graph(LCC& alcc,

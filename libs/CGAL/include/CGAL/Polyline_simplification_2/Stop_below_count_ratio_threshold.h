@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polyline_simplification_2/include/CGAL/Polyline_simplification_2/Stop_below_count_ratio_threshold.h $
+// $Id: Stop_below_count_ratio_threshold.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri, Fernando Cacciola
@@ -25,7 +25,7 @@ namespace Polyline_simplification_2
 /// \ingroup PkgPolylineSimplification2Classes
 
 /// This class is a stop predicate returning `true` when the percentage
-/// of remaning vertices is smaller than a certain threshold.
+/// of remaining vertices is smaller than a certain threshold.
 ///
 /// \cgalModels `PolylineSimplificationStopPredicate`.
 class Stop_below_count_ratio_threshold

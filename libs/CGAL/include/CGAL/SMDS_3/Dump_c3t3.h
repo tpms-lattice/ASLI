@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/SMDS_3/Dump_c3t3.h $
+// $Id: Dump_c3t3.h cf04d50 2022-12-14T10:28:21+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -39,9 +39,10 @@ template <typename C3t3,
              Output_rep<typename C3t3::Subdomain_index>::is_specialized)
           >
 struct Dump_c3t3 {
-  void dump_c3t3(const C3t3& c3t3, std::string prefix) const
+  void dump_c3t3(const C3t3& c3t3, std::string prefix, bool verbose) const
   {
-    std::clog<<"======dump c3t3===== to: " << prefix << std::endl;
+    if (verbose)
+      std::clog<<"======dump c3t3===== to: " << prefix << std::endl;
     std::ofstream medit_file((prefix+".mesh").c_str());
     medit_file.precision(17);
     CGAL::IO::output_to_medit(medit_file, c3t3, false /*rebind*/, true /*show_patches*/);
@@ -62,7 +63,7 @@ struct Dump_c3t3 {
 template <typename C3t3>
 struct Dump_c3t3<C3t3, false>
 {
-  void dump_c3t3(const C3t3&, std::string) {
+  void dump_c3t3(const C3t3&, std::string, bool) {
     std::cerr << "Warning " << __FILE__ << ":" << __LINE__ << "\n"
               << "  the c3t3 object of following type:\n"
               << typeid(C3t3).name() << std::endl
@@ -122,11 +123,16 @@ void dump_c3t3_edges(const C3t3& c3t3, std::string prefix)
   }
 }
 template <typename C3t3>
-void dump_c3t3(const C3t3& c3t3, std::string prefix)
+void dump_c3t3(const C3t3& c3t3, std::string prefix,
+#ifdef CGAL_MESH_3_VERBOSE
+               bool verbose = true)
+#else
+               bool verbose = false)
+#endif
 {
   if(!prefix.empty()) {
     Dump_c3t3<C3t3> dump;
-    dump.dump_c3t3(c3t3, prefix);
+    dump.dump_c3t3(c3t3, prefix, verbose);
   }
 }
 

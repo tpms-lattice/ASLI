@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesher_level/include/CGAL/Meshes/Simple_set_container.h $
+// $Id: Simple_set_container.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -27,7 +27,7 @@ namespace CGAL {
       typedef typename Set::size_type size_type;
 
     protected:
-      // --- protected datas ---
+      // --- protected data ---
       Set s;
 
     public:

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_foundations/include/CGAL/Needs_parens_as_product.h $
+// $Id: Needs_parens_as_product.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -28,7 +28,7 @@ class Parens_as_product_tag {};
 
 /*! \ingroup NiX_io_parens
  *  \brief decides whether this number requires parentheses
- *  in case it appears within a produkt.
+ *  in case it appears within a product.
  */
 template <class NT>
 struct Needs_parens_as_product{
@@ -37,7 +37,7 @@ struct Needs_parens_as_product{
 
 /*! \ingroup NiX_io_parens
  *  \brief decides whether this number requires parentheses
- *  in case it appears within a produkt.
+ *  in case it appears within a product.
  */
 template <class NT>
 inline bool needs_parens_as_product(const NT& x){

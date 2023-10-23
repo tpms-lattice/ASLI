@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/facets_in_complex_3_to_triangle_mesh.h $
+// $Id: facets_in_complex_3_to_triangle_mesh.h 2db4d01 2022-06-17T14:17:37+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

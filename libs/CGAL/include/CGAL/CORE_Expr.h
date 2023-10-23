@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/CORE_Expr.h $
+// $Id: CORE_Expr.h e845fb2 2023-04-04T10:44:42+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -173,7 +173,11 @@ template <> class Real_embeddable_traits< CORE::Expr >
     };
 };
 
-} //namespace CGAL
+inline const CORE::Expr& approx(const CORE::Expr& d) { return d; }
+inline const CORE::Expr& exact(const CORE::Expr& d) { return d; }
+inline int depth(const CORE::Expr&){ return -1; }
+
+} // namespace CGAL
 
 //since types are included by CORE_coercion_traits.h:
 #include <CGAL/CORE_BigInt.h>

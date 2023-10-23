@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_S2/include/CGAL/Nef_S2/SM_overlayer.h $
+// $Id: SM_overlayer.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1043,7 +1043,7 @@ check_sphere(const Seg_list& L, bool compute_halfsphere[3][2]) const {
       CGAL_assertion(n<3);
 
       CGAL_NEF_TRACEN("n " << n);
-      CGAL_NEF_TRACEN("number of coordinats =0:" << n);
+      CGAL_NEF_TRACEN("number of coordinates =0:" << n);
       if(n==0) {
         if((chsp&60)!=60 &&
            it->sphere_circle().orthogonal_vector().x()!=0) chsp|=60;

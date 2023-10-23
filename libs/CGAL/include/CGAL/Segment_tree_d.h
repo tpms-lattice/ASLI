@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SearchStructures/include/CGAL/Segment_tree_d.h $
+// $Id: Segment_tree_d.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -263,7 +263,7 @@ protected:
        }
        else
        {
-         // recursiv call for the construction. the interval is devided.
+         // recursiv call for the construction. the interval is divided.
          build_segment_tree(n - (int)n/2, leftchild, rightchild,
                          prevchild, leftmostlink, index, last, keys);
          link_type vparent = new_Segment_tree_node_t

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arrangement_2/Arr_traits_adaptor_2_dispatching.h $
+// $Id: Arr_traits_adaptor_2_dispatching.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -258,7 +258,7 @@ namespace Is_on_y_identification_2 {
 
 namespace Compare_y_on_boundary_2 {
 
- // Poitns
+ // Points
  template < class ArrSideTag >
   struct Points {
     typedef Arr_use_dummy_tag type;

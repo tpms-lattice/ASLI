@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Circle_2_Iso_rectangle_2.h $
+// $Id: Circle_2_Iso_rectangle_2.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,9 +24,9 @@ namespace internal {
 
 // Circle_2 is not a disk, thus if the box is contained within the circle, there is no intersection.
 template <class K>
-bool do_intersect_circle_iso_rectangle_2(const typename K::Circle_2& circle,
-                                         const typename K::Iso_rectangle_2& rec,
-                                         const K&)
+typename K::Boolean do_intersect_circle_iso_rectangle_2(const typename K::Circle_2& circle,
+                                                        const typename K::Iso_rectangle_2& rec,
+                                                        const K&)
 {
   typedef typename K::FT                                          FT;
   typedef typename K::Point_2                                     Point;
@@ -92,18 +92,17 @@ bool do_intersect_circle_iso_rectangle_2(const typename K::Circle_2& circle,
 }
 
 template <class K>
-bool do_intersect(const typename K::Iso_rectangle_2& rec,
-                  const typename K::Circle_2& circle,
-                  const K&)
+typename K::Boolean do_intersect(const typename K::Iso_rectangle_2& rec,
+                                 const typename K::Circle_2& circle,
+                                 const K&)
 {
   return do_intersect_circle_iso_rectangle_2(circle, rec, K());
 }
 
-
 template <class K>
-bool do_intersect(const typename K::Circle_2& circle,
-                  const typename K::Iso_rectangle_2& rec,
-                  const K&)
+typename K::Boolean do_intersect(const typename K::Circle_2& circle,
+                                 const typename K::Iso_rectangle_2& rec,
+                                 const K&)
 {
   return do_intersect_circle_iso_rectangle_2(circle, rec, K());
 }

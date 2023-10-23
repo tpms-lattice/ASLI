@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_geometry_traits/Bezier_cache.h $
+// $Id: Bezier_cache.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -822,7 +822,7 @@ _Bezier_cache<NtTraits>::_compute_resultant
         }
 
         // We multiplied the current row by the i'th diagonal entry, thus
-        // multipling the determinant value by it. We therefore increment
+        // multiplying the determinant value by it. We therefore increment
         // the exponent of mat[i][i] in the normalization factor.
         exp_fact[i] = exp_fact[i] + 1;
       }

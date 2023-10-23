@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/draw_constrained_triangulation_2.h $
+// $Id: draw_constrained_triangulation_2.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -40,7 +40,7 @@ public:
   /// @param at2 the t2 to view
   /// @param title the title of the window
   /// @param anofaces if true, do not draw faces (faces are not computed; this can be
-  ///        usefull for very big object where this time could be long)
+  ///        useful for very big object where this time could be long)
   SimpleConstrainedTriangulation2ViewerQt(QWidget* parent, const T2& at2,
                                           InDomainPmap ipm,
                                           const char* title="Basic CDT2 Viewer",

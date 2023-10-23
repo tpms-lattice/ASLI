@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/Generic_clip_output_builder.h $
+// $Id: Generic_clip_output_builder.h dbccebf 2023-02-06T18:32:41+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -148,7 +148,7 @@ public:
 
     std::size_t nb_patches_tm1 =
       connected_components(tm1,
-                           bind_property_maps(fids1,make_property_map(&tm1_patch_ids[0])),
+                           make_compose_property_map(fids1,make_property_map(&tm1_patch_ids[0])),
                            parameters::edge_is_constrained_map(ecm1)
                                       .face_index_map(fids1));
 
@@ -228,7 +228,7 @@ public:
       }
     }
 
-    keep_connected_components(tm1, cc_to_keep, bind_property_maps(fids1,make_property_map(&tm1_patch_ids[0])));
+    keep_connected_components(tm1, cc_to_keep, make_compose_property_map(fids1,make_property_map(&tm1_patch_ids[0])));
   }
 };
 

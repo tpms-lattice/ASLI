@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/mouseGrabber.h $
+// $Id: mouseGrabber.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_MOUSE_GRABBER_H
@@ -269,7 +269,7 @@ protected:
   //@}
 
 private:
-  // Copy constructor and opertor= are declared private and undefined
+  // Copy constructor and operator= are declared private and undefined
   // Prevents everyone from trying to use them
   MouseGrabber(const MouseGrabber &);
   MouseGrabber &operator=(const MouseGrabber &);

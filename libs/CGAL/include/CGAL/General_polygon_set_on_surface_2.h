@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Boolean_set_operations_2/include/CGAL/General_polygon_set_on_surface_2.h $
+// $Id: General_polygon_set_on_surface_2.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
@@ -68,7 +68,7 @@ public:
 
 public:
 
-  // default costructor
+  // default constructor
   General_polygon_set_on_surface_2() : Base()
   {}
 

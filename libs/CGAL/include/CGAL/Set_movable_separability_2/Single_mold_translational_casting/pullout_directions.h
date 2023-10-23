@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/Single_mold_translational_casting/pullout_directions.h $
+// $Id: pullout_directions.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Shahar    <shasha94@gmail.com>
@@ -32,7 +32,7 @@ namespace Single_mold_translational_casting {
  *           intersection in  [firstClockwise,secondClockwise].
  *           When a new semicircle appear the possible cases are as such:
  *           (let f:=firstClockwise, s:=secondClockwise, a:=newSemicircleFirstClockwise , b:=newSemicircleSecondClockwise)
- *        REMEBER THAT THIS ARE SEGMENTS ON A CIRCLE! NOT ON A LINE!
+ *        REMEMBER THAT THIS ARE SEGMENTS ON A CIRCLE! NOT ON A LINE!
  * 1. [f,s] contained in [a,b]
  *                f           s                    *      f                s   *          f        s  *     f        s
  *           a                b          *      a                b   *     a                b  *     a                b
@@ -61,7 +61,7 @@ namespace Single_mold_translational_casting {
  *          f                s *          f                s
  *                a           b          *                 b          a
  *           __________________*        __________________
- *           THIS CASE CANT HAPPEN!! [a,b] is an semicircle, and (f,s) is a semicircle or less
+ *           THIS CASE CAN'T HAPPEN!! [a,b] is a semicircle, and (f,s) is a semicircle or less
  */
 template <typename CastingTraits_2>
 std::pair<bool, std::pair<typename CastingTraits_2::Direction_2,

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_3/include/CGAL/Convex_hull_3/dual/halfspace_intersection_interior_point_3.h $
+// $Id: halfspace_intersection_interior_point_3.h 2741267 2023-07-10T14:11:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -180,7 +180,7 @@ halfspace_intersection_interior_point_3(PlaneIterator begin, PlaneIterator end)
   typedef typename Kernel_traits<typename std::iterator_traits<PlaneIterator>::value_type>::Kernel K;
 
   // choose exact integral type
-  typedef typename internal::Exact_field_selector<void*>::Type ET;
+  typedef typename internal::Exact_field_selector<typename K::FT>::Type ET;
 
   // find a point inside the intersection
   internal::Interior_polyhedron_3<K, ET> interior;

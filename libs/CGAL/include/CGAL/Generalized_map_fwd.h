@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Generalized_map/include/CGAL/Generalized_map_fwd.h $
+// $Id: Generalized_map_fwd.h c25da7a 2022-05-23T13:28:00+02:00 Guillaume Damiand
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>

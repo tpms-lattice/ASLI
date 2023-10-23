@@ -3,14 +3,14 @@
 // Copyright 2004 The Trustees of Indiana University.
 // Use, modification and distribution is subject to the Boost Software
 // License, Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
-// http://www.boost.org/LICENSE_1_0.txt)
+// https://www.boost.org/LICENSE_1_0.txt)
 //
 // Authors: Douglas Gregor
 //          Andrew Lumsdaine
 //=======================================================================
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/STL_Extension/internal/boost/relaxed_heap.hpp $
+// $Id: relaxed_heap.hpp b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: BSL-1.0
 //
 // NOTE: this file has been taken from boost 1.77 to use

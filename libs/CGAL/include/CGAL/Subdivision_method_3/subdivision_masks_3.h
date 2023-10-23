@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_masks_3.h $
+// $Id: subdivision_masks_3.h dbd56de 2023-03-17T16:58:36+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -88,7 +88,7 @@ public:
 
 public:
   Linear_mask_3(Mesh* pmesh)
-    : Base(pmesh, get(vertex_point, pmesh))
+    : Base(pmesh, get(vertex_point, *pmesh))
   { }
 
   Linear_mask_3(Mesh* pmesh, VertexPointMap vpmap)
@@ -118,7 +118,7 @@ public:
   }
 
   void border_node(halfedge_descriptor edge, Point& ept, Point& /*vpt*/){
-    edge_node(edge, ept);
+   edge_node(edge, ept);
   }
 };
 

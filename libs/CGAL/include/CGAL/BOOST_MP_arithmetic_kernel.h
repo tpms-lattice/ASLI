@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arithmetic_kernel/include/CGAL/BOOST_MP_arithmetic_kernel.h $
+// $Id: BOOST_MP_arithmetic_kernel.h ed79fea 2021-09-23T13:02:58+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author: Marc Glisse <marc.glisse@inria.fr>

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/TDS_2/include/CGAL/Triangulation_ds_face_2.h $
+// $Id: Triangulation_ds_face_2.h 79d2374 2022-09-23T15:25:30+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

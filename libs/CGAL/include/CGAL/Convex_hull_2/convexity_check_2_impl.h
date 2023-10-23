@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_2/include/CGAL/Convex_hull_2/convexity_check_2_impl.h $
+// $Id: convexity_check_2_impl.h 96e5657 2022-06-30T09:32:45+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/orbifold_shortest_path.h $
+// $Id: orbifold_shortest_path.h 7c20752 2022-05-04T17:38:32+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé

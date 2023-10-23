@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/vec_impl.h $
+// $Id: vec_impl.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifdef CGAL_HEADER_ONLY
@@ -59,7 +59,7 @@ void Vec::projectOnPlane(const Vec &normal) {
 
 /*! Returns a Vec orthogonal to the Vec. Its norm() depends on the Vec, but is
  zero only for a null Vec. Note that the function that associates an
- orthogonalVec() to a Vec is not continous. */
+ orthogonalVec() to a Vec is not continuous. */
 CGAL_INLINE_FUNCTION
 Vec Vec::orthogonalVec() const {
   // Find smallest component. Keep equal case for null values.

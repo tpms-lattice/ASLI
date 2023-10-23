@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/BGL/include/CGAL/boost/graph/internal/helpers.h $
+// $Id: helpers.h 39b84d0 2023-03-22T14:00:57+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Andread Fabri
@@ -15,6 +15,7 @@
 #include <CGAL/property_map.h>
 #include <CGAL/boost/graph/iterator.h>
 #include <CGAL/Named_function_parameters.h>
+#include <CGAL/value_type_traits.h>
 
 #include <boost/iterator/function_output_iterator.hpp>
 
@@ -222,7 +223,6 @@ namespace impl
     {
       put(map, pair.first, pair.second);
     }
-
   };
 
   template<typename PMAP>
@@ -236,6 +236,13 @@ namespace impl
     return Emptyset_iterator();
   }
 }//end of impl
+
+template <class PMAP>
+struct value_type_traits<boost::function_output_iterator<impl::Output_iterator_functor<PMAP>>>
+{
+  typedef std::pair<typename impl::Output_iterator_functor<PMAP>::input_t,
+                    typename impl::Output_iterator_functor<PMAP>::output_t> type;
+};
 
 } // CGAL
 

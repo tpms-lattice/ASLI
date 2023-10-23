@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/TDS_2/include/CGAL/Triangulation_ds_vertex_2.h $
+// $Id: Triangulation_ds_vertex_2.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -68,7 +68,7 @@ public:
   bool is_valid(bool verbose = false, int level = 0);
 
 private:
-  // used to implement deprected access to circulators
+  // used to implement deprecated access to circulators
   Vertex_handle handle();
 };
 

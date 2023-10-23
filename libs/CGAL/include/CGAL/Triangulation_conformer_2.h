@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Triangulation_conformer_2.h $
+// $Id: Triangulation_conformer_2.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -44,7 +44,7 @@ protected:
     GABRIEL   /**< `this` has been \e Gabriel-initialized. */
   };
 
-// --- PROTECTED DATAS ---
+// --- PROTECTED DATA ---
   Initialization initialized;
   Tr& tr;
   Null_mesher_level null_level;

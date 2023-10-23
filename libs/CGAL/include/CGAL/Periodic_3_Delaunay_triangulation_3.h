@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_triangulation_3/include/CGAL/Periodic_3_Delaunay_triangulation_3.h $
+// $Id: Periodic_3_Delaunay_triangulation_3.h 58cc661 2023-03-23T23:47:58+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -665,29 +665,6 @@ private:
   }
 
 public:
-  /** @name Geometric access functions */
-
-  Point point(const Periodic_point& pp) const
-  {
-    return point(pp, geom_traits().construct_point_3_object());
-  }
-
-  // The following functions return the "real" position in space (unrestrained
-  // to the fundamental domain) of the vertices v and c->vertex(idx),
-  // respectively
-
-  Point point(Vertex_handle v) const
-  {
-    return point(v, geom_traits().construct_point_3_object());
-  }
-
-  Point point(Cell_handle c, int idx) const
-  {
-    return point(c, idx, geom_traits().construct_point_3_object());
-  }
-
-  // end of geometric functions
-
   Periodic_point periodic_circumcenter(Cell_handle c) const {
     return Base::periodic_circumcenter(c, geom_traits().construct_circumcenter_3_object());
   }
@@ -926,17 +903,8 @@ Periodic_3_Delaunay_triangulation_3<Gt,Tds>::
 move_point(Vertex_handle v, const Point& p)
 {
   CGAL_expensive_precondition(is_vertex(v));
-  // Remember an incident vertex to restart
-  // the point location after the removal.
-  // Cell_handle c = v->cell();
-  //Vertex_handle old_neighbor = c->vertex(c->index(v) == 0 ? 1 : 0);
-  //  CGAL_assertion(old_neighbor != v);
-
   remove(v);
-
-  if(number_of_vertices() == 0)
-    return insert(p);
-  return insert(p);//, old_neighbor->cell());
+  return insert(p);
 }
 
 template < class Gt, class Tds >

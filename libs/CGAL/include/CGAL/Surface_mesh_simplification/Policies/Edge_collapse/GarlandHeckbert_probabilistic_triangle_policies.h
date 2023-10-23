@@ -1,8 +1,8 @@
 // Copyright (c) 2019  GeometryFactory (France). All rights reserved.
 //
 // This file is part of CGAL (www.cgal.org).
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/GarlandHeckbert_probabilistic_triangle_policies.h $
+// $Id: GarlandHeckbert_probabilistic_triangle_policies.h 4f5f834 2022-06-10T07:37:53+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baskin Burak Senbaslar,

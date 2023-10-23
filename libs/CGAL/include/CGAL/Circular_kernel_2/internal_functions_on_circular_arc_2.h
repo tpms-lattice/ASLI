@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circular_kernel_2/include/CGAL/Circular_kernel_2/internal_functions_on_circular_arc_2.h $
+// $Id: internal_functions_on_circular_arc_2.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
@@ -1302,7 +1302,7 @@ template < class CK, class OutputIterator >
   }
 
 // This is the make_x_monotone function returning extra information:
-// The ouput iterator refers to pairs, the first part of which is an
+// The output iterator refers to pairs, the first part of which is an
 // object containing the x-monotone arc and the second part is a
 // boolean defining whether the arc is on the upper part of the
 // circle or not. This extra information returned by make_x_monotone
@@ -1457,7 +1457,7 @@ template < class CK, class OutputIterator >
 // In the same as the advanced_make_x_monotone works, this make_xy_function
 // returns extra information, descriptive of the position of the returned
 // xy-monotone arcs on the circle: The output iterator refers to pairs, the
-// first part of which is the object containing tha arc and the second part
+// first part of which is the object containing the arc and the second part
 // is another pair containing 2 booleans which equavalently describe whether the
 // returned xy-monotone arc is on the upper part and the left side of the circle
 

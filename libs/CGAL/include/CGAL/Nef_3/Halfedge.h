@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/Halfedge.h $
+// $Id: Halfedge.h b66ee56 2023-01-18T23:27:25+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,6 +21,7 @@
 
 #include <string>
 #include <sstream>
+#include <CGAL/IO/io.h>
 #include <CGAL/IO/Verbose_ostream.h>
 #include <CGAL/Nef_3/SNC_iteration.h>
 #include <CGAL/Origin.h>

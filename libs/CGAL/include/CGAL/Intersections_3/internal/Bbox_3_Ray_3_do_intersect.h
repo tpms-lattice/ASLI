@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Ray_3_do_intersect.h $
+// $Id: Bbox_3_Ray_3_do_intersect.h e8ec440 2022-12-05T14:51:31+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,7 @@
 #ifndef CGAL_INTERNAL_INTERSECTIONS_3_BBOX_3_RAY_3_DO_INTERSECT_H
 #define CGAL_INTERNAL_INTERSECTIONS_3_BBOX_3_RAY_3_DO_INTERSECT_H
 
-// inspired from http://cag.csail.mit.edu/~amy/papers/box-jgt.pdf
+// inspired from https://people.csail.mit.edu/amy/papers/box-jgt.pdf
 
 #include <CGAL/Intersections_3/internal/Bbox_3_Segment_3_do_intersect.h>
 // for CGAL::internal::do_intersect_bbox_segment_aux
@@ -26,9 +26,10 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool do_intersect(const typename K::Ray_3& ray,
-                  const CGAL::Bbox_3& bbox,
-                  const K&)
+typename K::Boolean
+do_intersect(const typename K::Ray_3& ray,
+             const CGAL::Bbox_3& bbox,
+             const K&)
 {
   typedef typename K::FT FT;
   typedef typename K::Point_3 Point_3;
@@ -49,9 +50,10 @@ bool do_intersect(const typename K::Ray_3& ray,
 }
 
 template <class K>
-bool do_intersect(const CGAL::Bbox_3& bbox,
-                  const typename K::Ray_3& ray,
-                  const K& k)
+typename K::Boolean
+do_intersect(const CGAL::Bbox_3& bbox,
+             const typename K::Ray_3& ray,
+             const K& k)
 {
   return do_intersect(ray, bbox, k);
 }

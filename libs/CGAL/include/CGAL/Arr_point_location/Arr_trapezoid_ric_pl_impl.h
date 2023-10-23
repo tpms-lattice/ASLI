@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Arr_trapezoid_ric_pl_impl.h $
+// $Id: Arr_trapezoid_ric_pl_impl.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -201,7 +201,7 @@ _get_unbounded_face(const Td_map_item& item,const Point_2& p,
     //the Halfedge_handle source is left_ee.
     // this way the face on it's left is the desired one
 
-    //MICHAL: maybe add a verification that the above occures
+    //MICHAL: maybe add a verification that the above occurs
     return he->face();
   }
   else if (!tr.is_on_right_boundary()) {
@@ -234,7 +234,7 @@ _get_unbounded_face(const Td_map_item& item,const Point_2& p,
     //the Halfedge_handle source is right_ee.
     // this way the face on it's left is the desired one
 
-    //MICHAL: maybe add a verification that the above occures
+    //MICHAL: maybe add a verification that the above occurs
     return he->face();
   }
 

@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/qglviewer.h $
+// $Id: qglviewer.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_QGLVIEWER_H
@@ -385,7 +385,7 @@ public:
    * of the world and the origin of the scene. It is relevant when the whole scene is translated
    * of a big number, because there is a useless loss of precision when drawing.
    *
-   * The offset must be added to the drawn coordinates, and substracted from the computation
+   * The offset must be added to the drawn coordinates, and subtracted from the computation
    * \attention  the result of pointUnderPixel is the real item translated by the offset.
    *
    */

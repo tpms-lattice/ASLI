@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_2/include/CGAL/Nef_2/PM_checker.h $
+// $Id: PM_checker.h 49f7a40 2023-02-09T09:42:55+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -220,7 +220,7 @@ check_boundary_is_clockwise_weakly_polygon() const
   } while (hvit != hend);
   // now e_boundary_at_v_min is highest starting edge in bundle!!
 
-  int winding_around_globally=0;
+  CGAL_assertion_code(int winding_around_globally=0);
   Halfedge_around_face_const_circulator
     hfit(e_boundary_at_v_min),hstart(hfit);
   Halfedge_const_handle e_prev = next(e_boundary_at_v_min);
@@ -229,7 +229,7 @@ check_boundary_is_clockwise_weakly_polygon() const
   Direction d_prev = direction(e_prev);
   CGAL_For_all_backwards(hstart,hfit) {
     Direction d_curr = direction(hfit);
-    if ( d_curr < d_prev ) ++winding_around_globally;
+    CGAL_assertion_code(if ( d_curr < d_prev ) ++winding_around_globally);
     d_prev = d_curr;
   }
   CGAL_assertion(winding_around_globally == 1);
@@ -262,10 +262,10 @@ check_is_triangulation() const
   for( eit = this->halfedges_begin(); eit != this->halfedges_end(); ++eit) {
     if (on_boundary[eit]) continue;
     hit = hend = eit;
-    int edges_in_face_cycle=0;
+    CGAL_assertion_code(int edges_in_face_cycle=0);
     CGAL_For_all(hit,hend) {
       error_status << PE(hit);
-      ++edges_in_face_cycle;
+      CGAL_assertion_code(++edges_in_face_cycle);
     }
     CGAL_assertion_msg(edges_in_face_cycle==3,error_status.str().c_str());
     CGAL_assertion_msg(

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Polygon_conversions.h $
+// $Id: Polygon_conversions.h 420f37a 2021-09-23T16:28:23+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

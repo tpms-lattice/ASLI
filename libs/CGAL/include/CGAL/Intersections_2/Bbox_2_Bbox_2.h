@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Bbox_2_Bbox_2.h $
+// $Id: Bbox_2_Bbox_2.h ce4cbe6 2020-03-19T11:41:57+01:00 Maxime Gimeno
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

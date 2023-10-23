@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/intersection_of_coplanar_triangles_3.h $
+// $Id: intersection_of_coplanar_triangles_3.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -81,7 +81,7 @@ struct Intersect_coplanar_faces_3
   //an intersection point between two edges. Otherwise, the point is a vertex of the second facet included into
   //the first facet.
   //
-  //(V,F) : point initialy constructed
+  //(V,F) : point initially constructed
   //(V,E) : (V,F) updated by get_orientation_and_update_info_2 (i.e lies on one edge)
   //(V,V) : (V,E) updated by get_orientation_and_update_info_2 (i.e lies on two edges)
   //(E,E) : created in the following function when prev and curr lie on the same edge

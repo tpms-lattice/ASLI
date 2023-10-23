@@ -2,8 +2,8 @@
 // All rights reserved.
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Stream_support/include/CGAL/IO/trace.h $
+// $Id: trace.h 3b7754f 2021-09-20T12:44:38+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret

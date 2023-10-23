@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_algebraic_segment_traits_2.h $
+// $Id: Arr_algebraic_segment_traits_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -61,7 +61,7 @@ public:
     // Copy constructor
     Arr_algebraic_segment_traits_2 (const  Self& /* s */) { /* No state...*/}
 
-    // Assignement operator
+    // Assignment operator
     const Self& operator= (const Self& s)
         {return s;}
 
@@ -254,7 +254,7 @@ public:
             return std::make_pair(std::make_pair(0,0),vertical);
         }
 
-        // abbrevation for convenience
+        // abbreviation for convenience
         bool is_one_one(Curve_2 cv, Point_2 p) const {
 
             std::pair<std::pair<int,int>,bool> branches

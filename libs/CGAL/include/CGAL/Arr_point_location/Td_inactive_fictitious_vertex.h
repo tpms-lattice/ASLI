@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_inactive_fictitious_vertex.h $
+// $Id: Td_inactive_fictitious_vertex.h 781f9a2 2022-11-17T10:25:10+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)         : Oren Nechushtan <theoren@math.tau.ac.il>
@@ -17,7 +17,7 @@
 
 
 /*! \file
- * Defintion of the Td_inactive_fictitious_vertex<Td_traits> class.
+ * Definition of the Td_inactive_fictitious_vertex<Td_traits> class.
  */
 
 #include <CGAL/Arr_point_location/Trapezoidal_decomposition_2.h>
@@ -43,7 +43,7 @@ namespace CGAL {
  * when one of the four sides is on the parameter space boundary.
  * Trapezoids are created as active and become inactive when Remove() member
  * function called.
- * Each trapezoid has at most four neighbouring trapezoids.
+ * Each trapezoid has at most four neighboring trapezoids.
  * X_trapezoid structure can represent a real trapezoid, a Td-edge or an
  * edge-end (end point).
  */

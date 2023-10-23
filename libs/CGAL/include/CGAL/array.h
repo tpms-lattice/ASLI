@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/array.h $
+// $Id: array.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sylvain Pion
@@ -30,7 +30,7 @@ namespace CGAL {
 // https://lists.boost.org/Archives/boost/2006/08/109003.php
 //
 // C++0x has it under discussion here :
-// http://www.open-std.org/jtc1/sc22/wg21/docs/lwg-active.html#851
+// https://www.open-std.org/jtc1/sc22/wg21/docs/lwg-active.html#851
 
 // Hopefully C++0x will fix this properly with initializer_lists.
 // So, it's temporary, therefore I do not document it and keep it internal.

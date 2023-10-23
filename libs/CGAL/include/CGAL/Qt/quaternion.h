@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/quaternion.h $
+// $Id: quaternion.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_QUATERNION_H
@@ -36,7 +36,7 @@ namespace qglviewer {
         You can apply the Quaternion \c q rotation to the OpenGL matrices using:
         \code
         glMultMatrixd(q.matrix());
-        // equvalent to glRotate(q.angle()*180.0/M_PI, q.axis().x, q.axis().y,
+        // equivalent to glRotate(q.angle()*180.0/M_PI, q.axis().x, q.axis().y,
    q.axis().z); \endcode
 
         Quaternion is part of the \c qglviewer namespace, specify \c

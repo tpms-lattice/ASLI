@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Solver_interface/include/CGAL/Eigen_vector.h $
+// $Id: Eigen_vector.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud
@@ -20,7 +20,7 @@ namespace CGAL {
 \ingroup PkgSolverInterfaceLS
 
 The class `Eigen_vector` is a wrapper around `Eigen`
-<a href="http://eigen.tuxfamily.org/dox/classEigen_1_1Matrix.html">vector type</a>,
+<a href="https://eigen.tuxfamily.org/dox/classEigen_1_1Matrix.html">vector type</a>,
 which is a simple array of numbers.
 
 \cgalModels `SvdTraits::Vector`

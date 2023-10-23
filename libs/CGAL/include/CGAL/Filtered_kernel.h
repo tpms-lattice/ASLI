@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Filtered_kernel/include/CGAL/Filtered_kernel.h $
+// $Id: Filtered_kernel.h 873cc88 2022-09-22T12:03:25+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -81,13 +81,16 @@ struct Filtered_kernel_base
     Approximate_kernel approximate_kernel() const { return {}; }
 
     // We change the predicates.
-#define CGAL_Kernel_pred(P, Pf) \
-    typedef Filtered_predicate<typename Exact_kernel::P, typename Approximate_kernel::P, C2E, C2F> P; \
+#define CGAL_Kernel_pred_RT_or_FT(P, Pf) \
+    typedef Filtered_predicate_RT_FT<typename Exact_kernel_rt::P, \
+                                     typename Exact_kernel::P, \
+                                     typename Approximate_kernel::P, \
+                                    C2E_rt, \
+                                    C2E, \
+                                    C2F> P; \
     P Pf() const { return P(); }
 
-#define CGAL_Kernel_pred_RT(P, Pf) \
-    typedef Filtered_predicate<typename Exact_kernel_rt::P, typename Approximate_kernel::P, C2E_rt, C2F> P; \
-    P Pf() const { return P(); }
+#define CGAL_Kernel_pred(P, Pf) CGAL_Kernel_pred_RT_or_FT(P, Pf)
 
     // We don't touch the constructions.
 #define CGAL_Kernel_cons(Y,Z)

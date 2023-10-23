@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/Simplicial_mesh_vertex_base_3.h $
+// $Id: Simplicial_mesh_vertex_base_3.h b507b59 2022-05-17T16:13:03+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stéphane Tayeb, Andreas Fabri, Jane Tournois

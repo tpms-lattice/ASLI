@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Generator/include/CGAL/point_generators_2.h $
+// $Id: point_generators_2.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -658,7 +658,7 @@ struct Address_of {
   }
 };
 
-}//namesapce internal
+}//namespace internal
 
 template <class Point_2,
           class Triangle_2=typename Kernel_traits<Point_2>::Kernel::Triangle_2,

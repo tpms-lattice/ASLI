@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_S2/include/CGAL/Nef_S2/Sphere_segment.h $
+// $Id: Sphere_segment.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -85,7 +85,7 @@ class Sphere_segment :
   public Handle_for< Sphere_segment_rep<R_> > {
 
 /*{\Mdefinition An object |\Mvar| of type |\Mname| is a segment in the
-surface of a unit sphere that is part of a great circle trough the
+surface of a unit sphere that is part of a great circle through the
 origin. Sphere segments are represented by two sphere points $p$ and
 $q$ plus an oriented plane $h$ that contains $p$ and $q$. The plane
 determines the sphere segment. Let $c$ be the circle in the

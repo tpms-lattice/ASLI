@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Bbox_2_Circle_2.h $
+// $Id: Bbox_2_Circle_2.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,18 +24,19 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool do_intersect(const CGAL::Bbox_2& bbox,
-                  const typename K::Circle_2& circle,
-                  const K&)
+typename K::Boolean
+do_intersect(const CGAL::Bbox_2& bbox,
+             const typename K::Circle_2& circle,
+             const K&)
 {
   return do_intersect_circle_iso_rectangle_2(circle, bbox, K());
 }
 
-
 template <class K>
-bool do_intersect(const typename K::Circle_2& circle,
-                  const CGAL::Bbox_2& bbox,
-                  const K&)
+typename K::Boolean
+do_intersect(const typename K::Circle_2& circle,
+             const CGAL::Bbox_2& bbox,
+             const K&)
 {
   return do_intersect_circle_iso_rectangle_2(circle, bbox, K());
 }
@@ -44,15 +45,17 @@ bool do_intersect(const typename K::Circle_2& circle,
 } // namespace Intersections
 
 template<typename K>
-bool do_intersect(const CGAL::Bbox_2& a,
-                  const Circle_2<K>& b)
+typename K::Boolean
+do_intersect(const CGAL::Bbox_2& a,
+             const Circle_2<K>& b)
 {
   return K().do_intersect_2_object()(a, b);
 }
 
 template<typename K>
-bool do_intersect(const Circle_2<K>& a,
-                  const CGAL::Bbox_2& b)
+typename K::Boolean
+do_intersect(const Circle_2<K>& a,
+             const CGAL::Bbox_2& b)
 {
   return K().do_intersect_2_object()(a, b);
 }

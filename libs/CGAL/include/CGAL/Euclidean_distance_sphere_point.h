@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Spatial_searching/include/CGAL/Euclidean_distance_sphere_point.h $
+// $Id: Euclidean_distance_sphere_point.h 98e4718 2021-08-26T11:33:39+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/QP_solver/include/CGAL/QP_options.h $
+// $Id: QP_options.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -86,7 +86,7 @@ private:
   // verbosity
   // ---------
   //    0: silent
-  //    1: short iteration summary (recommened for the user)
+  //    1: short iteration summary (recommended for the user)
   // >= 2: output of internal details (not recommend for the user)
   int verbosity_;
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Line_2.h $
+// $Id: Line_2.h 3933d0b 2022-11-08T12:07:14+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -89,18 +89,17 @@ public:
     : RLine_2(typename R::Construct_line_2()(Return_base_tag(), p,v)) {}
 
 
-  // FIXME : Use Qrt<> here.
-  RT a() const
+  decltype(auto) a() const
   {
     return R().compute_a_2_object()(*this);
   }
 
-  RT b() const
+  decltype(auto) b() const
   {
     return R().compute_b_2_object()(*this);
   }
 
-  RT c() const
+  decltype(auto) c() const
   {
     return R().compute_c_2_object()(*this);
   }

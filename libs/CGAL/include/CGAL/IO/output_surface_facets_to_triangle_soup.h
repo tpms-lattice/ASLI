@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Poisson_surface_reconstruction_3/include/CGAL/IO/output_surface_facets_to_triangle_soup.h $
+// $Id: output_surface_facets_to_triangle_soup.h 47f0eb4 2022-05-26T19:06:01+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez

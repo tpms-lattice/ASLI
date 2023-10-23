@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Line_3_Point_3_do_intersect.h $
+// $Id: Line_3_Point_3_do_intersect.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,7 +18,7 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-inline bool
+inline typename K::Boolean
 do_intersect(const typename K::Point_3& pt,
              const typename K::Line_3& line,
              const K& k)
@@ -27,7 +27,7 @@ do_intersect(const typename K::Point_3& pt,
 }
 
 template <class K>
-inline bool
+inline typename K::Boolean
 do_intersect(const typename K::Line_3& line,
              const typename K::Point_3& pt,
              const K& k)

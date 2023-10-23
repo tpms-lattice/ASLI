@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_intersection.h $
+// $Id: SNC_intersection.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -197,7 +197,7 @@ class SNC_intersection {
     if( outer_bound_pos != CGAL::ON_BOUNDED_SIDE )
       return outer_bound_pos;
     /* The point p is not in the relative interior of the outer face cycle
-       so it is not necesary to know the possition of p with respect to the
+       so it is not necessary to know the position of p with respect to the
        inner face cycles */
     Halffacet_cycle_const_iterator fe = f->facet_cycles_end();
     ++fc;
@@ -226,7 +226,7 @@ class SNC_intersection {
       if( inner_bound_pos != CGAL::ON_UNBOUNDED_SIDE )
         return opposite(inner_bound_pos);
       /* At this point the point p belongs to relative interior of the facet's
-         outer cycle, and its possition is completely known when it belongs
+         outer cycle, and its position is completely known when it belongs
          to the clousure of any inner cycle */
     }
     return CGAL::ON_BOUNDED_SIDE;

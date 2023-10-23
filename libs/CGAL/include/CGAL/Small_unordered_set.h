@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/Small_unordered_set.h $
+// $Id: Small_unordered_set.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -33,7 +33,7 @@ namespace CGAL
     unicity test is done element by element, in linear time
 
   - when the number of elements exceed MaxSize, a
-    `std::unordered_set<Key>` is instanciated, all the elements of the
+    `std::unordered_set<Key>` is instantiated, all the elements of the
     array are inserted in it and from that point the container behaves
     like a `std::unordered_set`
 

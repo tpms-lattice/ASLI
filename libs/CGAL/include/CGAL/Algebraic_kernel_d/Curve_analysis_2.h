@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Curve_analysis_2.h $
+// $Id: Curve_analysis_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -481,7 +481,7 @@ public:
      * \c internal::Zero_resultant_exception<Polynomial_2>,
      * instead of performing a shear.
      *
-     * \Todo Currently the defualt strategy has been changed to SHEAR_STRATEGY
+     * \Todo Currently the default strategy has been changed to SHEAR_STRATEGY
      * because there exist a problem if vertical asymtotes are present at
      * the rational x-coordinate.
      */
@@ -1167,7 +1167,7 @@ public:
 
     /*!
      * \brief returns the status line for the interval
-     * preceeding the <tt>i</tt>th event
+     * preceding the <tt>i</tt>th event
      *
      * Returns a status line for a reference x-coordinate of the <tt>i</tt>th
      * interval of the curve. If called multiple times for the same <tt>i</tt>,
@@ -1827,7 +1827,7 @@ private:
                    static_cast<size_type>(lcoeff_roots.size()) &&
                    event_values[i]==lcoeff_roots[curr_lcoeff_index]) {
                     // We have a root of the leading coefficient
-                    // of the primitve polynomial
+                    // of the primitive polynomial
                     curr_event.index_of_prim_lcoeff_root = curr_lcoeff_index;
                     curr_event.mult_of_prim_lcoeff_root
                         = lcoeff_mults[curr_lcoeff_index];
@@ -1867,7 +1867,7 @@ private:
                    static_cast<size_type>(lcoeff_roots.size()) &&
                    event_values[i]==lcoeff_roots[curr_lcoeff_index]) {
                     // We have a root of the leading coefficient
-                    // of the primitve polynomial
+                    // of the primitive polynomial
                     curr_event.index_of_prim_lcoeff_root = curr_lcoeff_index;
                     curr_event.mult_of_prim_lcoeff_root
                         = lcoeff_mults[curr_lcoeff_index];

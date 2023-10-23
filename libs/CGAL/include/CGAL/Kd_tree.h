@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Spatial_searching/include/CGAL/Kd_tree.h $
+// $Id: Kd_tree.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Hans Tangelder (<hanst@cs.uu.nl>),
@@ -175,7 +175,7 @@ private:
 #endif
   }
 
-  // TODO: Similiar to the leaf_init function above, a part of the code should be
+  // TODO: Similar to the leaf_init function above, a part of the code should be
   //       moved to a the class Kd_tree_node.
   //       It is not proper yet, but the goal was to see if there is
   //       a potential performance gain through the Compact_container

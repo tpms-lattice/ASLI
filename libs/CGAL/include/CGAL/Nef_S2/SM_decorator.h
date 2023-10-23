@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_S2/include/CGAL/Nef_S2/SM_decorator.h $
+// $Id: SM_decorator.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -231,7 +231,7 @@ Size_type number_of_sfaces() const
 
 SFace_cycle_iterator sface_cycles_begin(SFace_handle f) const
 /*{\Mop returns an iterator for all bounding face cycles of |f|.
-The iterator is is convertable to |SVertex_handle|,
+The iterator is is convertible to |SVertex_handle|,
 |SHalfloop_handle|, or |SHalfedge_handle|.}*/
 { return f->boundary_entry_objects().begin(); }
 
@@ -659,7 +659,7 @@ void link_as_target_of(SHalfedge_handle e, SVertex_handle v) const
 { link_as_source_of(e->twin(),v); }
 
 void set_adjacency_at_source_between(SHalfedge_handle e, SHalfedge_handle en)
-/*{\Mop makes |e| and |en| neigbors in the cyclic ordered adjacency list
+/*{\Mop makes |e| and |en| neighbors in the cyclic ordered adjacency list
     around |v=e->source()|. \precond |e->source()==en->source()|.}*/
 { CGAL_assertion(e->source()==en->source());
   link_as_prev_next_pair(en->twin(),e);

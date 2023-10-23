@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_3/include/CGAL/Point_set_3/IO/PLY.h $
+// $Id: PLY.h 1e6519e 2023-05-11T17:28:21+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -545,7 +545,7 @@ bool write_PLY(std::ostream& os,
       if(okay)
       {
         os << "property char " << prop[i] << std::endl;
-        printers.push_back(new internal::Char_property_printer<Index,Int8_map>(pmap));
+        printers.push_back(new internal::Simple_property_printer<Index,Int8_map>(pmap));
         continue;
       }
     }
@@ -555,7 +555,7 @@ bool write_PLY(std::ostream& os,
       if(okay)
       {
         os << "property uchar " << prop[i] << std::endl;
-        printers.push_back(new internal::Char_property_printer<Index,Uint8_map>(pmap));
+        printers.push_back(new internal::Simple_property_printer<Index,Uint8_map>(pmap));
         continue;
       }
     }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/uncertain/Uncertain_vertex_conflict_2.h $
+// $Id: Uncertain_vertex_conflict_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -268,7 +268,7 @@ private:
     {
       // NOTE:***************************************
       // * the perturb boolean variable is not used
-      // * for consistancy with Menelaos
+      // * for consistency with Menelaos
       // NOTE:***************************************
       RT x2 = p2.x() - p1.x();
       RT y2 = p2.y() - p1.y();
@@ -298,10 +298,10 @@ private:
           if ( is_indeterminate(s_xw2q) ) { return s_xw2q; }
           power_test = o12 * s_xw2q;
 
-          // this results is consistant with Menelaos
+          // this results is consistent with Menelaos
           if (power_test != ZERO) { return -power_test; }
 
-            // this result is consistant with the perturb on off idea
+            // this result is consistent with the perturb on off idea
             //if (power_test != ZERO || ! perturb) return -power_test;
 
           o1q = CGAL::sign(xq);
@@ -313,10 +313,10 @@ private:
           if ( is_indeterminate(s_yw2q) ) { return s_yw2q; }
           power_test = o12 * s_yw2q;
 
-          // this results is consistant with Menelaos
+          // this results is consistent with Menelaos
           if (power_test != ZERO) { return -power_test; }
 
-          // this result is consistant with the perturb on off idea
+          // this result is consistent with the perturb on off idea
           //if (power_test != ZERO || ! perturb) return -power_test;
 
           o1q = CGAL::sign(yq);
@@ -348,11 +348,11 @@ private:
                    - CGAL::square(xy2q));
       if ( is_indeterminate(radInt) ) { return radInt; }
 
-      // radical intersection degerate
+      // radical intersection degenerate
       if (radInt == ZERO) {
         CGAL_assertion (radSide != ZERO);
 
-        // this result is consistant with the perturb on off idea
+        // this result is consistent with the perturb on off idea
         //if (! perturb) return (radSide == orient) ? ZERO : orient;
 
         RT rs2q1 = (p2.x() - q.x()) * xw2q + (p2.y() - q.y()) * yw2q;

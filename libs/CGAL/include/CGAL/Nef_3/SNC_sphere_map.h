@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_sphere_map.h $
+// $Id: SNC_sphere_map.h b66ee56 2023-01-18T23:27:25+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,6 +24,7 @@
 #include <CGAL/Nef_S2/Generic_handle_map.h>
 #include <CGAL/Nef_2/iterator_tools.h>
 #include <CGAL/Nef_3/Infimaximal_box.h>
+#include <CGAL/Nef_3/SNC_list.h>
 #include <CGAL/Nef_S2/Sphere_geometry.h>
 #include <list>
 #undef CGAL_NEF_DEBUG

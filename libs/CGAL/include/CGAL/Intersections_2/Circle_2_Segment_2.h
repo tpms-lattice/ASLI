@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Circle_2_Segment_2.h $
+// $Id: Circle_2_Segment_2.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,8 +24,8 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool
-do_intersect(const typename K::Circle_2 & c,
+typename K::Boolean
+do_intersect(const typename K::Circle_2& c,
              const typename K::Segment_2& s,
              const K&)
 {
@@ -33,9 +33,9 @@ do_intersect(const typename K::Circle_2 & c,
 }
 
 template <class K>
-bool
+typename K::Boolean
 do_intersect(const typename K::Segment_2& s,
-             const typename K::Circle_2 & c,
+             const typename K::Circle_2& c,
              const K&)
 {
   return squared_distance(c.center(), s) <= c.squared_radius();
@@ -47,4 +47,5 @@ do_intersect(const typename K::Segment_2& s,
 CGAL_DO_INTERSECT_FUNCTION(Circle_2, Segment_2, 2)
 
 } // namespace CGAL
+
 #endif // CGAL_INTERSECTIONS_2_CIRCLE_2_SEGMENT_2_H

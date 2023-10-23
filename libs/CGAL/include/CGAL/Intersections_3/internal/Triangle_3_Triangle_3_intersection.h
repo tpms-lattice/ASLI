@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Triangle_3_Triangle_3_intersection.h $
+// $Id: Triangle_3_Triangle_3_intersection.h c17c14f 2023-01-24T10:55:29+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -51,7 +51,7 @@ void intersection_coplanar_triangles_cutoff(const typename Kernel::Point_3& p,
   for (Iterator it=inter_pts.begin();it!=inter_pts.end();++it)
     orientations[ &(*it) ]=orient(p,q,r,*it);
 
-  int pt_added = 0;
+  CGAL_kernel_assertion_code(int pt_added = 0;)
 
   const typename Kernel::Point_3* prev = &(*boost::prior(inter_pts.end()));
   Iterator stop = inter_pts.size() > 2 ? inter_pts.end() : boost::prior(inter_pts.end());
@@ -75,7 +75,7 @@ void intersection_coplanar_triangles_cutoff(const typename Kernel::Point_3& p,
 
       prev = &(*inter_pts.insert(it,*inter));
       orientations[prev] = COLLINEAR;
-      ++pt_added;
+      CGAL_kernel_assertion_code(++pt_added;)
     }
 
     prev = &(*it);

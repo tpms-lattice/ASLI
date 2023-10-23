@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/mst_orient_normals.h $
+// $Id: mst_orient_normals.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Laurent Saboret and Andreas Fabri
@@ -156,7 +156,7 @@ public:
 /// Helper class: Propagate_normal_orientation
 ///
 /// This class is used internally by mst_orient_normals()
-/// to propage the normal orientation, starting from a source point
+/// to propagate the normal orientation, starting from a source point
 /// and following the adjacency relations of vertices in a Minimum Spanning Tree.
 /// It does not orient normals that are already oriented.
 /// It does not propagate the orientation if the angle between 2 normals > angle_max.
@@ -548,7 +548,7 @@ create_mst_graph(
    \ingroup PkgPointSetProcessing3Algorithms
    Orients the normals of the range of `points` using the propagation
    of a seed orientation through a minimum spanning tree of the Riemannian graph.
-   This method modifies the order of input points so as to pack all sucessfully oriented points first,
+   This method modifies the order of input points so as to pack all successfully oriented points first,
    and returns an iterator over the first point with an unoriented normal (see erase-remove idiom).
    For this reason it should not be called on sorted containers.
    It is based on \cgalCite{cgal:hddms-srup-92}.
@@ -631,7 +631,7 @@ mst_orient_normals(
     typedef typename NP_helper::Geom_traits Kernel;
     typedef typename Point_set_processing_3::GetIsConstrainedMap<PointRange, NamedParameters>::type ConstrainedMap;
 
-    CGAL_static_assertion_msg(NP_helper::has_normal_map(), "Error: no normal map");
+    CGAL_assertion_msg(NP_helper::has_normal_map(points, np), "Error: no normal map");
 
     PointMap point_map = NP_helper::get_point_map(points, np);
     NormalMap normal_map = NP_helper::get_normal_map(points, np);

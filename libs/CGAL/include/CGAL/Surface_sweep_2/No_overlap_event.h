@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_sweep_2/include/CGAL/Surface_sweep_2/No_overlap_event.h $
+// $Id: No_overlap_event.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,
@@ -19,7 +19,7 @@
 
 /*! \file
  *
- * Defintion of the No_overlap_event class.
+ * Definition of the No_overlap_event class.
  */
 
 #include <CGAL/Surface_sweep_2/No_overlap_event_base.h>
@@ -45,7 +45,7 @@ namespace Surface_sweep_2 {
  * parameters of the surface-sweep visitor class templates. It enables the
  * definition of these two types, which refer one to another; (the curves to the
  * right of an event and the curves to its left are data members of the event,
- * and the two events associated with the endpoints of a curve are data memebrs
+ * and the two events associated with the endpoints of a curve are data members
  * of the curve.)
  *
  * If you need to represent an event with additional data members, introduce a

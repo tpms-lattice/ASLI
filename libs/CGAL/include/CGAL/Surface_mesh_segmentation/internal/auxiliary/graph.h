@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_segmentation/include/CGAL/Surface_mesh_segmentation/internal/auxiliary/graph.h $
+// $Id: graph.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // Re-licensed for CGAL distribution to:
 // SPDX-License-Identifier: GPL-3.0-or-later
 // Original license is:
@@ -53,10 +53,10 @@ This program is available under dual licence:
 
 1) Under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 Note that any program that incorporates the code under this licence must, under the terms of the GNU GPL, be released under a licence compatible with the GPL. GNU GPL does not permit incorporating this program into proprietary programs. If you wish to do this, please see the alternative licence available below.
-GNU General Public License can be found at http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+GNU General Public License can be found at https://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
 2) Proprietary Licence from UCL Business PLC.
-To enable programers to include the MaxFlow software in a proprietary system (which is not allowed by the GNU GPL), this licence gives you the right to incorporate the software in your program and distribute under any licence of your choosing. The full terms of the licence and applicable fee, are available from the Licensors at: http://www.uclb-elicensing.com/optimisation_software/maxflow_computervision.html
+To enable programmers to include the MaxFlow software in a proprietary system (which is not allowed by the GNU GPL), this licence gives you the right to incorporate the software in your program and distribute under any licence of your choosing. The full terms of the licence and applicable fee, are available from the Licensors at: http://www.uclb-elicensing.com/optimisation_software/maxflow_computervision.html
 
 ##################################################################
 
@@ -637,7 +637,7 @@ private:
     arcs_for[MF_ARC_BLOCK_SIZE]; /* all arcs must be at even addresses */
     union {
       arc_forward                        dummy;
-      node                                *LAST_NODE;        /* used in graph consruction */
+      node                                *LAST_NODE;        /* used in graph construction */
     }                                                LAST_NODE;
   } arc_for_block;
 
@@ -651,7 +651,7 @@ private:
     arcs_rev[MF_ARC_BLOCK_SIZE]; /* all arcs must be at even addresses */
     union {
       arc_reverse                        dummy;
-      node                                *LAST_NODE;        /* used in graph consruction */
+      node                                *LAST_NODE;        /* used in graph construction */
     }                                                LAST_NODE;
   } arc_rev_block;
 

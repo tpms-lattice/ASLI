@@ -9,8 +9,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/Bbox_3_Tetrahedron_3.h $
+// $Id: Bbox_3_Tetrahedron_3.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -28,15 +28,17 @@
 namespace CGAL {
 
 template<typename K>
-bool do_intersect(const CGAL::Bbox_3& box,
-                  const Tetrahedron_3<K>& t)
+typename K::Boolean
+do_intersect(const CGAL::Bbox_3& box,
+             const Tetrahedron_3<K>& t)
 {
   return K().do_intersect_3_object()(box, t);
 }
 
 template<typename K>
-bool do_intersect(const Tetrahedron_3<K>& t,
-                  const CGAL::Bbox_3& box)
+typename K::Boolean
+do_intersect(const Tetrahedron_3<K>& t,
+             const CGAL::Bbox_3& box)
 {
   return K().do_intersect_3_object()(t, box);
 }

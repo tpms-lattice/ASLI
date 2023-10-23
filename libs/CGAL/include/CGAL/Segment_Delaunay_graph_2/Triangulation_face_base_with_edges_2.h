@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Triangulation_face_base_with_edges_2.h $
+// $Id: Triangulation_face_base_with_edges_2.h d3fca65 2022-09-23T12:49:40+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Alpha_wrap_3/include/CGAL/Alpha_wrap_3/internal/Oracle_base.h $
+// $Id: Oracle_base.h 46c9fa1 2022-09-03T14:00:20+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé

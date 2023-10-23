@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_3/include/CGAL/Point_set_3/IO/XYZ.h $
+// $Id: XYZ.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -35,7 +35,7 @@ namespace IO {
 /*!
   \ingroup PkgPointSet3IOXYZ
 
-  \brief reads the content of an intput stream in the \ref IOStreamXYZ into a point set.
+  \brief reads the content of an input stream in the \ref IOStreamXYZ into a point set.
 
   If normals are present in the input stream, a normal map will be created and filled.
 

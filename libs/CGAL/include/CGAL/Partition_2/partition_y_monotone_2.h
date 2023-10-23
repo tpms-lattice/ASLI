@@ -3,15 +3,15 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Partition_2/include/CGAL/Partition_2/partition_y_monotone_2.h $
+// $Id: partition_y_monotone_2.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
 // Author(s)     : Susan Hert <hert@mpi-sb.mpg.de>
 
 //
-// Implementaion of the algorithm from pp 49--55 of "Computational Geometry
+// Implementation of the algorithm from pp 49--55 of "Computational Geometry
 // Algorithms and  Applications" by de Berg, van Kreveld, Overmars, and
 // Schwarzkopf for producing a partitioning of a polygon into y-monotone
 // pieces.

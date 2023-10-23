@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/DemosMainWindow.h $
+// $Id: DemosMainWindow.h 1a6ece1 2023-04-27T17:27:23+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -93,8 +93,9 @@ protected Q_SLOTS:
   void popupAboutCGAL();
   void popupAboutDemo();
 
+#if QT_SVG_LIB
   void exportSVG();
-
+#endif
   void openRecentFile_aux();
   void addToRecentFiles(QString fileName);
   void updateRecentFileActions();

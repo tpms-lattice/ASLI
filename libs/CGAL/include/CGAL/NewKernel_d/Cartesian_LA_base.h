@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_LA_base.h $
+// $Id: Cartesian_LA_base.h bdc0ce3 2021-01-27T16:33:59+01:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse

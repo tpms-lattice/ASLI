@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/Triangulation_2/internal/Constraint_hierarchy_2.h $
+// $Id: Constraint_hierarchy_2.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -208,7 +208,7 @@ template <class T, class Compare, class Data>
 void
 Constraint_hierarchy_2<T,Compare,Data>::
 copy(const Constraint_hierarchy_2& ch1, std::map<T,T>& vmap)
-  // copy with a tranfer vertex map
+  // copy with a transfer vertex map
 {
   clear();
   // copy c_to_sc_map
@@ -457,7 +457,7 @@ remove_constraint(T va, T vb){
     CGAL_assertion(scit != sc_to_c_map.end());
     H_context_list* hcl = scit->second;
 
-    // and remove the contraint from the context list of the subcontraint
+    // and remove the constraint from the context list of the subconstraints
     for(H_context_iterator ctit=hcl->begin(); ctit != hcl->end(); ctit++) {
       if(ctit->enclosing == hvl){
             hcl->erase(ctit);

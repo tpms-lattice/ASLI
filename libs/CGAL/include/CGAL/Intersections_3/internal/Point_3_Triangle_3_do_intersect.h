@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Point_3_Triangle_3_do_intersect.h $
+// $Id: Point_3_Triangle_3_do_intersect.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,9 +21,10 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool do_intersect(const typename K::Triangle_3& t,
-                  const typename K::Point_3& p,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Triangle_3& t,
+             const typename K::Point_3& p,
+             const K& k)
 {
   CGAL_kernel_precondition(!k.is_degenerate_3_object()(t));
 
@@ -68,9 +69,10 @@ bool do_intersect(const typename K::Triangle_3& t,
 }
 
 template <class K>
-bool do_intersect(const typename K::Point_3& p,
-                  const typename K::Triangle_3& t,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Point_3& p,
+             const typename K::Triangle_3& t,
+             const K& k)
 {
   return do_intersect(t, p, k);
 }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_default_dcel.h $
+// $Id: Gps_default_dcel.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -20,7 +20,7 @@
 
 /*! \file
  * This class is the default \dcel{} class used by the General_polygon_set_2
- * and Polygon_set_2} class-templates to represent the undelying internal
+ * and Polygon_set_2} class-templates to represent the underlying internal
  * Arrangement_2 data structure.
  */
 

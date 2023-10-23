@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_d/include/CGAL/predicates_d.h $
+// $Id: predicates_d.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -177,7 +177,7 @@ affinely independent.
 template <class R>
 Comparison_result compare_lexicographically(
   const Point_d<R>& p1, const Point_d<R>& p2)
-/*{\Mfunc compares the Cartesian coordiantes of points |p1| and |p2|
+/*{\Mfunc compares the Cartesian coordinates of points |p1| and |p2|
    lexicographically.}*/
 { typename R::Compare_lexicographically_d cmp;
   return cmp(p1,p2); }

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/HalfedgeDS/include/CGAL/boost/graph/graph_traits_HalfedgeDS.h $
+// $Id: graph_traits_HalfedgeDS.h fd20bee 2022-05-03T15:09:05+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Line_3.h $
+// $Id: Line_3.h c685810 2022-10-27T21:42:59+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -106,7 +106,7 @@ public:
 
   Point_3 point() const
   {
-    return R().construct_point_on_3_object()(*this, 0);
+    return R().construct_point_on_3_object()(*this);
   }
 
   Point_3 point(const FT i) const

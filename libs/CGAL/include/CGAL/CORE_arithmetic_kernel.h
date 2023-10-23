@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arithmetic_kernel/include/CGAL/CORE_arithmetic_kernel.h $
+// $Id: CORE_arithmetic_kernel.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michael Hemmer <mhemmer@uni-mainz.de>
@@ -42,7 +42,7 @@ class CORE_arithmetic_kernel : public internal::Arithmetic_kernel_base {
 public:
     //! exact integers
     typedef CORE::BigInt Integer;
-    //! exact float nummber
+    //! exact float number
     typedef CORE::BigRat Exact_float_number;
     //! exact rationals, constructible from integers
     typedef CORE::BigRat Rational;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Filtered_kernel/include/CGAL/Filtered_kernel/internal/Static_filters/Static_filter_error.h $
+// $Id: Static_filter_error.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -129,7 +129,7 @@ private:
   //    variable.
   // _e is a bound on the absolute error (difference between _b and the
   //    _real_ value of the variable.
-  // _d is the degree of the variable, it allows some additionnal checks.
+  // _d is the degree of the variable, it allows some additional checks.
   double _b, _e;
   int _d;
 };

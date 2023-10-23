@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Bbox_3_Sphere_3_do_intersect.h $
+// $Id: Bbox_3_Sphere_3_do_intersect.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,9 +23,10 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool do_intersect(const typename K::Sphere_3& sphere,
-                  const CGAL::Bbox_3& bbox,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Sphere_3& sphere,
+             const CGAL::Bbox_3& bbox,
+             const K& k)
 {
   return do_intersect_sphere_box_3(sphere,
                                    bbox.xmin(), bbox.ymin(), bbox.zmin(),
@@ -34,9 +35,10 @@ bool do_intersect(const typename K::Sphere_3& sphere,
 }
 
 template <class K>
-bool do_intersect(const CGAL::Bbox_3& bbox,
-                  const typename K::Sphere_3& sphere,
-                  const K& k)
+typename K::Boolean
+do_intersect(const CGAL::Bbox_3& bbox,
+             const typename K::Sphere_3& sphere,
+             const K& k)
 {
   return do_intersect(sphere, bbox, k);
 }

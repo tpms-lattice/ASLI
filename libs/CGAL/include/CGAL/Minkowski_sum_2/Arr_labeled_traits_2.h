@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/Arr_labeled_traits_2.h $
+// $Id: Arr_labeled_traits_2.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein   <wein_r@yahoo.com>
@@ -21,7 +21,7 @@
 namespace CGAL {
 
 /*! \class
- * A meta-traits class that adds lables to points and to x-monotone curves,
+ * A meta-traits class that adds labels to points and to x-monotone curves,
  * such that the comparison of two points, as well as the computation of the
  * intersections between two segments can be easily filtered.
  */
@@ -115,7 +115,7 @@ public:
                                                         Compare_y_at_x_right_2;
   typedef typename Base_traits_2::Equal_2               Equal_2;
 
-  /// \name Overriden functors.
+  /// \name Overridden functors.
   //@{
   class Compare_x_2 {
   private:

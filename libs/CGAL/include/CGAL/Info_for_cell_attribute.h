@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Info_for_cell_attribute.h $
+// $Id: Info_for_cell_attribute.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -19,10 +19,10 @@ namespace CGAL {
   class Info_for_cell_attribute
   {
   public:
-    /// Contructor without parameter.
+    /// Constructor without parameter.
     Info_for_cell_attribute()=default; // default => zero-initializing built-in types
 
-    /// Contructor with an info in parameter.
+    /// Constructor with an info in parameter.
     Info_for_cell_attribute(const Info& ainfo) : minfo(ainfo)
     {}
 

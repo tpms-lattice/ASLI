@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_sweep_2/include/CGAL/Surface_sweep_2_algorithms.h $
+// $Id: Surface_sweep_2_algorithms.h 7988148 2022-06-19T12:39:43+03:00 Efi Fogel
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -62,8 +62,8 @@ struct Default_arr_traits<CGAL::internal::Polycurve_2
 };
 
 template <typename Rat_kernel_, class Alg_kernel_, class Nt_traits_>
-struct Default_arr_traits<CGAL::_Conic_arc_2<Rat_kernel_, Alg_kernel_,
-                                             Nt_traits_> >
+struct Default_arr_traits<CGAL::Conic_arc_2<Rat_kernel_, Alg_kernel_,
+                                            Nt_traits_> >
 {
   typedef CGAL::Arr_conic_traits_2<Rat_kernel_, Alg_kernel_, Nt_traits_>
                                                                         Traits;

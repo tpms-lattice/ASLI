@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Filtered_curved_kernel_via_analysis_2_impl.h $
+// $Id: Filtered_curved_kernel_via_analysis_2_impl.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -546,7 +546,7 @@ public:
 
         if (!Base::_ckva()->may_have_intersection_2_object()(cv1, cv2)) {
             // return no one
-            CKvA_CERR("\nfilter: sucessfull\n");
+            CKvA_CERR("\nfilter: successful\n");
 
             CGAL_assertion_code(
             {

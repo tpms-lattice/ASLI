@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Skin_surface_3/include/CGAL/triangulate_power_diagram_3.h $
+// $Id: triangulate_power_diagram_3.h 7a1aaa4 2022-03-09T13:11:19+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

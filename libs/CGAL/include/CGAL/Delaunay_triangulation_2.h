@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/Delaunay_triangulation_2.h $
+// $Id: Delaunay_triangulation_2.h fbe559a 2023-02-14T08:32:33+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mariette Yvinec
@@ -193,7 +193,7 @@ private:
   void propagating_flip(const Face_handle& f,int i);
 #endif
 
-// auxilliary functions for remove
+// auxiliary functions for remove
   void remove_degree_init(Vertex_handle v, std::vector<Face_handle> &f,
          std::vector<Vertex_handle> &w, std::vector<int> &i,int&d,int&maxd);
   void remove_degree_triangulate(Vertex_handle v, std::vector<Face_handle> &f,
@@ -269,7 +269,7 @@ private:
          std::vector<Vertex_handle> &w, std::vector<int> &i);
   void remove_degree7_rightfan  (Vertex_handle&,int,std::vector<Face_handle> &f,
          std::vector<Vertex_handle> &w, std::vector<int> &i);
-// end of auxilliary functions for remove
+// end of auxiliary functions for remove
 
   Vertex_handle nearest_vertex_2D(const Point& p, Face_handle f) const;
   Vertex_handle nearest_vertex_1D(const Point& p) const;
@@ -358,10 +358,8 @@ private:
       it = indices.begin(), end = indices.end();
       it != end; ++it) {
       v_hint = insert(points[*it], hint);
-      if(v_hint!=Vertex_handle()) {
-        v_hint->info()=infos[*it];
-        hint=v_hint->face();
-      }
+      v_hint->info()=infos[*it];
+      hint=v_hint->face();
     }
 
     return this->number_of_vertices() - n;

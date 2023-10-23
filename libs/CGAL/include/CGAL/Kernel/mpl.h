@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Kernel/mpl.h $
+// $Id: mpl.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,7 @@
 
 namespace CGAL {
 
-// The additionnal int parameter is to obtain different types.
+// The additional int parameter is to obtain different types.
 template < typename A, typename B, int = 0 >
 struct First_if_different {
   typedef A Type;

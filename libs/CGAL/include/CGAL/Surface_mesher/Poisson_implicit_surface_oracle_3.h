@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Poisson_surface_reconstruction_3/include/CGAL/Surface_mesher/Poisson_implicit_surface_oracle_3.h $
+// $Id: Poisson_implicit_surface_oracle_3.h ce65fa9 2022-09-28T11:53:10+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

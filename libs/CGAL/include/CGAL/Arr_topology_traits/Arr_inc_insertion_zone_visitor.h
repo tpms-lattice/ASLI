@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_topology_traits/Arr_inc_insertion_zone_visitor.h $
+// $Id: Arr_inc_insertion_zone_visitor.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -59,8 +59,8 @@ private:
   const Vertex_handle invalid_v;        // An invalid vertex handle.
   const Halfedge_handle invalid_he;     // An invalid halfedge handle.
 
-  X_monotone_curve_2 m_sub_cv1;           // Auxiliary varibale (for splitting).
-  X_monotone_curve_2 m_sub_cv2;           // Auxiliary varibale (for splitting).
+  X_monotone_curve_2 m_sub_cv1;           // Auxiliary variable (for splitting).
+  X_monotone_curve_2 m_sub_cv2;           // Auxiliary variable (for splitting).
 
 public:
   /*! Constructor. */

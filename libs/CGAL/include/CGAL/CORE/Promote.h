@@ -18,11 +18,11 @@
  *       Sylvain Pion <pion@cs.nyu.edu>
  *       Vikram Sharma<sharma@cs.nyu.edu>
  *
- * WWW URL: http://cs.nyu.edu/exact/
+ * WWW URL: https://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_Core/include/CGAL/CORE/Promote.h $
+ * $Id: Promote.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 

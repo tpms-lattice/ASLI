@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/bmptypes.h $
+// $Id: bmptypes.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -129,7 +129,7 @@ typedef struct Bitmapfileheader
  * BITMAPARRAYHEADER is used to establish a linked list of Bitmapfileheader
  * structures for a bitmap file with multiple images in it.  There is no
  * equivalent structure in the Windows SDK.  Its analogues in the OS/2 toolkit
- * are the BITMAPARRAYFILEHEADER and BITMAPARRAYFILEHEADER2 strucutres.
+ * are the BITMAPARRAYFILEHEADER and BITMAPARRAYFILEHEADER2 structures.
  *
  * A Bitmapfileheader structure is always concatenated to the end of a
  * BITMAPARRAYHEADER structure.

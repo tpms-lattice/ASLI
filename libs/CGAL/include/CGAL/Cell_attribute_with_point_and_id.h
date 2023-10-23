@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Linear_cell_complex/include/CGAL/Cell_attribute_with_point_and_id.h $
+// $Id: Cell_attribute_with_point_and_id.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -36,15 +36,15 @@ namespace CGAL {
     typedef typename Base::Point Point;
 
   protected:
-    /// Default contructor.
+    /// Default constructor.
     Cell_attribute_with_point_and_id()
     {}
 
-    /// Contructor with an info in parameter.
+    /// Constructor with an info in parameter.
     Cell_attribute_with_point_and_id(const Point& apoint) : Base(apoint)
     {}
 
-    /// Contructor with a point and an attribute in parameters.
+    /// Constructor with a point and an attribute in parameters.
     Cell_attribute_with_point_and_id(const Point& apoint, const Info_& ainfo) :
       Base(apoint, ainfo)
     {}
@@ -68,11 +68,11 @@ namespace CGAL {
     typedef typename Base::Point Point;
 
   protected:
-    /// Default contructor.
+    /// Default constructor.
     Cell_attribute_with_point_and_id()
     {}
 
-    /// Contructor with a point in parameter.
+    /// Constructor with a point in parameter.
     Cell_attribute_with_point_and_id(const Point& apoint) : Base(apoint)
     {}
   };

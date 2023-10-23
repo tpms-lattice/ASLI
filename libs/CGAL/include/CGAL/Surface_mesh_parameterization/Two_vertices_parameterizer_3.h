@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Two_vertices_parameterizer_3.h $
+// $Id: Two_vertices_parameterizer_3.h aab981e 2022-11-08T17:39:53+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez, Bruno Levy
@@ -143,13 +143,13 @@ public:
     for(vertex_descriptor vd : vertices) {
       const Point_3& position = get(ppmap,vd);
 
-      xmin = (std::min)(position.x(), xmin);
-      ymin = (std::min)(position.y(), ymin);
-      zmin = (std::min)(position.z(), zmin);
+      xmin = (std::min)(CGAL::to_double(position.x()), xmin);
+      ymin = (std::min)(CGAL::to_double(position.y()), ymin);
+      zmin = (std::min)(CGAL::to_double(position.z()), zmin);
 
-      xmax = (std::max)(position.x(), xmax);
-      ymax = (std::max)(position.y(), ymax);
-      zmax = (std::max)(position.z(), zmax);
+      xmax = (std::max)(CGAL::to_double(position.x()), xmax);
+      ymax = (std::max)(CGAL::to_double(position.y()), ymax);
+      zmax = (std::max)(CGAL::to_double(position.z()), zmax);
     }
 
     // Find longest bounding box axes

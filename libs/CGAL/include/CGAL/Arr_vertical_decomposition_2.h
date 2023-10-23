@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_vertical_decomposition_2.h $
+// $Id: Arr_vertical_decomposition_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Ron Wein <wein@post.tau.ac.il>
@@ -87,7 +87,7 @@ decompose(const Arrangement_on_surface_2<GeometryTraits_2, TopologyTraits>& arr,
     Halfedge_const_handle he = (eit->direction() == ARR_RIGHT_TO_LEFT) ?
       eit : eit->twin();
     //attempt to solve compile problem in one of the tests. created the
-    // tmp_curve instead of passing eit->curve() as a parmeter to the function
+    // tmp_curve instead of passing eit->curve() as a parameter to the function
     X_monotone_curve_2 tmp_curve = eit->curve();
     xcurves_vec[i++] = Vd_x_monotone_curve_2(tmp_curve, he);
   }
@@ -102,7 +102,7 @@ decompose(const Arrangement_on_surface_2<GeometryTraits_2, TopologyTraits>& arr,
     if (vit->is_isolated()) {
       Vertex_const_handle iso_v = vit;
       //attempt to solve compile problem in one of the tests. created the
-      // tmp_curve instead of passing eit->curve() as a parmeter to the
+      // tmp_curve instead of passing eit->curve() as a parameter to the
       // function
       Point_2 tmp_point = vit->point();
       iso_pts_vec[i++] = Vd_point_2(tmp_point, iso_v);

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/Fixed_border_parameterizer_3.h $
+// $Id: Fixed_border_parameterizer_3.h 9e137bc 2023-01-31T12:26:55+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Saboret, Pierre Alliez, Bruno Levy
@@ -267,7 +267,7 @@ public:
 
     // Solve "A*Xu = Bu". On success, solution is (1/Du) * Xu.
     // Solve "A*Xv = Bv". On success, solution is (1/Dv) * Xv.
-    NT Du = 0, Dv = 0;
+    double Du = 0, Dv = 0;
     if(!get_linear_algebra_traits().linear_solver(A, Bu, Xu, Du) ||
        !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv))
     {
@@ -361,7 +361,7 @@ protected:
   /// - compute w_ii = - sum of w_ijs.
   ///
   /// \pre Vertices must be indexed.
-  /// \pre Vertex i musn't be already parameterized.
+  /// \pre Vertex i mustn't be already parameterized.
   /// \pre Line i of A must contain only zeros.
   // TODO: check if this must be virtual
   // virtual

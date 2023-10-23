@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_rep.h $
+// $Id: Algebraic_real_rep.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -38,7 +38,7 @@ namespace internal {
 // sign_at_low_ = polynomial_.evaluate(low_)
 // x is the only root of polynomial_ in the open interval ]low_,high_[
 // low_ != x != high
-// ******************* EXEPTION *******************
+// ******************* EXCEPTION *******************
 // x is rational: in this case low=high=x
 
 template< class Coefficient_, class Rational_>
@@ -135,7 +135,7 @@ protected:
 
         // interval_option left out
 
-        // trys to set rational if degree is 1
+        // tries to set rational if degree is 1
         typedef typename CGAL::Coercion_traits< Coefficient, Rational >::Type RET;
         set_rational(RET());
     }

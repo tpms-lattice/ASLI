@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_polyhedron_3.h $
+// $Id: Nef_polyhedron_3.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -128,7 +128,7 @@ class Nef_polyhedron_3_rep
 /*{\Mdefinition
 An instance of data type |\Mname| is a subset of 3-space which is the
 result of forming complements and intersections starting from a set |H| of
-halfspaces. |\Mtype| is closed under all binary set opertions |intersection|,
+halfspaces. |\Mtype| is closed under all binary set operations |intersection|,
 |union|, |difference|, |complement| and under the topological operations
 |boundary|, |closure|, and |interior|.}*/
 
@@ -1461,7 +1461,7 @@ protected:
   symmetric_difference(const Nef_polyhedron_3<Kernel,Items, Mark>& N1) const
   /*{\Mop returns the symmectric difference |\Mvar - T| $\cup$
           |T - \Mvar|. }*/ {
-    CGAL_NEF_TRACEN(" symmetic difference between nef3 "<<&*this<<" and "<<&N1);
+    CGAL_NEF_TRACEN(" symmetric difference between nef3 "<<&*this<<" and "<<&N1);
     if (is_empty()) return N1;
     if (N1.is_empty()) return *this;
     if (is_space()) return Nef_polyhedron_3(EMPTY);
@@ -1527,11 +1527,11 @@ protected:
   or equal, equality, inequality.}*/
 
   bool operator==(const Nef_polyhedron_3<Kernel,Items, Mark>& N1) const
-  { CGAL_NEF_TRACEN(" equality comparision between nef3 "<<&*this<<" and "<<&N1);
+  { CGAL_NEF_TRACEN(" equality comparison between nef3 "<<&*this<<" and "<<&N1);
     return symmetric_difference(N1).is_empty(); }
 
   bool operator!=(const Nef_polyhedron_3<Kernel,Items, Mark>& N1) const
-  { CGAL_NEF_TRACEN(" inequality comparision between nef3 "<<&*this<<" and "<<&N1);
+  { CGAL_NEF_TRACEN(" inequality comparison between nef3 "<<&*this<<" and "<<&N1);
     return !operator==(N1); }
 
   bool operator<(const Nef_polyhedron_3<Kernel,Items, Mark>& N1) const

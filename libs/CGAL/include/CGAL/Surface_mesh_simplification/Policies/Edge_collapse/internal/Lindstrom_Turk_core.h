@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/internal/Lindstrom_Turk_core.h $
+// $Id: Lindstrom_Turk_core.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -264,7 +264,7 @@ compute_placement()
   // 'Ai' is a (row) vector and 'bi' a scalar.
   //
   // The vertex is completely determined with 3 such constraints,
-  // so is the solution to the folloing system:
+  // so is the solution to the following system:
   //
   //  A.r0(). * v = b0
   //  A1 * v = b1

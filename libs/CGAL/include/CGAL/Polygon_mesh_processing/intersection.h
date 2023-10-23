@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/intersection.h $
+// $Id: intersection.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1575,7 +1575,7 @@ struct Mesh_callback
  *
  * detects and reports all the pairs of meshes intersecting in a range of triangulated surface meshes.
  * A pair of meshes intersecting is put in the output iterator `out` as a `std::pair<std::size_t, std::size_t>`,
- * each index refering to the index of the triangle mesh in the input range.
+ * each index referring to the index of the triangle mesh in the input range.
  * If `do_overlap_test_of_bounded_sides` is `true`, the overlap of bounded sides are tested as well. In that case, the meshes must be closed.
  * This function depends on the package \ref PkgBoxIntersectionD.
  *

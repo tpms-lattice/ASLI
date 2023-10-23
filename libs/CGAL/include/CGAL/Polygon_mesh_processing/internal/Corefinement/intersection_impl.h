@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/internal/Corefinement/intersection_impl.h $
+// $Id: intersection_impl.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -293,7 +293,7 @@ class Intersection_of_triangle_meshes
           if (non_manifold_feature_map.non_manifold_edges[eid].front()!=ed)
             continue;
           else
-            // make sure the halfedge used is consistant with stored one
+            // make sure the halfedge used is consistent with stored one
             h = halfedge(non_manifold_feature_map.non_manifold_edges[eid].front(), tm_e);
         }
         edge_boxes.push_back( Box(

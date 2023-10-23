@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/internal/smooth_vertices.h $
+// $Id: smooth_vertices.h 9e137bc 2023-01-31T12:26:55+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -48,6 +48,7 @@ class Tetrahedral_remeshing_smoother
   typedef typename Tr::Geom_traits           Gt;
   typedef typename Gt::Vector_3              Vector_3;
   typedef typename Gt::Point_3               Point_3;
+  typedef typename Gt::FT                    FT;
 
 private:
   typedef  CGAL::Tetrahedral_remeshing::internal::FMLS<Gt> FMLS;
@@ -140,6 +141,20 @@ private:
       n = opp(n);
 
     return n;
+  }
+
+  template<typename Patch_index>
+  std::string debug_to_string(const Patch_index i)
+  {
+    return std::to_string(i);
+  }
+
+  template<typename Patch_index>
+  std::string debug_to_string(const std::pair<Patch_index, Patch_index>& pi)
+  {
+    std::string str = std::to_string(pi.first);
+    str.append("_").append(std::to_string(pi.second));
+    return str;
   }
 
   template<typename VertexNormalsMap, typename CellSelector>
@@ -283,7 +298,8 @@ private:
     for (auto& kv : ons_map)
     {
       std::ostringstream oss;
-      oss << "dump_normals_normalized_" << kv.first << ".polylines.txt";
+      oss << "dump_normals_normalized_["
+        << debug_to_string(kv.first) << "].polylines.txt";
       std::ofstream ons(oss.str());
       for (auto s : kv.second)
         ons << "2 " << s.source() << " " << s.target() << std::endl;
@@ -332,9 +348,9 @@ private:
                                 const CellRange& inc_cells,
                                 const Tr& /* tr */,
 #ifdef CGAL_TETRAHEDRAL_REMESHING_VERBOSE
-                                double& total_move)
+                                FT& total_move)
 #else
-                                double&)
+                                FT&)
 #endif
   {
     const typename Tr::Point backup = v->point(); //backup v's position
@@ -452,7 +468,7 @@ public:
     inc_cells(nbv, boost::container::small_vector<Cell_handle, 40>());
     for (const Cell_handle c : tr.finite_cell_handles())
     {
-      const bool cell_is_selected = cell_selector(c);
+      const bool cell_is_selected = get(cell_selector, c);
 
       for (int i = 0; i < 4; ++i)
       {

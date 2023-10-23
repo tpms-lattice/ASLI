@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_mesh_3/include/CGAL/Periodic_3_mesh_3/config.h $
+// $Id: config.h 984cc77 2022-10-25T23:36:59+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Aymeric Pellé
@@ -18,6 +18,10 @@
 
 #if defined(CGAL_PERIODIC_3_MESH_3_VERBOSE) && !defined(CGAL_MESH_3_VERBOSE)
   #define CGAL_MESH_3_VERBOSE
+#endif
+
+#ifdef CGAL_MESH_3_CONFIG_H
+  #error "The header '<CGAL/Periodic_3_mesh_3/config.h>' must be included before '<CGAL/Mesh_3/config.h>'"
 #endif
 
 #include <CGAL/Mesh_3/config.h>

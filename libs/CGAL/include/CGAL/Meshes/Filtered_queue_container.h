@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesher_level/include/CGAL/Meshes/Filtered_queue_container.h $
+// $Id: Filtered_queue_container.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -31,7 +31,7 @@ namespace CGAL {
 
       typedef typename std::deque<Element>::const_iterator const_iterator;
     private:
-      // --- private datas ---
+      // --- private data ---
       std::deque<Element> d;
       Predicate test;
 

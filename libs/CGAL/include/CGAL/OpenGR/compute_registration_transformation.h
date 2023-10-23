@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/OpenGR/compute_registration_transformation.h $
+// $Id: compute_registration_transformation.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Sebastien Loriot, Necip Fazil Yildiran
@@ -276,7 +276,7 @@ compute_registration_transformation(const PointRange1& range1,    const PointRan
      \cgalParamNEnd
 
      \cgalParamNBegin{normal_map}
-       \cgalParamDescription{a property map associating normals to the elements of the poing set `point_set_2`}
+       \cgalParamDescription{a property map associating normals to the elements of the point set `point_set_2`}
        \cgalParamType{a model of `ReadablePropertyMap` whose key type is the value type
                       of the iterator of `PointRange2` and whose value type is `geom_traits::Vector_3`}
        \cgalParamDefault{Normals are computed and stored internally.}

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_linear_traits_2.h $
+// $Id: Arr_linear_traits_2.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -592,7 +592,7 @@ public:
       Compare_y_at_x_2 compare_y_at_x = m_traits.compare_y_at_x_2_object();
 
       //preconditions
-      //check if source and taget are distinct points and they lie on the line.
+      //check if source and target are distinct points and they lie on the line.
       CGAL_precondition(!equal(src, tgt));
       CGAL_precondition(compare_y_at_x(src, xcv) == EQUAL);
       CGAL_precondition(compare_y_at_x(tgt, xcv) == EQUAL);

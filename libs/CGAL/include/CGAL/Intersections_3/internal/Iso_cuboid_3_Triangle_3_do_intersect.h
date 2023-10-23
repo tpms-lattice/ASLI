@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Iso_cuboid_3_Triangle_3_do_intersect.h $
+// $Id: Iso_cuboid_3_Triangle_3_do_intersect.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -21,26 +21,25 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-bool do_intersect(const typename K::Triangle_3& triangle,
-                  const typename K::Iso_cuboid_3& bbox,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Triangle_3& triangle,
+             const typename K::Iso_cuboid_3& bbox,
+             const K& k)
 {
   return do_intersect_bbox_or_iso_cuboid(triangle, bbox, k);
 }
 
 template <class K>
-bool do_intersect(const typename K::Iso_cuboid_3& bbox,
-                  const typename K::Triangle_3& triangle,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Iso_cuboid_3& bbox,
+             const typename K::Triangle_3& triangle,
+             const K& k)
 {
   return do_intersect_bbox_or_iso_cuboid(triangle, bbox, k);
 }
 
 } // namespace internal
 } // namespace Intersections
-
-
-
 } // namespace CGAL
 
 #endif // CGAL_INTERNAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_DO_INTERSECT_H

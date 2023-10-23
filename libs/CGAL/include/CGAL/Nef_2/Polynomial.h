@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_2/include/CGAL/Nef_2/Polynomial.h $
+// $Id: Polynomial.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -366,7 +366,7 @@ template <class pNT> class Polynomial :
 
 
   /*{\Mtext Additionally |\Mname| offers standard arithmetic ring
-  opertions like |+,-,*,+=,-=,*=|. By means of the sign operation we can
+  operations like |+,-,*,+=,-=,*=|. By means of the sign operation we can
   also offer comparison predicates as $<,>,\leq,\geq$. Where $p_1 < p_2$
   holds iff $|sign|(p_1 - p_2) < 0$. This data type is fully compliant
   to the requirements of CGAL number types. \setopdims{3cm}{2cm}}*/
@@ -690,7 +690,7 @@ class Polynomial<int> :
   }
 
   /*{\Xtext Additionally |\Mname| offers standard arithmetic ring
-  opertions like |+,-,*,+=,-=,*=|. By means of the sign operation we can
+  operations like |+,-,*,+=,-=,*=|. By means of the sign operation we can
   also offer comparison predicates as $<,>,\leq,\geq$. Where $p_1 < p_2$
   holds iff $|sign|(p_1 - p_2) < 0$. This data type is fully compliant
   to the requirements of CGAL number types. \setopdims{3cm}{2cm}}*/
@@ -991,7 +991,7 @@ determines the sign for the limit process $x \rightarrow \infty$.
 
 
   /*{\Xtext Additionally |\Mname| offers standard arithmetic ring
-  opertions like |+,-,*,+=,-=,*=|. By means of the sign operation we can
+  operations like |+,-,*,+=,-=,*=|. By means of the sign operation we can
   also offer comparison predicates as $<,>,\leq,\geq$. Where $p_1 < p_2$
   holds iff $|sign|(p_1 - p_2) < 0$. This data type is fully compliant
   to the requirements of CGAL number types. \setopdims{3cm}{2cm}}*/

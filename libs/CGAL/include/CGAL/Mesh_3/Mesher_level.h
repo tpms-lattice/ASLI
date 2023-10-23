@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_3/Mesher_level.h $
+// $Id: Mesher_level.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -175,7 +175,7 @@ protected:
     return derived().debug_info_element_impl(e);
   }
 
-  /** \name Private member datas */
+  /** \name Private member data */
 
   Previous_level& previous_level; /**< The previous level of the refinement
                                     process. */

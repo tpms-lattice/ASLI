@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesher/include/CGAL/Surface_mesher/Sphere_oracle_3.h $
+// $Id: Sphere_oracle_3.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -298,7 +298,7 @@ namespace CGAL {
           const Point original_a = a;
           const Vector ab = vector(a, b);
           a = translated_point(original_a, scaled_vector(ab, root_1));
-          if( root_2 <= FT(1) ) /// move b iif root_2 <=1
+          if( root_2 <= FT(1) ) /// move b if root_2 <=1
           {
             b = translated_point(original_a, scaled_vector(ab, root_2));
           }

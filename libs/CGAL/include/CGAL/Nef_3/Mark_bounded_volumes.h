@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/Mark_bounded_volumes.h $
+// $Id: Mark_bounded_volumes.h b558057 2023-01-18T19:58:44+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -15,8 +15,8 @@
 
 #include <CGAL/license/Nef_3.h>
 
-
-#include <CGAL/Nef_polyhedron_3.h>
+#include <CGAL/Modifier_base.h>
+#include <CGAL/Nef_3/SNC_iteration.h>
 
 namespace CGAL {
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon/include/CGAL/Polygon_with_holes_2.h $
+// $Id: Polygon_with_holes_2.h abbcfbb 2023-03-02T09:34:48-05:00 Brendan Vessels
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -136,7 +136,7 @@ std::ostream& operator<<(std::ostream &os,
     default:
       os << "Polygon_with_holes_2(" << std::endl;
       if(p.is_unbounded())
-        os << "No outer bounary" << std::endl;
+        os << "No outer boundary" << std::endl;
       else
       {
         os << "Boundary(" << std::endl;
@@ -166,7 +166,7 @@ Both \ascii and binary formats are supported, and the format is automatically de
 The format consists of the number of points of the outer boundary followed
 by the points themselves in counterclockwise order, followed by the number of holes,
 and for each hole, the number of points of the outer boundary is followed
-by the points themselves in clockwise order.
+by the points themselves, in clockwise order.
 
 \relates Polygon_with_holes_2
 */

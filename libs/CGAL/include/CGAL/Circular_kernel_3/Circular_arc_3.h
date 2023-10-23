@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circular_kernel_3/include/CGAL/Circular_kernel_3/Circular_arc_3.h $
+// $Id: Circular_arc_3.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,
@@ -80,7 +80,7 @@ namespace CGAL {
         // we can optimize the computations of the sign (for the has_on functor),
         // by computing the vector s-c and t-s, in order to use them directly on
         // another compute_sign_of_cross_product function
-        // we can save time computing the substractions
+        // we can save time computing the subtractions
         // the problem is: more memory space is needed
         _sign_cross_product =
           CGAL::SphericalFunctors::compute_sign_of_cross_product<SK>(s,t,c.center());

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/boost_mp.h $
+// $Id: boost_mp.h 96bf9c9 2023-04-07T10:45:12+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse
@@ -897,6 +897,7 @@ template< > class Real_embeddable_traits< Quotient<boost::multiprecision::cpp_in
 } //namespace CGAL
 
 #include <CGAL/BOOST_MP_arithmetic_kernel.h>
+#include <CGAL/cpp_float.h>
 
 #endif // BOOST_VERSION
 #endif

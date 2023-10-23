@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Generic_map_selector.h $
+// $Id: Generic_map_selector.h 999a813 2022-05-05T13:34:19+02:00 Guillaume Damiand
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Thien Hoang <thienvhoang99@gmail.com>

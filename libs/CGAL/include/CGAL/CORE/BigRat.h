@@ -14,11 +14,11 @@
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
  *
- * WWW URL: http://cs.nyu.edu/exact/
+ * WWW URL: https://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_Core/include/CGAL/CORE/BigRat.h $
+ * $Id: BigRat.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -34,7 +34,7 @@ public:
   BigRatRep() {
     mpq_init(mp);
   }
-  // Note : should the copy-ctor be alloed at all ? [Sylvain Pion]
+  // Note : should the copy-ctor be allowed at all ? [Sylvain Pion]
   BigRatRep(const BigRatRep& z)  : RCRepImpl<BigRatRep>() {
     mpq_init(mp);
     mpq_set(mp, z.mp);

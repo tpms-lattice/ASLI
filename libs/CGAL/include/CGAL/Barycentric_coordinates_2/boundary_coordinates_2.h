@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/boundary_coordinates_2.h $
+// $Id: boundary_coordinates_2.h 9c56d70 2021-05-20T14:05:21+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

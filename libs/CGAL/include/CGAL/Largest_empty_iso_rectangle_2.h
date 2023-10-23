@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Inscribed_areas/include/CGAL/Largest_empty_iso_rectangle_2.h $
+// $Id: Largest_empty_iso_rectangle_2.h 7fe663c 2023-02-10T15:40:42+01:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -265,8 +265,8 @@ public:
     std::set<Point_data *,Less_yx> *right_tent;
     std::set<Point_data *,Less_yx> *left_tent;
 
-    /* detemine whether the point is a bounding box corner
-       (thus not implicitely inserted as a point, or not.
+    /* determine whether the point is a bounding box corner
+       (thus not implicitly inserted as a point, or not).
     */
 
     Point_type type;
@@ -762,7 +762,7 @@ bool
 Largest_empty_iso_rectangle_2<T>::insert(const Point_2& _p)
 {
   // check that the point is inside the bounding box
-  if(bbox_p.has_on_unbounded_side(_p)) {
+  if(! bbox_p.has_on_bounded_side(_p)) {
     return(false);
   }
 
@@ -893,7 +893,7 @@ Largest_empty_iso_rectangle_2<T>::phase_1_on_x()
   }
 
   // traverse over all possibilities for finding a larger empty rectangle
-  // rectangles here touch the top and the buttom of the bounding box
+  // rectangles here touch the top and the bottom of the bounding box
   while(iter != last_iter) {
     // filter false points
     if((*iter)->type != TOP_RIGHT && (*iter)->type != TOP_LEFT) {

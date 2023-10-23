@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/convert.h $
+// $Id: convert.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -13,13 +13,13 @@
 /*************************************************************************
  * convert.h - conversion between types
  *
- * $Id$
+ * $Id: convert.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
  *
  * Copyright©INRIA 1998
  *
  * AUTHOR:
  * Gregoire Malandain (greg@sophia.inria.fr)
- * http://www.inria.fr/epidaure/personnel/malandain/
+ * https://www-sop.inria.fr/members/Gregoire.Malandain/
  *
  * CREATION DATE:
  * June, 9 1998

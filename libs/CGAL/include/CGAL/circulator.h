@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circulator/include/CGAL/circulator.h $
+// $Id: circulator.h 9e27798 2023-01-24T13:42:06+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -701,7 +701,13 @@ typedef Iterator_from_circulator< C, const_reference, const_pointer>
 template <class Container>
 class Circulator_from_container {
     typedef Circulator_from_container<Container>      Self;
-    typedef typename Container::iterator              iterator;
+    typedef typename Container::iterator              container_iterator;
+    typedef typename Container::const_iterator        container_const_iterator;
+    typedef std::conditional_t<
+        std::is_const<Container>::value,
+        container_const_iterator,
+        container_iterator
+        >                                             iterator;
     typedef std::iterator_traits<iterator>            iterator_traits;
 public:
     typedef typename iterator_traits::value_type      value_type;

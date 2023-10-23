@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation/include/CGAL/Delaunay_triangulation.h $
+// $Id: Delaunay_triangulation.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)    : Samuel Hornus
@@ -523,7 +523,7 @@ Delaunay_triangulation<DCTraits, TDS>
     // 2. Find corresponding Facet on boundary of dark zone
     // 3. stitch.
 
-    // 1. Build a facet on the boudary of the light zone:
+    // 1. Build a facet on the boundary of the light zone:
     Full_cell_handle light_s = *simps.begin();
     Facet light_ft(light_s, light_s->index(v));
 

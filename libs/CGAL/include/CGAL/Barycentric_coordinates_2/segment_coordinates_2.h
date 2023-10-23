@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/segment_coordinates_2.h $
+// $Id: segment_coordinates_2.h 0e84898 2022-05-13T15:50:21+02:00 Sebastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

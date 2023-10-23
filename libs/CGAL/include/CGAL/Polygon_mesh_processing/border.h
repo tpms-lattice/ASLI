@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/border.h $
+// $Id: border.h 7789f8a 2023-05-04T17:22:43+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -252,7 +252,7 @@ std::size_t border_size(typename boost::graph_traits<PolygonMesh>::halfedge_desc
   /// @todo It could make sense to also return the length of each cycle.
   /// @todo It should probably go into BGL package (like the rest of this file).
   template <typename PolygonMesh, typename OutputIterator>
-  OutputIterator extract_boundary_cycles(PolygonMesh& pm,
+  OutputIterator extract_boundary_cycles(const PolygonMesh& pm,
                                          OutputIterator out)
   {
     typedef typename boost::graph_traits<PolygonMesh>::halfedge_descriptor halfedge_descriptor;

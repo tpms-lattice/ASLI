@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Plane_3_Triangle_3_intersection.h $
+// $Id: Plane_3_Triangle_3_intersection.h 22b0697 2023-01-15T17:23:04+00:00 Giles Bathgate
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -18,6 +18,7 @@
 
 #include <CGAL/enum.h>
 #include <CGAL/kernel_assertions.h>
+#include <iterator>
 
 namespace CGAL {
 namespace Intersections {
@@ -141,7 +142,7 @@ intersection(const typename K::Plane_3& plane,
   CGAL_kernel_assertion(pts.size() == 2);
 
   return intersection_return<typename K::Intersect_3, typename K::Plane_3, typename K::Triangle_3>(
-           k.construct_segment_3_object()(*pts.begin(), *boost::prior(pts.end())));
+           k.construct_segment_3_object()(*pts.begin(), *std::prev(pts.end())));
 }
 
 template <class K>

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_constructor.h $
+// $Id: SNC_constructor.h 33d9560 2023-01-19T00:39:36+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,12 +24,13 @@
 #include <CGAL/Nef_S2/Normalizing.h>
 #include <CGAL/Nef_3/bounded_side_3.h>
 #include <CGAL/Nef_3/Pluecker_line_3.h>
-#include <CGAL/Nef_3/SNC_decorator.h>
+#include <CGAL/Nef_3/SNC_const_decorator.h>
 #include <CGAL/Nef_3/SNC_SM_overlayer.h>
 #include <CGAL/Nef_S2/SM_point_locator.h>
+#include <CGAL/Nef_3/SNC_halfedge_key.h>
 #include <CGAL/Nef_3/SNC_sphere_map.h>
+#include <CGAL/Nef_3/SNC_structure.h>
 #include <CGAL/Nef_3/SNC_intersection.h>
-#include <CGAL/Nef_3/SNC_external_structure.h>
 #ifdef SM_VISUALIZOR
 #include <CGAL/Nef_3/SNC_SM_visualizor.h>
 #endif // SM_VISUALIZOR

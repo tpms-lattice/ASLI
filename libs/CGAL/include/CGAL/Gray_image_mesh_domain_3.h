@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Gray_image_mesh_domain_3.h $
+// $Id: Gray_image_mesh_domain_3.h 530d6e0 2022-08-23T14:58:15+05:30 GYuvanShankar
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

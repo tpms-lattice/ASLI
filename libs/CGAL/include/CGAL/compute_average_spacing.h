@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/compute_average_spacing.h $
+// $Id: compute_average_spacing.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Laurent Saboret
@@ -181,7 +181,7 @@ compute_average_spacing(
   // precondition: at least 2 nearest neighbors
   CGAL_precondition(k >= 2);
 
-  // Instanciate a KD-tree search.
+  // Instantiate a KD-tree search.
   Neighbor_query neighbor_query (points, point_map);
 
   // iterate over input points, compute and output normal

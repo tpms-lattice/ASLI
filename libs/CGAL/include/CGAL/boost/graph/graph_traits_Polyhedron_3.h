@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polyhedron/include/CGAL/boost/graph/graph_traits_Polyhedron_3.h $
+// $Id: graph_traits_Polyhedron_3.h 968e9cf 2022-06-16T13:29:20+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/algebraic_curve_kernel_2_tools.h $
+// $Id: algebraic_curve_kernel_2_tools.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -157,7 +157,7 @@ template<typename AlgebraicKernel_1> typename AlgebraicKernel_1::Bound
 }
 
 /*!
- * \brief finds a Rational value rightt of an Algebraic real alpha
+ * \brief finds a Rational value right of an Algebraic real alpha
  */
 template<typename AlgebraicKernel_1> typename AlgebraicKernel_1::Bound
   bound_right_of(const AlgebraicKernel_1* kernel,

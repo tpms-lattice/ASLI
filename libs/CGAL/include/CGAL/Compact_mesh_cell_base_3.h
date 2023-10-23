@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Compact_mesh_cell_base_3.h $
+// $Id: Compact_mesh_cell_base_3.h fef1a43 2022-12-15T10:43:27+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent Rineau, Stephane Tayeb, Andreas Fabri
@@ -740,7 +740,11 @@ template <typename GT, typename MD>
 class Compact_mesh_cell_base_3<GT, MD, void>
 {
 public:
+#ifdef DOXYGEN_RUNNING
+  typedef unspecified_type                              Triangulation_data_structure;
+#else
   typedef internal::Dummy_tds_3                         Triangulation_data_structure;
+#endif
   typedef Triangulation_data_structure::Vertex_handle   Vertex_handle;
   typedef Triangulation_data_structure::Cell_handle     Cell_handle;
   template <typename TDS2>
@@ -761,7 +765,11 @@ template <typename GT,
 class Compact_mesh_cell_generator_3
 {
 public:
+#ifdef DOXYGEN_RUNNING
+  typedef unspecified_type                              Triangulation_data_structure;
+#else
   typedef internal::Dummy_tds_3                         Triangulation_data_structure;
+#endif
   typedef Triangulation_data_structure::Vertex_handle   Vertex_handle;
   typedef Triangulation_data_structure::Cell_handle     Cell_handle;
   template <typename TDS2>

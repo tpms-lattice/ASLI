@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Plane_3_Plane_3_Plane_3_do_intersect.h $
+// $Id: Plane_3_Plane_3_Plane_3_do_intersect.h 3a4e230 2022-11-22T12:22:42+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -23,7 +23,7 @@ namespace Intersections {
 namespace internal {
 
 template <class K>
-inline bool
+inline typename K::Boolean
 do_intersect(const typename K::Plane_3& plane1,
              const typename K::Plane_3& plane2,
              const typename K::Plane_3& plane3,

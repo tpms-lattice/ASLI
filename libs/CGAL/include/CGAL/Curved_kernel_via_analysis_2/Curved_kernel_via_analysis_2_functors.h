@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curved_kernel_via_analysis_2_functors.h $
+// $Id: Curved_kernel_via_analysis_2_functors.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -945,7 +945,7 @@ public:
 };
 
 /*!\brief
- * Functor that computes the relative vertical aligment of two arcs left
+ * Functor that computes the relative vertical alignment of two arcs left
  * of a point
  */
 template < class CurvedKernelViaAnalysis_2 >
@@ -1056,7 +1056,7 @@ public:
 
 
 /*!\brief
- * Functor that computes the relative vertical aligment of two arcs right
+ * Functor that computes the relative vertical alignment of two arcs right
  * of a point
  */
 template < class CurvedKernelViaAnalysis_2 >
@@ -1932,7 +1932,7 @@ public:
   /*!\brief
    * Splits an input object \c obj into x-monotone arcs and isolated points
    *
-   * \param obj the polymorph input object: can represet \c Point_2,
+   * \param obj the polymorph input object: can represent \c Point_2,
    * \c Arc_2, \c Non_x_monotone_arc_2 or \c Curve_analysis_2
    * \param oi Output iterator that stores CGAL::Object, which either
    *           encapsulates \c Point_2 or \c Arc_2

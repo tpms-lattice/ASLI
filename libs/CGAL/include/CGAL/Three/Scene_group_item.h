@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Three/include/CGAL/Three/Scene_group_item.h $
+// $Id: Scene_group_item.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -203,7 +203,7 @@ public :
     //!
     //! When a `Scene_group_item` is added to the selection of the scene,
     //! this function defines which of its children will be added too.
-    //! Typically overriden to allow applying an operation from the
+    //! Typically overridden to allow applying an operation from the
     //! Operation menu only to the parent item and not to its children.
     virtual QList<Scene_interface::Item_id> getChildrenForSelection() const {return *children;}
     //!Removes a Scene_item from the list of children.

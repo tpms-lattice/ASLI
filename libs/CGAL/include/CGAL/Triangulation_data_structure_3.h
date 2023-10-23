@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/TDS_3/include/CGAL/Triangulation_data_structure_3.h $
+// $Id: Triangulation_data_structure_3.h b115a68 2022-12-06T09:47:46+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -2049,7 +2049,7 @@ bool
 Triangulation_data_structure_3<Vb,Cb,Ct>::
 is_vertex(Vertex_handle v) const
 {
-    return vertices().owns_dereferencable(v);
+    return vertices().owns_dereferenceable(v);
 }
 
 template <class Vb, class Cb, class Ct>
@@ -2102,7 +2102,7 @@ is_edge(Cell_handle c, int i, int j) const
   if ( (dimension() == 2) && ((i>2) || (j>2)) ) return false;
   if ((i>3) || (j>3)) return false;
 
-  return cells().owns_dereferencable(c);
+  return cells().owns_dereferenceable(c);
 }
 
 template <class Vb, class Cb, class Ct>
@@ -2149,7 +2149,7 @@ is_facet(Cell_handle c, int i) const
     if ( (dimension() == 2) && (i!=3) )
         return false;
 
-    return cells().owns_dereferencable(c);
+    return cells().owns_dereferenceable(c);
 }
 
 template <class Vb, class Cb, class Ct>
@@ -2161,7 +2161,7 @@ is_cell( Cell_handle c ) const
     if (dimension() < 3)
         return false;
 
-    return cells().owns_dereferencable(c);
+    return cells().owns_dereferenceable(c);
 }
 
 template <class Vb, class Cb, class Ct>
@@ -3935,21 +3935,21 @@ is_valid(Cell_handle c, bool verbose, int level) const
 
           int j1n=4,j2n=4,j3n=4;
           if ( ! n->has_vertex(c->vertex((i+1)&3),j1n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+1)&3)
+            if (verbose) { std::cerr << "vertex (+1) " << ((i+1)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_assertion(false);
             return false;
           }
           if ( ! n->has_vertex(c->vertex((i+2)&3),j2n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+2)&3)
+            if (verbose) { std::cerr << "vertex (+2) " << ((i+2)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_assertion(false);
             return false;
           }
           if ( ! n->has_vertex(c->vertex((i+3)&3),j3n) ) {
-            if (verbose) { std::cerr << "vertex " << ((i+3)&3)
+            if (verbose) { std::cerr << "vertex (+3) " << ((i+3)&3)
                                      << " not vertex of neighbor "
                                      << i << std::endl; }
             CGAL_assertion(false);

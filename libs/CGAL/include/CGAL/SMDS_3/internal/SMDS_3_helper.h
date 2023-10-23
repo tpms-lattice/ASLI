@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/SMDS_3/internal/SMDS_3_helper.h $
+// $Id: SMDS_3_helper.h 5ac73c3 2022-03-03T14:34:50+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

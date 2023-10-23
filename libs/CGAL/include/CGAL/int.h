@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/int.h $
+// $Id: int.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -157,7 +157,7 @@ template<> class Algebraic_structure_traits< short int >
     typedef Tag_true             Is_numerical_sensitive;
 
     // Explicitly defined functors which have no support for implicit
-    //  interoperability. This is nescessary because of the implicit conversion
+    //  interoperability. This is necessary because of the implicit conversion
     //  to int for binary operations between short ints.
     class Integral_division
       : public CGAL::cpp98::binary_function< Type, Type,

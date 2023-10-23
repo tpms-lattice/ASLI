@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/TDS_3/include/CGAL/Triangulation_utils_3.h $
+// $Id: Triangulation_utils_3.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud <Monique.Teillaud@sophia.inria.fr>
@@ -87,7 +87,7 @@ struct Triangulation_utils_3
   static int vertex_triple_index(const int i, const int j)
   {
     // indexes of the  jth vertex  of the facet of a cell
-    // opposite to vertx i
+    // opposite to vertex i
       CGAL_precondition( ( i >= 0 && i < 4 ) &&
                          ( j >= 0 && j < 3 ) );
     return tab_vertex_triple_index[i][j];

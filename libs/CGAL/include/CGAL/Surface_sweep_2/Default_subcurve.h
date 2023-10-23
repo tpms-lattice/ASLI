@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_sweep_2/include/CGAL/Surface_sweep_2/Default_subcurve.h $
+// $Id: Default_subcurve.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Tali Zvi <talizvi@post.tau.ac.il>,
@@ -19,7 +19,7 @@
 
 /*! \file
  *
- * Defintion of the Default_subcurve class, which is an extended curve
+ * Definition of the Default_subcurve class, which is an extended curve
  * type, referred to as Subcurve, used by the surface-sweep framework.
  *
  * The surface-sweep framework is implemented as a template that is
@@ -59,7 +59,7 @@ namespace Surface_sweep_2 {
  *
  * The information contained in this class is:
  * - two pointers to subcurves that are the originating subcurves in case of
- *   an overlap, otherwise thay are both nullptr.
+ *   an overlap, otherwise they are both nullptr.
  */
 template <typename GeometryTraits_2, typename Event_, typename Allocator_,
           typename Subcurve_>
@@ -299,7 +299,7 @@ public:
  *                    structure, and to construct/destroy the elements in that
  *                    memory. The type must meet the requirements of Allocator.
  * \tparam Subcurve_ the type of the subcurve or Default. If the default is not
- *         overriden it implies that the type is
+ *         overridden it implies that the type is
  *         No_overlap_subcurve
  */
 template <typename GeometryTraits_2, typename Event_,

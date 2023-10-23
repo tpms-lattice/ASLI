@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polyhedron/include/CGAL/Polyhedron_3_to_lcc.h $
+// $Id: Polyhedron_3_to_lcc.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -24,7 +24,7 @@ namespace CGAL {
   /** Import a given Polyhedron_3 into a Linear_cell_complex.
    * @param alcc the linear cell complex where Polyhedron_3 will be converted.
    * @param apoly the Polyhedron.
-   * @return A dart created during the convertion.
+   * @return A dart created during the conversion.
    */
   template< class LCC, class Polyhedron >
   typename LCC::Dart_descriptor import_from_polyhedron_3(LCC& alcc,
@@ -94,7 +94,7 @@ namespace CGAL {
   /** Convert a Polyhedron_3 read into a flux into 3D linear cell complex.
    * @param alcc the linear cell complex where Polyhedron_3 will be converted.
    * @param ais the istream where read the Polyhedron_3.
-   * @return A dart created during the convertion.
+   * @return A dart created during the conversion.
    */
   template < class LCC >
   typename LCC::Dart_descriptor

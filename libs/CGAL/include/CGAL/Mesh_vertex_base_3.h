@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_vertex_base_3.h $
+// $Id: Mesh_vertex_base_3.h fef1a43 2022-12-15T10:43:27+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Stéphane Tayeb, Andreas Fabri
@@ -317,7 +317,11 @@ template<class GT,
          class MD,
          class Vb = Regular_triangulation_vertex_base_3<GT> >
 struct Mesh_vertex_base_3 {
+#ifdef DOXYGEN_RUNNING
+  using Triangulation_data_structure = unspecified_type;
+#else
   using Triangulation_data_structure = internal::Dummy_tds_3;
+#endif
   using Vertex_handle = typename Triangulation_data_structure::Vertex_handle;
   using Cell_handle = typename Triangulation_data_structure::Cell_handle;
 
@@ -335,7 +339,11 @@ template<class GT,
          class Index,
          class Vb = Regular_triangulation_vertex_base_3<GT> >
 struct Mesh_vertex_generator_3 {
+#ifdef DOXYGEN_RUNNING
+  using Triangulation_data_structure = unspecified_type;
+#else
   using Triangulation_data_structure = internal::Dummy_tds_3;
+#endif
   using Vertex_handle = typename Triangulation_data_structure::Vertex_handle;
   using Cell_handle = typename Triangulation_data_structure::Cell_handle;
 

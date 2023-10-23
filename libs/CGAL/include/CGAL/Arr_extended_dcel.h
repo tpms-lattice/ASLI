@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_extended_dcel.h $
+// $Id: Arr_extended_dcel.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -223,7 +223,7 @@ public:
  * The Traits parameter corresponds to a geometric traits class, which
  * defines the Point_2 and X_monotone_curve_2 types.
  * The VertexData, HalfedgeData and FaceData parameter specify the object types
- * stored with each vertex, halfegde and face, respectively.
+ * stored with each vertex, halfedge and face, respectively.
  */
 template <class Traits_,
           typename VertexData_, typename HalfedgeData_, typename FaceData_,

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Curve_renderer_facade.h $
+// $Id: Curve_renderer_facade.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pavel Emeliyanenko <asm@mpi-sb.mpg.de>
@@ -246,7 +246,7 @@ public:
      * \c Coord_2 must be constructible from a pair of integers / doubles
      * depending on the renderer type
      *
-     * computes optionaly end-point coordinates (even if they lie outside the
+     * computes optionally end-point coordinates (even if they lie outside the
      * window)
      */
     template < class Coord_2, template < class, class > class Container,
@@ -335,7 +335,7 @@ Lexit:  std::cerr << "Sorry, this does not work even with exact "
      * rasterizes a point on curve, returns point coordinates as objects of
      * type \c Coord_2 which are constructible from a pair of ints / doubles
      *
-     * retunrs \c false if point lies outside the window or cannot be
+     * returns \c false if point lies outside the window or cannot be
      * rasterized due to precision problems
      */
     template < class Coord_2 >

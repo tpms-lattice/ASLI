@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_triangulation_3/include/CGAL/Periodic_3_offset_3.h $
+// $Id: Periodic_3_offset_3.h d0f63f5 2023-05-02T14:14:27+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,6 +19,9 @@
 #include <CGAL/basic.h>
 #include <CGAL/assertions.h>
 #include <CGAL/Cartesian.h>
+
+#include <iostream>
+#include <type_traits>
 
 namespace CGAL {
 
@@ -43,18 +46,27 @@ public:
   int& z() { return _offz; }
   int z() const { return _offz; }
 
-  int &operator[](int i) {
+  // Use sfinae on the operator[] to accept only integral types as argument
+  template <typename T,
+            typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+  int& operator[](T i)
+  {
     if (i==0) return _offx;
     if (i==1) return _offy;
     CGAL_assertion(i==2);
     return _offz;
   }
-  int operator[](int i) const {
+
+  template <typename T,
+            typename std::enable_if<std::is_integral<T>::value>::type* = nullptr>
+  int operator[](T i) const
+  {
     if (i==0) return _offx;
     if (i==1) return _offy;
     CGAL_assertion(i==2);
     return _offz;
   }
+
   void operator+=(const Periodic_3_offset_3 &other) {
     _offx += other._offx;
     _offy += other._offy;

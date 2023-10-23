@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/leda_real.h $
+// $Id: leda_real.h 733ecc4 2023-04-12T17:34:43+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -203,6 +203,10 @@ public:
     }
 };
 
+
+inline const leda_real& approx(const leda_real& d) { return d; }
+inline const leda_real& exact(const leda_real& d) { return d; }
+inline int depth(const leda_real&){ return -1; }
 
 
 } //namespace CGAL

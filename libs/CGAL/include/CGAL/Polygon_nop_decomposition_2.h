@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Minkowski_sum_2/include/CGAL/Polygon_nop_decomposition_2.h $
+// $Id: Polygon_nop_decomposition_2.h 254d60f 2019-10-19T15:23:19+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Efi Fogel   <efifogel@gmail.com>

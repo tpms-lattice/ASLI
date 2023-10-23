@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/ARAP_parameterizer_3.h $
+// $Id: ARAP_parameterizer_3.h d2bc415 2023-05-04T16:37:17+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -33,7 +33,7 @@
 
 #if defined(CGAL_EIGEN3_ENABLED)
 #include <CGAL/Eigen_solver_traits.h>
-#ifdef CGAL_SMP_USE_SPARSESUITE_SOLVERS
+#ifdef CGAL_SMP_USE_SUITESPARSE_SOLVERS
 #include <Eigen/UmfPackSupport>
 #endif
 #endif
@@ -154,7 +154,7 @@ namespace Surface_mesh_parameterization {
 ///   CGAL::Eigen_solver_traits<
 ///           Eigen::SparseLU<Eigen_sparse_matrix<double>::EigenType> >
 /// \endcode
-///         Moreover, if SparseSuite solvers are available, which is greatly preferable for speed,
+///         Moreover, if SuiteSparse solvers are available, which is greatly preferable for speed,
 ///         then the default parameter is:
 /// \code
 ///   CGAL::Eigen_solver_traits<
@@ -183,7 +183,7 @@ public:
   typedef typename Default::Get<
     SolverTraits_,
   #if defined(CGAL_EIGEN3_ENABLED)
-    #ifdef CGAL_SMP_USE_SPARSESUITE_SOLVERS
+    #ifdef CGAL_SMP_USE_SUITESPARSE_SOLVERS
       CGAL::Eigen_solver_traits<
         Eigen::UmfPackLU<Eigen_sparse_matrix<double>::EigenType> >
     #else
@@ -458,6 +458,7 @@ private:
                                       const Faces_vector& faces,
                                       Cot_map ctmap) const
   {
+    // Since we loop faces, we are implicitely defining the weight of border halfedges as 0...
     for(face_descriptor fd : faces) {
       halfedge_descriptor hd = halfedge(fd, mesh), hdb = hd;
 
@@ -504,7 +505,7 @@ private:
   // - compute w_ii = - sum of w_ijs.
   //
   // \pre Vertices must be indexed.
-  // \pre Vertex i musn't be already parameterized.
+  // \pre Vertex i mustn't be already parameterized.
   // \pre Line i of A must contain only zeros.
   template <typename VertexIndexMap>
   Error_code fill_linear_system_matrix(Matrix& A,
@@ -1016,7 +1017,7 @@ private:
   // - call compute_b_ij() for each neighbor v_j to compute the B coefficient b_i
   //
   // \pre Vertices must be indexed.
-  // \pre Vertex i musn't be already parameterized.
+  // \pre Vertex i mustn't be already parameterized.
   // \pre Lines i of Bu and Bv must be zero.
   template <typename VertexIndexMap>
   Error_code fill_linear_system_rhs(const Triangle_mesh& mesh,
@@ -1124,7 +1125,7 @@ private:
 
     // Solve "A*Xu = Bu". On success, the solution is (1/Du) * Xu.
     // Solve "A*Xv = Bv". On success, the solution is (1/Dv) * Xv.
-    NT Du, Dv;
+    double Du, Dv;
     if(!get_linear_algebra_traits().linear_solver(A, Bu, Xu, Du) ||
        !get_linear_algebra_traits().linear_solver(A, Bv, Xv, Dv)) {
       std::cerr << "Could not solve linear system" << std::endl;

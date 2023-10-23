@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_2/Voronoi_vertex_ring_C2.h $
+// $Id: Voronoi_vertex_ring_C2.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1502,7 +1502,7 @@ private:
 
   vertex_t v_type;
 
-  // index that indicates the refence point for the case PPS
+  // index that indicates the reference point for the case PPS
   short pps_idx;
 
   // the case ppp

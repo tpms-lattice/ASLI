@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Combinatorial_map_iterators_base.h $
+// $Id: Combinatorial_map_iterators_base.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -28,7 +28,7 @@ namespace CGAL {
    * Basic classes that serve as tools for definition of iterators.
    There are 3 classes:
    *  - CMap_dart_iterator<Map,Const> is the basic generic class defining
-   *    what is an interator on darts.
+   *    what is an iterator on darts.
    *  - CMap_extend_iterator<Map,Ite,Bi> to extend the given iterator by adding
    *    the involution Bi.
    *  - CMap_non_basic_iterator<Map_,Ite> to transform the basic iterator Ite

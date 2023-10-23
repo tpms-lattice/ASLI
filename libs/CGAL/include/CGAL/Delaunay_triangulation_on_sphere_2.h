@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_on_sphere_2/include/CGAL/Delaunay_triangulation_on_sphere_2.h $
+// $Id: Delaunay_triangulation_on_sphere_2.h f15b144 2023-06-05T15:10:11+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mariette Yvinec,
@@ -27,7 +27,6 @@
 #include <CGAL/spatial_sort_on_sphere.h>
 #include <CGAL/Spatial_sort_traits_adapter_3.h>
 
-#include <boost/iterator/transform_iterator.hpp>
 #include <boost/property_map/function_property_map.hpp>
 
 #include <algorithm>
@@ -147,7 +146,7 @@ public:
   {
   }
 
-  // Assignement
+  // Assignment
   Delaunay_triangulation_on_sphere_2& operator=(Delaunay_triangulation_on_sphere_2 other) // intentional copy
   {
     Base::swap(static_cast<Base&>(other));

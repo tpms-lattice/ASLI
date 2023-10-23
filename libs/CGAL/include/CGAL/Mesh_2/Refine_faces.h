@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Mesh_2/Refine_faces.h $
+// $Id: Refine_faces.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -256,7 +256,7 @@ public:
   /**
    * Adds the sequence `[begin, end[` to the list
    * of bad faces.
-   * Use this overriden function if the list of bad faces can be
+   * Use this overridden function if the list of bad faces can be
    * computed easily without testing all faces.
    * \param Fh_it is an iterator of `Face_Handle`.
    */

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Ridges_3/include/CGAL/PolyhedralSurf_neighbors.h $
+// $Id: PolyhedralSurf_neighbors.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Pouget and Frédéric Cazals
@@ -100,7 +100,7 @@ public:
   // vertex_neigh stores the vertex v and its 1Ring neighbors contour
   // stores halfedges, oriented CW, following the 1Ring disk border
   // OneRingSize is the max distance from v to its OneRing
-  // neighbors. (the tag is_visited is not mofified)
+  // neighbors. (the tag is_visited is not modified)
   void compute_one_ring(const vertex_descriptor v,
                         std::vector<vertex_descriptor> &vertex_neigh,
                         std::list<halfedge_descriptor> &contour,

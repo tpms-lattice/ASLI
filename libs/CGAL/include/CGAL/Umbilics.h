@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Ridges_3/include/CGAL/Umbilics.h $
+// $Id: Umbilics.h 781f9a2 2022-11-17T10:25:10+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Pouget and Frédéric Cazals
@@ -31,7 +31,7 @@ enum Umbilic_type { NON_GENERIC_UMBILIC = 0, ELLIPTIC_UMBILIC, HYPERBOLIC_UMBILI
 
 //-------------------------------------------------------------------
 //Umbilic : stores umbilic data, its location given by a vertex, its
-//type and a circle of edges bording a disk containing the vertex
+//type and a circle of edges bordering a disk containing the vertex
 //------------------------------------------------------------------
 template < class TriangleMesh >
 class Umbilic
@@ -192,7 +192,7 @@ compute(OutputIterator umbilics_it, FT size)
     vces.clear();
     contour.clear();
     is_umbilic = true;
-    //the size of neighbourhood is (size * OneRingSize)
+    //the size of neighborhood is (size * OneRingSize)
     poly_neighbors->compute_neighbors(vh, vces, contour, size);
 
 

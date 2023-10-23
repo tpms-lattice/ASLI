@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/Basic_viewer_qt.h $
+// $Id: Basic_viewer_qt.h 3e07f88 2023-04-24T12:01:17+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1781,7 +1781,7 @@ protected:
 
   QGLBuffer buffers[NB_VBO_BUFFERS];
 
-  // The following enum gives the indices of the differents vao.
+  // The following enum gives the indices of the different vao.
   enum
     { VAO_MONO_POINTS=0,
       VAO_COLORED_POINTS,
@@ -1816,8 +1816,8 @@ protected:
 namespace CGAL
 {
 
-  template<class T>
-  void draw(const T&, const char* ="", bool=false)
+  template<class ... T>
+  void draw(T...)
   {
     std::cerr<<"Impossible to draw, CGAL_USE_BASIC_VIEWER is not defined."<<std::endl;
   }

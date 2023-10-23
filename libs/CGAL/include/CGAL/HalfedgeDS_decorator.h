@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/HalfedgeDS/include/CGAL/HalfedgeDS_decorator.h $
+// $Id: HalfedgeDS_decorator.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -427,7 +427,7 @@ public:
         insert_tip( inew->opposite(), hnew);
         insert_tip( jnew->opposite(), inew);
         insert_tip( hnew->opposite(), jnew);
-        // Make the new incidences with the old stucture.
+        // Make the new incidences with the old structure.
         CGAL_assertion_code( std::size_t termination_count = 0;)
         if ( h->next() != i) {
             Halfedge_handle g = h->next();

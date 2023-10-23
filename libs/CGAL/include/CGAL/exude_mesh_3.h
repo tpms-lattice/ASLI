@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/exude_mesh_3.h $
+// $Id: exude_mesh_3.h 4b632c2 2023-03-30T10:40:28+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -102,8 +102,9 @@ Mesh_optimization_return_code exude_mesh_3(C3T3& c3t3,const CGAL_NP_CLASS& np = 
 }
 
 #ifndef CGAL_NO_DEPRECATED_CODE
-template<typename C3T3, typename CGAL_NP_TEMPLATE_PARAMETERS>
-Mesh_optimization_return_code exude_mesh_3(C3T3& c3t3, double time_limit = 0, double sliver_bound = 0)
+template<typename C3T3>
+CGAL_DEPRECATED
+Mesh_optimization_return_code exude_mesh_3(C3T3& c3t3, double time_limit, double sliver_bound = 0)
 {
   return exude_mesh_3(c3t3, CGAL::parameters::time_limit(time_limit).sliver_bound(sliver_bound));
 }

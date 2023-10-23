@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/type_traits.h $
+// $Id: type_traits.h 2e90313 2022-11-09T10:50:01+01:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Meyer
@@ -27,6 +27,18 @@ struct is_same_or_derived :
   >::type
 {};
 
-}
+namespace cpp20 {
+
+  template< class T >
+  struct remove_cvref {
+      typedef std::remove_cv_t<std::remove_reference_t<T>> type;
+  };
+
+  template< class T >
+  using remove_cvref_t = typename remove_cvref<T>::type;
+
+} // end namespace cpp20
+
+} // end namespace CGAL
 
 #endif // CGAL_TYPE_TRAITS_H

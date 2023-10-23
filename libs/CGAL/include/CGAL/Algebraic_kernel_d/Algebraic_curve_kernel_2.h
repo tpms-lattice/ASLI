@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_curve_kernel_2.h $
+// $Id: Algebraic_curve_kernel_2.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -840,7 +840,7 @@ public:
         } else {
           // more work! We should not assume that each
           // roots[i].first has f or g as defining polynomial, because
-          // the representation might have been simplifed
+          // the representation might have been simplified
 
           // Here's the safe way: Take the simpler of the curves
           // (but the one without vertical component!)
@@ -922,7 +922,7 @@ public:
      *
      * \attention{This method returns the y-coordinate in isolating interval
      * representation. Calculating such a representation is usually a time-
-     * consuming taks, since it is against the "y-per-x"-view that we take
+     * consuming task, since it is against the "y-per-x"-view that we take
      * in our kernel. Therefore, it is recommended, if possible,
      *  to use the functors
      * \c Approximate_absolute_y_2 and \c Approximate_relative_y_2 that

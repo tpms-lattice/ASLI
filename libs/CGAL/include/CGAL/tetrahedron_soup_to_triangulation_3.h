@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/tetrahedron_soup_to_triangulation_3.h $
+// $Id: tetrahedron_soup_to_triangulation_3.h 5b31fc4 2022-06-29T12:21:07+02:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

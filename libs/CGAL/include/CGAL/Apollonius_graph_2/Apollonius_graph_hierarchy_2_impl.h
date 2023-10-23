@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Apollonius_graph_2/include/CGAL/Apollonius_graph_2/Apollonius_graph_hierarchy_2_impl.h $
+// $Id: Apollonius_graph_hierarchy_2_impl.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -54,7 +54,7 @@ Apollonius_graph_hierarchy_2
 }
 
 
-//Assignement
+//Assignment
 template<class Gt, class Agds, class LTag>
 Apollonius_graph_hierarchy_2<Gt,Agds,LTag> &
 Apollonius_graph_hierarchy_2<Gt,Agds,LTag>::

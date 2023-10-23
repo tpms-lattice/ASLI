@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/AABB_tree/include/CGAL/AABB_tree/internal/AABB_drawing_traits.h $
+// $Id: AABB_drawing_traits.h b411e26 2022-06-30T09:22:44+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

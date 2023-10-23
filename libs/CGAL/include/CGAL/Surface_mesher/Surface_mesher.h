@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesher/include/CGAL/Surface_mesher/Surface_mesher.h $
+// $Id: Surface_mesher.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -387,7 +387,7 @@ namespace CGAL {
           error_msg <<
             boost::format("Surface_mesher ERROR: "
                           "A facet is not in conflict with its refinement point!\n"
-                          "Debugging informations:\n"
+                          "Debugging information:\n"
                           "  Facet: (%1%, %2%) = (%6%, %7%, %8%)\n"
                           "  Dual: (%3%, %4%)\n"
                           "  Refinement point: %5%\n")

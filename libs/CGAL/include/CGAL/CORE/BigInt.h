@@ -14,11 +14,11 @@
  *       Chen Li <chenli@cs.nyu.edu>
  *       Zilin Du <zilin@cs.nyu.edu>
  *
- * WWW URL: http://cs.nyu.edu/exact/
+ * WWW URL: https://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_Core/include/CGAL/CORE/BigInt.h $
+ * $Id: BigInt.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 #ifndef _CORE_BIGINT_H_
@@ -37,7 +37,7 @@ public:
   BigIntRep() {
     mpz_init(mp);
   }
-  // Note : should the copy-ctor be alloed at all ? [Sylvain Pion]
+  // Note : should the copy-ctor be allowed at all ? [Sylvain Pion]
   BigIntRep(const BigIntRep& z) : RCRepImpl<BigIntRep>() {
     mpz_init_set(mp, z.mp);
   }

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_2_triangulation_2/include/CGAL/Periodic_2_Delaunay_triangulation_2.h $
+// $Id: Periodic_2_Delaunay_triangulation_2.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Nico Kruithof <Nico@nghk.nl>
@@ -572,7 +572,7 @@ private:
   void propagating_flip(const Face_handle& f, int i);
 #endif
 
-  // auxilliary functions for remove
+  // auxiliary functions for remove
   // returns false if we first need to convert to a 9-cover before the vertex can be removed
   bool remove_single_vertex(Vertex_handle v, const Offset &v_o);
   void remove_degree_triangulate(Vertex_handle v, std::vector<Face_handle> &f,
@@ -763,7 +763,7 @@ private:
                                    true) ==  ON_POSITIVE_SIDE;
   }
 
-// end of auxilliary functions for remove
+// end of auxiliary functions for remove
 
 
 

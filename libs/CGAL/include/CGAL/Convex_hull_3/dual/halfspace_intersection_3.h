@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_3/include/CGAL/Convex_hull_3/dual/halfspace_intersection_3.h $
+// $Id: halfspace_intersection_3.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -242,7 +242,7 @@ namespace CGAL
           // find a point inside the intersection
           origin = halfspace_intersection_interior_point_3(begin, end);
 
-          CGAL_assertion_msg(origin!=boost::none, "halfspace_intersection_3: problem when determing a point inside the intersection");
+          CGAL_assertion_msg(origin!=boost::none, "halfspace_intersection_3: problem when determining a point inside the intersection");
           if (origin==boost::none)
             return;
         }

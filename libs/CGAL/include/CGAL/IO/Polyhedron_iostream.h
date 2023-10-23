@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polyhedron/include/CGAL/IO/Polyhedron_iostream.h $
+// $Id: Polyhedron_iostream.h 115fa5a 2021-12-14T14:01:21+00:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

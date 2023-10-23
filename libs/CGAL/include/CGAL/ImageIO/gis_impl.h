@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/gis_impl.h $
+// $Id: gis_impl.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -445,7 +445,7 @@ int readGisHeader( const char* name,_image* im)
 
 
       else {
-        fprintf( stderr, "readGisHeader: unknown indentifier '%s'\n", s );
+        fprintf( stderr, "readGisHeader: unknown identifier '%s'\n", s );
         ADD_USER_STRING
         *s = '\0';
       }

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Solver_interface/include/CGAL/Eigen_sparse_matrix.h $
+// $Id: Eigen_sparse_matrix.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Gael Guennebaud
@@ -21,7 +21,7 @@ namespace CGAL {
 \ingroup PkgSolverInterfaceLS
 
 The class `Eigen_sparse_matrix` is a wrapper around `Eigen` matrix type
-<a href="http://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix`</a>
+<a href="https://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix`</a>
 that represents general matrices, be they symmetric or not.
 
 \cgalModels `SparseLinearAlgebraTraits_d::Matrix`
@@ -301,7 +301,7 @@ private:
 \ingroup PkgSolverInterfaceRefLS
 
 The class `Eigen_sparse_symmetric_matrix` is a wrapper around `Eigen` matrix type
-<a href="http://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix` </a>
+<a href="https://eigen.tuxfamily.org/dox/classEigen_1_1SparseMatrix.html">`Eigen::SparseMatrix` </a>
 
 Since the matrix is symmetric, only the lower triangle part is stored.
 

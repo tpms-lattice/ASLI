@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Algebraic_real_quadratic_refinement_rep_bfi.h $
+// $Id: Algebraic_real_quadratic_refinement_rep_bfi.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -45,7 +45,7 @@ namespace internal {
  * @Unpublished{abbott-quadratic,
  *    author =          {John Abbott},
  *    title =          {Quadratic Interval Refinement for Real Roots},
- *    url =      {http://www.dima.unige.it/~abbott/},
+ *    url =      {https://www.dima.unige.it/~abbott/},
  *  note =       {Poster presented at the 2006 Internat. Sympos. on Symbolic
  and Algebraic Computation (ISSAC 2006)}
  * }
@@ -494,7 +494,7 @@ public:
         }
     }
 };
-} // namepace internal
+} // namespace internal
 
 } //namespace CGAL
 

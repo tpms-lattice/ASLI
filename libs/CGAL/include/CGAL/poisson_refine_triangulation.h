@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Poisson_surface_reconstruction_3/include/CGAL/poisson_refine_triangulation.h $
+// $Id: poisson_refine_triangulation.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Laurent RINEAU, Laurent Saboret
@@ -86,7 +86,7 @@ protected:
   }
 
 public:
-  /* Overriden functions of this level: */
+  /* Overridden functions of this level: */
   /* we override all methods that call test_if_cell_is_bad() */
 
   void scan_triangulation_impl()
@@ -130,7 +130,7 @@ public:
 
 
 private:
-  /* --- private datas --- */
+  /* --- private data --- */
   unsigned int max_vertices; ///< number of vertices bound (ignored if zero)
 
 }; // end Poisson_mesher_level_impl_base

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/BGL/include/CGAL/boost/graph/IO/Generic_facegraph_printer.h $
+// $Id: Generic_facegraph_printer.h 477353d 2022-04-20T15:55:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé

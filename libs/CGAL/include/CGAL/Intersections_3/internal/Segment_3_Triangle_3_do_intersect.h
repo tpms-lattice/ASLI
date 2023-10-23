@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Segment_3_Triangle_3_do_intersect.h $
+// $Id: Segment_3_Triangle_3_do_intersect.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,7 +25,8 @@ bool do_intersect_coplanar(const typename K::Point_3& A,
                            const typename K::Point_3& B,
                            const typename K::Point_3& C,
                            const typename K::Point_3& p,
-                           const typename K::Point_3& q, const K& k)
+                           const typename K::Point_3& q,
+                           const K& k)
 {
   typedef typename K::Point_3 Point_3;
 
@@ -173,9 +174,10 @@ bool do_intersect_coplanar(const typename K::Triangle_3& t,
 }
 
 template <class K>
-bool do_intersect(const typename K::Triangle_3& t,
-                  const typename K::Segment_3& s,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Triangle_3& t,
+             const typename K::Segment_3& s,
+             const K& k)
 {
   CGAL_kernel_precondition(!k.is_degenerate_3_object()(t) );
   CGAL_kernel_precondition(!k.is_degenerate_3_object()(s) );
@@ -269,9 +271,10 @@ bool do_intersect(const typename K::Triangle_3& t,
 
 template <class K>
 inline
-bool do_intersect(const typename K::Segment_3& s,
-                  const typename K::Triangle_3& t,
-                  const K& k)
+typename K::Boolean
+do_intersect(const typename K::Segment_3& s,
+             const typename K::Triangle_3& t,
+             const K& k)
 {
   return do_intersect(t, s, k);
 }

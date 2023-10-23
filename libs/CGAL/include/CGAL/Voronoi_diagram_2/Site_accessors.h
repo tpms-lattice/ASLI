@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Site_accessors.h $
+// $Id: Site_accessors.h 942d461 2021-05-05T16:59:22+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

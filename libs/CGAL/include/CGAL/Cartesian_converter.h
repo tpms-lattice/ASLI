@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Cartesian_kernel/include/CGAL/Cartesian_converter.h $
+// $Id: Cartesian_converter.h 1c5454d 2022-10-27T11:42:13+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,6 +30,7 @@
 #include <CGAL/Bbox_2.h>
 #include <CGAL/Bbox_3.h>
 #include <CGAL/Origin.h>
+#include <CGAL/Kernel/Return_base_tag.h>
 #include <CGAL/Kernel/Type_mapper.h>
 #include <vector>
 #include <boost/mpl/lambda.hpp>
@@ -106,6 +107,12 @@ public:
     operator()(Null_vector n) const
     {
         return n;
+    }
+
+    Return_base_tag
+    operator()(Return_base_tag o) const
+    {
+        return o;
     }
 
     const Bbox_2&

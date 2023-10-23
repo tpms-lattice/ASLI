@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Profiling_tools/include/CGAL/Timer.h $
+// $Id: Timer.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,7 +66,7 @@ public:
     double   time()       const;
     int      intervals()  const { return interv; }
     double   precision()  const;
-    // Returns timer precison. Computes it dynamically at first call.
+    // Returns timer precision. Computes it dynamically at first call.
     // Returns -1.0 if timer system call fails, which, for a proper coded
     // test towards precision leads to an immediate stop of an otherwise
     // infinite loop (fixed tolerance * total time >= precision).

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/internal/Ray_3_Triangle_3_intersection.h $
+// $Id: Ray_3_Triangle_3_intersection.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -90,13 +90,13 @@ t3r3_intersection_coplanar_aux(const typename K::Point_3& a,
 
   const Point_3& p = point_on(r,0);
 
-  // A ray is not symetric, 2 cases depending on isolated side of c
+  // A ray is not symmetric, 2 cases depending on isolated side of c
   Orientation cap = negative_side ? coplanar_orientation(c,a,p)
                                   : coplanar_orientation(b,c,p);
 
   switch ( cap ) {
     case NEGATIVE:
-      // p is bellow [c,a]
+      // p is below [c,a]
       return intersection_return<typename K::Intersect_3, typename K::Triangle_3, typename K::Ray_3>();
 
     case COLLINEAR:
@@ -111,7 +111,7 @@ t3r3_intersection_coplanar_aux(const typename K::Point_3& a,
       Point_3 p_side_end_point(p);
       Point_3 q_side_end_point;
 
-      // A ray is not symetric, 2 cases depending on isolated side of c
+      // A ray is not symmetric, 2 cases depending on isolated side of c
       if ( negative_side )
       {
         if ( NEGATIVE == coplanar_orientation(b,c,p) )

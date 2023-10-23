@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/bmp.h $
+// $Id: bmp.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -13,7 +13,7 @@
 /*************************************************************************
  * iobmp.h - I procedures for BMP raw images
  *
- * $Id$
+ * $Id: bmp.h 0779373 2020-03-26T13:31:46+01:00 Sébastien Loriot
  *
  * Copyright INRIA
  *

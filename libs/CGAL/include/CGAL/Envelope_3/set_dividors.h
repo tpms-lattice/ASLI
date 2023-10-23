@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Envelope_3/include/CGAL/Envelope_3/set_dividors.h $
+// $Id: set_dividors.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -46,7 +46,7 @@ public:
 };
 
 //! The last element is stored in the second sequence and all the other (n-1)
-//  elments are stored in the first sequence.
+//  elements are stored in the first sequence.
 class Incremental_dividor
 {
 public:

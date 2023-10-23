@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/scanline_orient_normals.h $
+// $Id: scanline_orient_normals.h 9e137bc 2023-01-31T12:26:55+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -328,7 +328,7 @@ void orient_scanline (Iterator begin, Iterator end,
     const Point_3& p = get (point_map, *it);
     mean_x += p.x();
     mean_y += p.y();
-    max_z = (std::max)(max_z, p.z());
+    max_z = (std::max)(max_z, CGAL::to_double(p.z()));
     ++ nb;
   }
 
@@ -373,7 +373,7 @@ void orient_scanline (Iterator begin, Iterator end,
    iterating on `points`:
 
    - if the named parameter `scanline_id_map` is provided, the range
-     is cutted everytime the id changes.
+     is cut everytime the id changes.
 
    - if no scanline ID map is provided, a fallback method simply cuts
      the range everytime 3 consecutive points form an acute angle on
@@ -479,7 +479,7 @@ void scanline_orient_normals (PointRange& points, const NamedParameters& np = pa
     <internal_np::scanline_id_t, NamedParameters, No_map>::type;
   using Fallback_scanline_ID = Boolean_tag<std::is_same<ScanlineIDMap, No_map>::value>;
 
-  CGAL_static_assertion_msg(NP_helper::has_normal_map(), "Error: no normal map");
+  CGAL_assertion_msg(NP_helper::has_normal_map(points, np), "Error: no normal map");
 
   PointMap point_map = NP_helper::get_point_map(points, np);
   NormalMap normal_map = NP_helper::get_normal_map(points, np);

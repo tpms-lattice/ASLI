@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Curved_kernel_via_analysis_2/Point_2.h $
+// $Id: Point_2.h ccdb5a0 2023-02-15T14:36:44+02:00 Efi Fogel
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -76,8 +76,7 @@ public:
     typedef typename Curve_kernel_2::Curve_analysis_2 Curve_analysis_2;
 
     //! default constructor
-    Point_2_rep() {
-    }
+    Point_2_rep() : _m_location(CGAL::ARR_INTERIOR) {}
 
     //! constructs a "finite" point on curve,
     //! implies CGAL::NO_BOUNDARY in x/y
@@ -326,7 +325,7 @@ protected:
     //!@{
 
     /*!\brief
-     * constructs from a given represenation
+     * constructs from a given representation
      */
     /*!\brief
      * Constructor for for rebind

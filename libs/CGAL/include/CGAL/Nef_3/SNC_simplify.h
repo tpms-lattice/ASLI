@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_simplify.h $
+// $Id: SNC_simplify.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -111,7 +111,7 @@ class SNC_simplify_base : public SNC_decorator<SNC_structure> {
           if ( SD.is_closed_at_source( u->twin()) )
              SD.set_face( tgt, fu);
           /* TO VERIFY: does is_closed_at_source(u) imply is_isolated(src)?
-             if it is true, the svertex face update is not necesary. */
+             if it is true, the svertex face update is not necessary. */
 
           SHalfedge_around_facet_circulator next = u;
           ++next;
@@ -127,7 +127,7 @@ class SNC_simplify_base : public SNC_decorator<SNC_structure> {
       }
       else if(fc.is_shalfloop()) {
         SHalfloop_handle l(fc);
-        // this code is currenlty not used, but it is potentially need
+        // this code is currently not used, but it is potentially need
         // in the future, e.g for complex marks or a relative interior
         // function
         SFace_handle fu = l->incident_sface(), ftu = l->twin()->incident_sface();
@@ -144,7 +144,7 @@ class SNC_simplify_base : public SNC_decorator<SNC_structure> {
   }
 
   bool is_part_of_volume(Vertex_handle v)
-    /* determines if a vertex v is part of a volume, cheking if its local
+    /* determines if a vertex v is part of a volume, checking if its local
        graph is trivial (only one sface with no boundary). */  {
     SM_decorator SD(&*v);
     CGAL_assertion( !is_empty_range( SD.sfaces_begin(), SD.sfaces_end()));

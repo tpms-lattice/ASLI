@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_point_location/Td_dag_node.h $
+// $Id: Td_dag_node.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Michal Balas <balasmic@post.tau.ac.il>
@@ -145,7 +145,7 @@ protected:
       boost::apply_visitor(clear_neighbors_visitor(), m_data);
     }
 
-    bool is_inner_node() const //MICHAL: a node with only left child (like removed node) will be concidered as a leaf
+    bool is_inner_node() const //MICHAL: a node with only left child (like removed node) will be considered as a leaf
     {
       //return !!m_left_child && !!m_right_child;
       return (!m_left_child.is_null() && !m_right_child.is_null());

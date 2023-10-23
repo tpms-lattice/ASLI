@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/gis.h $
+// $Id: gis.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -23,7 +23,7 @@
 
    Format du fichier texte associe aux fichiers binaires (images)
 
-exemple :
+example :
          512 512 100 2
          -type U16
          -dx 1.

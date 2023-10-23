@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/NewKernel_d/include/CGAL/NewKernel_d/Wrapper/Sphere_d.h $
+// $Id: Sphere_d.h 37580e9 2022-06-14T11:22:58+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse

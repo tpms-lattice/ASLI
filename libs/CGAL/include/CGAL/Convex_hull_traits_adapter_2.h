@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_2/include/CGAL/Convex_hull_traits_adapter_2.h $
+// $Id: Convex_hull_traits_adapter_2.h 75441da 2022-07-01T23:49:57+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Sebastien Loriot

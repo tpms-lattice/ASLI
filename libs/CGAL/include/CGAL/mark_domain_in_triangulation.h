@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/mark_domain_in_triangulation.h $
+// $Id: mark_domain_in_triangulation.h 8081822 2023-02-09T23:14:50+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -14,13 +14,14 @@
 
 #include <CGAL/license/Triangulation_2.h>
 
-#include <list>
-#include <deque>
+#include <CGAL/assertions.h>
+#include <CGAL/Triangulation_2/internal/In_domain.h>
+#include <CGAL/Unique_hash_map.h>
 
 #include <boost/property_map/property_map.hpp>
 
-#include <CGAL/Triangulation_2/internal/In_domain.h>
-#include <CGAL/Unique_hash_map.h>
+#include <deque>
+#include <list>
 
 namespace CGAL {
 
@@ -37,6 +38,8 @@ mark_domain_in_triangulation(CT& ct,
 {
   typedef typename CT::Face_handle Face_handle;
   typedef typename CT::Edge Edge;
+
+  CGAL_precondition(ct.dimension() == 2);
 
   if(nesting_level[start] != -1){
     return;

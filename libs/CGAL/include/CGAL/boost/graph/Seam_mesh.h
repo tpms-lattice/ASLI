@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/BGL/include/CGAL/boost/graph/Seam_mesh.h $
+// $Id: Seam_mesh.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -177,7 +177,7 @@ public:
 
 /// \ingroup PkgBGLAdaptors
 ///
-/// This class is a data structure that takes a triangle mesh, further refered
+/// This class is a data structure that takes a triangle mesh, further referred
 /// to as `underlying mesh` and turns some marked edges of that mesh into
 /// virtual boundary edges.
 ///

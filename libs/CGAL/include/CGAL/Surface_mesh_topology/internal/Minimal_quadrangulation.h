@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_topology/include/CGAL/Surface_mesh_topology/internal/Minimal_quadrangulation.h $
+// $Id: Minimal_quadrangulation.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -1323,7 +1323,7 @@ protected:
     return (std::numeric_limits<std::size_t>::max)();
   }
 
-  /// @return the positive turn given two darts using their ids (unsed for CGAL_PWRLE_TURN_V2 and V3)
+  /// @return the positive turn given two darts using their ids (unused for CGAL_PWRLE_TURN_V2 and V3)
   std::size_t compute_positive_turn_given_ids(Dart_const_descriptor dh1,
                                               Dart_const_descriptor dh2) const
   {
@@ -1333,7 +1333,7 @@ protected:
       {
         return get_dart_id(dh2)-get_dart_id(dh1);
       }
-      // here we have to add the degree (i.e. substract the vertex info)
+      // here we have to add the degree (i.e. subtract the vertex info)
       return get_dart_id(dh2)-get_local_map().template info<0>(dh1)-get_dart_id(dh1);
     }
     // here we know there is a hole just before the dart 0 (plus maybe other ones)
@@ -1346,7 +1346,7 @@ protected:
     return get_dart_id(dh2)-get_dart_id(dh1);
   }
 
-  /// @return the negative turn given two darts using their ids (unsed for CGAL_PWRLE_TURN_V2 and V3)
+  /// @return the negative turn given two darts using their ids (unused for CGAL_PWRLE_TURN_V2 and V3)
   std::size_t compute_negative_turn_given_ids(Dart_const_descriptor dh1,
                                               Dart_const_descriptor dh2) const
   {
@@ -1356,7 +1356,7 @@ protected:
       {
         return get_dart_id(dh1)-get_dart_id(dh2);
       }
-      // here we have to add the degree (i.e. substract the vertex info)
+      // here we have to add the degree (i.e. subtract the vertex info)
       return get_dart_id(dh1)-get_local_map().template info<0>(dh1)-get_dart_id(dh2);
     }
     // here we know there is a hole just before the dart 0 (plus maybe other ones)
@@ -1382,7 +1382,7 @@ protected:
   }
 
   /// @return true iff the edge containing adart is associated with a path
-  ///         of only 1 dart (case of an edge bewteen two perforated faces)
+  ///         of only 1 dart (case of an edge between two perforated faces)
   bool edge_path_has_only_one_dart(Original_dart_const_descriptor adart) const
   {
     return

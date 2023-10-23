@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/Converter.h $
+// $Id: Converter.h 42752d0 2023-03-29T11:39:37-03:00 Luiz Georg
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -164,6 +164,15 @@ public:
   {
     QPolygonF qp;
     qp << operator()(t.vertex(0)) << operator()(t.vertex(1)) << operator()(t.vertex(2));
+    return qp;
+  }
+
+  QPolygonF operator()(const std::list< CGAL_Point_2 >& p) const
+  {
+    QPolygonF qp;
+    for(int i = 0; i < p.size(); i++){
+      qp << operator()(p[i]);
+    }
     return qp;
   }
 

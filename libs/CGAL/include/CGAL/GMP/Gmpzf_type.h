@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/GMP/Gmpzf_type.h $
+// $Id: Gmpzf_type.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -166,8 +166,8 @@ public:
     canonicalize();
   }
 
-  // arithmetics
-  // -----------
+  // arithmetic
+  // ----------
   Gmpzf operator+() const;
   Gmpzf operator-() const;
   Gmpzf& operator+=( const Gmpzf& b);
@@ -203,8 +203,8 @@ private:
 // implementation
 // ==============
 
-// arithmetics
-// -----------
+// arithmetic
+// ----------
 
 inline
 Gmpzf Gmpzf::operator+() const

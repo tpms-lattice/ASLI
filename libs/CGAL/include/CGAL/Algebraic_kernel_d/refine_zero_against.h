@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/refine_zero_against.h $
+// $Id: refine_zero_against.h 9d9a517 2023-02-09T23:27:01+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -66,7 +66,7 @@ int descartes(Polynomial& p, const Field& low,const Field& high){
 }
 
 /*! \ingroup \NiX_univariate_polynomial_utils
- *  \brief refine isolating interval for \c p w.r.t \c q
+ *  \brief refine isolating interval for \c p w.r.t. \c q
  *
  *  This function refines the interval ]<TT>low</TT>, <TT>high</TT>[
  *  such that it does not contain any zero of \c q different from the

@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Constrained_voronoi_diagram_2.h $
+// $Id: Constrained_voronoi_diagram_2.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez
@@ -146,7 +146,7 @@ public:
 
 
 // Cdt should be of the type Constrained_Delaunay_triangulation_2
-// and the face base shoul be Constrained_Delaunay_triangulation_face_base_2
+// and the face base should be Constrained_Delaunay_triangulation_face_base_2
 template <class Cdt>
 class Constrained_voronoi_diagram_2
 {

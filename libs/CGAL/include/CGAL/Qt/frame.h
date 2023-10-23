@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/frame.h $
+// $Id: frame.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 #ifndef QGLVIEWER_FRAME_H
 #define QGLVIEWER_FRAME_H
@@ -106,7 +106,7 @@ class Constraint;
   the Frame. The default constraint() is \c nullptr resulting in no filtering. Use
   setConstraint() to attach a Constraint to a frame.
 
-  Constraints are especially usefull for the ManipulatedFrame instances, in
+  Constraints are especially useful for the ManipulatedFrame instances, in
   order to forbid some mouse motions. See the <a
   href="../examples/constrainedFrame.html">constrainedFrame</a>, <a
   href="../examples/constrainedCamera.html">constrainedCamera</a> and <a
@@ -119,7 +119,7 @@ class Constraint;
   <h3>Derived classes</h3>
 
   The ManipulatedFrame class inherits Frame and implements a mouse motion
-  convertion, so that a Frame (and hence an object) can be manipulated in the
+  conversion, so that a Frame (and hence an object) can be manipulated in the
   scene with the mouse.
 
   \nosubgrouping */

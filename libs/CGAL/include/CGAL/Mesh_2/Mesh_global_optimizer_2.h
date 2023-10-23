@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Mesh_2/Mesh_global_optimizer_2.h $
+// $Id: Mesh_global_optimizer_2.h 9d9a517 2023-02-09T23:27:01+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jane Tournois, Raul Gallegos, Pierre Alliez, Stéphane Tayeb
@@ -273,7 +273,7 @@ private:
 
     FT local_move_sq_ratio = (move * move) / local_sq_size;
 
-    // Move point only if displacement is big enough w.r.t local size
+    // Move point only if displacement is big enough w.r.t. local size
     if ( local_move_sq_ratio < sq_freeze_ratio_ )
       return CGAL::NULL_VECTOR;
 

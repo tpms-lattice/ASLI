@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Alpha_wrap_3/include/CGAL/Alpha_wrap_3/internal/Alpha_wrap_AABB_geom_traits.h $
+// $Id: Alpha_wrap_AABB_geom_traits.h 9c2d913 2022-11-01T19:48:55+01:00 Mael
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Pierre Alliez

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Tetrahedral_remeshing/include/CGAL/Tetrahedral_remeshing/Remeshing_vertex_base_3.h $
+// $Id: Remeshing_vertex_base_3.h a6b4822 2022-03-24T17:07:23+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

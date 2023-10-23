@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Partition_2/include/CGAL/Partition_2/Triangulation_indirect_traits_2.h $
+// $Id: Triangulation_indirect_traits_2.h 2e8a59d 2020-07-21T15:25:54+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

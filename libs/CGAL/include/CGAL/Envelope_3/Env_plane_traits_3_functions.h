@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Envelope_3/include/CGAL/Envelope_3/Env_plane_traits_3_functions.h $
+// $Id: Env_plane_traits_3_functions.h 96a8d91 2022-11-16T13:45:12+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Baruch Zukerman     <baruchzu@post.tau.ac.il>
@@ -34,7 +34,7 @@ Object plane_half_plane_proj_intersection(const typename K::Plane_3 &h1,
   // intersect the two planes
   Object h_obj = k.intersect_3_object()(h1, h2);
   if(h_obj.is_empty())
-    return Object(); // no intersection at all (paralles planes)
+    return Object(); // no intersection at all (parallel planes)
 
   Plane_3 p;
   if(assign(p, h_obj))
@@ -73,7 +73,7 @@ Object half_plane_half_plane_proj_intersection(const typename K::Plane_3 &h1,
   if(assign(ray, obj))
     return ray_under_linear_constraint(ray, l1, k);
 
-  CGAL_error(); // doesnt suppose to reach here
+  CGAL_error(); // doesn't suppose to reach here
   return Object();
 }
 

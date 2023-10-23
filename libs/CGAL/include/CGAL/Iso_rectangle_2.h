@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Iso_rectangle_2.h $
+// $Id: Iso_rectangle_2.h 39e6369 2023-05-12T10:32:54+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -78,7 +78,9 @@ public:
     : Rep(typename R::Construct_iso_rectangle_2()(Return_base_tag(), min_hx, min_hy, max_hx, max_hy, hw)) {}
 
   Iso_rectangle_2(const Bbox_2& bbox)
-    : Rep(typename R::Construct_iso_rectangle_2()(Return_base_tag(), bbox.xmin(), bbox.ymin(), bbox.xmax(), bbox.ymax())) {}
+    : Rep(typename R::Construct_iso_rectangle_2()(Return_base_tag(),
+                                                  typename R::Construct_point_2()(FT(bbox.xmin()), FT(bbox.ymin())),
+                                                  typename R::Construct_point_2()(FT(bbox.xmax()), FT(bbox.ymax())))) {}
 
   decltype(auto)
   min BOOST_PREVENT_MACRO_SUBSTITUTION () const

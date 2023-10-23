@@ -5,8 +5,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO_impl.h $
+// $Id: ImageIO_impl.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 
@@ -887,7 +887,7 @@ _image* _readNonInterlacedImage(const char *name) {
 
 
 /* Write inrimage given in inr in file name. If file name's suffix is
-   .gz, the image is gziped. If file name's suffix is .hdr, the image
+   .gz, the image is gzipped. If file name's suffix is .hdr, the image
    is written in ANALYZE format. If file name is nullptr, image is written
    on stdout */
 CGAL_INLINE_FUNCTION

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Three/include/CGAL/Three/Polyhedron_demo_plugin_interface.h $
+// $Id: Polyhedron_demo_plugin_interface.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,7 +41,7 @@ public:
 
   //! \brief indicates if an action is usable or not.
   //! This function usually tests the type of the selected item to determine if `action` can be applied to it,
-  //! but not necessarly.
+  //! but not necessarily.
   //! @returns \c true if `action` can be called in the current state, \c false
   //! otherwise
   virtual bool applicable(QAction* action) const = 0;

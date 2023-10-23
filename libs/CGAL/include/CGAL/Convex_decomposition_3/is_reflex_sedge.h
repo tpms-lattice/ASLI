@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/is_reflex_sedge.h $
+// $Id: is_reflex_sedge.h e8b66f2 2023-01-18T22:41:52+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,6 +14,8 @@
 
 #include <CGAL/license/Convex_decomposition_3.h>
 
+#include <CGAL/enum.h>
+#include <CGAL/Origin.h>
 
 #undef CGAL_NEF_DEBUG
 #define CGAL_NEF_DEBUG 239

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Algebraic_kernel_d/include/CGAL/Algebraic_kernel_d/Float_traits.h $
+// $Id: Float_traits.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -41,7 +41,7 @@ namespace CGAL {
 
 namespace internal {
 
-// Don't define default, results in more convinient compiler messages
+// Don't define default, results in more convenient compiler messages
 template< class Type > class Float_traits;
 // {
 // public:

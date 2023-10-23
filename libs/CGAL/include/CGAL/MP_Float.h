@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/MP_Float.h $
+// $Id: MP_Float.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -324,7 +324,7 @@ public:
     return exp + exponent_type(v.size());
   }
 
-  // Rescale the value by some factor (in limbs).  (substract the exponent)
+  // Rescale the value by some factor (in limbs).  (subtract the exponent)
   void rescale(exponent_type scale)
   {
     if (v.size() != 0)
@@ -617,7 +617,7 @@ division(const MP_Float & n, const MP_Float & d)
 
   CGAL_precondition(divisor != 0);
 
-  // Rescale d to have a to_double() value with reasonnable exponent.
+  // Rescale d to have a to_double() value with reasonable exponent.
   exponent_type scale_d = divisor.find_scale();
   divisor.rescale(scale_d);
   const double dd = INTERN_MP_FLOAT::to_double(divisor);

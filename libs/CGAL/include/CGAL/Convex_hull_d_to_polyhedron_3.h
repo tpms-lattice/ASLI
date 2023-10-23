@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_d/include/CGAL/Convex_hull_d_to_polyhedron_3.h $
+// $Id: Convex_hull_d_to_polyhedron_3.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -105,7 +105,7 @@ include |<CGAL/Convex_hull_d_to_polyhedron_3.h>|
 template <class R, class Polyhedron_3>
 void convex_hull_d_to_polyhedron_3(
   const Convex_hull_d<R>& C, Polyhedron_3& P)
-/*{\Mfunc converts the convex hull |C| to polyedral surface stored in
+/*{\Mfunc converts the convex hull |C| to polyhedral surface stored in
    |P|.\\ \precond |dim == 3| and |dcur == 3|. }*/
 { typedef Convex_hull_d<R> ChullType;
 

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Spatial_searching/include/CGAL/Kd_tree_rectangle.h $
+// $Id: Kd_tree_rectangle.h 1c5454d 2022-10-27T11:42:13+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -40,7 +40,7 @@ namespace CGAL {
     operator()(P p)
     {
       T h;
-      typename Construct_cartesian_const_iterator_d::result_type pit = construct_it(*p);
+      auto pit = construct_it(*p);
       for (int i = 0; i < dim; ++i, ++pit) {
         h=(*pit);
         if (h < lower[i]) lower[i] = h;
@@ -126,7 +126,7 @@ namespace CGAL {
       if (begin ==end)
         return;
       // initialize with values of first point
-      typename Construct_cartesian_const_iterator_d::result_type bit = construct_it(**begin);
+      auto bit = construct_it(**begin);
 
       for (int i=0; i < D::value; ++i, ++bit) {
         lower_[i]= *bit; upper_[i]=lower_[i];

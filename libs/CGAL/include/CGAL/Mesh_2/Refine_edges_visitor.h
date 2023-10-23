@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Mesh_2/Refine_edges_visitor.h $
+// $Id: Refine_edges_visitor.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,7 @@ namespace Mesh_2 {
 /**
  * This class is the visitor needed when Refine_edges<Tr> if called from
  * Refine_faces<Tr>.
- * \param Faces_mesher should be instanciated with Refine_face_base<Tr>.
+ * \param Faces_mesher should be instantiated with Refine_face_base<Tr>.
  */
 template <typename Faces_mesher>
 class Refine_edges_visitor : public ::CGAL::Null_mesh_visitor

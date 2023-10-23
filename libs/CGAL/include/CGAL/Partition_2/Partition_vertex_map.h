@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Partition_2/include/CGAL/Partition_2/Partition_vertex_map.h $
+// $Id: Partition_vertex_map.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -332,7 +332,7 @@ std::ostream& operator<<(std::ostream& os, const Edge_list<Traits>& edges)
    return os;
 }
 
-} // namesapce Partition_2
+} // namespace Partition_2
 
 template <class Traits_>
 class Partition_vertex_map

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Visibility_2/include/CGAL/Rotational_sweep_visibility_2.h $
+// $Id: Rotational_sweep_visibility_2.h 4ffc949 2022-02-03T17:11:20+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/Point_set_processing_3/internal/Rich_grid.h $
+// $Id: Rich_grid.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Shihao Wu, Clement Jamin, Pierre Alliez
@@ -266,7 +266,7 @@ void Rich_grid<Kernel>::travel_itself(
       for(int x = 0; x < x_side; x++) {
         int origin = cell(x, y, z);
         self(get_start_iter(origin), get_end_iter(origin), radius);
-        // compute between other girds
+        // compute between other grids
         for(int d = 2; d < 28; d += 2) { // skipping self
           const int *cs = corner + 3*diagonals[d];
           const int *ce = corner + 3*diagonals[d+1];
@@ -284,7 +284,7 @@ void Rich_grid<Kernel>::travel_itself(
   }
 }
 
-/// define how to travel in other gird
+/// define how to travel in other grid
 template <typename Kernel>
 void Rich_grid<Kernel>::travel_others(
   Rich_grid &points,

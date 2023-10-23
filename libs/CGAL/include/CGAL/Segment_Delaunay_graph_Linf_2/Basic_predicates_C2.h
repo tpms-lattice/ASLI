@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Segment_Delaunay_graph_Linf_2/include/CGAL/Segment_Delaunay_graph_Linf_2/Basic_predicates_C2.h $
+// $Id: Basic_predicates_C2.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1010,7 +1010,7 @@ public:
       // with the ray starting from corner and going to the
       // direction of the center of the infinite box
 
-      // corner has homogenuous coordinates cx, cy, cw
+      // corner has homogeneous coordinates cx, cy, cw
       RT cx, cy, cw;
       compute_intersection_of_lines(lhor, lver, cx, cy, cw);
 

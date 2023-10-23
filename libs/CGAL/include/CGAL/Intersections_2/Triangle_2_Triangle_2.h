@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Triangle_2_Triangle_2.h $
+// $Id: Triangle_2_Triangle_2.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -22,8 +22,10 @@
 #include <CGAL/Intersections_2/internal/Triangle_2_Triangle_2_intersection_impl.h>
 
 namespace CGAL {
+
 CGAL_DO_INTERSECT_FUNCTION_SELF(Triangle_2, 2)
 CGAL_INTERSECTION_FUNCTION_SELF(Triangle_2, 2)
+
 } // namespace CGAL
 
-#endif
+#endif // CGAL_INTERSECTIONS_2_TRIANGLE_2_TRIANGLE_2_H

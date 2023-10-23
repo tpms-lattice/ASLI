@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Three/include/CGAL/Three/Primitive_container.h $
+// $Id: Primitive_container.h d1cda5b 2023-06-08T12:54:59+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Maxime Gimeno
@@ -18,6 +18,8 @@
 #include <CGAL/Three/Buffer_objects.h>
 #include <CGAL/Three/Viewer_interface.h>
 #include <CGAL/Three/Scene_item_rendering_helper.h>
+
+#include <memory> // for std::unique_ptr
 
 using namespace CGAL::Three;
 
@@ -248,7 +250,7 @@ public:
   //!
 private:
   friend struct D;
-  mutable D* d;
+  std::unique_ptr<D> d;
 }; //end of class Triangle_container
 
 }

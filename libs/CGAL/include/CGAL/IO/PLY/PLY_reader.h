@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Stream_support/include/CGAL/IO/PLY/PLY_reader.h $
+// $Id: PLY_reader.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Simon Giraudot
@@ -156,7 +156,7 @@ public:
 
   // The two following functions prevent the stream to only extract
   // ONE character (= what the types char imply) by requiring
-  // explicitely an integer object when reading the stream
+  // explicitly an integer object when reading the stream
   void read_ascii(std::istream& stream, char& c) const
   {
     short s;

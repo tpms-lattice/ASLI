@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polynomial/include/CGAL/Polynomial/misc.h $
+// $Id: misc.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,7 @@ namespace CGAL{
 namespace internal{
 
 // template meta function Innermost_coefficient_type
-// returns the tpye of the innermost coefficient
+// returns the type of the innermost coefficient
 template <class T> struct Innermost_coefficient_type{ typedef T Type; };
 template <class Coefficient_type>
 struct Innermost_coefficient_type<Polynomial<Coefficient_type> >{

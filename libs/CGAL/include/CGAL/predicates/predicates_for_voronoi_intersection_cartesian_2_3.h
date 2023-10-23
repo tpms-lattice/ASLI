@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Interpolation/include/CGAL/predicates/predicates_for_voronoi_intersection_cartesian_2_3.h $
+// $Id: predicates_for_voronoi_intersection_cartesian_2_3.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -67,7 +67,7 @@ side_of_plane_centered_sphereC3(const RT &ax, const RT &ay, const RT &az,
   //  return:   sign( (c-p)(c-p) - (c-t)(c-t))
   //
   //method:
-  // - tranlation of p to the origin.
+  // - translation of p to the origin.
   // - separate computation of det and norm of the expression
 
   return side_of_plane_centered_sphere_translateC3<RT>(ax-px, ay-py, az-pz,
@@ -136,7 +136,7 @@ side_of_plane_centered_sphereC3(const RT &ax, const RT &ay, const RT &az,
   //  return:   sign( (c-p)(c-p) - (c-r)(c-r))
   //
   //method:
-  // - tranlation of p to the origin.
+  // - translation of p to the origin.
   // - separate computation of det and nom of the expression
 
   return side_of_plane_centered_sphere_translateC3<RT>(ax-px, ay-py, az-pz,

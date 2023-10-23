@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Minkowski_sum_2/include/CGAL/Minkowski_sum_2/Labels.h $
+// $Id: Labels.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ron Wein   <wein_r@yahoo.com>
@@ -182,7 +182,7 @@ public:
        (label._is_last && _index == 0)));
   }
 
-  /*! Check whether the given label is the succcessor of this label. */
+  /*! Check whether the given label is the successor of this label. */
   bool is_next (const X_curve_label& label) const
   {
     if (_component == 0)

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Bounding_volumes/include/CGAL/Approximate_min_ellipsoid_d/Approximate_min_ellipsoid_d_impl.h $
+// $Id: Approximate_min_ellipsoid_d_impl.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -91,7 +91,7 @@ namespace CGAL {
     //       [ M'  m  ]
     //   M = [ m^T nu ]
     //
-    // where M is the matrix defined via E->matrix(i,j).  After caling
+    // where M is the matrix defined via E->matrix(i,j).  After calling
     // compute_center() (see above), we have in center_ a point c such
     // that
     //
@@ -101,7 +101,7 @@ namespace CGAL {
     //
     // Now if we can write M' = U D U^T holds for some diagonal matrix
     // D and an orthogonal matrix U then the length l_i of the ith axes
-    // (corresponding to the ith "direcion" stored in the ith row of
+    // (corresponding to the ith "direction" stored in the ith row of
     // U) can be obtained by plugging (0,...,0,l_i,0,...,0)U^T=y-c into
     // the above equation for E*:
     //

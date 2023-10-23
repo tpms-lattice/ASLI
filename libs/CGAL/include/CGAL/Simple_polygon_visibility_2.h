@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Visibility_2/include/CGAL/Simple_polygon_visibility_2.h $
+// $Id: Simple_polygon_visibility_2.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -205,7 +205,7 @@ namespace CGAL {
 
   mutable Arr_point_location point_location;
 
-  /*! Stack of visibile points; manipulated when going through the sequence
+  /*! Stack of visible points; manipulated when going through the sequence
     of input vertices; contains the vertices of the visibility region after
     the run of the algorithm*/
   mutable std::stack<Point_2> stack;
@@ -340,7 +340,7 @@ namespace CGAL {
 
 
   /*! Main method of the algorithm - initializes the stack and variables
-    and calles the corresponding methods acc. to the algorithm's state;
+    and calls the corresponding methods acc. to the algorithm's state;
     'q' - query point;
     'i' - current vertex' index
     'w' - endpoint of ray shot from query point */
@@ -589,7 +589,7 @@ namespace CGAL {
     }
   }
 
-  /*! Find the first edge interecting the segment (v_0, s_t) */
+  /*! Find the first edge intersecting the segment (v_0, s_t) */
   void scanb(Size_type& i, Point_2& w) const {
     if ( i == vertices.size() - 1 ) {
       upcase = FINISH;

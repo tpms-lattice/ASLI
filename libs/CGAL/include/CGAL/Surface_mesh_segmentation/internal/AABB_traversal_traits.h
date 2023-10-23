@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_segmentation/include/CGAL/Surface_mesh_segmentation/internal/AABB_traversal_traits.h $
+// $Id: AABB_traversal_traits.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -23,7 +23,7 @@ namespace CGAL
 
 /**
  * @class Special case for ray/segment-triangle
- * the only difference with the offical one (Listing_intersection_traits) is that
+ * the only difference with the official one (Listing_intersection_traits) is that
  * is the do_intersect which is made prior to the intersection call.
  */
 template<typename AABBTraits, typename Query, typename Output_iterator>

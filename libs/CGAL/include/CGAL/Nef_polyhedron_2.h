@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_2/include/CGAL/Nef_polyhedron_2.h $
+// $Id: Nef_polyhedron_2.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -1031,7 +1031,7 @@ public:
   dictionaries are present or if not then the point location time is
   worst-case linear, but experiments show often sublinear runtimes.  Ray
   shooting equals point location plus a walk in the constrained
-  triangulation overlayed on the plane map representation. The cost of
+  triangulation overlaid on the plane map representation. The cost of
   the walk is proportional to the number of triangles passed in
   direction |d| until an obstacle is met. In a minimum weight
   triangulation of the obstacles (the plane map representing the

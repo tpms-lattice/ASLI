@@ -3,8 +3,8 @@
 //
 // This file is part of the ImageIO Library, and as been adapted for CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_ImageIO/include/CGAL/ImageIO/typedefs.h $
+// $Id: typedefs.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: LGPL-3.0-or-later
 //
 //
@@ -13,13 +13,13 @@
 /*************************************************************************
  * typedefs.h -
  *
- * $Id$
+ * $Id: typedefs.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
  *
  * Copyright©INRIA 1998
  *
  * AUTHOR:
  * Gregoire Malandain (greg@sophia.inria.fr)
- * http://www.inria.fr/epidaure/personnel/malandain/
+ * https://www-sop.inria.fr/members/Gregoire.Malandain/
  *
  * CREATION DATE:
  * June, 9 1998
@@ -35,7 +35,7 @@
 
 
 
-/* Differents type coding for images and buffers.
+/* Different type coding for images and buffers.
  */
 typedef enum {
   TYPE_UNKNOWN /* unknown type */,
@@ -63,7 +63,7 @@ typedef double             r64;
 
 
 
-/* Typedef Booleen
+/* Typedef Boolean
  */
 typedef enum {
   False = 0,

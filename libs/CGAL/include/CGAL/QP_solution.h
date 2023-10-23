@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/QP_solver/include/CGAL/QP_solution.h $
+// $Id: QP_solution.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -297,7 +297,7 @@ public:
   Quadratic_program_solution ()
     : Handle_for<const QP_solver_base<ET>*>(), et0(0)
   {
-    *(this->ptr()) = 0; // unitialized solution
+    *(this->ptr()) = 0; // uninitialized solution
   }
 
   Quadratic_program_solution (const QP_solver_base<ET>* s)

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_decomposition_3/include/CGAL/Convex_decomposition_3/Ray_hit_generator2.h $
+// $Id: Ray_hit_generator2.h 1172c9d 2022-03-29T17:48:17+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_3/internal/Periodic_3_regular_triangulation_dummy_288.h $
+// $Id: Periodic_3_regular_triangulation_dummy_288.h 1869294 2022-11-18T00:21:58+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -37,7 +37,7 @@ std::vector<Weighted_point> dummy_points()
 
         FT z = (FT(k) * domain_z / FT(8)) + domain().zmin();
 
-        dummy_points.push_back(Weighted_point(Bare_point(x, y, z), 0));
+        dummy_points.emplace_back(Bare_point(x, y, z), 0);
       }
     }
   }

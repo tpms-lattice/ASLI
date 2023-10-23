@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/internal/utils_2.h $
+// $Id: utils_2.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -306,7 +306,7 @@ namespace internal {
     return boost::none;
   }
 
-  // Check wether a query point belongs to the last polygon edge.
+  // Check whether a query point belongs to the last polygon edge.
   template<
   typename VertexRange,
   typename OutputIterator,

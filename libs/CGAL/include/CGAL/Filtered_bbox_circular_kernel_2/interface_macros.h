@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circular_kernel_2/include/CGAL/Filtered_bbox_circular_kernel_2/interface_macros.h $
+// $Id: interface_macros.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Monique Teillaud, Sylvain Pion, Pedro Machado
@@ -21,7 +21,7 @@
 // It's aimed at being included from within a kernel traits class, this
 // way we share more code.
 
-// It is the responsability of the including file to correctly set the 2
+// It is the responsibility of the including file to correctly set the 2
 // macros CGAL_Filtered_Bbox_Circular_Kernel_pred and CGAL_Filtered_Bbox_Circular_Kernel_cons.
 // And they are #undefed at the end of this file.
 

@@ -8,8 +8,8 @@
 // https://www.boost.org/LICENSE_1_0.txt)
 //=======================================================================
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/STL_Extension/internal/boost/mutable_heap.hpp $
+// $Id: mutable_heap.hpp 4ea7b65 2021-08-26T11:42:01+02:00 Sébastien Loriot
 // SPDX-License-Identifier: BSL-1.0
 //
 // NOTE: this file have been taken from boost 1.46.1 for using

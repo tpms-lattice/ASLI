@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/manipulatedCameraFrame.h $
+// $Id: manipulatedCameraFrame.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 
 #ifndef QGLVIEWER_MANIPULATED_CAMERA_FRAME_H
@@ -174,7 +174,7 @@ public:
 
   Default value is (0,1,0), but it is updated by the Camera when this object is
   set as its Camera::frame(). Camera::setOrientation() and
-  Camera::setUpVector()) direclty modify this value and should be used instead.
+  Camera::setUpVector()) directly modify this value and should be used instead.
 */
   Vec sceneUpVector() const { return sceneUpVector_; }
 

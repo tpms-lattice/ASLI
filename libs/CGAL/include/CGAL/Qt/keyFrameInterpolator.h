@@ -6,8 +6,8 @@
  This file is part of a fork of the QGLViewer library version 2.7.0.
 
 *****************************************************************************/
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/GraphicsView/include/CGAL/Qt/keyFrameInterpolator.h $
+// $Id: keyFrameInterpolator.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-only
 #ifndef QGLVIEWER_KEY_FRAME_INTERPOLATOR_H
 #define QGLVIEWER_KEY_FRAME_INTERPOLATOR_H
@@ -290,7 +290,7 @@ private Q_SLOTS:
   }
 
 private:
-  // Copy constructor and opertor= are declared private and undefined
+  // Copy constructor and operator= are declared private and undefined
   // Prevents everyone from trying to use them
   // KeyFrameInterpolator(const KeyFrameInterpolator& kfi);
   // KeyFrameInterpolator& operator=(const KeyFrameInterpolator& kfi);

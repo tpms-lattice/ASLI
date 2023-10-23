@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Boolean_set_operations_2/include/CGAL/Boolean_set_operations_2/Gps_agg_meta_traits.h $
+// $Id: Gps_agg_meta_traits.h 62a31ba 2022-11-14T17:44:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -32,10 +32,10 @@ protected:
   typedef Curve_with_halfedge<Arrangement_>        Base;
 
   const Arrangement* m_arr; // pointer to the arrangement containing the edge.
-  unsigned int m_bc;        // the boudary counter of the halfedge with the same
+  unsigned int m_bc;        // the boundary counter of the halfedge with the same
                             // direction as the curve
 
-  unsigned int m_twin_bc;   // the boudary counter of the halfedge with the same
+  unsigned int m_twin_bc;   // the boundary counter of the halfedge with the same
                             // direction as the curve
 
 public:

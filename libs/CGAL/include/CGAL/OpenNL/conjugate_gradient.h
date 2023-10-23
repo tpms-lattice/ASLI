@@ -1,7 +1,7 @@
 // Copyright (c) 2005-2008  Inria Loria (France).
 /*
  * author:  Bruno Levy, INRIA, project ALICE
- * website: http://www.loria.fr/~levy/software
+ * website: https://www.loria.fr/~levy/software
  *
  * This file is part of CGAL (www.cgal.org)
  *
@@ -13,7 +13,7 @@
  *    TITLE  = Numerical Methods for Digital Geometry Processing,
  *    BOOKTITLE =Israel Korea Bi-National Conference,
  *    YEAR=November 2005,
- *    URL=http://www.loria.fr/~levy/php/article.php?pub=../publications/papers/2005/Numerics
+ *    URL=https://www.loria.fr/~levy/php/article.php?pub=../publications/papers/2005/Numerics
  * }
  *
  *  Laurent Saboret 2005-2006: Changes for CGAL:
@@ -23,8 +23,8 @@
  *      - added comments
  *      - copied Conjugate Gradient algorithm WITH preconditioner from Graphite 1.9 code
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/OpenNL/include/CGAL/OpenNL/conjugate_gradient.h $
+ * $Id: conjugate_gradient.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
  * SPDX-License-Identifier: LGPL-3.0-or-later
  */
 

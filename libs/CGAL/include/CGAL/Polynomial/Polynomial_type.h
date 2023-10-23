@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polynomial/include/CGAL/Polynomial/Polynomial_type.h $
+// $Id: Polynomial_type.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -173,7 +173,7 @@ Polynomial_rep<NT>::Polynomial_rep(size_type n, ...)
 
   The important invariant to be preserved by all methods is that
   the coefficient sequence does not contain leading zero coefficients
-  (where leading means at the high-degree end), with the excpetion that
+  (where leading means at the high-degree end), with the exception that
   the zero polynomial is represented by a single zero coefficient.
   An empty coefficient sequence denotes an undefined value.
 

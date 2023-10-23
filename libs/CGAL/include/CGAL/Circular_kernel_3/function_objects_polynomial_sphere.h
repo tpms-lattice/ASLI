@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circular_kernel_3/include/CGAL/Circular_kernel_3/function_objects_polynomial_sphere.h $
+// $Id: function_objects_polynomial_sphere.h b96f6d5 2022-06-10T09:43:59+02:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Monique Teillaud, Sylvain Pion, Pedro Machado,

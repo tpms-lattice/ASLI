@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/NewKernel_d/include/CGAL/NewKernel_d/Cartesian_filter_K.h $
+// $Id: Cartesian_filter_K.h 634fe39 2020-12-30T19:56:58+01:00 Marc Glisse
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Marc Glisse

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/polygon_mesh_to_nef_3.h $
+// $Id: polygon_mesh_to_nef_3.h b66ee56 2023-01-18T23:27:25+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,10 +19,13 @@
 
 #include <CGAL/license/Nef_3.h>
 
-
+#include <CGAL/Circulator_project.h>
 #include <CGAL/normal_vector_newell_3.h>
 #include <CGAL/Nef_S2/SM_point_locator.h>
 #include <CGAL/Nef_3/SNC_indexed_items.h>
+#include <CGAL/Plane_3.h>
+#include <CGAL/Point_3.h>
+#include <CGAL/Vector_3.h>
 #include <CGAL/boost/graph/helpers.h>
 
 #undef CGAL_NEF_DEBUG

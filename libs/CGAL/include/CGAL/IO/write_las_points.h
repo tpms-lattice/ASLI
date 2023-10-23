@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Point_set_processing_3/include/CGAL/IO/write_las_points.h $
+// $Id: write_las_points.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Simon Giraudot
@@ -164,7 +164,7 @@ namespace LAS {
    handlers. A `PropertyHandle` is a `std::pair<PropertyMap,
    LAS_property::Tag >` used to write a scalar value
    `LAS_property::Tag::type` as a %LAS property (for example,
-   writing an `int` vairable as an `int` %LAS property). An exception
+   writing an `int` variable as an `int` %LAS property). An exception
    is used for points that are written using a `std::tuple` object.
 
    See documentation of `read_LAS_with_properties()` for the

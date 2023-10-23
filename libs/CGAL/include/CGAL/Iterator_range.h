@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/Iterator_range.h $
+// $Id: Iterator_range.h 36b3491 2023-05-05T15:30:43+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -77,6 +77,13 @@ namespace CGAL {
   operator std::tuple<const I&, const I&>() const
   {
     return std::tuple<const I&, const I&>{this->first, this->second};
+  }
+
+  template <template<class...> class Container>
+  auto to() const
+  {
+    using V = std::remove_cv_t<std::remove_reference_t<decltype(*begin())>>;
+    return Container<V>(begin(), end());
   }
 };
 

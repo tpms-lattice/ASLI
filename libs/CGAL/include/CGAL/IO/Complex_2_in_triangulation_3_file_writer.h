@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesher/include/CGAL/IO/Complex_2_in_triangulation_3_file_writer.h $
+// $Id: Complex_2_in_triangulation_3_file_writer.h 580a1ef 2020-05-22T15:31:50+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Convex_hull_d/include/CGAL/Regular_complex_d.h $
+// $Id: Regular_complex_d.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -266,7 +266,7 @@ vertices. A $0$-simplex is a point, a $1$-simplex is a line segment, a
 $2$-simplex is a triangle, a $3$-simplex is a tetrahedron,
 etc.. \emph{The simplices is a concrete simplicial complex must
 satisfy the additional conditions that the points associated with the
-vertices of any simplex are affinely independet and that the
+vertices of any simplex are affinely independent and that the
 intersection of any two simplices is a face of both.} We will write
 simplicial complex instead of concrete simplicial complex in the
 sequel.
@@ -298,7 +298,7 @@ the functions |C.simplex(v)| and |C.index(v)| return a pair $(s,i)$
 such that |v = C.vertex_of(s,i)|.
 
 The class |regl_complex| has a static member |nil_point| of type
-|Point_d|. This point is different (= not indentical) from any user
+|Point_d|. This point is different (= not identical) from any user
 defined point and is the point associated with every vertex of an
 abstract simplicial complex. It simulates the use of |nil| to denote
 an undefined object.

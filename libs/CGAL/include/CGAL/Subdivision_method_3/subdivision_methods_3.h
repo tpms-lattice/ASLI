@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Subdivision_method_3/include/CGAL/Subdivision_method_3/subdivision_methods_3.h $
+// $Id: subdivision_methods_3.h 9335ef7 2023-03-17T19:42:06+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -74,6 +74,7 @@ Catmull-Clark subdivision.
 \sa `CGAL::DooSabin_mask_3<PolygonMesh`
 \sa `CGAL::Loop_mask_3<PolygonMesh`
 \sa `CGAL::Sqrt3_mask_3<PolygonMesh>`
+\sa `CGAL::Linear_mask_3<PolygonMesh>`
 */
 /// @{
 
@@ -121,7 +122,6 @@ void CatmullClark_subdivision(PolygonMesh& pmesh, int step) {
  *   \cgalParamNEnd
  * \cgalNamedParamsEnd
  *
- * \pre `pmesh` must be a triangle mesh.
  **/
 template <class PolygonMesh, class NamedParameters = parameters::Default_named_parameters>
 void CatmullClark_subdivision(PolygonMesh& pmesh, const NamedParameters& np = parameters::default_values()) {
@@ -179,6 +179,8 @@ void Loop_subdivision(PolygonMesh& pmesh, int step) {
  *     \cgalParamDefault{`1`}
  *   \cgalParamNEnd
  * \cgalNamedParamsEnd
+ *
+ * \pre `pmesh` must be a triangle mesh.
  **/
 template <class PolygonMesh, class NamedParameters = parameters::Default_named_parameters>
 void Loop_subdivision(PolygonMesh& pmesh, const NamedParameters& np = parameters::default_values()) {

@@ -9,8 +9,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/intersection_3.h $
+// $Id: intersection_3.h c2d1adf 2021-06-23T17:34:48+02:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Geert-Jan Giezeman <geert@cs.uu.nl>

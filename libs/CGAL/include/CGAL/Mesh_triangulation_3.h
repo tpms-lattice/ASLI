@@ -4,8 +4,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_triangulation_3.h $
+// $Id: Mesh_triangulation_3.h a8ffa74 2022-12-05T15:19:39+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -62,12 +62,14 @@ public:
   typedef typename Base::Triangle                             Triangle;
 
   typedef typename Base::Vertex_handle                        Vertex_handle;
+  typedef typename Base::Facet                                Facet;
   typedef typename Base::Cell_handle                          Cell_handle;
 
   typedef typename Geom_traits::Vector_3                      Vector;
 
   using Base::geom_traits;
   using Base::point;
+  using Base::triangle;
 
   static std::string io_signature() { return Get_io_signature<Base>()(); }
 
@@ -83,9 +85,9 @@ public:
     return q;
   }
 
-  const Triangle& get_closest_triangle(const Bare_point& /*p*/, const Triangle& t) const
+  Triangle get_incident_triangle(const Facet& f, const Vertex_handle) const
   {
-    return t;
+    return triangle(f);
   }
 
   void set_point(const Vertex_handle v,

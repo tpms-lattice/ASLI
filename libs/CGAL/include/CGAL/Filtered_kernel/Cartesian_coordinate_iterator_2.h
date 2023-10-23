@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Filtered_kernel/include/CGAL/Filtered_kernel/Cartesian_coordinate_iterator_2.h $
+// $Id: Cartesian_coordinate_iterator_2.h 66c20ba 2021-08-03T16:30:18+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

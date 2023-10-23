@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polynomial/include/CGAL/Polynomial_traits_d.h $
+// $Id: Polynomial_traits_d.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -389,7 +389,7 @@ public:
   struct Substitute_homogeneous{
   public:
     // this is the end of the recursion
-    // begin contains the homogeneous variabel
+    // begin contains the homogeneous variable
     // hdegree is the remaining degree
     template <class Input_iterator>
     typename

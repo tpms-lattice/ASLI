@@ -21,11 +21,11 @@
  *       Zilin Du <zilin@cs.nyu.edu>
  *       Sylvain Pion <pion@cs.nyu.edu>
  *
- * WWW URL: http://cs.nyu.edu/exact/
+ * WWW URL: https://cs.nyu.edu/exact/
  * Email: exact@cs.nyu.edu
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/CGAL_Core/include/CGAL/CORE/extLong_impl.h $
+ * $Id: extLong_impl.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
  * SPDX-License-Identifier: LGPL-3.0-or-later
  ***************************************************************************/
 
@@ -177,7 +177,7 @@ extLong extLong::operator- () const {
 
 // sign
 //    You should check "flag" before calling this, otherwise
-//    you cannot interprete the returned value!
+//    you cannot interpret the returned value!
 CGAL_INLINE_FUNCTION
 int extLong::sign() const {
   if (flag == 2)

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Orthtree/include/CGAL/Orthtree/IO.h $
+// $Id: IO.h 0fcb4cb 2020-10-27T09:04:13+01:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Jackson Campolattaro, Cédric Portaneri, Tong Zhao

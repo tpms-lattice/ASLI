@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/GMP/Gmpfr_type.h $
+// $Id: Gmpfr_type.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author: Luis Peñaranda <luis.penaranda@gmx.com>
@@ -378,7 +378,7 @@ class Gmpfr:
 
 #undef CGAL_GMPFR_CONSTRUCTOR_FROM_OBJECT
 
-        // When Gmpfr is refence counted, we inherit the assignment
+        // When Gmpfr is reference counted, we inherit the assignment
         // operator and the copy constructor from Handle_for.
 #ifdef CGAL_GMPFR_NO_REFCOUNT
         Gmpfr& operator=(const Gmpfr &a){
@@ -455,7 +455,7 @@ class Gmpfr:
         static bool inex_flag();
         static bool erange_flag();
 
-        // arithmetics
+        // arithmetic
 
         Gmpfr operator+()const;
         Gmpfr operator-()const;
@@ -620,7 +620,7 @@ bool Gmpfr::erange_flag(){
         return mpfr_erangeflag_p()!=0;
 }
 
-// arithmetics
+// arithmetic
 
 inline
 Gmpfr Gmpfr::operator+()const{

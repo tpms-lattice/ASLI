@@ -7,12 +7,13 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon/include/CGAL/General_polygon_with_holes_2.h $
+// $Id: General_polygon_with_holes_2.h 74746e5 2023-05-08T17:26:35+03:00 Efi Fogel
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
-// Author(s)     : Baruch Zukerman <baruchzu@post.tau.ac.il>
+// Author(s): Baruch Zukerman <baruchzu@post.tau.ac.il>
+//            Efi Fogel <efifogel@gmail.com>
 
 #ifndef CGAL_GENERAL_POLYGON_WITH_HOLES_2_H
 #define CGAL_GENERAL_POLYGON_WITH_HOLES_2_H
@@ -106,6 +107,10 @@ public:
   void add_hole(Polygon_2&& pgn_hole) { m_holes.emplace_back(std::move(pgn_hole)); }
 
   void erase_hole(Hole_iterator hit) { m_holes.erase(hit); }
+
+  void clear_outer_boundary() { m_pgn.clear(); }
+
+  void clear_holes() { m_holes.clear(); }
 
   bool has_holes() const { return (!m_holes.empty()); }
 

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Iso_cuboid_3.h $
+// $Id: Iso_cuboid_3.h 39e6369 2023-05-12T10:32:54+02:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,6 +30,7 @@ template <class R_>
 class Iso_cuboid_3 : public R_::Kernel_base::Iso_cuboid_3
 {
   typedef typename R_::RT                 RT;
+  typedef typename R_::FT                 FT;
   typedef typename R_::Point_3            Point_3;
   typedef typename R_::Aff_transformation_3  Aff_transformation_3;
 
@@ -84,8 +85,9 @@ public:
                                              max_hx, max_hy, max_hz)) {}
 
   Iso_cuboid_3(const Bbox_3& bbox)
-   : Rep(typename R::Construct_iso_cuboid_3()(Return_base_tag(), bbox.xmin(), bbox.ymin(), bbox.zmin(),
-                                                                 bbox.xmax(), bbox.ymax(), bbox.zmax())) {}
+   : Rep(typename R::Construct_iso_cuboid_3()(Return_base_tag(),
+                                              typename R::Construct_point_3()(FT(bbox.xmin()), FT(bbox.ymin()), FT(bbox.zmin())),
+                                              typename R::Construct_point_3()(FT(bbox.xmax()), FT(bbox.ymax()), FT(bbox.zmax())))) {}
 
   decltype(auto)
   min BOOST_PREVENT_MACRO_SUBSTITUTION () const

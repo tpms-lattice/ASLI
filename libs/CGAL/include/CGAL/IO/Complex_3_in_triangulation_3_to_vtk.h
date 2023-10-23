@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/SMDS_3/include/CGAL/IO/Complex_3_in_triangulation_3_to_vtk.h $
+// $Id: Complex_3_in_triangulation_3_to_vtk.h 355b52d 2022-03-01T11:30:21+01:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

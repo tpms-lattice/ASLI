@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/refine_mesh_3.h $
+// $Id: refine_mesh_3.h e249f59 2023-02-20T14:38:38+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -261,7 +261,7 @@ private:
  * \sa `CGAL::parameters::no_odt()`
  */
 template<typename C3T3, typename MeshDomain, typename MeshCriteria, typename CGAL_NP_TEMPLATE_PARAMETERS>
-void refine_mesh_3(C3T3& c3t3, MeshDomain& domain, MeshCriteria& criteria, const CGAL_NP_CLASS& np = parameters::default_values())
+void refine_mesh_3(C3T3& c3t3, const MeshDomain& domain, const MeshCriteria& criteria, const CGAL_NP_CLASS& np = parameters::default_values())
 {
     using parameters::choose_parameter;
     using parameters::get_parameter;
@@ -291,7 +291,7 @@ template<typename C3T3, typename MeshDomain, typename MeshCriteria,
          typename CGAL_NP_TEMPLATE_PARAMETERS_NO_DEFAULT_1,
          typename CGAL_NP_TEMPLATE_PARAMETERS_NO_DEFAULT_2,
          typename ... NP>
-void refine_mesh_3(C3T3& c3t3, MeshDomain& domain, MeshCriteria& criteria,
+void refine_mesh_3(C3T3& c3t3, const MeshDomain& domain, const MeshCriteria& criteria,
                    const CGAL_NP_CLASS_1&  np1,
                    const CGAL_NP_CLASS_2&  np2,
                    const NP& ... nps)

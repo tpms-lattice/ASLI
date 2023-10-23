@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_d/include/CGAL/Kernel_d/Ray_d.h $
+// $Id: Ray_d.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -45,7 +45,7 @@ class Ray_d : public Handle_for< Pair_d<p_R> > {
 
 /*{\Mdefinition
 An instance of data type |Ray_d| is a ray in $d$-dimensional
-Euclidian space. It starts in a point called the source of |\Mvar| and
+Euclidean space. It starts in a point called the source of |\Mvar| and
 it goes to infinity.}*/
 
 public:

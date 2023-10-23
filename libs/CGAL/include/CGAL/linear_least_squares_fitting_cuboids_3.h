@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Principal_component_analysis/include/CGAL/linear_least_squares_fitting_cuboids_3.h $
+// $Id: linear_least_squares_fitting_cuboids_3.h 3efe2ec 2021-03-31T09:40:19+02:00 Simon Giraudot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Pierre Alliez and Sylvain Pion and Ankit Gupta

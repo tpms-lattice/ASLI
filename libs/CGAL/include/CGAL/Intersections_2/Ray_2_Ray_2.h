@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Ray_2_Ray_2.h $
+// $Id: Ray_2_Ray_2.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -54,14 +54,15 @@ protected:
 };
 
 template <class K>
-inline bool do_intersect(
-    const typename K::Ray_2 &p1,
-    const typename K::Ray_2 &p2,
-    const K&)
+inline
+typename K::Boolean
+do_intersect(const typename K::Ray_2& r1,
+             const typename K::Ray_2& r2,
+             const K&)
 {
-    typedef Ray_2_Ray_2_pair<K> pair_t;
-    pair_t pair(&p1, &p2);
-    return pair.intersection_type() != pair_t::NO_INTERSECTION;
+  typedef Ray_2_Ray_2_pair<K> pair_t;
+  pair_t pair(&r1, &r2);
+  return pair.intersection_type() != pair_t::NO_INTERSECTION;
 }
 
 
@@ -252,7 +253,6 @@ intersection(const typename K::Ray_2 &ray1,
 CGAL_INTERSECTION_FUNCTION_SELF(Ray_2, 2)
 CGAL_DO_INTERSECT_FUNCTION_SELF(Ray_2, 2)
 
+} // namespace CGAL
 
-} //namespace CGAL
-
-#endif
+#endif // CGAL_INTERSECTIONS_2_RAY_2_RAY_2_H

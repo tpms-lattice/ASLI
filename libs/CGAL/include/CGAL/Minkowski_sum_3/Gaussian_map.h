@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Minkowski_sum_3/include/CGAL/Minkowski_sum_3/Gaussian_map.h $
+// $Id: Gaussian_map.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -180,7 +180,7 @@ class Gaussian_map :
         CGAL_NEF_TRACEN( "first+current:" << first << "+" << current );
         typename Nef_polyhedron_3::SHalfedge_around_sface_const_circulator sfc(sec), send(sfc);
         CGAL_For_all(sfc, send) {
-          CGAL_NEF_TRACEN( "sedge->cirlce() " << sfc->circle() );
+          CGAL_NEF_TRACEN( "sedge->circle() " << sfc->circle() );
           if(sfc->circle() != current) {
             if(sfc->circle() != first)
               ++circles;

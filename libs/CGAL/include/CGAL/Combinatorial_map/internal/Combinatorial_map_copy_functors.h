@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Combinatorial_map/internal/Combinatorial_map_copy_functors.h $
+// $Id: Combinatorial_map_copy_functors.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -41,7 +41,7 @@ namespace internal
 // ****************************************************************************
 // Map1 is the existing map, to convert into map2.
 // Functor called only when both i-attributes have non void info.
-// General cases when both info are differents.
+// General cases when both info are different.
 template< typename Map1, typename Map2, unsigned int i,
           typename Info1=typename Map1::template
           Attribute_type<i>::type::Info,
@@ -439,7 +439,7 @@ struct Default_converter_cmap_attributes
 };
 // ****************************************************************************
 // Cast converter always copy attributes, doing a cast. This can work only
-// if both types are convertible and this is user responsability
+// if both types are convertible and this is user responsibility
 // to use it only in this case.
 template< typename Map1, typename Map2, unsigned int i>
 struct Cast_converter_cmap_attributes
@@ -480,7 +480,7 @@ struct Default_converter_dart_info<Map1, Map2, Info, Info>
 };
 // ****************************************************************************
 // Cast converter of dart info. This can work only if both types are
-// convertible and this is user responsability to use it only in this case.
+// convertible and this is user responsibility to use it only in this case.
 template< typename Map1, typename Map2>
 struct Cast_converter_dart_info
 {

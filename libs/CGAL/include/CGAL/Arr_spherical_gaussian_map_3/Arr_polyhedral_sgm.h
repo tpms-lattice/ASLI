@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_spherical_gaussian_map_3/Arr_polyhedral_sgm.h $
+// $Id: Arr_polyhedral_sgm.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Efi Fogel         <efif@post.tau.ac.il>
@@ -109,7 +109,7 @@ private:
                    polyhedron.planes_begin(), Normal_equation());
   }
 
-  /*! Compute the equation of the undelying plane of a facet */
+  /*! Compute the equation of the underlying plane of a facet */
   struct Plane_equation {
     template <typename Facet>
     typename Facet::Plane_3 operator()(Facet& f) {

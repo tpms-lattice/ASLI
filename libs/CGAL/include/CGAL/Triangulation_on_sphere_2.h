@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_on_sphere_2/include/CGAL/Triangulation_on_sphere_2.h $
+// $Id: Triangulation_on_sphere_2.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mariette Yvinec,
@@ -123,7 +123,7 @@ public:
     _gt.set_radius(radius);
   }
 
-  // Assignement
+  // Assignment
   void swap(Triangulation_on_sphere_2& tr);
   Triangulation_on_sphere_2& operator=(Triangulation_on_sphere_2 tr); // intentional copy
 
@@ -512,7 +512,7 @@ clear()
   _tds.clear();
 }
 
-// Assignement
+// Assignment
 template <typename Gt, typename Tds>
 void
 Triangulation_on_sphere_2<Gt, Tds>::

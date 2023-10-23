@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Kernel_23/include/CGAL/Kernel_23/internal/Projection_traits_base_3.h $
+// $Id: Projection_traits_base_3.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -567,7 +567,7 @@ public:
 
   // Special functor, not in the Kernel concept
   class Projection_to_plan {
-    // Remeber: Point_2 is K::Point_3
+    // Remember: Point_2 is K::Point_3
     const Point_2& plane_point;
     const Vector_3& normal;
   public:

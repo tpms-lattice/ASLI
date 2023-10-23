@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_parameterization/include/CGAL/Surface_mesh_parameterization/internal/validity.h $
+// $Id: validity.h 9e137bc 2023-01-31T12:26:55+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Mael Rouxel-Labbé
@@ -132,7 +132,7 @@ public:
     halfedge_descriptor h = halfedge(a->info(), mesh);
     halfedge_descriptor g = halfedge(b->info(), mesh);
 
-    // check for shared egde
+    // check for shared edge
     if(face(opposite(h, mesh), mesh) == b->info() ||
        face(opposite(prev(h, mesh), mesh), mesh) == b->info() ||
        face(opposite(next(h, mesh), mesh), mesh) == b->info()) {
@@ -272,11 +272,11 @@ bool is_one_to_one_mapping(const TriangleMesh& mesh,
     const Point_2& p1 = get(uvmap, vd1);
     const Point_2& p2 = get(uvmap, vd2);
 
-    Bbox_2 b = p0.bbox();
-    b += p1.bbox();
-    b += p2.bbox();
-
-    boxes.push_back(Box(b, fd));
+    NT bx[2] = { (std::min)(p0[0], (std::min)(p1[0], p2[0])),
+                 (std::min)(p0[1], (std::min)(p1[1], p2[1])) };
+    NT by[2] = { (std::max)(p0[0], (std::max)(p1[0], p2[0])),
+                 (std::max)(p0[1], (std::max)(p1[1], p2[1])) };
+    boxes.emplace_back(bx, by, fd);
   }
 
   std::vector<const Box*> boxes_ptr;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Combinatorial_map/include/CGAL/Dart.h $
+// $Id: Dart.h 781f9a2 2022-11-17T10:25:10+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -241,7 +241,7 @@ namespace CGAL {
     }
 
   protected:
-    /// Neighboors for each dimension +1 (from 0 to dimension).
+    /// Neighbors for each dimension +1 (from 0 to dimension).
     Dart_descriptor mf[dimension+1];
 
     /// Values of Boolean marks.

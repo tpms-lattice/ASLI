@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Circulator/include/CGAL/circulator_bases.h $
+// $Id: circulator_bases.h 7a62583 2022-11-14T19:14:33+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -47,7 +47,7 @@ struct Random_access_circulator_tag
 };
 
 template <typename Tag, typename T, typename Distance = std::ptrdiff_t,
-          /* size is so awkwardly placed to faciliate using the
+          /* size is so awkwardly placed to facilitate using the
            * default arguments from the derived classes */
           typename Size = std::size_t, typename Pointer = T*,
           typename Reference = T&>

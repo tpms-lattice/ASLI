@@ -3,8 +3,8 @@
 // This file is part of CGAL (www.cgal.org).
 //
 
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Straight_skeleton_2/include/CGAL/create_straight_skeleton_from_polygon_with_holes_2.h $
+// $Id: create_straight_skeleton_from_polygon_with_holes_2.h 66fe079 2023-03-23T11:49:18+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando_cacciola@ciudad.com.ar>
@@ -45,6 +45,6 @@ create_interior_straight_skeleton_2 ( Polygon const& aPolyWithHoles,
 // create_exterior_straight_skeleton_2() for polygon with holes is simply in create_straight_skeleton_2.h
 // as the holes do not matter.
 
-} // end namespace CGAL
+} // namespace CGAL
 
-#endif // CGAL_STRAIGHT_SKELETON_BUILDER_2_H //
+#endif // CGAL_CREATE_STRAIGHT_SKELETON_FROM_POLYGON_WITH_HOLES_2_H

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/shape_predicates.h $
+// $Id: shape_predicates.h 1520ac9 2022-11-22T10:38:00+01:00 Sébastien Loriot
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -14,7 +14,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_SHAPE_PREDICATES_H
 #define CGAL_POLYGON_MESH_PROCESSING_SHAPE_PREDICATES_H
 
-#include <CGAL/license/Polygon_mesh_processing/repair.h>
+#include <CGAL/license/Polygon_mesh_processing/geometric_repair.h>
 
 #include <CGAL/Named_function_parameters.h>
 #include <CGAL/boost/graph/named_params_helper.h>

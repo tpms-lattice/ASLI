@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Interpolation/include/CGAL/natural_neighbor_coordinates_2.h $
+// $Id: natural_neighbor_coordinates_2.h 70a06b4 2022-06-27T08:58:17+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Frank Da, Julia Floetotto

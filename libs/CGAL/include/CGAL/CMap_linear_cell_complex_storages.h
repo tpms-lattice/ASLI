@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Linear_cell_complex/include/CGAL/CMap_linear_cell_complex_storages.h $
+// $Id: CMap_linear_cell_complex_storages.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -36,7 +36,7 @@ namespace CGAL {
 
   // Storage of darts with compact container, beta with handles
   // Copy of Combinatorial_map_storage_1 and add new types related
-  // to geometry (not possible to inherith because we use Self type
+  // to geometry (not possible to inherit because we use Self type
   // as template parameter of Dart_wrapper. If we inherit, Self is not
   // the correct type).
   template<unsigned int d_, unsigned int ambient_dim,

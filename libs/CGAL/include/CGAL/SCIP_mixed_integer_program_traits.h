@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Solver_interface/include/CGAL/SCIP_mixed_integer_program_traits.h $
+// $Id: SCIP_mixed_integer_program_traits.h 99a6283 2023-06-08T14:33:18+02:00 Sven Oesau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Liangliang Nan
@@ -24,6 +24,11 @@
 #include <vector>
 
 namespace CGAL {
+
+#if (_MSC_VER == 1500)
+#undef SCIP_CALL(x)
+#define SCIP_CALL(x) (x)
+#endif
 
 /// \ingroup PkgSolverInterfaceMIP
 ///

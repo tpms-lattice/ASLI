@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Bounding_volumes/include/CGAL/Min_circle_2/Min_circle_2_adapterH2.h $
+// $Id: Min_circle_2_adapterH2.h 74e4d89 2022-09-27T10:42:05+01:00 Andreas Fabri
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

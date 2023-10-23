@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Segment_Delaunay_graph_2/include/CGAL/Segment_Delaunay_graph_vertex_base_2.h $
+// $Id: Segment_Delaunay_graph_vertex_base_2.h 87ecfae 2021-02-17T10:55:59+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/internal/Common.h $
+// $Id: Common.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Fernando Cacciola <fernando.cacciola@geometryfactory.com>
@@ -48,7 +48,7 @@ namespace internal {
 
 };
 
-} // namesapce internal
+} // namespace internal
 
 template<class Handle>
 inline bool handle_assigned(Handle h) { Handle null; return h != null; }

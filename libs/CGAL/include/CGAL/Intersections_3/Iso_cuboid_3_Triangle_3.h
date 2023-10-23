@@ -9,8 +9,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_3/include/CGAL/Intersections_3/Iso_cuboid_3_Triangle_3.h $
+// $Id: Iso_cuboid_3_Triangle_3.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -34,4 +34,4 @@ CGAL_INTERSECTION_FUNCTION(Iso_cuboid_3, Triangle_3, 3)
 
 } // namespace CGAL
 
-#endif // CGAL_INTERSECTIONS_3_BBOX_3_TRIANGLE_3_H
+#endif // CGAL_INTERSECTIONS_3_ISO_CUBOID_3_TRIANGLE_3_H

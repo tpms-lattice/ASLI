@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Distance_3/include/CGAL/Distance_3/Point_3_Triangle_3.h $
+// $Id: Point_3_Triangle_3.h 5aeb592 2022-02-28T11:29:54+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

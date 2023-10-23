@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/AABB_tree/include/CGAL/AABB_traits.h $
+// $Id: AABB_traits.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -213,7 +213,7 @@ public:
   /// Point query type.
   typedef typename GeomTraits::Point_3 Point_3;
 
-  /// additionnal types for the search tree, required by the RangeSearchTraits concept
+  /// additional types for the search tree, required by the RangeSearchTraits concept
   /// \bug This is not documented for now in the AABBTraits concept.
   typedef typename GeomTraits::Iso_cuboid_3 Iso_cuboid_3;
 
@@ -254,7 +254,7 @@ public:
    * @param beyond iterator on beyond element
    * @param bbox the bounding box of [first,beyond[
    *
-   * Sorts the range defined by [first,beyond[. Sort is achieved on bbox longuest
+   * Sorts the range defined by [first,beyond[. Sort is achieved on bbox longest
    * axis, using the comparison function `<dim>_less_than` (dim in {x,y,z})
    */
   class Split_primitives

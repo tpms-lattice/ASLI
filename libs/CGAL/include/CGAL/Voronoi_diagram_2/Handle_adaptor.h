@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Voronoi_diagram_2/include/CGAL/Voronoi_diagram_2/Handle_adaptor.h $
+// $Id: Handle_adaptor.h aea0bdd 2021-09-13T09:33:35+02:00 Laurent Rineau
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

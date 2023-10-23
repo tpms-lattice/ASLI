@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Intersections_2/include/CGAL/Intersections_2/Point_2_Segment_2.h $
+// $Id: Point_2_Segment_2.h 8ba0b41 2022-11-22T12:35:10+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -30,7 +30,7 @@ namespace internal {
 
 template <class K>
 inline
-bool
+typename K::Boolean
 do_intersect(const typename K::Point_2 &pt,
              const typename K::Segment_2 &seg,
              const K&)
@@ -40,7 +40,7 @@ do_intersect(const typename K::Point_2 &pt,
 
 template <class K>
 inline
-bool
+typename K::Boolean
 do_intersect(const typename K::Segment_2 &seg,
              const typename K::Point_2 &pt,
              const K&)
@@ -77,10 +77,9 @@ intersection( const typename K::Segment_2 &seg,
 } // namespace internal
 } // namespace Intersections
 
-
 CGAL_INTERSECTION_FUNCTION(Point_2, Segment_2, 2)
 CGAL_DO_INTERSECT_FUNCTION(Point_2, Segment_2, 2)
 
-} //namespace CGAL
+} // namespace CGAL
 
-#endif
+#endif // CGAL_INTERSECTIONS_2_POINT_2_SEGMENT_2_H

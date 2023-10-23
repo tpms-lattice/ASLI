@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org);
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Stream_support/include/CGAL/IO/OFF/File_scanner_OFF.h $
+// $Id: File_scanner_OFF.h 1627150 2023-02-16T10:21:32+01:00 Sébastien Loriot
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -25,6 +25,7 @@
 
 #include <boost/cstdint.hpp>
 
+#include <vector>
 #include <cstddef>
 #include <iostream>
 #include <sstream>
@@ -789,7 +790,7 @@ public:
 
   void skip_to_next_facet(std::size_t current_facet)
   {
-    // Take care of trailing informations like color triples.
+    // Take care of trailing information like color triples.
     if(binary())
     {
       boost::int32_t k;

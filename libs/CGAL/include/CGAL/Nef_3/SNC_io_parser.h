@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/SNC_io_parser.h $
+// $Id: SNC_io_parser.h b558057 2023-01-18T19:58:44+00:00 Giles Bathgate
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -24,7 +24,6 @@
 #include <CGAL/Nef_S2/SM_decorator.h>
 #include <CGAL/Nef_3/SNC_structure.h>
 #include <CGAL/Nef_3/SNC_decorator.h>
-#include <CGAL/Nef_3/SNC_constructor.h>
 #include <CGAL/Nef_2/Object_index.h>
 #include <CGAL/Nef_S2/Normalizing.h>
 #include <vector>

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/OGL_helper.h $
+// $Id: OGL_helper.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -123,7 +123,7 @@ namespace OGL {
 
   // DFacet stores the facet cycle vertices in a continuus C array
   // of three double components, this is necessary due to the OpenGL
-  // tesselator input format !
+  // tessellator input format !
   class DFacet {
     typedef std::vector<Double_triple>   Coord_vector;
     typedef std::vector<unsigned>        Cycle_vector;

@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Triangulation_2/include/CGAL/Triangulation_hierarchy_2.h $
+// $Id: Triangulation_hierarchy_2.h eed54a0 2022-11-15T18:45:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -309,7 +309,7 @@ Triangulation_hierarchy_2(const Triangulation_hierarchy_2<Tr_> &tr)
 }
 
 
-//Assignement
+//Assignment
 template <class Tr_>
 Triangulation_hierarchy_2<Tr_> &
 Triangulation_hierarchy_2<Tr_>::

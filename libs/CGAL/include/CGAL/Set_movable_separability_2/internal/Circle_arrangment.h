@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Set_movable_separability_2/include/CGAL/Set_movable_separability_2/internal/Circle_arrangment.h $
+// $Id: Circle_arrangment.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s): Shahar    <shasha94@gmail.com>
@@ -242,7 +242,7 @@ public:
    * \param[in] segment_outer_circle - the outer circle of the current segment of
    *        the polygon.
    * \param[in] edge_ite this segment iterator
-   * This is the main funtion of this code. It separates the cells in which the
+   * This is the main function of this code. It separates the cells in which the
    * endpoints of the new arc is contained to two parts and increase m_count
    * for all the cells that the new arc covers. In the end the function
    * merge_adjacent_2_edges_and_remove_empty is called to remove redundant cells
@@ -409,7 +409,7 @@ public:
    * add_segment_outer_circle() which calls
    * merge_adjacent_2_edges_and_remove_empty().
    *
-   * The funtions checks that the whole circle is a single cell, which can
+   * The functions checks that the whole circle is a single cell, which can
    * happen only if this cell is of depth 2, so there is no need to check the
    * depth as well.
    * \return if all of the arrangement is in depth 2+

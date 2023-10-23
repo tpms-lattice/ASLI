@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_S2/include/CGAL/Nef_S2/leda_sphere_map.h $
+// $Id: leda_sphere_map.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -100,7 +100,7 @@ template <typename Iterator>
 void subdivide(Iterator start, Iterator end)
 /* subdivision is done in phases
    - first we partition all segments into the pieces in the
-     closed postive xy-halfspace and into the pieces in the
+     closed positive xy-halfspace and into the pieces in the
      negative xy-halfspace
    - we sweep both halfspheres separate. Note that the boundary
      carries the same topology

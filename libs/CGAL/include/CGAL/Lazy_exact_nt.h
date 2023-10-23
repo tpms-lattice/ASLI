@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/Lazy_exact_nt.h $
+// $Id: Lazy_exact_nt.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -68,7 +68,7 @@
  * TODO :
  * - Generalize it for constructions at the kernel level.
  * - Add mixed operations with ET too ?
- * - Interval refinement functionnality ?
+ * - Interval refinement functionality ?
  * - Separate the handle and the representation(s) in 2 files (?)
  *   maybe not a good idea, better if everything related to one operation is
  *   close together.
@@ -174,7 +174,7 @@ struct Lazy_exact_Ex_Cst final : public Lazy_exact_nt_rep<ET>
   }
 };
 
-// Construction from a Lazy_exact_nt<ET1> (which keeps the lazyness).
+// Construction from a Lazy_exact_nt<ET1> (which keeps the laziness).
 template <typename ET, typename ET1>
 class Lazy_lazy_exact_Cst final : public Lazy_exact_nt_rep<ET>
 {

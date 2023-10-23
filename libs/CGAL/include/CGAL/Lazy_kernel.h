@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Filtered_kernel/include/CGAL/Lazy_kernel.h $
+// $Id: Lazy_kernel.h b114789 2022-09-06T13:56:31+02:00 Laurent Rineau
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -89,7 +89,7 @@ protected:
 // Exact_kernel = exact kernel that will be made lazy
 // Kernel = lazy kernel
 
-// the Generic base simplies applies the generic magic functor stupidly.
+// the Generic base simply applies the generic magic functor stupidly.
 // then the real base fixes up a few special cases.
 template < typename EK_, typename AK_, typename E2A_, typename Kernel_ >
 class Lazy_kernel_generic_base : protected internal::Enum_holder

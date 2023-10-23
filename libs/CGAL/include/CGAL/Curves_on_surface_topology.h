@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_topology/include/CGAL/Curves_on_surface_topology.h $
+// $Id: Curves_on_surface_topology.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Guillaume Damiand <guillaume.damiand@liris.cnrs.fr>
@@ -181,7 +181,7 @@ public:
 // Utility functions
 
   // Set whether to display warning message in `std::cerr` when input doesn't meet
-  // prerequesite
+  // prerequisite
   void set_verbose(bool is_verbose)
   {
     m_is_verbose = is_verbose;

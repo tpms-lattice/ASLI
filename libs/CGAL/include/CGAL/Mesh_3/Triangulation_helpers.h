@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_3/include/CGAL/Mesh_3/Triangulation_helpers.h $
+// $Id: Triangulation_helpers.h b10b84f 2022-11-18T16:47:07+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -414,7 +414,7 @@ get_sq_distance_to_closest_vertex(const Tr& tr,
   typedef std::vector<Vertex_handle>              Vertex_container;
 
   // There is no need to use tr.min_squared_distance() here because we are computing
-  // distances between 'v' and a neighbor within their common cell, which means
+  // distances between 'v' and a neighboring vertex within a common cell, which means
   // that even if we are using a periodic triangulation, the distance is correctly computed.
   typename Gt::Compute_squared_distance_3 csqd = tr.geom_traits().compute_squared_distance_3_object();
   typename Gt::Construct_point_3 cp = tr.geom_traits().construct_point_3_object();
@@ -475,7 +475,7 @@ get_sq_distance_to_closest_vertex(const Tr& tr,
   typedef typename Vertex_container::iterator                VC_it;
 
   // There is no need to use tr.min_squared_distance() here because we are computing
-  // distances between 'v' and a neighbor within their common cell, which means
+  // distances between 'v' and a neighboring vertex within a common cell, which means
   // that even if we are using a periodic triangulation, the distance is correctly computed.
   typename Gt::Compute_squared_distance_3 csqd = tr.geom_traits().compute_squared_distance_3_object();
   typename Gt::Construct_point_3 cp = tr.geom_traits().construct_point_3_object();

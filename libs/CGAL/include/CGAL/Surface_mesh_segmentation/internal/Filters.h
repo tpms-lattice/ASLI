@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_segmentation/include/CGAL/Surface_mesh_segmentation/internal/Filters.h $
+// $Id: Filters.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -319,7 +319,7 @@ public:
               // if insertion is OK, then check its level
               facet_queue.push(
                 new_pair);                                      // if its level is equal to max_level do not put it in
-            }                                                                    // queue since we do not want to traverse its childs
+            }                                                                    // queue since we do not want to traverse its children
           }
         } while(++vertex_circulator != done);
       } while((edge = next(edge,polyhedron)) != halfedge(facet_front,polyhedron));

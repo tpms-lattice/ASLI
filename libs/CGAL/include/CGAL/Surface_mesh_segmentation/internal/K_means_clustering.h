@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_segmentation/include/CGAL/Surface_mesh_segmentation/internal/K_means_clustering.h $
+// $Id: K_means_clustering.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Ilker O. Yaz
@@ -141,7 +141,7 @@ public:
 
       // this can not select end(), since random_ds < total_probability (i.e. distance_square_cumulative.back())
       // this can not select an already selected item since either (by considering that upper bounds returns greater)
-      //  - aready selected item is at 0, and its value is 0.0
+      //  - already selected item is at 0, and its value is 0.0
       //  - or its value is equal to value of previous element
       std::size_t selection_index = std::upper_bound(
                                       distance_square_cumulative.begin(), distance_square_cumulative.end(), random_ds)

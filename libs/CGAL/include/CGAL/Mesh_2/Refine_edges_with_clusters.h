@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesh_2/include/CGAL/Mesh_2/Refine_edges_with_clusters.h $
+// $Id: Refine_edges_with_clusters.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -82,7 +82,7 @@ public:
   }
 
 
-  /** \name FUNCTIONS NEEDED BY Mesher_level OVERIDDEN BY THIS CLASS. */
+  /** \name FUNCTIONS NEEDED BY Mesher_level OVERRIDDEN BY THIS CLASS. */
 
   Point refinement_point_impl(const Edge& edge)
   {
@@ -104,7 +104,7 @@ public:
     vb_has_a_cluster = false;
     cluster_splitted = false;
 
-    // true bellow to remove ca and cb because they will
+    // true below to remove ca and cb because they will
     // be restored by update_cluster(...).
     if( clusters.get_cluster(this->va,this->vb,ca,ca_it) ) {
       if( clusters.get_cluster(this->vb,this->va,cb,cb_it) )

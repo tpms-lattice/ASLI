@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_4_hyperbolic_triangulation_2/include/CGAL/Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h $
+// $Id: Periodic_4_hyperbolic_Delaunay_triangulation_traits_2.h 5c8df66 2020-09-25T14:25:14+02:00 Jane Tournois
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     :   Iordan Iordanov

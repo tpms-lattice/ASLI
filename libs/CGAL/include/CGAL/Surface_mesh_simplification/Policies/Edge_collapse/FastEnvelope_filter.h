@@ -2,8 +2,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Surface_mesh_simplification/include/CGAL/Surface_mesh_simplification/Policies/Edge_collapse/FastEnvelope_filter.h $
+// $Id: FastEnvelope_filter.h c32b1f4 2022-11-16T13:22:39+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s)     : Andreas Fabri
@@ -133,7 +133,7 @@ public:
         std::array<Vector3, 3> triangle = { vecp, vecv, vecw};
 
         if(m_fast_envelope->is_outside(triangle)){
-          // the triange intersects the envelope
+          // the triangle intersects the envelope
           return boost::none;
         }
         vecv = vecw;

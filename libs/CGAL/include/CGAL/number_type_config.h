@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/number_type_config.h $
+// $Id: number_type_config.h 2f88b29 2023-04-28T17:54:07+02:00 Jane Tournois
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -19,7 +19,10 @@
 
 #include <CGAL/config.h>
 
-#define CGAL_PI 3.14159265358979323846
+#define CGAL_PI 3.141592653589793238462643383279502884
+#define CGAL_SQRT2 1.414213562373095048801688724209698078
+#define CGAL_SQRT3 1.732050807568877293527446341505872366
+#define CGAL_SQRT5 2.236067977499789696409173668731276235
 
 
 #ifdef CGAL_USE_NTS_NAMESPACE

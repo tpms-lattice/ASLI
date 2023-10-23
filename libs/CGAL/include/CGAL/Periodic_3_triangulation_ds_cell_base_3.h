@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Periodic_3_triangulation_3/include/CGAL/Periodic_3_triangulation_ds_cell_base_3.h $
+// $Id: Periodic_3_triangulation_ds_cell_base_3.h b10b84f 2022-11-18T16:47:07+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -189,6 +189,11 @@ public:
 
   void set_offsets(int o0,int o1,int o2,int o3)
   {
+    CGAL_precondition(o0 >= 0 && o0 <= 7);
+    CGAL_precondition(o1 >= 0 && o1 <= 7);
+    CGAL_precondition(o2 >= 0 && o2 <= 7);
+    CGAL_precondition(o3 >= 0 && o3 <= 7);
+
     off = 0;
     // The following explicit cast are needed according to the Intel
     // Compiler version 12.

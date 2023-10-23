@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Solver_interface/include/CGAL/Eigen_diagonalize_traits.h $
+// $Id: Eigen_diagonalize_traits.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 // Author(s) : Jocelyn Meyron and Quentin Mérigot
@@ -53,7 +53,7 @@ struct Restricted_FT<float> { typedef float type; };
 ///
 /// \cgalModels `DiagonalizeTraits`
 ///
-/// \sa http://eigen.tuxfamily.org/index.php?title=Main_Page
+/// \sa https://eigen.tuxfamily.org/index.php?title=Main_Page
 template <typename FT, unsigned int dim = 3>
 class Eigen_diagonalize_traits
 {

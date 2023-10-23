@@ -1,7 +1,7 @@
 // Copyright (c) 2005-2008  Inria Loria (France).
 /*
  * author:  Bruno Levy, INRIA, project ALICE
- * website: http://www.loria.fr/~levy/software
+ * website: https://www.loria.fr/~levy/software
  *
  * This file is part of CGAL (www.cgal.org)
  *
@@ -13,15 +13,15 @@
  *    TITLE  = Numerical Methods for Digital Geometry Processing,
  *    BOOKTITLE =Israel Korea Bi-National Conference,
  *    YEAR=November 2005,
- *    URL=http://www.loria.fr/~levy/php/article.php?pub=../publications/papers/2005/Numerics
+ *    URL=https://www.loria.fr/~levy/php/article.php?pub=../publications/papers/2005/Numerics
  * }
  *
  *  Laurent Saboret 01/2005: Change for CGAL:
  *      - Added OpenNL namespace
  *      - SparseMatrix is now a model of the SparseLinearAlgebraTraits_d::Matrix concept
  *
- * $URL$
- * $Id$
+ * $URL: https://github.com/CGAL/cgal/blob/v5.6/OpenNL/include/CGAL/OpenNL/sparse_matrix.h $
+ * $Id: sparse_matrix.h b5c21e1 2022-11-23T18:48:43+01:00 Mael Rouxel-Labbé
  * SPDX-License-Identifier: LGPL-3.0-or-later
 */
 

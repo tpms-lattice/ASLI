@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Interval_support/include/CGAL/Interval_traits.h $
+// $Id: Interval_traits.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -187,7 +187,7 @@ proper_subset(Interval interval1, Interval interval2) {
 }
 
 
-// Set operations, functions returing Interval
+// Set operations, functions returning Interval
 //the enable_if is need for MSVC as it is not able to eliminate
 //the function if Interval_traits<Interval>::Intersection has no result_type
 //(like Null_functor)

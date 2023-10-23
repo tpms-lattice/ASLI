@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Barycentric_coordinates_2/include/CGAL/Barycentric_coordinates_2/Discrete_harmonic_coordinates_2.h $
+// $Id: Discrete_harmonic_coordinates_2.h 9832893 2021-06-28T16:19:29+02:00 Dmitry Anisimov
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //

@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/HalfedgeDS/include/CGAL/HalfedgeDS_vector.h $
+// $Id: HalfedgeDS_vector.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -547,7 +547,7 @@ public:
         -- --rr;
         Hiterator rrhv = hvector.end();
         -- --rrhv;
-        // The comments proove the invariant of the partitioning step.
+        // The comments prove the invariant of the partitioning step.
         // Note that + 1 or - 1 denotes plus one edge or minus one edge,
         // so they mean actually + 2 and - 2.
                               // Pivot is in *ll
@@ -617,7 +617,7 @@ public:
         CGAL_assertion( llhv >= rrhv);
                               // rr + 1 >= ll >= rr
                               // Elements in [rr+1..end) >= pivot
-                              // Elemente in [begin..ll) <  pivot
+                              // Elements in [begin..ll) <  pivot
                               // Pivot is in a[ll]
         if ( ll == rr) {
             // Check for the possibly missed swap.

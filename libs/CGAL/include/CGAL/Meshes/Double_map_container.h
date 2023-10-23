@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Mesher_level/include/CGAL/Meshes/Double_map_container.h $
+// $Id: Double_map_container.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -33,7 +33,7 @@ namespace CGAL {
       typedef Elt Element;
 
     protected:
-      // --- protected datas ---
+      // --- protected data ---
       Double_map<Element, Quality> m;
 
     public:

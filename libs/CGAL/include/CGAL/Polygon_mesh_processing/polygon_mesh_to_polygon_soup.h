@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Polygon_mesh_processing/include/CGAL/Polygon_mesh_processing/polygon_mesh_to_polygon_soup.h $
+// $Id: polygon_mesh_to_polygon_soup.h 0ff7882 2022-12-06T22:21:06+01:00 Mael
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -13,7 +13,7 @@
 #ifndef CGAL_POLYGON_MESH_PROCESSING_POLYGON_MESH_TO_POLYGON_SOUP_H
 #define CGAL_POLYGON_MESH_PROCESSING_POLYGON_MESH_TO_POLYGON_SOUP_H
 
-#include <CGAL/license/Polygon_mesh_processing/repair.h>
+#include <CGAL/license/Polygon_mesh_processing/combinatorial_repair.h>
 
 #include <CGAL/algorithm.h>
 #include <CGAL/assertions.h>
@@ -55,7 +55,7 @@ struct PM_to_PS_point_converter<PM_Point, std::array<PS_FT, 3> >
 
 } // namespace internal
 
-/// \ingroup PMP_repairing_grp
+/// \ingroup PMP_combinatorial_repair_grp
 ///
 /// adds the vertices and faces of a mesh into a (possibly non-empty) polygon soup.
 ///
@@ -84,7 +84,7 @@ struct PM_to_PS_point_converter<PM_Point, std::array<PS_FT, 3> >
 ///
 /// \cgalAdvancedBegin
 /// `PolygonRange` can also be a model of the concepts `RandomAccessContainer` and `BackInsertionSequence`
-/// whose value type is an array, but it is the user's responsability to ensure that
+/// whose value type is an array, but it is the user's responsibility to ensure that
 /// all faces have the same number of vertices, and that this number is equal to the size of the array.
 /// \cgalAdvancedEnd
 ///

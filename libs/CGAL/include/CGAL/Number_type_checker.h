@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Number_types/include/CGAL/Number_type_checker.h $
+// $Id: Number_type_checker.h 3674c93 2022-11-15T15:21:01+01:00 albert-github
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -61,7 +61,7 @@ public:
   Number_type_checker(const NT1 &n1, const NT2 &n2)
     : _n1(n1), _n2(n2) { CGAL_assertion(is_valid()); }
 
-  // The following need to be dependant on NT1 != {NT2,int,double} ...
+  // The following need to be dependent on NT1 != {NT2,int,double} ...
   //Number_type_checker(const NT1 &n1) : _n1(n1), _n2(n1) {}
   //Number_type_checker(const NT2 &n2) : _n1(n2), _n2(n2) {}
 

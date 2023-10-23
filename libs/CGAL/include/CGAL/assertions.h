@@ -7,8 +7,8 @@
 //
 // This file is part of CGAL (www.cgal.org)
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/STL_Extension/include/CGAL/assertions.h $
+// $Id: assertions.h d076b25 2023-05-12T11:01:11+01:00 Andreas Fabri
 // SPDX-License-Identifier: LGPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -59,7 +59,7 @@ inline void set_use_assertions(bool b)
 }
 }
 
-#else
+#elif !defined(CGAL_USER_DEFINED_USE_ASSERTIONS)
 
 namespace CGAL{
 inline void set_use_assertions(bool){}
@@ -351,7 +351,7 @@ inline bool possibly(Uncertain<bool> c);
 
 } //namespace CGAL
 
-// This comes last as it is dependant on the macros to be defined.
+// This comes last as it is dependent on the macros to be defined.
 // But the macros need CGAL::possibly().
 #include <CGAL/Uncertain.h>
 

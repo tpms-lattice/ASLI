@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Arrangement_on_surface_2/include/CGAL/Arr_simple_point_location.h $
+// $Id: Arr_simple_point_location.h 014c06f 2022-11-14T15:32:47+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -152,7 +152,7 @@ public:
 protected:
   /*!
    * Locate the arrangement feature which a vertical ray emanating from the
-   * given point hits (not inculding isolated vertices).
+   * given point hits (not including isolated vertices).
    * \param p The query point.
    * \param shoot_up Indicates whether the ray is directed upward or downward.
    * \return An object representing the arrangement feature the ray hits.

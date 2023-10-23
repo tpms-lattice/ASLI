@@ -3,8 +3,8 @@
 //
 // This file is part of CGAL (www.cgal.org).
 //
-// $URL$
-// $Id$
+// $URL: https://github.com/CGAL/cgal/blob/v5.6/Nef_3/include/CGAL/Nef_3/Vertex.h $
+// $Id: Vertex.h 4547818 2022-11-15T13:39:40+01:00 albert-github
 // SPDX-License-Identifier: GPL-3.0-or-later OR LicenseRef-Commercial
 //
 //
@@ -128,7 +128,7 @@ class Vertex_base {
       Refs*& sncp() { return sncp_; }
 
       /* all sobjects of the local graph are stored in a global list
-         where each vertex has a continous range in each list for its
+         where each vertex has a continuous range in each list for its
          sobjects. All objects of the range [sxxx_begin_,sxxx_last_]
          belong to a vertex. This range is empty iff
          sxxx_begin_ == sxxx_last_ == sncp()->sxxx_end()
