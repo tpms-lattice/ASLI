@@ -1,7 +1,7 @@
 /* =============================================================================
 **  This file is part of the mmg software package for the tetrahedral
 **  mesh modification.
-**  Copyright (c) Bx INP/Inria/UBordeaux/UPMC, 2004- .
+**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-
 **
 **  mmg is free software: you can redistribute it and/or modify it
 **  under the terms of the GNU Lesser General Public License as published
@@ -21,17 +21,23 @@
 ** =============================================================================
 */
 
-#include "mmgcommon.h"
+#ifndef MMGEIGENV_H
+#define MMGEIGENV_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-extern int  (*MMG5_chkmsh)(MMG5_pMesh,int,int);
-extern int  (*MMG5_bezierCP)(MMG5_pMesh ,MMG5_Tria *,MMG5_pBezier ,int8_t );
-extern double (*MMG5_lenSurfEdg)(MMG5_pMesh mesh,MMG5_pSol sol ,int ,int, int8_t );
-extern int  (*MMG5_indElt)(MMG5_pMesh mesh,int kel);
-extern int  (*MMG5_indPt)(MMG5_pMesh mesh,int kp);
-extern int  (*MMG5_grad2met_ani)(MMG5_pMesh,MMG5_pSol,MMG5_pTria,int,int);
-extern int  (*MMG5_grad2metreq_ani)(MMG5_pMesh,MMG5_pSol,MMG5_pTria,int,int);
-extern int    (*MMG5_compute_meanMetricAtMarkedPoints)( MMG5_pMesh,MMG5_pSol);
-#ifdef USE_SCOTCH
-extern int  (*MMG5_renumbering)(int,MMG5_pMesh,MMG5_pSol,MMG5_pSol,int*);
+#define MMG5_EPSD      1.e-30
+#define MMG5_EPS       1.e-06
+
+int MMG5_eigenv3d(int symmat,double *mat,double lambda[3],double v[3][3]);
+int MMG5_eigenv2d(int symmat,double *mat,double lambda[2],double v[2][2]);
+int MMG5_eigen2(double *mm,double *lambda,double vp[2][2]);
+extern int MMG5_eigensym(double m[3],double lambda[2],double vp[2][2]);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

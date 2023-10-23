@@ -1,7 +1,7 @@
 /* =============================================================================
 **  This file is part of the mmg software package for the tetrahedral
 **  mesh modification.
-**  Copyright (c) Bx INP/CNRS/Inria/UBordeaux/UPMC, 2004-
+**  Copyright (c) Bx INP/Inria/UBordeaux/UPMC, 2004- .
 **
 **  mmg is free software: you can redistribute it and/or modify it
 **  under the terms of the GNU Lesser General Public License as published
@@ -21,22 +21,14 @@
 ** =============================================================================
 */
 
-#ifndef MMGEIGENV_H
-#define MMGEIGENV_H
+#ifndef MMG_CORE_EXPORT_H
+#define MMG_CORE_EXPORT_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#define MMG5_EPSD      1.e-30
-#define MMG5_EPS       1.e-06
-
-int MMG5_eigenv(int symmat,double *mat,double lambda[3],double v[3][3]);
-int MMG5_eigen2(double *mm,double *lambda,double vp[2][2]);
-extern int MMG5_eigensym(double m[3],double lambda[2],double vp[2][2]);
-
-#ifdef __cplusplus
-}
+#include "mmg_export.h"
+#if defined(libmmg_so_EXPORTS) || defined(libmmgs_so_EXPORTS) || defined(libmmg2d_so_EXPORTS) || defined(libmmg3d_so_EXPORTS)
+#  define LIBMMG_CORE_EXPORT MMG_DECL_EXPORT
+#else
+#  define LIBMMG_CORE_EXPORT MMG_DECL_IMPORT
 #endif
 
 #endif

@@ -22,7 +22,6 @@
 */
 
 /**
- * \file common/inlined_functions.h
  * \brief inlined Functions
  * \author Charles Dapogny (UPMC)
  * \author Cécile Dobrzynski (Bx INP/Inria/UBordeaux)
@@ -32,7 +31,7 @@
  * \copyright GNU Lesser General Public License.
  */
 
-#include "mmgcommon.h"
+#include "mmgcommon_private.h"
 
 #ifndef _INLINED_FUNC_H
 #define _INLINED_FUNC_H
@@ -51,7 +50,7 @@
  *
  */
 static inline
-double MMG5_lenEdg(MMG5_pMesh mesh,int np0,int np1,
+double MMG5_lenEdg(MMG5_pMesh mesh,MMG5_int np0,MMG5_int np1,
                     double *m0,double *m1,int8_t isedg) {
   MMG5_pPoint   p0,p1;
   double        gammaprim0[3],gammaprim1[3],t[3],*n1,*n2,ux,uy,uz,ps1,ps2,l0,l1;
@@ -195,7 +194,7 @@ double MMG5_lenEdg(MMG5_pMesh mesh,int np0,int np1,
  *
  */
 static inline
-double MMG5_lenSurfEdg_ani(MMG5_pMesh mesh,MMG5_pSol met,int np0,int np1,int8_t isedg) {
+double MMG5_lenSurfEdg_ani(MMG5_pMesh mesh,MMG5_pSol met,MMG5_int np0,MMG5_int np1,int8_t isedg) {
   MMG5_pPoint   p0,p1;
   double        *m0,*m1,met0[6],met1[6],ux,uy,uz,rbasis[3][3];
   static int8_t mmgWarn = 0;
@@ -264,7 +263,7 @@ double MMG5_lenSurfEdg_ani(MMG5_pMesh mesh,MMG5_pSol met,int np0,int np1,int8_t 
  */
 static inline
 double MMG5_lenSurfEdg33_ani(MMG5_pMesh mesh,MMG5_pSol met,
-                              int np0,int np1,int8_t isedg) {
+                              MMG5_int np0,MMG5_int np1,int8_t isedg) {
   double        *m0,*m1;
 
   /* Set metrics */
@@ -288,9 +287,9 @@ double MMG5_lenSurfEdg33_ani(MMG5_pMesh mesh,MMG5_pSol met,
  *
  */
 static
-inline double MMG5_lenSurfEdg_iso(MMG5_pMesh mesh,MMG5_pSol met,int ip1,int ip2, int8_t isedg) {
+inline double MMG5_lenSurfEdg_iso(MMG5_pMesh mesh,MMG5_pSol met,MMG5_int ip1,MMG5_int ip2, int8_t isedg) {
   MMG5_pPoint   p1,p2;
-  double   h1,h2,l,r,len;
+  double        h1,h2,l,r,len;
 
   p1 = &mesh->point[ip1];
   p2 = &mesh->point[ip2];
@@ -303,6 +302,54 @@ inline double MMG5_lenSurfEdg_iso(MMG5_pMesh mesh,MMG5_pSol met,int ip1,int ip2,
   len = fabs(r) < MMG5_EPS ? l / h1 : l / (h2-h1) * log1p(r);
 
   return len;
+}
+
+/**
+ * \param dim matrix size.
+ * \param m matrix array.
+ * \param dm diagonal values array.
+ * \param iv array of inverse coreduction basis.
+ *
+ * Recompose a symmetric matrix from its diagonalization on a simultaneous
+ * reduction basis.
+ * \warning Eigenvectors in Mmg are stored as matrix rows (the first dimension
+ * of the double array spans the number of eigenvectors, the second dimension
+ * spans the number of entries of each eigenvector). So the inverse (left
+ * eigenvectors) is also stored with transposed indices.
+ */
+static inline
+void MMG5_simredmat(int8_t dim,double *m,double *dm,double *iv) {
+  int8_t i,j,k,ij;
+
+  /* Storage of a matrix as a one-dimensional array: dim*(dim+1)/2 entries for
+   * a symmetric matrix. */
+  ij = 0;
+
+  /* Loop on matrix rows */
+  for( i = 0; i < dim; i++ ) {
+    /* Loop on the upper-triangular part of the matrix */
+    for( j = i; j < dim; j++ ) {
+      /* Initialize matrix entry */
+      m[ij] = 0.0;
+      /* Compute matrix entry as the recomposition of diagonal values after
+       * projection on the coreduction basis, using the inverse of the
+       * transformation:
+       *
+       * M_{ij} = \sum_{k,l} V^{-1}_{ki} Lambda_{kl} V^{-1}_{lj} =
+       *        = \sum_{k} lambda_{k} V^{-1}_{ki} V^{-1}_{kj}
+       *
+       * Since the inverse of the transformation is the inverse of an
+       * eigenvectors matrix (which is stored in Mmg by columns, and not by
+       * rows), the storage of the inverse matrix is also transposed and the
+       * indices have to be exchanged when implementing the above formula. */
+      for( k = 0; k < dim; k++ ) {
+        m[ij] += dm[k]*iv[i*dim+k]*iv[j*dim+k];
+      }
+      /* Go to the next entry */
+      ++ij;
+    }
+  }
+  assert( ij == (dim+1)*dim/2 );
 }
 
 #endif
