@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -20,12 +20,8 @@
 
 #include "version.h"
 #include "ASLI.h"       // Class containing all the required data
-#ifdef MMG_MESH
 	#include "MeshMMG.h"  // Implicit surface meshing using MMG
-#endif
-#ifdef CGAL_MESH
 	#include "MeshCGAL.h" // Implicit surface meshing using CGAL
-#endif
 
 #include "TicToc.h"     // A simple timer
 
@@ -146,26 +142,14 @@ if (configFile.has_filename() == false)
 
 	std::filesystem::path outputFile_string;
 	if (data->me_settings.mesher == "CGAL") { 
-		#ifdef CGAL_MESH
 			MeshCGAL::implicit2volume(data->shell, data->lt_type, data->lt_size, 
 			                          data->lt_feature, data->me_settings,
 																outputFile_string);
-		#else
-			std::cerr << "ERROR: Compile with the CGAL_MESH tag to enable this option" 
-				<< std::endl;
-			return(EXIT_FAILURE);
-		#endif
 
 	} else if (data->me_settings.mesher == "MMG") {
-		#ifdef MMG_MESH
-			MeshMMG::implicit2volume(&data->shell.tetgenPoints, data->lt_type, 
-			                         data->lt_size, data->lt_feature, 
-			                         data->me_settings, outputFile_string);
-		#else
-			std::cerr << "ERROR: Compile with the MMG_MESH tag to enable this option" 
-				<< std::endl;
-			return(EXIT_FAILURE);
-		#endif
+		MeshMMG::implicit2volume(data->shell, data->lt_type, data->lt_size,
+		                         data->lt_feature, data->me_settings, 
+		                         outputFile_string);
 
 //	} else if (data->me_settings.mesher == "TEST") {
 //			Test::implicit2volume_H(data->shell, data->lt_type, data->lt_size,

@@ -1,6 +1,6 @@
  # ============================================================================
  #  This file is part of ASLI (A Simple Lattice Infiller)
- #  Copyright (C) KU Leuven, 2019-2023
+ #  Copyright (C) KU Leuven, 2019-2024
  #
  #  ASLI is free software: you can redistribute it and/or modify it under the 
  #  terms of the GNU Affero General Public License as published by the Free 
@@ -62,7 +62,6 @@ me_cellSize: 0 # Tetrahedra size. Scales with wall size and overrides me_facetSi
 me_poissonOffset: 0 # Poisson reconstruction offset. Scales with largest unit cell size in the design. Set to value >= 0.1 (optional, default offset is 0.5)
 
 # Mesh settings (MMG)
-me_hvol: 0 # Tetgen max. volume constraint. Scales with the the smallest unit cell size in the design. (optional)
 me_hinitial: 0 # Base mesh size. Scales with the smallest feature size. (optional, default hinitial is 0.36)
 me_hmin: 0 # Min. edge size. Scales with the smallest feature size in the design. (optional)
 me_hmax: 0 # Max. edge size. Scales with the largest feature size in the design. (optional)

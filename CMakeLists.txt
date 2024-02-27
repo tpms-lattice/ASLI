@@ -1,6 +1,6 @@
  # ============================================================================
  #  This file is part of ASLI (A Simple Lattice Infiller)
- #  Copyright (C) KU Leuven, 2019-2022
+ #  Copyright (C) KU Leuven, 2019-2024
  #
  #  ASLI is free software: you can redistribute it and/or modify it under the 
  #  terms of the GNU Affero General Public License as published by the Free 
@@ -63,9 +63,7 @@ option(ASLI_DOC "Compile the documentation" OFF)
 option(ASLI_DLL "Copy required dll files" OFF)
 
 # Mesher option defaults
-option(CGAL_MESH "Include CGAL meshing option" ON)
 option(CGAL_ACTIVATE_CONCURRENT_MESH_3 "Activate parallelism in Mesh_3" OFF)
-option(MMG_MESH "Include MMG meshing option" ON)
 option(NATIVE "Add -march=native flag" OFF)
 
 # Set some default paths
@@ -94,9 +92,6 @@ find_package(Eigen3 3.3.7 REQUIRED)
 include_directories(${EIGEN3_INCLUDE_DIR})
 
 # CGAL and its components
-if(CGAL_MESH)
-  add_definitions(-DCGAL_MESH)
-
   # CGAL
   find_package(CGAL 5.5.1 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR}/libs/CGAL) #Needs -frounding-math with gcc
   include_directories(${CGAL_DIR}/include)
@@ -114,13 +109,9 @@ if(CGAL_MESH)
     # TBB
     find_package(TBB REQUIRED)
     include(CGAL_TBB_support)
-  endif()
 endif()
 
 # Mmg and its components
-if(MMG_MESH)
-  add_definitions(-DMMG_MESH)
-
   # MMG
   set(MMG_PREFIX mmg3d)
   set(MMG_PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MMG_PREFIX})
@@ -170,15 +161,6 @@ if(MMG_MESH)
     include_directories(PUBLIC ${SCOTCH_INCLUDE_DIRS})
   endif()
 
-  # tetgen
-  add_library(tet STATIC 
-              ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/predicates.cxx 
-              ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen/tetgen.cxx
-  )
-  target_include_directories(tet PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/tetgen)
-  target_compile_definitions(tet PUBLIC TETLIBRARY) # -DTETLIBRARY: flag to compile tetgen as a library
-
-endif()
 
 # alglib
 add_library(alg STATIC 
@@ -216,16 +198,11 @@ set(ASLI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp 
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
-                 ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc)
-
-if(CGAL_MESH)
-  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp) 
-#                                   ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp) # TEMP!
-endif()
-
-if(MMG_MESH)
-  set(ASLI_SOURCES ${ASLI_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp)
-endif()
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc
+)
+#                 ${CMAKE_CURRENT_SOURCE_DIR}/src/OffsetCGAL.cpp) # TEMP!
 
 add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${ASLI_SOURCES})
 
@@ -240,24 +217,22 @@ if(MARCH_NATIVE)
 endif()
 
 # Create entries for C++ files in "ASLI" routine
-target_link_libraries(ASLI PUBLIC alg yaml)
+add_dependencies(ASLI ${MMG_PREFIX} ${MSHMET_PREFIX})
+target_link_libraries(ASLI PUBLIC alg yaml 
+                      CGAL::CGAL CGAL::Eigen_support 
+                      ${MMG3D_LIBRARIES} ${MSHMET_LIBRARIES}
+)
+
 if(NOT MSVC)
   target_link_libraries(ASLI PUBLIC stdc++fs)
 endif()
 
-if(CGAL_MESH)
-  target_link_libraries(ASLI PUBLIC CGAL::CGAL CGAL::Eigen_support)
   if(CGAL_ACTIVATE_CONCURRENT_MESH_3 AND TARGET CGAL::TBB_support)
     target_link_libraries(ASLI PUBLIC TBB::tbb CGAL::TBB_support)
-  endif()
 endif()
 
-if(MMG_MESH)
-  add_dependencies(ASLI ${MMG_PREFIX} ${MSHMET_PREFIX})
-  target_link_libraries(ASLI PUBLIC ${MMG3D_LIBRARIES} ${MSHMET_LIBRARIES} tet)
   if(SCOTCH_FOUND)
     target_link_libraries(ASLI PUBLIC ${SCOTCH_LIBRARIES} scotch)
-  endif()
 endif()
 
 # Documentation

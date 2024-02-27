@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2023
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -180,8 +180,6 @@ void ASLI::SetUp(std::string configFile) {
 		if (me_settings.CGAL_poissonOffset < 0.1) me_settings.CGAL_poissonOffset = 0.5;
 		me_settings.CGAL_edgesProtectionAngle = 60; //config["me_edgesProtectionAngle"].as<double>();
 
-		me_settings.TETGEN_hvol = config["me_hvol"].as<double>();
-		if (me_settings.TETGEN_hvol <= 0) me_settings.TETGEN_hvol = 1.5;
 		me_settings.MMG_hinitial = config["me_hinitial"].as<double>();
 		if (me_settings.MMG_hinitial <= 0) me_settings.MMG_hinitial = 0.35;
 		me_settings.MMG_hmin = config["me_hmin"].as<double>();
@@ -214,8 +212,6 @@ void ASLI::SetUpLattice() {
 	
 	// Determine the bounding box of the outer shell 
 	std::vector<double> bounds = {HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL};
-	#ifdef CGAL_MESH // Place somewhere else
-		if( me_settings.mesher == "CGAL" ) {
 			for (size_t i=0; i<shell.points.size(); ++i) {
 				bounds[0] = std::min(bounds[0], shell.points[i].x());
 				bounds[1] = std::max(bounds[1], shell.points[i].x());
@@ -224,21 +220,6 @@ void ASLI::SetUpLattice() {
 				bounds[4] = std::min(bounds[4], shell.points[i].z());
 				bounds[5] = std::max(bounds[5], shell.points[i].z());
 			}
-		}
-	#endif
-	#ifdef MMG_MESH // Place somewhere else
-		if( me_settings.mesher == "MMG" ) {
-			for (size_t i=0; i<shell.tetgenPoints.numberofpoints; i+=3) {
-				bounds[0] = std::min(bounds[0], shell.tetgenPoints.pointlist[i]);
-				bounds[1] = std::max(bounds[1], shell.tetgenPoints.pointlist[i]);
-				bounds[2] = std::min(bounds[2], shell.tetgenPoints.pointlist[i+1]);
-				bounds[3] = std::max(bounds[3], shell.tetgenPoints.pointlist[i+1]);
-				bounds[4] = std::min(bounds[4], shell.tetgenPoints.pointlist[i+2]);
-				bounds[5] = std::max(bounds[5], shell.tetgenPoints.pointlist[i+2]);
-			}
-		}
-	#endif
-
 
 	std::vector<double> boundingBoxDimensions;
 	for (size_t i = 0; i < bounds.size(); i+=2)
@@ -338,8 +319,7 @@ void ASLI::SetUpLattice() {
 		      << ", Side: " << me_settings.side
 	          << ", Volume mesh: " << std::boolalpha << me_settings.volumeMesh << std::flush;
 	if (me_settings.mesher == "MMG") {
-		std::cout << ", hvol: " << me_settings.TETGEN_hvol
-		          << ", hinitial: " << me_settings.MMG_hinitial
+		std::cout << ", hinitial: " << me_settings.MMG_hinitial
 		          << ",\n               hmin: " << me_settings.MMG_hmin
 		          << ", hmax: " << me_settings.MMG_hmax
 		          << ", hausd: " << me_settings.MMG_hausd
@@ -460,29 +440,10 @@ void ASLI::LoadInputFiles() {
 	 */
 
 	// Read the stl file
-	#ifdef CGAL_MESH
-		if( me_settings.mesher == "CGAL" ) {
 			std::cout << "  Opening " << stlFile << std::endl;
 			std::ifstream stl_file(stlFile, std::ios::binary);
 			CGAL::IO::read_STL(stl_file, shell.points, shell.polygons);
 			stl_file.close();
-		}
-	#endif
-	#ifdef MMG_MESH
-		if( me_settings.mesher == "MMG" ) {
-			// The 'pointlist' and 'facetlist' together return the polyhedron. Note: After
-			// calling load_stl() or read_stl() there will be many duplicated points in 
-			// 'pointlist'. These are unified during the Delaunay tetrahedralization process.
-			char* stlFileChar = new char[stlFile.size() + 1];
-			strcpy(stlFileChar, stlFile.c_str());
-			std::cout << "  " << std::flush;
-			if (shell.tetgenPoints.load_stl(stlFileChar) == 0) { // For 1.6 (if 1.4 use read_stl instead)
-				delete stlFileChar;
-				exit(EXIT_FAILURE);
-			}
-			delete stlFileChar;
-		}
-	#endif
 
 	// Read the unit cell typing file (.tap file)
 	if (lt_type.type == "hybrid") {

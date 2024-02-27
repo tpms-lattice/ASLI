@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -23,9 +23,7 @@
 
 #include "Mesh.h"
 #include "Infill.h"
-
-/* Tetgen headers */
-#include "tetgen.h"
+#include "MeshCGAL.h"
 
 /* Mmg headers */
 #include "mmg/mmg3d/libmmg3d.h"
@@ -82,17 +80,11 @@ void * mycalloc(size_t c, size_t s) {
 	} while(0)
 
 namespace MeshMMG { 
-	int implicit2volume(tetgenio *points, latticeType lt_type, latticeSize lt_size,
-	                    latticeFeature lt_feature, meshSettings me_settings,
-                      std::filesystem::path &outputFile_string);
-	int surface2volume(std::string inputFile, latticeType lt_type, latticeSize lt_size,
+	int implicit2volume(outerShell &shell, latticeType lt_type, latticeSize lt_size,
                      latticeFeature lt_feature, meshSettings me_settings,
                      std::filesystem::path &outputFile_string);
 
 	namespace internal {
-		bool surface2volume(tetgenio *points, char *fileout, double hvol);
-
-		// Output functions
 		bool MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string format, char *filename) ;
 	}
 };

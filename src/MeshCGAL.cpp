@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2023
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -419,6 +419,92 @@ bool MeshCGAL::polehedral2volume (SurfaceMesh surfaceMesh,
 
 	return EXIT_SUCCESS;
 }
+
+bool MeshCGAL::polehedral2volume(outerShell &shell, latticeType lt_type, 
+                                 latticeSize lt_size, latticeFeature lt_feature, 
+                                 meshSettings me_settings, F_C3t3 &c3t3) {
+
+	// Mesh user settings
+	FT me_facetAngle = me_settings.CGAL_facetAngle;
+	FT me_facetSize = me_settings.CGAL_facetSize;
+	FT me_facetDistance = me_settings.CGAL_facetDistance;
+
+	FT me_cellRadiusEdgeRatio = me_settings.CGAL_cellRadiusEdgeRatio;
+	FT me_cellSize = me_settings.CGAL_cellSize;     
+
+	//
+	F_Polyhedron polygonSurface;
+	CGAL::Polygon_mesh_processing::polygon_soup_to_polygon_mesh(shell.points, shell.polygons, polygonSurface);
+
+	// Create domain
+	F_Polyhedron_domain domain(polygonSurface);
+
+	// Get sharp features
+	domain.detect_features();
+
+	// 
+	if (lt_type.type != "hybrid" && lt_size.minUnitCellSize == lt_size.maxUnitCellSize &&  lt_feature.feature_val > 0) { // If lattice is uniform
+		Point point(0, 0, 0);
+		featureSize localSize = Infill::featureSize_function(point, &lt_type, &lt_size, &lt_feature);
+
+		// Mesh criteria
+		F_Mesh_criteria criteria(CGAL::parameters::edge_size = me_cellSize * localSize.wallSize,
+		                         CGAL::parameters::facet_angle = me_facetAngle, // Min triangle angle (degrees)
+		                         CGAL::parameters::facet_size = me_cellSize * localSize.wallSize, // Max triangle size
+		                         CGAL::parameters::facet_distance = me_facetDistance * lt_size.size, // Surface approximation error
+		                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio, // Mesh tetrahedra radius|edge ratio upper bound
+		                         CGAL::parameters::cell_size = me_cellSize * localSize.wallSize, // 
+		                         CGAL::parameters::edge_min_size = me_cellSize * localSize.wallSize / 5); //
+
+		// Mesh generation
+		c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
+		                                 //CGAL::parameters::manifold()); // Causes assertion violation errors!
+		
+	} else {
+		// Sizing fields
+		TPMS_dependent_unitcellsize_field_P facetDistance;
+		facetDistance.lt_size = &lt_size;
+		facetDistance.parameter = &me_facetDistance;
+
+		TPMS_dependent_wallsize_field_P cellSize;
+		cellSize.lt_type = &lt_type;
+		cellSize.lt_size = &lt_size;
+		cellSize.lt_feature = &lt_feature;
+		cellSize.parameter = &me_cellSize;
+
+		// Mesh criteria
+		F_Mesh_criteria criteria(CGAL::parameters::edge_size = cellSize,
+		                         CGAL::parameters::facet_angle = me_facetAngle, // Min triangle angle (degrees)
+		                         CGAL::parameters::facet_size = cellSize, // Max triangle size
+		                         CGAL::parameters::facet_distance = facetDistance, // Surface approximation error
+		                         CGAL::parameters::cell_radius_edge_ratio = me_cellRadiusEdgeRatio, // Mesh tetrahedra radius|edge ratio upper bound
+		                         CGAL::parameters::cell_size = cellSize, //
+		                         CGAL::parameters::edge_min_size = me_cellSize * lt_size.minUnitCellSize / 15); // Note: Sizing field not yet suported by CHAL so fixed limit for now ...
+
+		// Mesh generation
+		c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria);//, 
+		                                 //CGAL::parameters::manifold()); // Causes assertion violation errors!
+	}
+	
+	// Clean up vertices
+	c3t3.remove_isolated_vertices();
+	
+	// ...
+	//#ifdef CGAL_CONCURRENT_MESH_3
+	//	//init.~task_scheduler_init(); // Deprecated
+	//	//control.~global_control();
+	//#endif
+
+	std::cout << "Finished!" << std::endl; TicToc::toc();
+
+	std::cout << "\n  VOLUME MESH: " << std::endl;
+	std::cout << "  Number of vertices: " << c3t3.triangulation().number_of_vertices() << std::endl;
+	std::cout << "  Number of facets: " << 2 * c3t3.number_of_facets() << std::endl;
+	std::cout << "  Number of tetrahedra: " << c3t3.number_of_cells() << std::endl;
+
+	return EXIT_SUCCESS;
+}
+
 
 bool MeshCGAL::surfaceRemesh(outerShell &shell, latticeType lt_type, latticeSize lt_size, 
                              latticeFeature lt_feature, meshSettings me_settings,

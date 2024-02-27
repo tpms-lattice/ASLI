@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -25,12 +25,12 @@
  * Author(s): F.P.B. (KU Leuven)
  */
 
-int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize lt_size,
+int MeshMMG::implicit2volume(outerShell &shell, latticeType lt_type, latticeSize lt_size,
                              latticeFeature lt_feature, meshSettings me_settings,
                              std::filesystem::path &outputFile_string) {
 	/* Discretizes a closed volume with an implicitly defined infill.
 	 * Inputs :
-	 *  points            : Point cloud data
+	 *  shell             : Structure containing the outer shell geometry
 	 *  lt_type           : Lattice type data
 	 *  lt_size           : Lattice size data
 	 *  lt_feature        : Lattice feature data
@@ -73,8 +73,14 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 	strcpy(tempFile,temporaryFile.c_str());
 
 	fprintf(stdout,"\n  Creating initial volume mesh...\n");
-	internal::surface2volume(points, tempFile, 
-	                         me_settings.TETGEN_hvol*lt_size.minUnitCellSize);
+
+	F_C3t3 c3t3;
+	MeshCGAL::polehedral2volume(shell, lt_type, lt_size, lt_feature, me_settings, c3t3);
+
+	// Write output to .mesh file
+	std::ofstream medit_file(tempFile);
+	c3t3.output_to_medit(medit_file);
+	medit_file.close();
 
 	/* ------------------------------- Step 2 ------------------------------- */
 	// Remesh the volume such that the elements have a size appropiate to capture
@@ -449,234 +455,6 @@ int MeshMMG::implicit2volume(tetgenio *points, latticeType lt_type, latticeSize 
 	std::filesystem::remove_all(temporaryFolder);
 
 	return(ierr);
-}
-
-
-bool MeshMMG::internal::surface2volume(tetgenio *points, char *fileout, double hvol) {
-	/* Converts a closed surface triangulation into a volume mesh.
-	 * Inputs:
-	 * 	points  : Point cloud data
-	 *  fileout : Output filename
-	 *  hvol    : Max. volume constraint
-	 * Outputs:
-	 * 	.mesh file containing the volume mesh
-	 */
-	
-	FILE *fileID;
-	std::string inputString;
-	tetgenio out;
-
-	// Tetgen input string
-	inputString = "p";        // Tetrahedralize a piecewise linear complex (PLC).
-//	inputString = "p/0.001";  // Tetrahedralize a piecewise linear complex (PLC). // 1.6?
-	inputString += "q1.414";  // Refines mesh (to improve mesh quality).
-	inputString += "a" + std::to_string( std::pow(hvol, 3) ); // max. tetrahedron volume constraint
-	inputString += "g";       // Outputs mesh to .mesh
-	inputString += "Q";       // Quiet: No terminal output except errors.
-
-	/* ------------------------------- Step 1 ------------------------------- */
-	// Create volume mesh
-//	char tetgenInputCommand[inputString.size() + 1];
-//	strcpy(tetgenInputCommand, inputString.c_str());
-//	tetrahedralize(tetgenInputCommand, points, &out);
-
-	char* tetgenInputCommand = new char[inputString.size() + 1]; 
-	strcpy(tetgenInputCommand, inputString.c_str());
-	tetrahedralize(tetgenInputCommand, points, &out);
-	delete tetgenInputCommand;
-
-	/* ------------------------------- Step 2 ------------------------------- */
-	// Store output
-	if( !(fileID = fopen(fileout,"w")) ) {
-		fprintf(stderr,"  ** UNABLE TO OPEN OUTPUT MESH FILE.\n");
-		exit(EXIT_FAILURE);
-	}
-
-	fprintf(fileID,"MeshVersionFormatted 2\n");
-	fprintf(fileID,"\nDimension 3\n");
-
-	// Loop over points
-	fprintf(fileID,"\nVertices\n%d\n", out.numberofpoints);
-	for(size_t i = 0; i < out.numberofpoints; i++) {
-		fprintf(fileID, "%.15lg %.15lg %.15lg %d \n", out.pointlist[i*3+0], out.pointlist[i*3+1], out.pointlist[i*3+2], 0);
-	}
-
-	// Loop over tetrahedra
-	fprintf(fileID, "\nTetrahedra\n%d\n", out.numberoftetrahedra);
-	int T[4];
-	for(size_t i = 0; i < out.numberoftetrahedra; i++) {
-		for(size_t j = 0; j<4; j++) {
-			int index = out.tetrahedronlist[i * out.numberofcorners + j];
-			T[j] = index;
-		}
-		fprintf(fileID, "%d %d %d %d %d \n", T[0], T[1], T[2], T[3], 1);
-	}
-
-	fprintf(fileID, "\nEnd\n");
-	fclose(fileID);
-
-	return EXIT_SUCCESS;
-}
-
-int MeshMMG::surface2volume(std::string inputFile, latticeType lt_type, latticeSize lt_size,
-                            latticeFeature lt_feature, meshSettings me_settings,
-                            std::filesystem::path &outputFile_string) {
-	/* Discretizes a closed volume with an implicitly defined infill.
-	 * Inputs :
-	 *  inputFile         : Surface .stl file
-	 *  lt_type           : Lattice type data
-	 *  lt_size           : Lattice size data
-	 *  lt_feature        : Lattice feature data
-	 *  me_settings       : Mesh settings
-	 *  outputFile_string : Output file
-	 * Outputs :
-	 *  .stl file containing the surface triangulation
-	 *  .mesh file containing the volume mesh
-	 */
-
-	tetgenio points;
-	MMG5_pMesh mmgMesh;
-	MMG5_pSol  mmgLs, mmgMet;
-	int np, ne, nt, na; // np = #vertices, ne = #tetra, nt = #triangles, na = #edges
-	int ierr;
-	char *outputFile, *tempFile;
-
-	double minFeatureSize = HUGE_VAL;
-	double maxFeatureSize = -HUGE_VAL;
-
-	// Read input file
-	char* stlFileChar = new char[inputFile.size() + 1];
-	strcpy(stlFileChar, inputFile.c_str());
-	std::cout << "  " << std::flush;
-	if (points.load_stl(stlFileChar) == 0) { //1.6
-	//if (points.read_stl(stlFileChar) == 0) { //1.4
-		delete stlFileChar;
-		exit(EXIT_FAILURE);
-	}
-	delete stlFileChar;
-
-	// Check if the folder to store temporary data exists (and create if missing)
-	std::string temporaryFolder = "temp";
-	std::string temporaryFile = temporaryFolder + "/mmg_temp.mesh";
-	if (!std::filesystem::is_directory(temporaryFolder) || !std::filesystem::exists(temporaryFolder)) {
-		std::filesystem::create_directory(temporaryFolder);
-	}
-
-	// Initialize mesh and sol structures
-	mmgMesh = NULL; mmgLs  = NULL; mmgMet = NULL;
-
-	MMG3D_Init_mesh(MMG5_ARG_start,
-	                MMG5_ARG_ppMesh, &mmgMesh,
-	                MMG5_ARG_ppMet,  &mmgMet,
-	                MMG5_ARG_end);
-
-	/* ------------------------------- Step 1 ------------------------------- */
-	// Create a volume mesh of the closed manifold surface provided as input
-	tempFile = (char *) calloc(strlen(temporaryFile.c_str()) + 1, sizeof(char));
-	strcpy(tempFile,temporaryFile.c_str());
-
-	fprintf(stdout,"\n  Creating volume mesh...\n");
-	internal::surface2volume(&points, tempFile, 
-	                         me_settings.TETGEN_hvol*lt_size.minUnitCellSize);
-
-	/* ------------------------------- Step 2 ------------------------------- */
-	// Remesh the volume to ensure elements have disires quality.
-	fprintf(stdout,"  Remeshing volume...\n");
-
-	// Read .mesh(b) file
-	if ( MMG3D_loadMesh(mmgMesh, tempFile) != 1 )  exit(EXIT_FAILURE);
-
-	// Set met size
-	MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na);
-	if ( MMG3D_Set_solSize(mmgMesh, mmgMet, MMG5_Vertex,np, MMG5_Scalar) != 1 )
-		exit(EXIT_FAILURE);
-
-	// Set met values
-	fprintf(stdout,"    Computing the metValues... ");
-	for (int i=1 ; i<=np ; i++) {
-		// Get the current point
-		double point[3];
-		MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL);
-		Point p(point[0], point[1], point[2]);
-
-		// Compute met value for current point
-		double solValueMet;
-		featureSize localFeatureSize;
-		localFeatureSize = Infill::featureSize_function(p, &lt_type, &lt_size, &lt_feature);
-		double minFeature = std::min(localFeatureSize.wallSize, localFeatureSize.poreSize);
-		double maxFeature = std::max(localFeatureSize.wallSize, localFeatureSize.poreSize);
-
-		solValueMet = me_settings.MMG_hinitial * minFeature;
-		if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 ) exit(EXIT_FAILURE);
-
-		// Determine minimum and maximum feature size in model
-		minFeatureSize = std::min(minFeatureSize, minFeature);
-		maxFeatureSize = std::max(maxFeatureSize, maxFeature);
-	}
-	fprintf(stdout,"Finished!\n");
-
-if (me_settings.MMG_hmin > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgMet, MMG3D_DPARAM_hmin, me_settings.MMG_hmin*minFeatureSize) != 1 )  exit(EXIT_FAILURE);		// Minimal mesh size
-	if (me_settings.MMG_hmax > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgMet, MMG3D_DPARAM_hmax, me_settings.MMG_hmax*maxFeatureSize) != 1 )  exit(EXIT_FAILURE);		// Maximal mesh size
-	if (me_settings.MMG_hausd > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgMet, MMG3D_DPARAM_hausd, me_settings.MMG_hausd*(minFeatureSize+maxFeatureSize)/2) != 1 )  exit(EXIT_FAILURE); 	// Control global Hausdorff distance (on all the boundary surfaces of the mesh) CHECK!!
-	if ( MMG3D_Set_dparameter(mmgMesh, mmgMet, MMG3D_DPARAM_hgrad, me_settings.MMG_hgrad) != 1 )  exit(EXIT_FAILURE);	// 
-
-	// Set level of verbosity (-1 ... 10)
-	if ( MMG3D_Set_iparameter(mmgMesh, mmgMet, MMG3D_IPARAM_verbose, 2) != 1 )  exit(EXIT_FAILURE);
-
-	// Remesh volume
-	fprintf(stdout,"    Remeshing... \n");
-	ierr = MMG3D_mmg3dlib(mmgMesh, mmgMet);
-	if ( ierr == MMG5_STRONGFAILURE ) {
-		fprintf(stdout,"BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH\n");
-		return(ierr);
-	} else if ( ierr == MMG5_LOWFAILURE )
-		fprintf(stdout,"BAD ENDING OF MMG3DLIB\n");
-	fprintf(stdout,"Finished!\n");
-
-	/* ------------------------------- Step 4 ------------------------------- */
-	// Store output and cleanup
-
-	//Determine current time to append to filenames
-  time_t t;
-  char currentTime[50];
-	std::time(&t);
-  std::strftime(currentTime, sizeof(currentTime), "_%Y-%m-%d_%H%M", localtime(&t)); 
-
-	outputFile = (char *) calloc(outputFile_string.string().size() + 1, sizeof(char));
-	strcpy(outputFile, outputFile_string.string().c_str());
-
-	// Save volume mesh
-	if (me_settings.volumeMesh == true) {
-		if ( MMG3D_saveMesh(mmgMesh, outputFile) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-			return(MMG5_STRONGFAILURE);
-		}
-	}
-
-	// Save surface triangulation
-	if ( internal::MMG3D_saveSurfaceAsSTL (mmgMesh, me_settings.STLFormat, outputFile) != EXIT_SUCCESS ) {
-		fprintf(stdout, "UNABLE TO SAVE SURFACE TRIANGULATION\n");
-		return(MMG5_STRONGFAILURE);
-	}
-
-	// Free the MMG3D5 structures
-	MMG3D_Free_all(MMG5_ARG_start,
-	               MMG5_ARG_ppMesh, &mmgMesh,
-	               MMG5_ARG_ppMet,  &mmgMet,
-	               MMG5_ARG_end);
-
-	// Cleanup
-	free(outputFile);
-	outputFile = NULL;
-
-	free(tempFile);
-	tempFile = NULL;
-
-	return(ierr);
-
 }
 
 bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string format, char *filename) {

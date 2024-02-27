@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2023
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -267,6 +267,10 @@ namespace MeshCGAL {
 	// Polehedral meshing
 	bool polehedral2volume(SurfaceMesh surfaceMesh,
 		SurfaceMesh::Property_map<edge_descriptor, bool> ecmap,
+		latticeType lt_type, latticeSize lt_size, latticeFeature lt_feature,
+		meshSettings me_settings, F_C3t3 &c3t3);
+
+	bool polehedral2volume(outerShell &shell,
 		latticeType lt_type, latticeSize lt_size, latticeFeature lt_feature,
 		meshSettings me_settings, F_C3t3 &c3t3);
 

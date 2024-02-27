@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -22,40 +22,19 @@
 #define MESH_H
 
 /* CGAL headers */
-#ifdef CGAL_MESH
 	#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
 	#include <CGAL/IO/STL.h>
-#endif
-
-/* tetgen headers */
-#ifdef MMG_MESH
-	#include "tetgen.h"
-#endif
 
 /* Standard library headers */
 #include <string>
 
-#ifdef CGAL_MESH
 	typedef CGAL::Exact_predicates_inexact_constructions_kernel K;
 	typedef K::Point_3 Point_3_;
-#endif
 
-#if defined CGAL_MESH && MMG_MESH
-	struct outerShell {
-		tetgenio tetgenPoints;
-		std::vector<Point_3_> points;
-		std::vector<std::vector<std::size_t>> polygons;
-	};
-#elif defined CGAL_MESH
 	struct outerShell {
 		std::vector<Point_3_> points;
 		std::vector<std::vector<std::size_t>> polygons;
 	};
-#elif defined MMG_MESH
-	struct outerShell {
-		tetgenio tetgenPoints;
-	};
-#endif
 
 struct meshSettings {
 	// General settings
@@ -76,9 +55,6 @@ struct meshSettings {
 	bool CGAL_preserveEdges;
 	double CGAL_poissonOffset;
 	double CGAL_edgesProtectionAngle;
-
-	// TETGEN settings
-	double TETGEN_hvol;
 
 	// MMG settings
 	double MMG_hinitial;
