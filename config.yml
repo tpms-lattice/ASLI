@@ -35,7 +35,7 @@ lt_type_correctionFactor: 0.25 # Correction factor to compensate for the thinnin
 
 lt_size: 0.5 # Unit cell size. Set to a value > 0 for a constant unit cell size. If a variable size is desired set to 0 and provide a .sap file. 
 
-lt_feature: isovalue # Unit cell feature: isovalue, volumeFraction, wallSize or poreSize.
+lt_feature: volumeFraction # Unit cell feature: volumeFraction, isovalue, wallSize or poreSize.
 lt_feature_val: 0.5 # Unit cell feature value. Set to a value > 0 for a constant feature value. If a variable feature value is desired set to 0 and provide a .fap file. [If the feature provided is the isovalue it should be specified as a normalized isovalue!]
 lt_feature_mode: relative # Feature size mode: absolute or relative. (Only applies to wall and pore size, default feature_mode is relative) [If set to relative, provide wall and pore sizes for a 1x1x1 unit cell]
 
