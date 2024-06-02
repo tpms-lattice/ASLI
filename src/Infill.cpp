@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2023
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -29,9 +29,9 @@
  * Author(s): F.P.B. (KU Leuven)
  */
 
-double Infill::internal::input2level(std::string type, double scaling, std::string feature, 
-                                     double featureValue, latticeUDF userDefinedParameters,
-                                     std::string featureMode) {
+double Infill::internal::input2level(const std::string &type, const double &scaling, const std::string &feature, 
+                                     const double &featureValue, const latticeUDF &userDefinedParameters,
+                                     const std::string &featureMode) {
 	/* Estimates the level-set constant that corresponds to the provided input
 	 * parameter. Estimation avaliable for: gyroid, diamond, primitive and IWP
 	 * in both strut and sheet variants.
@@ -58,12 +58,11 @@ double Infill::internal::input2level(std::string type, double scaling, std::stri
 	} else if (feature == "userDefined") {
 		return vFraction2level(userDefinedInput2vFraction(featureValue, userDefinedParameters), type);
 	} else {
-		std::cerr << "ERROR_INVALID_FEATURE_REQUEST" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_FEATURE_REQUEST);
 	}
 }
 
-double Infill::internal::unnormalizeLevel(double t_normalized, std::string type) {
+double Infill::internal::unnormalizeLevel(const double &t_normalized, const std::string &type) {
 	/* Reverts the min-max normalization of the provided normalized (range 
 	 * [0, 1]) level-set constant. Avaliable for: gyroid, diamond, primitive
 	 * and IWP in both strut and sheet variants.
@@ -102,12 +101,11 @@ double Infill::internal::unnormalizeLevel(double t_normalized, std::string type)
 		return (t_normalized * (0.71 - 0)) + 0;
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 }
 
-double Infill::internal::vFraction2level(double volFraction, std::string type) {
+double Infill::internal::vFraction2level(double volFraction, const std::string &type) {
 	/* Estimates the level-set constant that corresponds to the requested volume
 	 * fraction. Estimation avaliable for: gyroid, diamond, primitive and IWP in 
 	 * both strut and sheet variants.
@@ -158,8 +156,7 @@ double Infill::internal::vFraction2level(double volFraction, std::string type) {
 		g = -380.7; h = 114.3;
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 
 	// Compute the level-set constant
@@ -171,7 +168,7 @@ double Infill::internal::vFraction2level(double volFraction, std::string type) {
 	                           h*std::pow(volFraction,7);
 }
 
-double Infill::internal::wallSize2level(double wallSize, double scaling, std::string type, std::string mode) {
+double Infill::internal::wallSize2level(double wallSize, const double &scaling, const std::string &type, const std::string &mode) {
 	/* Estimates the level-set constant that corresponds to the requested wall
 	 * thickness. Estimation avaliable for: gyroid, diamond, primitive and IWP in
 	 * both strut and sheet variants.
@@ -234,8 +231,7 @@ double Infill::internal::wallSize2level(double wallSize, double scaling, std::st
 		if (wallSize > 1.356476) {wallSize = 1.356476;}
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 
 	// Compute the level-set constant
@@ -247,7 +243,7 @@ double Infill::internal::wallSize2level(double wallSize, double scaling, std::st
 	                         h*std::pow(wallSize,7));
 }
 
-double Infill::internal::poreSize2level(double poreSize, double scaling, std::string type, std::string mode) {
+double Infill::internal::poreSize2level(double poreSize, const double &scaling, const std::string &type, const std::string &mode) {
 	/* Estimates the level-set constant that corresponds to the requested pore
 	 * size. Estimation avaliable for: gyroid, diamond, primitive and IWP in 
 	 * both strut and sheet variants.
@@ -309,8 +305,7 @@ double Infill::internal::poreSize2level(double poreSize, double scaling, std::st
 		if (poreSize > 1.709269) {poreSize = 1.709269;}
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 
 	// Compute the level-set constant
@@ -323,7 +318,7 @@ double Infill::internal::poreSize2level(double poreSize, double scaling, std::st
 }
 
 
-double Infill::internal::level2wallSize(double t, double scaling, std::string type) {
+double Infill::internal::level2wallSize(double t, const double &scaling, const std::string &type) {
 	/* Estimates the wall thickness that corresponds to the requested level-set
 	 * constant. Estimation avaliable for: gyroid, diamond, primitive and IWP in
 	 * both strut and sheet variants.
@@ -397,8 +392,7 @@ double Infill::internal::level2wallSize(double t, double scaling, std::string ty
 		a = -0.03956; b = 2.002;
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 
 	// Compute the wall thickness
@@ -414,7 +408,7 @@ double Infill::internal::level2wallSize(double t, double scaling, std::string ty
 	else { return wallSize; }
 }
 
-double Infill::internal::level2poreSize(double t, double scaling, std::string type) {
+double Infill::internal::level2poreSize(double t, const double &scaling, const std::string &type) {
 	/* Estimates the pore size that corresponds to the requested level-set
 	 * constant. Estimation avaliable for: gyroid, diamond, primitive and IWP in
 	 * both strut and sheet variants.
@@ -489,8 +483,7 @@ double Infill::internal::level2poreSize(double t, double scaling, std::string ty
 		a = 1.42; b = -2.075;
 
 	} else {
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 
 	// Compute the pore size
@@ -506,8 +499,8 @@ double Infill::internal::level2poreSize(double t, double scaling, std::string ty
 	else { return poreSize; }
 }
 
-double Infill::internal::userDefinedInput2vFraction(double userDefinedInput, 
-                                                    latticeUDF userDefinedParameters) {
+double Infill::internal::userDefinedInput2vFraction(const double &userDefinedInput, 
+                                                    const latticeUDF &userDefinedParameters) {
 	/* Converts a user defined input to a volume fraction (relative density)
 	 * according to the user defined model selected. Users can implement 
 	 * the equation(s) that convert from their desired inputs to volume fractions
@@ -533,30 +526,17 @@ double Infill::internal::userDefinedInput2vFraction(double userDefinedInput,
 			return std::pow( (userDefinedInput/(userDefinedParameters.B*userDefinedParameters.A)), (1.0/userDefinedParameters.C) );
 		}
 
-	} else if (userDefinedParameters.userDefinedFeature == "elasticModulus_GyroidYan2015") { // Yan2015|Gibson-Ashby model
-		double relativeModulus = userDefinedInput/userDefinedParameters.A; // Relative density
-		if (relativeModulus < 0) {
-			return 0;
-		} else if (relativeModulus <= 0.01) { // Yan2015 model for a Gyroid TPMS (80-95 porosity)
-			return std::pow( (userDefinedInput/(0.19*userDefinedParameters.A)), (1.0/1.71) );
-		} else if (relativeModulus > 1) {
-			return 1;
-		} else {
-			return std::sqrt(userDefinedInput/userDefinedParameters.A); // Gibson-Ashby model
-		}
-
 	} else if (userDefinedParameters.userDefinedFeature == "stresses") {
-		std::cerr << "ERROR_NO_STRESS_CONVERSION_DEFINED" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::NO_STRESS_CONVERSION_DEFINED);
 		
 	} else {
-		std::cerr << "ERROR_INVALID_USER_DEFINED_FEATURE_REQUEST" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_USER_DEFINED_FEATURE_REQUEST);
 	}
 }
 
 
-double Infill::TPMS_function(Point p, std::string type, double scaling, double t) {
+double Infill::TPMS_function(Point &p, const std::string &type,
+	const double &scaling, const double &t) {
 	/* Returns the signed distance at point p for the requested unit cell type.
 	 * Currently available for: gyroid, diamond, primitive and IWP in both strut
 	 * and sheet variants.
@@ -644,13 +624,12 @@ double Infill::TPMS_function(Point p, std::string type, double scaling, double t
 		return std::min({X1, X2, X3}) - 1 - smoothing; // Boolean union of individual cylinders (with smoothing)
 
 	} else { 
-		std::cerr << "ERROR_INVALID_TPMS" << std::endl;
-		exit(EXIT_FAILURE);
+		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
 	}
 }
 
-double Infill::TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size,
-                           latticeFeature *lt_feature) {
+double Infill::TPMS_function(Point &p, const latticeType &lt_type,
+	const latticeSize &lt_size, const latticeFeature &lt_feature) {
 	/* Returns the signed distance at point p for a lattice of requested 
 	 * properties. Currently available for: gyroid, diamond, primitive and 
 	 * IWP in both strut and sheet variants.
@@ -673,41 +652,41 @@ double Infill::TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size
 	scaling = sizing_function(p, lt_size, "scaling");
 
 	// Determine the feature value
-	if (lt_feature->feature_val > 0) // If feature is provided as constant
-		featureVal = lt_feature->feature_val;
+	if (lt_feature.feature_val > 0) // If feature is provided as constant
+		featureVal = lt_feature.feature_val;
 	else // If feature is provided as variable
 		featureVal = TrilinearInterpolation::evaluate(pEigen, 
-		                                        &(lt_feature->interpModel_linear));
+		                                        lt_feature.interpModel_linear);
 
 	// Detemine the typing and compute the signed distance at point p
-	if (lt_type->type != "hybrid") { // If unit cell is fixed
-		double t = internal::input2level(lt_type->type, scaling, lt_feature->feature, featureVal, 
-		                                 lt_feature->udf, lt_feature->mode);
-		signedDistance = TPMS_function(p, lt_type->type, scaling, t);
+	if (lt_type.type != "hybrid") { // If unit cell is fixed
+		double t = internal::input2level(lt_type.type, scaling, lt_feature.feature, featureVal, 
+		                                 lt_feature.udf, lt_feature.mode);
+		signedDistance = TPMS_function(p, lt_type.type, scaling, t);
 
 	} else { // If unit cell is variable
 		// Compute weights
-		std::vector<double> weights(lt_type->interpModel_linear.size());
+		std::vector<double> weights(lt_type.interpModel_linear.size());
 		double norm = 0;
-		for (size_t i = 0; i < lt_type->interpModel_linear.size(); i++) {
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
 			weights[i] = TrilinearInterpolation::evaluate(pEigen, 
-			                                      &(lt_type->interpModel_linear[i]));
+			                                      lt_type.interpModel_linear[i]);
 			norm += weights[i] * weights[i];
 		}
 		norm = sqrt(norm);
 
 		// Determine the weighted signed distance at point p
 		signedDistance = 0;
-		for (size_t i = 0; i < lt_type->interpModel_linear.size(); i++) {
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
 			// Compute the level correction
-			double correction = 1 + lt_type->correctionFactor * (1-std::pow(2*(weights[i]/norm)-1 ,2));
+			double correction = 1 + lt_type.correctionFactor * (1-std::pow(2*(weights[i]/norm)-1 ,2));
 
 			// Compute the corrected feature value (Compensates thinning in hybrid region)
 			featureVal = correction * featureVal;
 
 			// Compute the weighted signed distance
-			double t = internal::input2level(lt_type->typeVector[i], scaling, lt_feature->feature, featureVal, lt_feature->udf, lt_feature->mode);
-			signedDistance += weights[i]/norm * TPMS_function(p, lt_type->typeVector[i], scaling, t);
+			double t = internal::input2level(lt_type.typeVector[i], scaling, lt_feature.feature, featureVal, lt_feature.udf, lt_feature.mode);
+			signedDistance += weights[i]/norm * TPMS_function(p, lt_type.typeVector[i], scaling, t);
 		}
 	}
 
@@ -715,7 +694,7 @@ double Infill::TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size
 	return signedDistance;
 }
 
-double Infill::sizing_function(Point p, latticeSize *lt_size, std::string mode) {
+double Infill::sizing_function(Point &p, const latticeSize &lt_size, const std::string &mode) {
 	/* Returns the size or scaling at point p.
 	 * Inputs:
 	 *   p       : Coordinates of point to be evaluated
@@ -727,13 +706,13 @@ double Infill::sizing_function(Point p, latticeSize *lt_size, std::string mode) 
 
 	double scaling;
 
-	if (lt_size->size > 0) { // If size is provided as constant
-		scaling = lt_size->scaling;
+	if (lt_size.size > 0) { // If size is provided as constant
+		scaling = lt_size.scaling;
 
 	} else { // If size is provided as variable
 		Eigen::Vector3d pEigen = Eigen::Vector3d(p.x(), p.y(), p.z());
 		scaling = TrilinearInterpolation::evaluate(pEigen, 
-		                                           &(lt_size->interpModel_linear));
+		                                           lt_size.interpModel_linear);
 	}
 
 	if (mode == "scaling") // Return scaling
@@ -742,9 +721,8 @@ double Infill::sizing_function(Point p, latticeSize *lt_size, std::string mode) 
 		return 2*PI/scaling;
 }
 
-featureSize Infill::featureSize_function(Point p, latticeType *lt_type,
-                                       latticeSize *lt_size, 
-                                       latticeFeature *lt_feature) {
+featureSize Infill::featureSize_function(Point &p, const latticeType &lt_type,
+	const latticeSize &lt_size, const latticeFeature &lt_feature) {
 	/* Returns the feature size at point p for a lattice of requested 
 	 * properties. Currently available for: gyroid, diamond, primitive and 
 	 * IWP in both strut and sheet variants.
@@ -771,41 +749,40 @@ featureSize Infill::featureSize_function(Point p, latticeType *lt_type,
 	scaling = sizing_function(p, lt_size, "scaling");
 
 	// Determine the feature value
-	if (lt_feature->feature_val > 0) // If feature is provided as constant
-		featureVal = lt_feature->feature_val;
+	if (lt_feature.feature_val > 0) // If feature is provided as constant
+		featureVal = lt_feature.feature_val;
 	else // If feature is provided as variable
-		featureVal = TrilinearInterpolation::evaluate(pEigen, 
-		                                        &(lt_feature->interpModel_linear));
+		featureVal = TrilinearInterpolation::evaluate(pEigen, lt_feature.interpModel_linear);
 
 	// Determine wall and pore size
-	if (lt_type->type != "hybrid") { // If unit cell is fixed
+	if (lt_type.type != "hybrid") { // If unit cell is fixed
 		// Compute the level-set constant
-		double t = internal::input2level(lt_type->type, scaling, lt_feature->feature, featureVal, 
-		                                 lt_feature->udf, lt_feature->mode);
+		double t = internal::input2level(lt_type.type, scaling, lt_feature.feature, featureVal, 
+		                                 lt_feature.udf, lt_feature.mode);
 	
 		// Compute wall and pore size
-		output.wallSize = internal::level2wallSize(t, scaling, lt_type->type);
-		output.poreSize = internal::level2poreSize(t, scaling, lt_type->type);
+		output.wallSize = internal::level2wallSize(t, scaling, lt_type.type);
+		output.poreSize = internal::level2poreSize(t, scaling, lt_type.type);
 
 	} else { // If unit cell is variable
 		// Compute  weights
-		std::vector<double> weights(lt_type->interpModel_linear.size());
+		std::vector<double> weights(lt_type.interpModel_linear.size());
 		double norm = 0;
-		for (size_t i = 0; i < lt_type->interpModel_linear.size(); i++) {
-			weights[i] = TrilinearInterpolation::evaluate(pEigen, &(lt_type->interpModel_linear[i]));
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
+			weights[i] = TrilinearInterpolation::evaluate(pEigen, lt_type.interpModel_linear[i]);
 			norm += weights[i] * weights[i];
 		}
 		norm = sqrt(norm);
 
 		// Compute wall and pore size
-		for (size_t i = 0; i < lt_type->interpModel_linear.size(); i++) {
-			double t = internal::input2level(lt_type->typeVector[i], scaling, 
-			                                lt_feature->feature, featureVal,
-			                                lt_feature->udf, lt_feature->mode);
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
+			double t = internal::input2level(lt_type.typeVector[i], scaling, 
+			                                lt_feature.feature, featureVal,
+			                                lt_feature.udf, lt_feature.mode);
 			
 			if (weights[i]/norm > 0.1) {
-				output.wallSize = std::min(output.wallSize, internal::level2wallSize(t, scaling, lt_type->typeVector[i]));
-				output.poreSize = std::min(output.poreSize, internal::level2poreSize(t, scaling, lt_type->typeVector[i]));
+				output.wallSize = std::min(output.wallSize, internal::level2wallSize(t, scaling, lt_type.typeVector[i]));
+				output.poreSize = std::min(output.poreSize, internal::level2poreSize(t, scaling, lt_type.typeVector[i]));
 			}
 		}
 	}

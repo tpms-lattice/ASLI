@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -32,11 +32,15 @@ struct neighbourData {
 };
 
 namespace Filter {
-	double filter(neighbourData neighbours, std::vector<double> unfilteredValues,
-	              std::string weightFunction, double filterRadius);
+	double filter(const neighbourData &neighbours, 
+	              const std::vector<double> &unfilteredValues,
+	              const std::string &weightFunction,
+	              const double &filterRadius);
 
 	namespace internal {
-		double weightFunction(std::string type, double distance, double radius);
+		double weightFunction(const std::string &type,
+		                      const double &distance,
+		                      const double &radius);
 	}
 };
 

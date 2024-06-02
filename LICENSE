@@ -15,7 +15,6 @@ the following third-party libraries, available under their own licenses:
    - eigen, found in the directory "libs/eigen", is licensed under the MPL2.
    - CGAL, found in the directory "libs/CGAL", is licensed under the GPL.
    - mTT, found in the directory "libs/mTT", is licensed under the BSD3.
-   - TetGen, found in the directory "libs/tetgen", is licensed under the AGPL.
    - yaml-cpp, found in the directory "libs/yaml", is licensed under the MIT 
      License.
 

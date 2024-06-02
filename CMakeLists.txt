@@ -63,7 +63,7 @@ option(ASLI_DOC "Compile the documentation" OFF)
 option(ASLI_DLL "Copy required dll files" OFF)
 
 # Mesher option defaults
-option(CGAL_ACTIVATE_CONCURRENT_MESH_3 "Activate parallelism in Mesh_3" OFF)
+option(ACTIVATE_CONCURRENT_MESHING "Activate parallelism in Mesh_3" OFF)
 option(NATIVE "Add -march=native flag" OFF)
 
 # Set some default paths
@@ -93,7 +93,7 @@ include_directories(${EIGEN3_INCLUDE_DIR})
 
 # CGAL and its components
   # CGAL
-  find_package(CGAL 5.5.1 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR}/libs/CGAL) #Needs -frounding-math with gcc
+find_package(CGAL 5.6 REQUIRED HINTS ${CMAKE_CURRENT_SOURCE_DIR}/libs/CGAL) #Needs -frounding-math with gcc
   include_directories(${CGAL_DIR}/include)
 
   # Eigen (CGAL support)
@@ -103,7 +103,7 @@ include_directories(${EIGEN3_INCLUDE_DIR})
   find_package(Boost 1.66 REQUIRED)
 
   # Compile for parallel use?
-  if(CGAL_ACTIVATE_CONCURRENT_MESH_3 OR ENV{CGAL_ACTIVATE_CONCURRENT_MESH_3})
+if(ACTIVATE_CONCURRENT_MESHING OR ENV{ACTIVATE_CONCURRENT_MESHING})
     add_definitions(-DCGAL_CONCURRENT_MESH_3)
 
     # TBB
@@ -113,7 +113,7 @@ endif()
 
 # Mmg and its components
   # MMG
-  set(MMG_PREFIX mmg3d)
+set(MMG_PREFIX mmg)
   set(MMG_PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MMG_PREFIX})
   set(MMG_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MMG_PREFIX})
   ExternalProject_Add(${MMG_PREFIX}
@@ -123,8 +123,9 @@ endif()
     BUILD_ALWAYS OFF
     INSTALL_DIR  ${MMG_INSTALL_DIR}
 
-    CMAKE_ARGS(-DCMAKE_BUILD_TYPE=Release -DBUILD=MMG3D -DLIBMMG3D_STATIC=ON
-               -DLIBMMG3D_SHARED=OFF -DUSE_ELAS=OFF -DUSE_VTK=OFF -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+  CMAKE_ARGS(-DCMAKE_BUILD_TYPE=Release -DBUILD=MMG 
+             -DUSE_ELAS=OFF -DUSE_VTK=OFF 
+             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
 
     BUILD_COMMAND   make
     INSTALL_COMMAND make install
@@ -136,24 +137,24 @@ endif()
   #add_library(MMG3D STATIC IMPORTED)
   #set_target_properties(MMG3D PROPERTIES IMPORTED_LOCATION "${MMG3D_LIBRARIES}")
 
-  # MshMet
-  set(MSHMET_PREFIX mshmet)
-  set(MSHMET_PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MSHMET_PREFIX})
-  set(MSHMET_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MSHMET_PREFIX})
-  ExternalProject_Add(${MSHMET_PREFIX}
-    PREFIX       ${MSHMET_PREFIX_DIR}
-    SOURCE_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/libs/AdaptTools
-
-    BUILD_ALWAYS OFF
-    BINARY_DIR ${MSHMET_INSTALL_DIR}
-    INSTALL_DIR  ${MSHMET_INSTALL_DIR}
-
-    CMAKE_ARGS(-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
-  )
-  set(MSHMET_INCLUDE_DIRS "${MSHMET_INSTALL_DIR}/include")
-  set(MSHMET_LIBRARIES "${MSHMET_INSTALL_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}${MSHMET_PREFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}")
-
-  include_directories(${MSHMET_INCLUDE_DIRS})
+## MshMet
+#set(MSHMET_PREFIX mshmet)
+#set(MSHMET_PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MSHMET_PREFIX})
+#set(MSHMET_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${MSHMET_PREFIX})
+#ExternalProject_Add(${MSHMET_PREFIX}
+#  PREFIX       ${MSHMET_PREFIX_DIR}
+#  SOURCE_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/libs/AdaptTools
+#
+#  BUILD_ALWAYS OFF
+#  BINARY_DIR ${MSHMET_INSTALL_DIR}
+#  INSTALL_DIR  ${MSHMET_INSTALL_DIR}
+#
+#  CMAKE_ARGS(-DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+#)
+#set(MSHMET_INCLUDE_DIRS "${MSHMET_INSTALL_DIR}/include")
+#set(MSHMET_LIBRARIES "${MSHMET_INSTALL_DIR}/lib/${CMAKE_STATIC_LIBRARY_PREFIX}${MSHMET_PREFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}")
+#
+#include_directories(${MSHMET_INCLUDE_DIRS})
 
   # Scotch
   find_package(SCOTCH)
@@ -173,6 +174,28 @@ target_include_directories(alg PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/libs/alglib/sr
 # mTT
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/libs/mTT/include)
 
+## ryml
+#set(RYML_PREFIX ryml)
+#set(RYML_PREFIX_DIR ${CMAKE_CURRENT_BINARY_DIR}/${RYML_PREFIX})
+#set(RYML_INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/${RYML_PREFIX})
+#ExternalProject_Add(${RYML_PREFIX}
+#  PREFIX       ${RYML_PREFIX_DIR}
+#  SOURCE_DIR   ${CMAKE_CURRENT_SOURCE_DIR}/libs/rapidyaml
+#
+#  BUILD_ALWAYS OFF
+#  INSTALL_DIR  ${RYML_INSTALL_DIR}
+#
+#  CMAKE_ARGS(-DCMAKE_BUILD_TYPE=Release 
+#             -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>)
+#
+#  BUILD_COMMAND   make
+#  INSTALL_COMMAND make install
+#)
+#set(RYML_INCLUDE_DIRS "${RYML_INSTALL_DIR}/include")
+#set(RYML_LIBRARIES "${RYML_INSTALL_DIR}/${CMAKE_INSTALL_LIBDIR}/${CMAKE_STATIC_LIBRARY_PREFIX}${RYML_PREFIX}${CMAKE_STATIC_LIBRARY_SUFFIX}")
+#
+#include_directories(${RYML_INCLUDE_DIRS})
+#
 # yaml
 file(GLOB yaml_SRC CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/libs/yaml/src/*.cpp) # Using file GLOB is not recomended!
 add_library(yaml STATIC)
@@ -189,7 +212,7 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   #target_compile_options(-W -Wall -Werror -Wextra -Wpedantic)
 
   if(WIN32 OR MSYS) # Set to "large object" file format
-  	add_compile_options(-Wa,-mbig-obj -O2)
+    add_compile_options(-Wa,-mbig-obj -O2) #you can use the -static option of mingw to static link dependencies and produce a binary that doesn't need any dlls from mingw, you only need to link your extra dlls, but the produced dlls/executables will have notably larger size.
   endif()
 endif()
 
@@ -198,6 +221,8 @@ set(ASLI_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/ASLI.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/TrilinearInterpolation.cpp 
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/Filter.cpp 
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/Infill.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/BasicGeometries.cpp
+                 ${CMAKE_CURRENT_SOURCE_DIR}/src/Mesh.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshCGAL.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/MeshMMG.cpp
                  ${CMAKE_CURRENT_SOURCE_DIR}/src/icon.rc
@@ -210,7 +235,7 @@ add_executable(ASLI ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp ${ASLI_SOURCES})
 target_include_directories(ASLI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include) 
 set_target_properties(ASLI PROPERTIES
                            RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin/$<0:>
-                           CXX_STANDARD 17
+                      CXX_STANDARD 20
 )
 if(MARCH_NATIVE)
   set_target_properties(ASLI PROPERTIES COMPILE_FLAGS "-march=native")
@@ -218,7 +243,7 @@ endif()
 
 # Create entries for C++ files in "ASLI" routine
 add_dependencies(ASLI ${MMG_PREFIX} ${MSHMET_PREFIX})
-target_link_libraries(ASLI PUBLIC alg yaml 
+target_link_libraries(ASLI PUBLIC alg yaml #${RYML_LIBRARIES} 
                       CGAL::CGAL CGAL::Eigen_support 
                       ${MMG3D_LIBRARIES} ${MSHMET_LIBRARIES}
 )
@@ -227,12 +252,12 @@ if(NOT MSVC)
   target_link_libraries(ASLI PUBLIC stdc++fs)
 endif()
 
-  if(CGAL_ACTIVATE_CONCURRENT_MESH_3 AND TARGET CGAL::TBB_support)
+if(ACTIVATE_CONCURRENT_MESHING AND TARGET CGAL::TBB_support)
     target_link_libraries(ASLI PUBLIC TBB::tbb CGAL::TBB_support)
 endif()
 
   if(SCOTCH_FOUND)
-    target_link_libraries(ASLI PUBLIC ${SCOTCH_LIBRARIES} scotch)
+  target_link_libraries(ASLI PUBLIC ${SCOTCH_LIBRARIES})
 endif()
 
 # Documentation
@@ -286,7 +311,7 @@ endif()
 
 # Copy release dll files (unsupported feature)
 if(MSYS AND ASLI_DLL)
-  if(CGAL_ACTIVATE_CONCURRENT_MESH_3)
+  if(ACTIVATE_CONCURRENT_MESHING)
     add_custom_command(TARGET ASLI POST_BUILD
   							COMMAND ${CMAKE_COMMAND} -E copy_if_different
   							${CMAKE_CURRENT_SOURCE_DIR}/dll/*.dll

@@ -18,45 +18,34 @@
  *  accept them.
  * ==========================================================================*/
 
-#include "MeshMMG.h"
-/* MESHMMG discretizes the provided closed surface with the requested infill
- * using the tetgen and mmg libraries.
+#include "Mesh.h"
+
+/* MESHMMG discretizes the provided closed surface with the requested infill 
+ * using the CGAL library to generate a volume mesh of the provided surface 
+ * and the mmg library to discretize the geometry with the prescribed infill.
  * 
  * Author(s): F.P.B. (KU Leuven)
  */
 
-int MeshMMG::implicit2volume(outerShell &shell, latticeType lt_type, latticeSize lt_size,
-                             latticeFeature lt_feature, meshSettings me_settings,
-                             std::filesystem::path &outputFile_string) {
+void MeshMMG::implicit2volume(const polygonSoup &shell, const latticeType &lt_type,
+                              const latticeSize &lt_size, const latticeFeature &lt_feature,
+                              const meshSettings &me_settings) {
 	/* Discretizes a closed volume with an implicitly defined infill.
 	 * Inputs :
-	 *  shell             : Structure containing the outer shell geometry
-	 *  lt_type           : Lattice type data
-	 *  lt_size           : Lattice size data
-	 *  lt_feature        : Lattice feature data
+	 *  shell             : Structure containing the general geometry
+	 *  lt_type           : Lattice type parameters
+	 *  lt_size           : Lattice size parameters
+	 *  lt_feature        : Lattice feature parameters
 	 *  me_settings       : Mesh settings
-	 *  outputFile_string : Output file path
 	 * Outputs :
 	 *  .stl file containing the surface triangulation
-	 *  .mesh file containing the volume mesh
+	 *  .mesh file containing the volume mesh (optional)
 	 */
 
 	MMG5_pMesh mmgMesh;
-	MMG5_pSol  mmgLs, mmgMet;
+	MMG5_pSol  mmgLs, mmgMet; // mmgLs = level-set solution, mmgMet = size metric
 	int np, ne, nt, na; // np = #vertices, ne = #tetra, nt = #triangles, na = #edges
 	int ierr;
-	char *outputFile, *tempFile;
-
-	double minFeatureSize = HUGE_VAL;
-	double maxFeatureSize = -HUGE_VAL;
-
-	std::string temporaryFolder = "temp";
-	std::string temporaryFile = temporaryFolder + "/mmg_temp.mesh";
-
-	// Check if the folder to store temporary data exists (and create if missing)
-	if (!std::filesystem::is_directory(temporaryFolder) || !std::filesystem::exists(temporaryFolder)) {
-		std::filesystem::create_directory(temporaryFolder);
-	}
 
 	// Initialize mesh and sol structures
 	mmgMesh = NULL; mmgLs  = NULL; mmgMet = NULL;
@@ -67,378 +56,267 @@ int MeshMMG::implicit2volume(outerShell &shell, latticeType lt_type, latticeSize
 	                MMG5_ARG_ppMet,  &mmgMet,
 	                MMG5_ARG_end);
 
-	/* ------------------------------- Step 1 ------------------------------- */
-	// Create a volume mesh of the closed manifold surface provided as input
-	tempFile = (char *) calloc(strlen(temporaryFile.c_str()) + 1, sizeof(char));
-	strcpy(tempFile,temporaryFile.c_str());
+	const bool isUniform = (lt_type.type != "hybrid" && lt_size.size != 0 && lt_feature.feature_val != 0 
+		&& (lt_type.side == "scaffold" || lt_type.side == "void" ));
+	std::filesystem::path outputPath = me_settings.output;
 
-	fprintf(stdout,"\n  Creating initial volume mesh...\n");
+	/* ------------------------------- Step 1 ------------------------------- */
+	// Create a volume mesh of the closed manifold input surface with elements
+	// of a size appropiate to capture the level-set describing the infill.
+	TicToc::tic(); std::cout << "  Generating initial volume mesh... " << std::flush;
 
 	F_C3t3 c3t3;
-	MeshCGAL::polehedral2volume(shell, lt_type, lt_size, lt_feature, me_settings, c3t3);
+	Mesh::polehedral2volume(shell, lt_type, lt_size, lt_feature, me_settings, c3t3);
+	Mesh::c3t3_to_MMG3D(c3t3, mmgMesh);
+	c3t3.clear();
 
-	// Write output to .mesh file
-	std::ofstream medit_file(tempFile);
-	c3t3.output_to_medit(medit_file);
-	medit_file.close();
+	// Save initial volume mesh for DEBUG PURPOSES!!!
+	if (me_settings.verbosity > 5) {
+		std::string tempFile = "MMG_Step_1.mesh";
+		if ( MMG3D_saveMesh(mmgMesh, tempFile.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_MESH, nullptr);
+	}
+
+	TicToc::toc("completed in ");
 
 	/* ------------------------------- Step 2 ------------------------------- */
-	// Remesh the volume such that the elements have a size appropiate to capture
-	// the level-set describing the infill geometry.
-	fprintf(stdout,"  Remeshing inital volume mesh...\n");
+	// Compute the level-set describing the lattice infill
 
-	// Read .mesh(b) file
-	if ( MMG3D_loadMesh(mmgMesh, tempFile) != 1 )  exit(EXIT_FAILURE);
-
-	// Set met size
-	MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na);
-	if ( MMG3D_Set_solSize(mmgMesh, mmgMet, MMG5_Vertex,np, MMG5_Scalar) != 1 )
-		exit(EXIT_FAILURE);
-
-	// Set met values
-	fprintf(stdout,"    Computing local feature size metric...\n");
-	for (int i=1 ; i<=np ; i++) {
-		// Get the current point
-		double point[3];
-		MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL);
-		Point p(point[0], point[1], point[2]);
-
-		// Compute met value for current point
-		double solValueMet;
-		featureSize localFeatureSize;
-		localFeatureSize = Infill::featureSize_function(p, &lt_type, &lt_size, &lt_feature);
-		double minFeature, maxFeature;
-		if (me_settings.side == "void") {
-			minFeature = localFeatureSize.poreSize;
-			maxFeature = localFeatureSize.poreSize;
-		} else if (me_settings.side == "scaffold") {
-			minFeature = localFeatureSize.wallSize;
-			maxFeature = localFeatureSize.wallSize;
-		} else {
-			minFeature = std::min(localFeatureSize.wallSize, localFeatureSize.poreSize);
-			maxFeature = std::max(localFeatureSize.wallSize, localFeatureSize.poreSize);
-		}
-
-		solValueMet = me_settings.MMG_hinitial * minFeature;
-		if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 ) exit(EXIT_FAILURE);
-
-		// Determine minimum and maximum feature size in model
-		minFeatureSize = std::min(minFeatureSize, minFeature);
-		maxFeatureSize = std::max(maxFeatureSize, maxFeature);
+	// Get mesh info and set solution size
+	if ( MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na) != 1 )
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_GET_MESH_SIZE, nullptr);
+	if ( MMG3D_Set_solSize(mmgMesh, mmgLs, MMG5_Vertex, np, MMG5_Scalar) != 1 ) 
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_SOL_SIZE, nullptr);
+	if (!isUniform) {
+		if ( MMG3D_Set_solSize(mmgMesh, mmgMet, MMG5_Vertex, np, MMG5_Scalar) != 1 ) 
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_SOL_SIZE, nullptr);
 	}
-
-	// Set level of verbosity (-1 ... 10)
-	if ( MMG3D_Set_iparameter(mmgMesh, mmgMet, MMG3D_IPARAM_verbose, -1) != 1 )  exit(EXIT_FAILURE);
-
-	// Remesh volume
-	fprintf(stdout,"    Refining volume mesh based on feature metric...\n");
-	ierr = MMG3D_mmg3dlib(mmgMesh, mmgMet);
-	if ( ierr == MMG5_STRONGFAILURE ) {
-		fprintf(stdout,"BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH\n");
-		return(ierr);
-	} else if ( ierr == MMG5_LOWFAILURE )
-		fprintf(stdout,"BAD ENDING OF MMG3DLIB\n");
-
-	if ( MMG3D_saveMesh(mmgMesh, tempFile) != 1 ) {
-		fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-		return(MMG5_STRONGFAILURE);
-	}
-
-
-
-
-
-/* TESTING MSHMET IMPROVEMENT START!!! */
-	bool testImprovement = 1;
-	if (testImprovement == 1) {
-		/* ------------------------------ Step 2.1 ------------------------------ */
-		// Optimize mesh sizing distribution by computing a signed distance based metric.
-		// Get mesh info
-
-		MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na);
-
-		// Set sol size
-		if ( MMG3D_Set_solSize(mmgMesh, mmgMet, MMG5_Vertex,np, MMG5_Scalar) != 1 )
-			exit(EXIT_FAILURE);
-
-		//
-		std::vector<double> solValueLs (np);
-		double minLS = HUGE_VAL;
-		double maxLS = -HUGE_VAL;
-		
-		fprintf(stdout,"    Computing level-set based metric... \n");
-		for (size_t i=0 ; i<np ; i++) {
-			// Get the current point value
-			double point[3];
-			MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL);
-			Point p(point[0], point[1], point[2]);
-
-			// Compute the sol value for current point
-			solValueLs[i] = Infill::TPMS_function(p, &lt_type, &lt_size, &lt_feature);
-			solValueLs[i] = std::abs(solValueLs[i]); //solValueLs[i] = std::pow(std::abs(solValueLs[i]), 1.0/3.0);
-
-			minLS = std::min(minLS, solValueLs[i]);
-			maxLS = std::max(maxLS, solValueLs[i]);
-		}
-
-		double a = std::max(1e-6, minLS);//me_settings.MMG_hinitial
-		double b = 1e2*maxLS;
-		for (size_t i=0 ; i<np ; i++) {
-			double solVals = (solValueLs[i] - minLS) / (maxLS - minLS);
-
-			solVals = std::pow(solVals, 1.0/3.0);
-
-			//solVals = a + ( ((solValueLs[i] - minLS)*(b-a)) / (maxLS - minLS) );
-
-			// Set sol value
-			if ( MMG3D_Set_scalarSol(mmgMet, solVals, i+1) != 1 )
-				exit(EXIT_FAILURE);
-		}
-		
-		// 
-		if ( MMG3D_saveSol(mmgMesh, mmgMet, tempFile) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE SOL\n");
-			return(MMG5_STRONGFAILURE);
-		}
-
-		// this will 'fill' the string command with the right stuff, assuming myFile and convertedFile are strings themselves
-		char *mshmetName;
-		std::string temporaryFileB = temporaryFolder + "/mmg_temp.new.mesh";
-
-		mshmetName = (char *) calloc(strlen(temporaryFileB.c_str()) + 1, sizeof(char));
-		strcpy(mshmetName,temporaryFileB.c_str());
-
-		// Determine mshmet input parameters
-		std::ostringstream hmin, hmax, mshmet_outFile;
-		hmin << 0.05*minFeatureSize;
-		hmax << 1*maxFeatureSize;
-		mshmet_outFile << tempFile;
-
-		std::vector<std::string> arguments = {"./mshmet", 
-		                                      "-hmin", hmin.str(), 
-		                                      "-hmax", hmax.str(), 
-		                                      "-hgrad", "4.5",
-		                                      "-eps", "0.05",
-		                                      "-v", "0",
-		                                      mshmet_outFile.str()};
-
-		// Conctruct argv like input to pass on to mshmet
-		std::vector<char*> argv;
-		for (const auto& arg : arguments)
-			argv.push_back((char*)arg.data());
-		argv.push_back(nullptr);
-
-		fprintf(stdout, "\n    ");
-		for (size_t i=0; i < argv.size() - 1; i++)
-			fprintf(stdout, "%s ", arguments[i].c_str());
-		fprintf(stdout, "\n");
-
-		// Construct signed distance based metric using mshmet
-		main_mshmet(argv.size() - 1, argv.data());
-
-		// Load computed metric
-		if ( MMG3D_loadSol(mmgMesh, mmgMet, mshmetName) != 1 ) exit(EXIT_FAILURE);
-
-		if ( MMG3D_Set_iparameter(mmgMesh, mmgMet, MMG3D_IPARAM_verbose, -1) != 1 )  exit(EXIT_FAILURE); // Set level of verbosity (-1 ... 10)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgMet, MMG3D_DPARAM_hgrad, 4.5) != 1 )  exit(EXIT_FAILURE);
-
-		// Remesh volume
-		fprintf(stdout,"    Remeshing volume based on level-set metric...\n");
-		ierr = MMG3D_mmg3dlib(mmgMesh, mmgMet);
-		if ( ierr == MMG5_STRONGFAILURE ) {
-			fprintf(stdout,"BAD ENDING OF MMG3DLIB: UNABLE TO SAVE MESH\n");
-			return(ierr);
-		} else if ( ierr == MMG5_LOWFAILURE )
-			fprintf(stdout,"BAD ENDING OF MMG3DLIB\n");
-
-		if ( MMG3D_saveMesh(mmgMesh, tempFile) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-			return(MMG5_STRONGFAILURE);
-		}
-	}
-/* TESTING MSHMET IMPROVEMENT END!!! */
-
-
-
-
-
-	/* ------------------------------- Step 3 ------------------------------- */
-	// Discretize the level-set describing the lattice infill
-	fprintf(stdout,"\n  Discretizing level-set...\n");
-
-	// Get mesh info
-	MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na);
-
-	// Set sol size
-	if ( MMG3D_Set_solSize(mmgMesh, mmgLs, MMG5_Vertex,np, MMG5_Scalar) != 1 )
-		exit(EXIT_FAILURE);
-
+	
 	// Compute the level-set values within the volume to be provided with an 
-	// infill and set them as the sol values
-	fprintf(stdout,"    Computing the level-set solution values...\n");
-	for (int i=0 ; i<np ; i++) {
-		// Get the current point value
+	// infill and set them as the solution values
+	double minFeatureSize = HUGE_VAL, maxFeatureSize = -HUGE_VAL;
+	double wallSize, poreSize;
+
+	TicToc::tic();
+	if (isUniform)
+		std::cout << "  Computing the level-set solution values... " << std::flush;
+	else
+		std::cout << "  Computing the level-set solution values and size metrics... " << std::flush;
+
+	for (int i=1 ; i<=np ; i++) {
+		// Get the coordinates of the current point
 		double point[3];
-		MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL);
+		if ( MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_GET_VERTEX, nullptr);
+
 		Point p(point[0], point[1], point[2]);
 
-		// Compute the sol value for current point
-		double solValueLs;
-		solValueLs = Infill::TPMS_function(p, &lt_type, &lt_size, &lt_feature);
+		// Compute the level-set solution value at the current coordinate
+		double isovalue = Infill::TPMS_function(p, lt_type, lt_size, lt_feature);
+		if ( MMG3D_Set_scalarSol(mmgLs, isovalue, i) != 1 ) 
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_SOL, nullptr);
 
-		// Set sol value
-		if ( MMG3D_Set_scalarSol(mmgLs, solValueLs, i+1) != 1 )
-			exit(EXIT_FAILURE);
+		// Compute the size metric at the current coordinate
+		if (!isUniform) {
+			// Compute the size of the walls and pores at the current coordinate
+			featureSize localFeatureSize = Infill::featureSize_function(p, lt_type, lt_size, lt_feature);
+
+			double solValueMet = (isovalue > 0) ? localFeatureSize.poreSize : localFeatureSize.wallSize;
+			solValueMet *= me_settings.elementSize;
+
+			// Make non-positive element sizes (or bellow some set threshold) equal to the size
+			// of the unit cell at that location since there is no infill to capture anyway.
+			double unitCellSize = Infill::sizing_function(p, lt_size, "");
+			if (solValueMet <= unitCellSize*me_settings.threshold) {solValueMet = unitCellSize;}
+
+			// Set size metric
+			if (solValueMet > 0) {
+				if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 )
+					throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_SOL_SIZE, nullptr);
+			} else {
+				throw ExceptionError(MMG_ERRMSG::INVALID_SIZE_METRIC, nullptr);
+			}
+
+			// Track the minimum and maximum feature size in the geometry
+			minFeatureSize = std::min(minFeatureSize, std::min(localFeatureSize.wallSize, localFeatureSize.poreSize));
+			maxFeatureSize = std::max(maxFeatureSize, std::max(localFeatureSize.wallSize, localFeatureSize.poreSize));
+		}
 	}
 
-	// Recompute local feature size metric
-//	if (me_settings.volumeMesh == true) {
-//		fprintf(stdout,"    Recomputing local feature size metric... ");
-//		for (int i=1 ; i<=np ; i++) {
-//			// Get the current point
-//			double point[3];
-//			MMG3D_Get_vertex(mmgMesh, &(point[0]), &(point[1]), &(point[2]), NULL, NULL, NULL);
-//			Point p(point[0], point[1], point[2]);
-//
-//			// Compute met value for current point
-//			double solValueMet;
-//			featureSize localFeatureSize;
-//			localFeatureSize = Infill::featureSize_function(p, &lt_type, &lt_size, &lt_feature);
-////			double minFeature = std::min(localFeatureSize.wallSize, localFeatureSize.poreSize);
-////			double maxFeature = std::max(localFeatureSize.wallSize, localFeatureSize.poreSize);
-//
-//			double hlocal;
-//			if (me_settings.MMG_hmax==0)
-//				hlocal = 1;
-//			else
-//				hlocal = me_settings.MMG_hmax;
-//
-//			solValueMet = hlocal * localFeatureSize.wallSize;
-//			if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 ) exit(EXIT_FAILURE);
-//		}
-//	}
+	// Check if the number of given entities match with mesh size
+	if ( MMGS_Chk_meshData(mmgMesh, mmgLs) != 1 )
+		throw ExceptionError(MMG_ERRMSG::FAILED_MESH_DATA_CHECK, nullptr);
 
-	// SAVE MESH AND SOL FILE TO BE USED FOR LEVEL_SET DISCRETIZATION (FOR
-	// DEBUG PURPOSES) COMMENT WHEN NOT REQUIRED!!!
-//	if ( MMG3D_saveMesh(mmgMesh, tempFile) != 1 ) {
-//		fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-//		return(MMG5_STRONGFAILURE);
-//	}
-////	if ( MMG3D_saveSol(mmgMesh, mmgMet, tempFile) != 1 ) {
-////		fprintf(stdout, "UNABLE TO SAVE SOL\n");
-////		return(MMG5_STRONGFAILURE);
-////	}
-//	if ( MMG3D_saveSol(mmgMesh, mmgLs, tempFile) != 1 ) {
-//		fprintf(stdout, "UNABLE TO SAVE SOL\n");
-//		return(MMG5_STRONGFAILURE);
-//	}
-
-	// SAVE MESH AND LEVEL-SET SOL FILE TO USE DIRECTLY IN SOME OTHER PROGRAM (AND SKIP TO CLEANUP)
-	if (me_settings.exportls == true) {
-		fprintf(stdout,"\n  Exporting level-set sol file...\n");
-
-		char *outputFileLS;
-
-		time_t t;
-		char currentTime[50];
-		std::time(&t);
-		std::strftime(currentTime, sizeof(currentTime), "_%Y-%m-%d_%H%M", localtime(&t)); 
-
-		outputFile_string = me_settings.output + currentTime + "mmgLS.mesh";
-		outputFileLS = (char *) calloc(outputFile_string.string().size() + 1, sizeof(char));
-		strcpy(outputFileLS, outputFile_string.string().c_str());
-
-		if ( MMG3D_saveMesh(mmgMesh, outputFileLS) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-			return(MMG5_STRONGFAILURE);
-		}
-		if ( MMG3D_saveSol(mmgMesh, mmgLs, outputFileLS) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE SOL\n");
-			return(MMG5_STRONGFAILURE);
+	// Global size
+	double hsiz;
+	if (isUniform) {
+		Point p(0, 0, 0);
+		featureSize globalFeatureSize = Infill::featureSize_function(p, lt_type, lt_size, lt_feature);
+		if (lt_type.side == "scaffold") {
+			hsiz = me_settings.elementSize*globalFeatureSize.wallSize;
+		} else {
+			hsiz = me_settings.elementSize*globalFeatureSize.poreSize;
 		}
 
-		free(outputFileLS);
-		outputFileLS = NULL;
+		if ( hsiz <= 0 )
+			throw ExceptionError(MMG_ERRMSG::INVALID_SIZE_METRIC, nullptr);
+
+	} else { // Check validity of size metric
+		if ( MMGS_Chk_meshData(mmgMesh, mmgMet) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_MESH_DATA_CHECK, nullptr);
+	}
+
+	TicToc::toc("completed in ");
+
+	// Save mesh and metrics for DEBUG PURPOSES!!!
+	if (me_settings.verbosity > 5) {
+		std::string tempFile = "MMG_Step_2.mesh";
+		if ( MMG3D_saveMesh(mmgMesh, tempFile.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_MESH, nullptr);
+
+		std::string tempFileLS = "MMG_Step_2_LS.sol";
+		if ( MMG3D_saveSol(mmgMesh, mmgLs, tempFileLS.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_SOL, nullptr);
+
+		if (!isUniform) {
+			std::string tempFileSZ = "MMG_Step_2_SZ.sol";
+			if ( MMG3D_saveSol(mmgMesh, mmgMet, tempFileSZ.c_str()) != 1 )
+				throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_SOL, nullptr);
+		}
+	}
+
+	// Save MESH and level-set SOL file for external use (and skip to cleanup)
+	if (me_settings.MMG_exportLS == true) {
+		TicToc::tic(); std::cout << "  Exporting base mesh and level-set sol file... " << std::flush;
+
+		outputPath.replace_extension(".mesh");
+		std::string tempFile = outputPath.string(); //Extra step to ensure correct compilation in Windows
+
+		if ( MMG3D_saveMesh(mmgMesh, tempFile.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_MESH, nullptr);
+
+		if ( MMG3D_saveSol(mmgMesh, mmgLs, tempFile.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_SOL, nullptr);
+
+		TicToc::toc("completed in ");
 
 		goto cleanup;
 	}
 
+	/* ------------------------------- Step 3 ------------------------------- */
+	// Discretize the level-set describing the lattice infill
+
 	// Set global meshing parameters
-	//if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_mem, 5000) != 1 )  exit(EXIT_FAILURE); // Set max. memory size in MB
+	if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_iso, 1) != 1 ) // Set to level-set mode
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_iso", nullptr);
 
-	if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_iso, 1) != 1 ) exit(EXIT_FAILURE);     // Use level-set
-	if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmc, 1e-1) != 1 )  exit(EXIT_FAILURE); // Remove small solid parasitic components
-	//if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmcvoid, 1e-5) != 1 )  exit(EXIT_FAILURE); // Remove void parasitic components
-
-	if (me_settings.MMG_hmin > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hmin, me_settings.MMG_hmin*minFeatureSize) != 1 )  exit(EXIT_FAILURE); // Minimal mesh size
-	if (me_settings.MMG_hmax > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hmax, me_settings.MMG_hmax*maxFeatureSize) != 1 )  exit(EXIT_FAILURE); // Maximal mesh size
-	if (me_settings.MMG_hausd > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hausd, me_settings.MMG_hausd*(minFeatureSize+maxFeatureSize)/2) != 1 )  exit(EXIT_FAILURE); // Control global Hausdorff distance (on all the boundary surfaces of the mesh) CHECK!!
-	if (me_settings.MMG_edgesProtectionAngle > 0)
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_angleDetection, me_settings.MMG_edgesProtectionAngle) != 1 )  exit(EXIT_FAILURE); // Sharp angle detection
-	
-	if (me_settings.volumeMesh == true) {
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hgrad, me_settings.MMG_hgrad) != 1 )  exit(EXIT_FAILURE); // 
-	} else {
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hgrad, -1) != 1 )  exit(EXIT_FAILURE);
+	if (lt_type.side == "scaffold") {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmc, 1e-1) != 1 ) // Remove small solid parasitic components
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_rmc", nullptr);
+	} else if (lt_type.side == "void") {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmcvoid, 1e-1) != 1 ) // Remove small void parasitic components
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_rmcvoid", nullptr);
 	}
 
-	if (me_settings.side == "void") { // Select a sub-domain to keep
-		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_numsubdomain, 2) != 1 )  exit(EXIT_FAILURE);
-	} else if (me_settings.side == "scaffold") {
-		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_numsubdomain, 3) != 1 )  exit(EXIT_FAILURE);
+	if (isUniform) {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hsiz, hsiz) != 1 ) // Constant mesh size
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hsiz", nullptr);
+	} else {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hmin, (me_settings.elementSize-0.1*me_settings.elementSize)*minFeatureSize) != 1 ) // Set min. mesh size
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hmin", nullptr);
+		//if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hmax, (me_settings.elementSize+0.1*me_settings.elementSize)*maxFeatureSize) != 1 ) // Set max. mesh size
+		//	throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hmax", nullptr);
+	} 
+
+	if (me_settings.MMG_hausd > 0) {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hausd, me_settings.MMG_hausd*lt_size.meanUnitCellSize) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hausd", nullptr);
 	}
 
-	if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_verbose, 2) != 1 )  exit(EXIT_FAILURE); // Tune level of verbosity -1 to 10 
-
-	// Dicretize the level-set
-	if (me_settings.volumeMesh == true) {
-		fprintf(stdout,"    Discretizing volume...\n");
- 		ierr = MMG3D_mmg3dls(mmgMesh, mmgLs, NULL);
-//		ierr = MMG3D_mmg3dls(mmgMesh, mmgLs, mmgMet);
+	if (me_settings.isVolumeMesh) {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hgrad, me_settings.MMG_hgrad) != 1 ) // 
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hgrad", nullptr);
 	} else {
-		fprintf(stdout,"    Discretizing surface...\n");
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_hgradreq, -1) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_hgradreq", nullptr);
+	}
+
+	if (me_settings.edgeProtectionAngle > 0) {
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_angleDetection, me_settings.edgeProtectionAngle) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_angleDetection", nullptr);
+	} else {
+		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_angle, 0) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_IPARAM_angle", nullptr);
+	}
+
+	if (lt_type.side == "scaffold") { // Select sub-domain to keep
+		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_numsubdomain, 3) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_numsubdomain", nullptr);
+	} else if ( lt_type.side == "void" ) {
+		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_numsubdomain, 2) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_numsubdomain", nullptr);
+	}
+
+	if (me_settings.MMG_memory > 0) {
+		if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_mem, me_settings.MMG_memory) != 1 ) // Max. memory size in MB
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_mem", nullptr);
+	}
+
+	if ( MMG3D_Set_iparameter(mmgMesh, mmgLs, MMG3D_IPARAM_verbose, me_settings.verbosity) != 1 )
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_verbose", nullptr);
+
+	// Dicretize the geometry with its lattice infill
+	TicToc::tic();
+	if (me_settings.isVolumeMesh) std::cout << "  Meshing volume... " << std::flush;
+	else std::cout << "  Meshing surface... " << std::flush;
+	if (isUniform)
 		ierr = MMG3D_mmg3dls(mmgMesh, mmgLs, NULL);
+	else
+		ierr = MMG3D_mmg3dls(mmgMesh, mmgLs, mmgMet);
+	TicToc::toc("completed in ");
+
+	if (ierr == MMG5_STRONGFAILURE)
+		throw ExceptionError(MMG_ERRMSG::BAD_ENDING_OF_MMG3DLS, nullptr);
+	else if (ierr == MMG5_LOWFAILURE)
+		std::cerr << "ERROR: BAD ENDING OF MMG3DLS!" << std::endl;
+
+	// Mesh info
+	MMG3D_Get_meshSize(mmgMesh, &np, &ne, NULL, &nt, NULL, &na);
+	std::cout << "\n    Surface triangulation: " << std::endl;
+	std::cout << "      Number of vertices: N/A" << std::endl;
+	//std::cout << "      Number of vertices: ~" << double(2 + 0.5 * nt) << std::endl;
+	std::cout << "      Number of facets: " << nt << std::endl;
+	if (me_settings.isVolumeMesh) {
+		std::cout << "\n    Volume mesh: " << std::endl;
+		std::cout << "      Number of vertices: " << np << std::endl;
+		std::cout << "      Number of facets: " << nt << std::endl;
+		std::cout << "      Number of tetrahedra: " << ne << std::endl;
 	}
-	if ( ierr == MMG5_STRONGFAILURE ) {
-		fprintf(stdout,"BAD ENDING OF MMG3DLS: UNABLE TO SAVE MESH\n");
-		return(ierr);
-	} else if ( ierr == MMG5_LOWFAILURE )
-		fprintf(stdout,"BAD ENDING OF MMG3DLS\n");
 
 	/* ------------------------------- Step 4 ------------------------------- */
 	// Store output and cleanup
-
-	//Determine current time to append to filenames
-	time_t t;
-	char currentTime[50];
-	std::time(&t);
-	std::strftime(currentTime, sizeof(currentTime), "_%Y-%m-%d_%H%M", localtime(&t)); 
-
-	outputFile_string = me_settings.output + currentTime + "_mmg.mesh";
-	outputFile = (char *) calloc(outputFile_string.string().size() + 1, sizeof(char));
-	strcpy(outputFile, outputFile_string.string().c_str());
+	std::cout << "\nSAVING OUTPUT(S)... " << std::endl;
+	std::cout << "  Output file(s): " << std::flush;
 
 	// Save volume mesh
-	if (me_settings.volumeMesh == true) {
-		if ( MMG3D_saveMesh(mmgMesh, outputFile) != 1 ) {
-			fprintf(stdout, "UNABLE TO SAVE VOLUME MESH\n");
-			return(MMG5_STRONGFAILURE);
-		}
+	if (me_settings.isVolumeMesh) {
+		outputPath.replace_extension(".mesh");
+		std::string tempFile = outputPath.string();
+
+		if ( MMG3D_saveMesh(mmgMesh, tempFile.c_str()) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_MESH, nullptr);
+
+		std::cout << outputPath.filename() << " & "  << std::flush;
 	}
 
 	// Save surface triangulation
-	if ( internal::MMG3D_saveSurfaceAsSTL (mmgMesh, me_settings.STLFormat, outputFile) != EXIT_SUCCESS ) {
-		fprintf(stdout, "UNABLE TO SAVE SURFACE TRIANGULATION\n");
-		return(MMG5_STRONGFAILURE);
+	{	outputPath.replace_extension(".stl");
+		std::string tempFile = outputPath.string();
+		if ( internal::MMG3D_saveSurfaceAsSTL (mmgMesh, me_settings.STLFormat, tempFile.c_str()) != EXIT_SUCCESS )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_STL, nullptr);
+
+		std::cout << outputPath.filename() << std::endl;
 	}
-
-	// Cleanup
-	free(outputFile);
-	outputFile = NULL;
-
 	cleanup:
 	// Free the MMG3D5 structures
 	MMG3D_Free_all(MMG5_ARG_start,
@@ -446,21 +324,40 @@ int MeshMMG::implicit2volume(outerShell &shell, latticeType lt_type, latticeSize
 	               MMG5_ARG_ppLs,   &mmgLs,
 	               MMG5_ARG_ppMet,  &mmgMet,
 	               MMG5_ARG_end);
-
-	// Free remaning pointers
-	free(tempFile);
-	tempFile = NULL;
-
-	// Delete temporary folder and its contents
-	std::filesystem::remove_all(temporaryFolder);
-
-	return(ierr);
 }
 
-bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string format, char *filename) {
+void MeshMMG::internal::shell_to_MMGS(const polygonSoup &shell, MMG5_pMesh mmgMesh) {
+	/* Convert shell to MMGS_mesh
+	 * Inputs:
+	 *   shell   : Polygon soup
+	 * Output:
+	 *   mmgMesh : MMG surface mesh
+	 */
+
+	int np = shell.points.size();
+	int nt = shell.polygons.size();
+
+	// Set mesh size: mesh, # vertices, # triangles, # edges
+	if ( MMGS_Set_meshSize(mmgMesh, np, nt, 0) != 1 )
+		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_MESH_SIZE, nullptr);
+
+	// Vertices
+	for (unsigned int i = 0; i < np; i++) {
+		if ( MMGS_Set_vertex(mmgMesh, shell.points[i].x(), shell.points[i].y(), shell.points[i].z(), 0, i+1) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_VERTEX, nullptr);
+	}
+
+	// Triangles
+	for (unsigned int i = 0; i < nt; i++) {
+		if ( MMGS_Set_triangle(mmgMesh,  shell.polygons[i][0]+1,  shell.polygons[i][1]+1,  shell.polygons[i][2]+1, 3, i+1) != 1 )
+			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_TRIANGLE, nullptr);
+	}
+}
+
+bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(const MMG5_pMesh &mmgMesh, const std::string &format, const char *filename) {
 	/* Extracts and saves the surface of an MMG5_pMesh to an .stl file.
 	 * Inputs :
-	 * 	 mesh     : Mesh whose surface is to be stored as an .stl
+	 *   mmgMesh  : MMG mesh whose surface is to be stored as an .stl
 	 *   format   : Output file format: ASCII or Binary (Default)
 	 *   filename : Output path including filename
 	 * Output:
@@ -472,13 +369,13 @@ bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string form
 
 	// Open output file for writing
 	MMG5_SAFE_CALLOC(outputFile, strlen(filename)+6, char, return 0);
-  strcpy(outputFile, filename);
-  ptr = strstr(outputFile,".mesh");
+	strcpy(outputFile, filename);
+	ptr = strstr(outputFile,".mesh");
 	if ( ptr ) { // if filename contains the mesh extension
-    ptr = strstr(outputFile,".mesh");
-    if ( ptr ) *ptr = '\0';
-    strcat(outputFile,".stl");
-  }
+		ptr = strstr(outputFile,".mesh");
+		if ( ptr ) *ptr = '\0';
+		strcat(outputFile,".stl");
+	}
 
 	std::ofstream myOutputFile(outputFile, std::ios::out | std::ios::binary);
 	if(!myOutputFile) {
@@ -486,7 +383,7 @@ bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string form
 		exit(EXIT_FAILURE);
 	}
 
-	if ( mesh->info.imprim >= 0 ) 
+	if ( mmgMesh->info.imprim >= 0 ) 
 		fprintf(stdout,"  %%%% %s OPENED\n",outputFile);
 
 	// Start of file
@@ -498,20 +395,20 @@ bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string form
 		myOutputFile << "FileType: Binary" + std::string(64,' ');
 
 		// Number of facets
-		const uint32_t nFacets = static_cast<uint32_t>(mesh->nt);
+		const uint32_t nFacets = static_cast<uint32_t>(mmgMesh->nt);
 		myOutputFile.write(reinterpret_cast<const char*>(&nFacets), sizeof(nFacets));
 	}
 
 	// Body of file
-	if ( mesh->xp && mesh->xpoint ) {
-		for (size_t k=1; k<=mesh->nt; k++) {
+	if ( mmgMesh->xp && mmgMesh->xpoint ) {
+		for (size_t k=1; k<=mmgMesh->nt; k++) {
 			MMG5_xPoint pxp;
 
-			MMG5_pTria ptt = &mesh->tria[k];
+			MMG5_pTria ptt = &mmgMesh->tria[k];
 			double faceNormal[3] = {0,0,0};
 			for (size_t i=0; i<3; i++) {
-				MMG5_Point point = mesh->point[ptt->v[i]];
-				pxp = mesh->xpoint[point.xp];
+				MMG5_Point point = mmgMesh->point[ptt->v[i]];
+				pxp = mmgMesh->xpoint[point.xp];
 				faceNormal[0] += pxp.n1[0]/3;
 				faceNormal[1] += pxp.n1[1]/3;
 				faceNormal[2] += pxp.n1[2]/3;
@@ -528,7 +425,7 @@ bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string form
 					<< faceNormal[1] << " " << faceNormal[2] <<"\n";
 				myOutputFile << "    outer loop\n";
 				for (size_t i=0; i<3; i++) {
-					MMG5_Point point = mesh->point[ptt->v[i]];
+					MMG5_Point point = mmgMesh->point[ptt->v[i]];
 					myOutputFile << "      vertex   " << point.c[0] << " " << point.c[1] 
 						<< " " << point.c[2] <<"\n";
 				}
@@ -544,7 +441,7 @@ bool MeshMMG::internal::MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string form
 
 				// Vertex
 				for (size_t i = 0; i < 3; i++) {
-					MMG5_Point point = mesh->point[ptt->v[i]];
+					MMG5_Point point = mmgMesh->point[ptt->v[i]];
 					for (size_t j = 0; j < 3; j++) {
 						float p = static_cast<float>(point.c[j]);//int32_t
 						myOutputFile.write(reinterpret_cast<const char*>(&p), sizeof(p));

@@ -39,12 +39,12 @@ ASLI is written in C++ and makes use of [CMake](http://www.cmake.org) and [GNU M
     * [TBB](https://intel.com/oneTBB) (optional, necessary for parallelization)
   * [Eigen](http://eigen.tuxfamily.org)
   * [MMG](https://www.mmgtools.org)
-  * [TETGEN](http://tetgen.org)
+    * [Scotch](https://gitlab.inria.fr/scotch/scotch) (optional)
   * [Yaml-cpp](https://github.com/jbeder/yaml-cpp)
   * [QASLI](https://github.com/tpms-lattice/QASLI) (optional, the GUI of ASLI)
     * [QT](https://www.qt.io/) (optional, required if compiling the GUI)
 
-Most of these dependencies are included with ASLI so that the user does not need to worry about them. Not included with ASLI are GMP, MPFR, Boost and TBB (optional). QT, required to compile the GUI of ASLI is not included either. To be able to compile ASLI, depending on the compilation settings, users will need some or all of these libraries available on their system.
+Most of these dependencies are included with ASLI so that the user does not need to worry about them. Not included with ASLI are GMP, MPFR, Boost, TBB (optional) and Scotch (optional). QT, required to compile the GUI of ASLI is not included either. To be able to compile ASLI, depending on the compilation settings, users will need some or all of these libraries available on their system.
 
 ### Install dependencies ###
 #### Linux ####
@@ -70,6 +70,11 @@ Install libraries (TBB):
 sudo apt-get install libtbb-dev
 ```
 
+Install libraries (Scotch):  
+```Shell
+sudo apt-get install libscotch-dev
+```
+
 Install libraries (QT):  
 ```Shell
 sudo apt-get install qt3d5-dev
@@ -93,6 +98,11 @@ pacman -S mingw-w64-x86_64-boost
 Install libraries (TBB):  
 ```Shell
 pacman -S mingw-w64-x86_64-intel-tbb
+```
+
+Install libraries (Scotch):  
+```Shell
+pacman -S mingw-w64-x86_64-scotch
 ```
 
 Install libraries (QT):  
@@ -142,7 +152,7 @@ Assuming [MSYS2](https://www.msys2.org/) is installed on the system and all requ
 To clean up, simply delete the `build` and `bin` directory found in the source directory.
 
 ### Parallel mode ###
-To compile ASLI in parallel mode include `-DCGAL_ACTIVATE_CONCURRENT_MESH_3=ON` when calling cmake. Parallel mode is currently limited to the CGAL workflow.
+To compile ASLI in parallel mode include `-DACTIVATE_CONCURRENT_MESHING=ON` when calling cmake. Parallel mode is currently limited to the CGAL workflow.
 
 ### Graphical user interface ###
 To compile ASLI together with its GUI include `-DASLI_GUI=ON` when calling cmake.

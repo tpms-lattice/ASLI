@@ -56,13 +56,14 @@ struct latticeTypeTree {
 
 namespace ASLI_IO {
 	// Declarations
-	inline bool read_csv(std::string csvFile, char separator, 
+	inline bool read_csv(const std::string &csvFile, const char &separator, 
 	                     std::vector<std::vector<double>> &data);
-	inline bool read_tap(std::string tapFile, char separator, 
+	inline bool read_tap(const std::string &tapFile, const char &separator, 
 	                     latticeTypeData &typeData);
 
 	// Definitions
-	bool read_csv(std::string csvFile, char separator, std::vector<std::vector<double>> &data) {
+	bool read_csv(const std::string &csvFile, const char &separator,
+		std::vector<std::vector<double>> &data) {
 		/* Simple csv reader for numeric data
 		* 
 		*/
@@ -89,6 +90,7 @@ namespace ASLI_IO {
 
 				if (!getline(ss, currentCol, separator)) break;
 				record.push_back(std::stod(currentCol));
+				//if ( record[3] <= threshold ) throw runtime_error(ASLI_ERRMSG::INVALID_INPUT);
 			}
 			data.push_back(record);
 		}
@@ -97,7 +99,7 @@ namespace ASLI_IO {
 	}
 
 	//
-	bool read_tap(std::string tapFile, char separator, latticeTypeData &typeData) {
+	bool read_tap(const std::string &tapFile, const char &separator, latticeTypeData &typeData) {
 		/* Simple .tap file reader
 		* 
 		*/

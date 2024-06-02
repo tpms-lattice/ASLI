@@ -18,9 +18,9 @@ typedef boost::graph_traits<TriangleMesh>::vertex_descriptor vertex_descriptor;
 typedef boost::graph_traits<TriangleMesh>::halfedge_descriptor halfedge_descriptor;
 
 namespace CGAL {
-  enum vertex_selection_t         { vertex_selection};
-  enum edge_selection_t           { edge_selection};
-  enum face_selection_t           { face_selection};
+	enum vertex_selection_t         { vertex_selection};
+	enum edge_selection_t           { edge_selection};
+	enum face_selection_t           { face_selection};
 } // namespace CGAL
 
 

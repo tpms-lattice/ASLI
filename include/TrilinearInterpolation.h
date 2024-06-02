@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -18,8 +18,8 @@
  *  accept them.
  * ==========================================================================*/
 
-#ifndef TRILINEARINTERPOLATION_H
-#define TRILINEARINTERPOLATION_H
+#ifndef TRILINEAR_INTERPOLATION_H
+#define TRILINEAR_INTERPOLATION_H
 
 /* Eigen headers */
 #include <Eigen/Core>
@@ -29,21 +29,27 @@
 #include <iostream>
 
 struct modelData {
-	Eigen::VectorXd interpolationCoefficients; 
+	Eigen::VectorXd interpolationCoefficients;
 	Eigen::Matrix3Xd x;
 };
 
 namespace TrilinearInterpolation {
-	bool setup(std::vector<std::vector<double>> data, 
-	           modelData *interpolationModel);
-	bool setup(Eigen::Matrix3Xd dataPoints, Eigen::VectorXd y, 
-	           modelData *interpolationModel);
-	double evaluate(Eigen::Vector3d p, modelData *interpolationModel);
+	bool setup(const std::vector<std::vector<double>> &data,
+	           modelData &interpolationModel);
+	bool setup(const Eigen::Matrix3Xd &coordinates,
+	           const Eigen::VectorXd &y,
+	           modelData &interpolationModel);
+
+	double evaluate(const Eigen::Vector3d p,
+	                const modelData &interpolationModel);
 
 	namespace internal {
-		double kernel(double r);
-		Eigen::MatrixXd distanceMatrix(Eigen::Matrix3Xd *A, Eigen::Matrix3Xd *B);
-		Eigen::VectorXd distanceVector(Eigen::Matrix3Xd *A, Eigen::Vector3d *B);
+		double kernel(const double &r);
+
+		Eigen::MatrixXd distanceMatrix(const Eigen::Matrix3Xd &A,
+		                               const Eigen::Matrix3Xd &B);
+		Eigen::VectorXd distanceVector(const Eigen::Matrix3Xd &A,
+		                               const Eigen::Vector3d &B);
 	}
 }
 #endif

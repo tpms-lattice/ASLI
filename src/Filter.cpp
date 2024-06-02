@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -24,9 +24,10 @@
  * Author(s): F.P.B. (KU Leuven)
  */
 
-double Filter::filter(neighbourData neighbours, 
-                      std::vector<double> unfilteredValues,
-                      std::string filterType, double filterRadius){
+double Filter::filter(const neighbourData &neighbours, 
+                      const std::vector<double> &unfilteredValues,
+                      const std::string &filterType,
+                      const double &filterRadius) {
 	/* Filters the data using the chosen weight function
 	*  Inputs:
 	*    neighbours        : Structure containing IDX and distance information
@@ -53,8 +54,9 @@ double Filter::filter(neighbourData neighbours,
 	return a/b;
 }
 
-double Filter::internal::weightFunction(std::string type, double distance,
-                                        double radius) {
+double Filter::internal::weightFunction(const std::string &type,
+                                        const double &distance,
+                                        const double &radius) {
 
 	if (type == "linear") { // Linear weight function
 		if (std::abs(distance) <= radius)

@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2023
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -22,6 +22,7 @@
 #define INFILL_H
 
 #include "TrilinearInterpolation.h"
+#include "ExceptionClass.h" // Custom exception class
 
 /* Standard library headers */
 #include <cmath>
@@ -31,16 +32,19 @@
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
+#include <list>
+#include <unordered_map>
 
 struct latticeType {
-	std::string type;        // Unit cell type
-	std::string filterType;  // filter (if type is hybrid)
-	double filterRadius;     // filter radius (if type is hybrid)
-	double correctionFactor; // filter correction (if type is hybrid)
+	std::string type;                     // Unit cell type
+	std::string side        = "scaffold"; // Unit cell side
+	std::string filterType  = "gaussian"; // filter (if type is hybrid)
+	double filterRadius     = 1.0;        // filter radius (if type is hybrid)
+	double correctionFactor = 0.25;       // filter correction (if type is hybrid)
 
-	std::vector<modelData> interpModel_linear;
-	std::vector<std::string> typeVector; // Unit cell type described by the
-	                                     // corresponding interpolation model
+	std::vector<modelData> interpModel_linear; // Interpolation model
+	std::vector<std::string> typeVector;       // Unit cell types described by the
+	                                           // corresponding interpolation model
 };
 
 struct latticeSize {
@@ -51,7 +55,7 @@ struct latticeSize {
 	double meanUnitCellSize; // Mean unit cell size
 
 	std::vector<std::vector<double>> data; // Unit cell scaling data
-	modelData interpModel_linear;
+	modelData interpModel_linear;          // Interpolation model
 };
 
 struct latticeUDF { 
@@ -63,13 +67,13 @@ struct latticeUDF {
 	double E;                       // User defined constant 5
 };
 struct latticeFeature {
-	std::string feature;       // Unit cell feature label
-	double feature_val;        // Unit cell feature value
-	std::string mode;          // Type of sizing specification
-	latticeUDF udf;            // User defined feature parameters
+	std::string feature;           // Unit cell feature label
+	double feature_val;            // Unit cell feature value
+	std::string mode = "relative"; // Type of sizing specification
+	latticeUDF udf;                // User defined feature parameters
 
 	std::vector<std::vector<double>> data; // Unit cell feature data
-	modelData interpModel_linear;
+	modelData interpModel_linear;          // Interpolation model
 };
 
 struct featureSize {
@@ -110,40 +114,76 @@ typedef ASLI_point<double> Point;
 namespace Infill {
 	// Constants
 	const double PI = 4.0*std::atan(1.0);
+	
+	const std::unordered_map<std::string, std::pair<double, double>> TPMS_av = {
+		{"gyroid",          {0.05, 0.95}},
+		{"sheet_gyroid",    {0.05, 0.95}},
+		{"diamond",         {0.10, 0.90}},
+		{"sheet_diamond",   {0.05, 0.80}},
+		{"primitive",       {0.22, 0.78}},
+		{"sheet_primitive", {0.05, 0.55}},
+		{"IWP",             {0.05, 0.90}},
+		{"sheet_IWP",       {0.05, 0.85}},
+		{"cubic",           {0.05, 0.90}}
+	};
+
+	const std::list<std::string> feature_av = {
+		{"volumeFraction"},
+		{"isovalue"},
+		{"wallSize"},
+		{"poreSize"},
+		{"userDefined"}
+	};
 
 	// Signed distance functions
-	double TPMS_function(Point p, latticeType *lt_type, latticeSize *lt_size, 
-	                     latticeFeature *lt_feature);
-	double TPMS_function(Point p, std::string type, double scaling, double t);
+	double TPMS_function(Point &p, const std::string &type,
+		const double &scaling, const double &t);
+
+	double TPMS_function(Point &p, const latticeType &lt_type,
+		const latticeSize &lt_size, const latticeFeature &lt_feature);
 
 	// Mesh sizing functions
-	double sizing_function(Point p, latticeSize *lt_size, std::string mode);
-	featureSize featureSize_function(Point p, latticeType *lt_type, 
-	                           latticeSize *lt_size, latticeFeature *lt_feature);
+	double sizing_function(Point &p, const latticeSize &lt_size,
+		const std::string &mode);
+
+	featureSize featureSize_function(Point &p, const latticeType &lt_type, 
+		const latticeSize &lt_size, const latticeFeature &lt_feature);
 
 	// Parameter conversions
 	namespace internal {
-		double input2level(std::string type, double scaling, std::string feature, 
-		                  double featureValue, latticeUDF userDefinedParameters,
-		                  std::string featureMode);
+		double input2level(const std::string &type, const double &scaling,
+			const std::string &feature, const double &featureValue, 
+			const latticeUDF &userDefinedParameters, const std::string &featureMode);
 
 		// Normalizations
-		double unnormalizeLevel(double t_normalized, std::string type);
+		double unnormalizeLevel(const double &t_normalized, const std::string &type);
 
 		// Convertions to isovalue (level-set constant)
-		double vFraction2level(double vFraction, std::string type);
-		double wallSize2level(double wallSize, double scaling, std::string type, 
-		                      std::string mode);
-		double poreSize2level(double poreSize, double scaling, std::string type, 
-		                      std::string mode);
+		double vFraction2level(double vFraction, const std::string &type);
+
+		double wallSize2level(double wallSize, const double &scaling,
+			const std::string &type, const std::string &mode);
+		double poreSize2level(double poreSize, const double &scaling,
+			const std::string &type, const std::string &mode);
 
 		// Conversions from isovalue (level-set constant)
-		double level2wallSize(double t, double scaling, std::string type);
-		double level2poreSize(double t, double scaling, std::string type);
+		double level2wallSize(double t, const double &scaling,
+			const std::string &type);
+		double level2poreSize(double t, const double &scaling,
+			const std::string &type);
 
 		// Others
-		double userDefinedInput2vFraction(double userDefinedInput, 
-		                                  latticeUDF userDefinedParameters);
+		double userDefinedInput2vFraction(const double &userDefinedInput, 
+			const latticeUDF &userDefinedParameters);
 	}
 };
+
+// Error messages
+namespace INFILL_ERRMSG {
+	const std::string INVALID_TPMS = "Invalid TPMS";
+	const std::string INVALID_FEATURE_REQUEST = "Invalid feature requested";
+	const std::string INVALID_USER_DEFINED_FEATURE_REQUEST = "Invalid user defined feature requested";
+	const std::string NO_STRESS_CONVERSION_DEFINED = "Stress conversion has not been defined";
+}
+
 #endif

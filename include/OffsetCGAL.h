@@ -2,8 +2,8 @@
  *  Based on CGAL's offset meshing plugin. See CGAL demos.
  * ==========================================================================*/
 
-#ifndef OFFSETCGAL_H
-#define OFFSETCGAL_H
+#ifndef OFFSET_CGAL_H
+#define OFFSET_CGAL_H
 
 #include "Mesh.h"
 #include "SMesh_type.h"

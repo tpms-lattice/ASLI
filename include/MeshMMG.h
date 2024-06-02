@@ -18,20 +18,15 @@
  *  accept them.
  * ==========================================================================*/
 
-#ifndef MESHMMG_H
-#define MESHMMG_H
+#ifndef MESH_MMG_H
+#define MESH_MMG_H
 
-#include "Mesh.h"
 #include "Infill.h"
-#include "MeshCGAL.h"
+#include "ExceptionClass.h" // Custom exception class
 
 /* Mmg headers */
 #include "mmg/mmg3d/libmmg3d.h"
-
-/* MshMet headers */
-extern "C" {
-	#include "mshmet_.h"
-}
+#include "mmg/mmgs/libmmgs.h"
 
 /* Standard library headers */
 #include <cmath>
@@ -79,13 +74,31 @@ void * mycalloc(size_t c, size_t s) {
 		}                                        \
 	} while(0)
 
-namespace MeshMMG { 
-	int implicit2volume(outerShell &shell, latticeType lt_type, latticeSize lt_size,
-                     latticeFeature lt_feature, meshSettings me_settings,
-                     std::filesystem::path &outputFile_string);
+// Error messages
+namespace MMG_ERRMSG {
+	const std::string FAILED_TO_SET_MESH_SIZE = "Failed to set mesh size";
+	const std::string FAILED_TO_SET_VERTEX = "Failed to set vertex";
+	const std::string FAILED_TO_SET_TRIANGLE = "Failed to set triangle";
+	const std::string FAILED_TO_SET_TETRA = "Failed to set tretrahedral";
+	const std::string FAILED_TO_SET_SOL_SIZE = "Failed to set sol size";
+	const std::string FAILED_TO_SET_SOL = "Failed to set sol value";
+	const std::string FAILED_MESH_DATA_CHECK = "Failed mesh data check";
+	const std::string FAILED_TO_SET_IPARAMETER = "Failed to set ";
+	const std::string FAILED_TO_SET_DPARAMETER = "Failed to set ";
 
-	namespace internal {
-		bool MMG3D_saveSurfaceAsSTL(MMG5_pMesh mesh, std::string format, char *filename) ;
-	}
-};
+	const std::string FAILED_TO_GET_MESH_SIZE = "Failed to get mesh size";
+	const std::string FAILED_TO_GET_VERTEX = "Failed to get vertex";
+	const std::string FAILED_TO_GET_EDGE = "Failed to get edge";
+	const std::string FAILED_TO_GET_TRIANGLE = "Failed to get triangle";
+
+	const std::string INVALID_SIZE_METRIC = "Invalid size metric";
+
+	const std::string BAD_ENDING_OF_MMG3DLS = "BAD ENDING OF MMG3DLS: UNABLE TO SAVE MESH";
+	const std::string BAD_ENDING_OF_MMGSLIB = "BAD ENDING OF MMGSLIB: UNABLE TO SAVE MESH";
+
+	const std::string FAILED_TO_SAVE_MESH = "Unable to save volume mesh";
+	const std::string FAILED_TO_SAVE_STL = "Unable to save surface triangulation";
+	const std::string FAILED_TO_SAVE_SOL = "Unable to save sol data";
+}
+
 #endif

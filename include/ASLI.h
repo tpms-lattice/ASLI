@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -21,11 +21,14 @@
 #ifndef ASLI_H
 #define ASLI_H
 
+#include "BasicGeometries.h"
 #include "Infill.h"
 #include "Mesh.h"
 #include "TrilinearInterpolation.h"
 #include "Filter.h"
 #include "IO_ASLI.h"
+
+#include "ExceptionClass.h" // Custom exception class
 
 /* alglib headers */
 #include "stdafx.h"
@@ -42,17 +45,14 @@
 #include <iostream>
 #include <iomanip>
 #include <sstream>
-#include <filesystem>
 #include <cstdlib>
 #include <cstdio>
+#include <string>//for std::stod
 
 class ASLI {
 public:
 	/* Constructors|Destructors */
-	ASLI(std::string configFile, bool exportls);
-	ASLI(std::string _stlFile, std::string _tapFile, std::string _sapFile,
-	     std::string _fapFile, latticeType _lt_type, latticeSize _lt_size,
-	     latticeFeature _lt_feature, meshSettings _me_settings);
+	ASLI(std::string configFile);
 	~ASLI();
 
 	/* Parameters */
@@ -60,7 +60,7 @@ public:
 	const double PI = 4.0*std::atan(1.0);
 
 	// Outer shell
-	outerShell shell;
+	polygonSoup shell;
 
 	// Lattice
 	latticeType lt_type;
@@ -72,20 +72,110 @@ public:
 	meshSettings me_settings;
 
 private:
-	// Allocate variables and set values
+	const std::vector<std::string> mesher_av = {"CGAL", "MMG", "CGAL_OLD"};
+	const std::vector<std::string> side_av = {"scaffold", "void", "all"};
+	const std::vector<std::string> feature_mode_av = {"wallSize", "poreSize"};
+	const std::vector<std::string> mode_av = {"relative", "absolute"};
+
 	void SetUp(std::string configFile);
 	void SetUpLattice();
-	void SetUpKdtree(alglib::real_2d_array *alglib_data, 
-	                 alglib::integer_1d_array *tags, alglib::kdtree *kdt);
-	void SetUpTypeInterpolator(alglib::real_2d_array coordinates,
-	                           std::vector<double> weights, 
-	                           modelData *interpolationModel);
+	void SetUpKdtree(const alglib::real_2d_array &alglib_data, 
+	                 const alglib::integer_1d_array &tags,
+	                 alglib::kdtree &kdt);
+	void SetUpTypeInterpolator(const alglib::real_2d_array &coordinates,
+	                           const std::vector<double> &weights, 
+	                           modelData &interpolationModel);
+
+	std::vector<std::string> split(const std::string &s, 
+	                               const std::string &delimiter);
 
 	void LoadInputFiles();
 
-	// Input files
-	std::string stlFile;
+	/* Parameters */
 	std::string tapFile, sapFile, fapFile;
 };
+
+// Error messages
+namespace ASLI_ERRMSG {
+	const std::string INVALID_NUMBER_OF_COMMAND_LINE_ARGUMENTS = "ERROR: Invalid number of command line arguments.";
+	const std::string CONFIGURATION_FILE_WITHOUT_EXTENSION = std::string("YAML configuration file not specified or ") + 
+		"specified without extension. Please provide the path to the configuration file including filename and extension.";
+
+	const std::string UNDEFINED_NODE = "Undefined node";
+	const std::string UNDEFINED_KEY = " not defined in configuration file";
+
+	// Input files
+	const std::string FAILED_TO_OPEN_CONFIG_FILE = "Unable to open configuration file";
+	const std::string FAILED_TO_PARSE_CONFIG_FILE = "Failed to parse configuration file";
+
+
+	const std::string FAILED_TO_OPEN_STL_FILE = "Unable to open .stl file";
+	const std::string INTERNAL_GEOMETRY_DIMENSION_ZERO = "Dimension(s) of internal geometry must be larger than zero.";
+	const std::string FAILED_TO_OPEN_TAP_FILE = "Unable to open .tap file";
+	const std::string FAILED_TO_OPEN_SAP_FILE = "Unable to open .sap file";
+	const std::string FAILED_TO_OPEN_FAP_FILE = "Unable to open .fap file";
+
+	const std::string NO_INPUT_GEOMETRY_SPECIFIED = "Incorrect or missing input geometry information";
+	const std::string FAILED_TO_READ_TAP_KEY = "Unable to read .tap file key";
+	const std::string FAILED_TO_READ_SAP_KEY = "Unable to read .sap file key";
+	const std::string FAILED_TO_READ_FAP_KEY = "Unable to read .fap file key";
+
+	const std::string INPUT_GEOMETRY_IS_NOT_CLOSED = "Input geometry does not form a closed surface";
+
+	// Lattice parameters
+	const std::string INVALID_TPMS = "Invalid TPMS type specified";
+	const std::string INVALID_SIDE = "Invalid scaffold side specified";
+	const std::string INVALID_FILER_RADIUS = "Hybrid mode filter radius cannot be negative";
+	const std::string INVALID_CORRECTION_FACTOR = "Hybrid mode correction factor cannot be negative";
+
+	const std::string INVALID_UNIT_CELL_SIZE = "Invalid unit cell size specified";
+
+	const std::string INVALID_FEATURE = "Invalid unit cell feature specified";
+	const std::string INVALID_FEATURE_VALUE = "Unit cell feature value cannot be negative";
+	const std::string INVALID_FEATURE_MODE = "Invalid unit cell feature mode specified";
+
+	// Mesh settings
+	const std::string INVALID_MESHER = "Invalid mesher specified";
+	const std::string INVALID_THREAD_NUMBER = "Number of threads cannot be an integer smaller than one";
+	const std::string INVALID_MESH_SIZE = "Mesh size must be larger than zero";
+	const std::string INVALID_EDGE_PROTECTION_ANGLE = "Edge protection angle cannot be negative";
+
+	const std::string INVALID_FACET_DISTANCE = "Facet distance must be positive";
+	const std::string INVALID_CELL_RADIUS_EDGE_RATIO = "Cell radius edge ratio must be larger than two";
+	const std::string INVALID_FACET_ANGLE = "Facet angle must be larger than zero and not larger than thirty degrees";
+	const std::string INVALID_RELATIVE_ERROR_BOUND = "Relative error bound must be positive";
+	const std::string INVALID_FACET_SIZE = "Facet size must be larger than zero";
+	const std::string INVALID_EDGE_SIZE = "Edge size must be larger than zero";
+	const std::string INVALID_OFFSET = "Poisson offset must be larger than 0.1";
+
+	const std::string INVALID_HAUSD = "hausd parameter cannot be negative";
+	const std::string INVALID_HGRAD = "hgrad must be larger than 1";
+	const std::string INVALID_HINITIAL = "hinitial cannot be negative";
+	const std::string INVALID_MAX_MEMORY = "Max. memory cannot be negative";
+
+	const std::string INVALID_THRESHOLD = "Invalid threshold value";
+	
+}
+
+template <typename T>
+std::optional<T> getOptional(const YAML::Node& node, const std::string& key, const bool required, std::set<std::string>& accessed_keys) {
+	try {
+		if (node.IsDefined()) {
+			if (node[key] && node[key].IsDefined()) {
+				std::optional<T> data = node[key].as<T>();
+				accessed_keys.insert(key);
+				return data;
+			} else if (required) {
+				throw std::runtime_error("\"" + key + "\"" + ASLI_ERRMSG::UNDEFINED_KEY);
+			}
+		} else if (required) {
+			throw std::runtime_error(ASLI_ERRMSG::UNDEFINED_NODE);
+		}
+	} catch (const std::exception& e) {
+		throw std::runtime_error("Failed to parse \"" + key + "\" (" + e.what() + ")");
+	}
+	
+	return std::nullopt;
+}
 
 #endif

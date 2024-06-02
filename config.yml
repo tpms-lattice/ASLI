@@ -22,50 +22,49 @@
 
 # Input & output files
 files:
-  stl: inputs/cube.stl # Object to be provided of an infill as an Stl file.
-  tap: inputs/cube.tap # Type at point file. [Use to assign multiple unit cell types] (optional)
-  sap: inputs/cube.sap # Size at point file. [Use to assign a non-constant unit cell size] (optional)
-  fap: inputs/cube.fap # Feature at point file. [Use to assign a non-constant unit cell feature value] (optional)
-  output: outputs/ # Location of the output files. By default the output files are stored in the "outputs" folder.
+  stl: inputs/cube.stl # Object to be provided of an infill in .stl format.
+  tap: inputs/cube.tap # Variable unit cell type data in .tap format. [optional]
+  sap: inputs/cube.sap # Variable unit cell size data in .sap format. [optional]
+  fap: inputs/cube.fap # Variable unit cell feature data in .fap format. [optional]
+  output: outputs/cube.* # Output location. [optional, default=outputs/]
 
 # Lattice settings
-lt_type: gyroid # Unit cell type: gyroid, sheet_gyroid, diamond, sheet_diamond, primitive, sheet_primitive, IWP or sheet_IWP. If multiple unit cell types are desired set to hybrid and provide a .tap file.
-lt_type_filterRadius: 1.0 # Radius specifying the size of hybrid regions. Scales with local unit cell size. (Hybrid mode option)
-lt_type_correctionFactor: 0.25 # Correction factor to compensate for the thinning effect of hybridization. (Hybrid mode option)
+lt_type: gyroid # Unit cell type: gyroid, sheet_gyroid, diamond, sheet_diamond, primitive, sheet_primitive, IWP, sheet_IWP or cubic. To assign multiple unit cell types set to hybrid and provide a .tap file.
+#lt_type_side: scaffold # Side of the lattice to discretize: scaffold (default), void or all. [optional]
+#lt_type_filterRadius: 1.0 # Radius specifying the size of hybrid regions. Scales with local unit cell size. [hybrid mode option]
+#lt_type_correctionFactor: 0.25 # Correction factor to compensate for the thinning effect of hybridization. [hybrid mode option]
 
-lt_size: 0.5 # Unit cell size. Set to a value > 0 for a constant unit cell size. If a variable size is desired set to 0 and provide a .sap file. 
+lt_size: 1 # Unit cell size. To assign a variable size set to 0 and provide a .sap file. 
 
 lt_feature: volumeFraction # Unit cell feature: volumeFraction, isovalue, wallSize or poreSize.
-lt_feature_val: 0.5 # Unit cell feature value. Set to a value > 0 for a constant feature value. If a variable feature value is desired set to 0 and provide a .fap file. [If the feature provided is the isovalue it should be specified as a normalized isovalue!]
-lt_feature_mode: relative # Feature size mode: absolute or relative. (Only applies to wall and pore size, default feature_mode is relative) [If set to relative, provide wall and pore sizes for a 1x1x1 unit cell]
+lt_feature_val: 0.5 # Unit cell feature value. To assign variable feature values set to 0 and provide a .fap file. (Isovalues provided must be normalized)
+#lt_feature_mode: relative # Feature size mode: relative (default) or absolute. In relative mode, wall and pore sizes provided are relative to a 1x1x1 unit cell. [optional]
 
 # User defined feature settings (To use set lt_feature to userDefined) [Unsupported]
-udf_userDefinedFeature: elasticModulus # User defined feature label
-udf_A: 110000 # User defined constant 1
-udf_B: 1 # User defined constant 2
-udf_C: 2 # User defined constant 3
-udf_D: 0 # User defined constant 4
-udf_E: 0 # User defined constant 5
+#udf_userDefinedFeature: elasticModulus # User defined feature label. [optional]
+#udf_A: 110000 # User defined constant 1. [optional]
+#udf_B: 1 # User defined constant 2. [optional]
+#udf_C: 2 # User defined constant 3. [optional]
+#udf_D: 0 # User defined constant 4. [optional]
+#udf_E: 0 # User defined constant 5. [optional]
 
 # Mesh settings
 me_mesher: CGAL # Mesh library: CGAL or MMG.
-me_side: scaffold # Side of scaffold to discretize: scaffold or void.
-me_volumeMesh: FALSE # Set to TRUE to also get a volume mesh, otherwise set to FALSE.
-me_nThreads: 1 # Number of threads (parallel mode is currently only available with CGAL)
+me_nThreads: 1 # Number of threads. [optional, default=1, parallel mode only available with CGAL]
+me_elementSize: 0.5 # Size of mesh elements. In CGAL an upper bound on the circumradii of the mesh tetrahedra and radii of surface Delaunay balls, in MMG the edge size. Scales with the local wall or pore size depending on the side discretized.
+#me_edgeProtectionAngle: 70 # Edge protection angle in degrees. To disable set to 0. [optional, default=70]
+#me_volumeMesh: FALSE # Set to TRUE to obtain both, a volume mesh and a surface triangulation. Set to FALSE to obtain only a surface triangulation. [optional, default=FALSE]
 
 # Mesh settings (CGAL)
-me_facetAngle: 0 # Surface facet shape (optional, default facet angle is 30 degrees) [Lower bound for the surface facets angle in degrees]
-me_facetSize: 0 # Surface facet size. Scales with unit cell size. (optional, defaults to the local unit cell size) [Upper bound for the radii of surface Delaunay balls]
-me_facetDistance: 0.015 # Surface approximation error. Scales with the unit cell size [Upper bound for the distance between the circumcenter of a surface facet and the center of a surface Delaunay ball of this facet]
-me_cellRadiusEdgeRatio: 0 # Tetrahedron shape quality measure. Value must be larger than 2. (optional, default edge ratio is 3.0. Only used when preserve edges is set to FALSE) [Upper bound for the ratio between the circumradius of a mesh tetrahedron and its shortest edge]
-me_cellSize: 0 # Tetrahedra size. Scales with wall size and overrides me_facetSize if me_volumeMesh if set to TRUE. (optional, defaults to the local wall size . Only used when preserve edges is set to FALSE) [Upper bound on the circumradii of the mesh tetrahedra]
-me_poissonOffset: 0 # Poisson reconstruction offset. Scales with largest unit cell size in the design. Set to value >= 0.1 (optional, default offset is 0.5)
+CGAL_facetDistance: 0.01 # Surface approximation error as an upper bound for the distance between the circumcenter of a surface facet and the center of a surface Delaunay ball of this facet. Scales with the local unit cell size . [optional, default=0.01]
+#CGAL_relativeErrorBound: 1e-3 # Relative error bound used to compute intersection points between the implicit surface and query segments. The bisection is stopped when the length of the intersected segment is less than the product of relative_error_bound by the diagonal of bounding_box. [optional, default=1e-3]
+#CGAL_facetAngle: 30 # Facet shape quality measure as a lower bound for the surface facets angle in degrees. [optional, default=30]
+#CGAL_cellRadiusEdgeRatio: 3.0 # Tetrahedron shape quality measure as an upper bound for the ratio between the circumradius of the tetrahedron and its shortest edge. [optional, default=3.0, only active if volumeMesh=TRUE]
+#CGAL_poissonOffset: 0.5 # Poisson reconstruction offset. Scales with the largest unit cell size in the design. [optional, default=0.5]
 
 # Mesh settings (MMG)
-me_hinitial: 0 # Base mesh size. Scales with the smallest feature size. (optional, default hinitial is 0.36)
-me_hmin: 0 # Min. edge size. Scales with the smallest feature size in the design. (optional)
-me_hmax: 0 # Max. edge size. Scales with the largest feature size in the design. (optional)
-me_hausd: 0.42 # Maximal Hausdorff distance for the boundaries approximation. Scales with the mean feature size.
-me_hgrad: 0 # Gradation value. (optional, default gradation value is 1.3. Only used when volume mesh is set to TRUE)
+MMG_hausd: 0.3 # Surface approximation error as a maximal Hausdorff distance. Scales with the mean unit cell [optional, default=0.3]
+#MMG_hgrad: 1.3 # Gradation value. [optional, default=1.3, only active if volumeMesh=TRUE]
+#MMG_hinitial: 0.36 # Base mesh size. Scales with the local smallest feature size. [optional, default=0.36]
 
-# Note: Set optional parameters to 0 to use in default mode.
+# Note: Parameters used at their default values and optional parameters not used can be removed from the configuration file if desired.
