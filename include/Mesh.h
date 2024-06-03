@@ -197,9 +197,9 @@ namespace MeshCGAL {
 		std::vector<double> &boundingBox, Poisson_reconstruction_function *&poissonReconstruction);
 
 	namespace internal {
-		double signedDistance(const Point_3 &p, const latticeType &lt_type, //rename to something with infill???Infill
-			const latticeSize &lt_size, const latticeFeature &lt_feature,
-			const Poisson_reconstruction_function *const &poissonReconstruction);
+		double infill(const Point_3 &p, const latticeType &lt_type, const latticeSize &lt_size,
+			const latticeFeature &lt_feature, const std::vector<double> &BBoxSize,
+			const std::vector<double> &BBoxCenter);
 		double signedDistance_old(const Point_3 &p, const latticeType &lt_type, 
 			const latticeSize &lt_size, const latticeFeature &lt_feature,
 			const Poisson_reconstruction_function *const &poissonReconstruction);

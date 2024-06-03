@@ -56,31 +56,29 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 		&& (lt_type.side == "scaffold" || lt_type.side == "void" ));
 	std::filesystem::path outputPath = me_settings.output;
 
-	double offset = 0.0;
-	if ( me_settings.edgeProtectionAngle > 0 )
-		offset = me_settings.CGAL_poissonOffset*lt_size.maxUnitCellSize;
+	// Determine bounding box
+	std::vector<double> BB = {HUGE_VAL, HUGE_VAL, HUGE_VAL, -HUGE_VAL, -HUGE_VAL, -HUGE_VAL};
+	for (size_t i=0; i<shell.points.size(); ++i) {
+		BB[0] = std::min(BB[0], shell.points[i].x());
+		BB[1] = std::min(BB[1], shell.points[i].y());
+		BB[2] = std::min(BB[2], shell.points[i].z());
+		BB[3] = std::max(BB[3], shell.points[i].x());
+		BB[4] = std::max(BB[4], shell.points[i].y());
+		BB[5] = std::max(BB[5], shell.points[i].z());
+	}
+	CGAL::Bbox_3 boundingBox(BB[0], BB[1], BB[2], BB[3], BB[4], BB[5]);
 
-	// remesh???
+	const std::vector<double> BBoxSize = {boundingBox.xmax()-boundingBox.xmin(),
+	                                      boundingBox.ymax()-boundingBox.ymin(),
+	                                      boundingBox.zmax()-boundingBox.zmin()};
 
-	// Build a Poisson surface representation of the input geometry
-	TicToc::tic(); std::cout << "  Creating implicit surface description of the outer shell... " << std::flush;
-	Poisson_reconstruction_function *poissonSurfaceReconstruction = nullptr;
-	std::vector<double> poissonBounds;
-
-	implicitPoissonReconstruction(shell, offset, poissonBounds, poissonSurfaceReconstruction);
-  TicToc::toc("completed in ");
-
-	// Determine bounding box (and add some padding)
-	CGAL::Bbox_3 boundingBox(poissonBounds[0] - 0.1*(poissonBounds[1]-poissonBounds[0]),
-	                         poissonBounds[2] - 0.1*(poissonBounds[3]-poissonBounds[2]), 
-	                         poissonBounds[4] - 0.1*(poissonBounds[5]-poissonBounds[4]), 
-	                         poissonBounds[1] + 0.1*(poissonBounds[1]-poissonBounds[0]), 
-	                         poissonBounds[3] + 0.1*(poissonBounds[3]-poissonBounds[2]), 
-	                         poissonBounds[5] + 0.1*(poissonBounds[5]-poissonBounds[4]));
+	const std::vector<double> BBoxCenter = {(boundingBox.xmin()+boundingBox.xmax())/2.0,
+	                                        (boundingBox.ymin()+boundingBox.ymax())/2.0,
+	                                        (boundingBox.zmin()+boundingBox.zmax())/2.0};
 
 	// Implicit domain
-	auto myImplicitFunction = [poissonSurfaceReconstruction, lt_type, lt_size, lt_feature](const Point_3 &p) 
-		{ return internal::signedDistance(p, lt_type, lt_size, lt_feature, poissonSurfaceReconstruction); }; // To be able to pass funciton on as a static member
+	auto myImplicitFunction = [lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter](const Point_3 &p) 
+		{ return internal::infill(p, lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter); }; // To be able to pass funciton on as a static member
 	Implicit_domain my_implicit_domain = Implicit_domain::create_implicit_mesh_domain(myImplicitFunction,
 		boundingBox, CGAL::parameters::relative_error_bound(me_settings.CGAL_relativeErrorBound));
 
@@ -293,9 +291,7 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	stl_fileOut.close();
 
 	std::cout << outputPath.filename() << std::endl;
-	
-	delete poissonSurfaceReconstruction;
-	poissonSurfaceReconstruction = nullptr;
+
 	c3t3.clear();
 }
 
@@ -969,9 +965,9 @@ void MeshCGAL::implicitPoissonReconstruction(const polygonSoup &shell, const dou
 		throw ExceptionError("ERROR_POISSON_LINEAR_SOLVER_FAILED", nullptr);
 }
 
-double MeshCGAL::internal::signedDistance(const Point_3 &p, const latticeType &lt_type,
+double MeshCGAL::internal::infill(const Point_3 &p, const latticeType &lt_type,
 	const latticeSize &lt_size, const latticeFeature &lt_feature,
-	const Poisson_reconstruction_function *const &poissonReconstruction) {
+	const std::vector<double> &BBoxSize, const std::vector<double> &BBoxCenter) {
 	/* 
 	 * Inputs :
 	 *  
@@ -981,30 +977,14 @@ double MeshCGAL::internal::signedDistance(const Point_3 &p, const latticeType &l
 
 	Point point(p.x(), p.y(), p.z());
 
-//	int mode = 0;
-//	switch (mode) {
-//		case 1: // Signed distance function of outer shape (For debug purposes)
-//			return poissonReconstruction->operator()(p);
-//
-//		case 2: { // Signed distance function of a sphere (For debug purposes)
-//			return BasicGeometries::implicit_function("spheroid", {0.5}, p);
-//
-//		} case 3: { // Signed distance function of the infill (For debug purposes)
-//			return Infill::TPMS_function (point, lt_type, lt_size, lt_feature);
-//
-//		} case 4: { // Signed distance function of a lattice filled sphere (For debug purposes)
-//			double a = BasicGeometries::implicit_function("spheroid", {0.5}, p);
-//			double b = Infill::TPMS_function (point, lt_type, lt_size, lt_feature); // Infill
-//				
-//			return (a > b) ? a : b;
-//
-//		} default: { // Signed distance function of lattice filled outer shape
-			double a = poissonReconstruction->operator()(p); // Outer shape
-			double b = Infill::TPMS_function (point, lt_type, lt_size, lt_feature); // Infill
+	const double x_abs = std::abs(p.x()-BBoxCenter[0])/BBoxSize[0];
+	const double y_abs = std::abs(p.y()-BBoxCenter[1])/BBoxSize[1];
+	const double z_abs = std::abs(p.z()-BBoxCenter[2])/BBoxSize[2];
 
-			return (a > b) ? a : b;
-//		}
-//	}
+	double a = std::max(std::max(x_abs, y_abs), z_abs) - 1.0/2.0; // BBox
+	double b = Infill::TPMS_function (point, lt_type, lt_size, lt_feature); // Infill
+
+	return (a > b) ? a : b;
 }
 
 double MeshCGAL::internal::signedDistance_old(const Point_3 &p, const latticeType &lt_type,
