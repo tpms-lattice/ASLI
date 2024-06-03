@@ -57,7 +57,7 @@ me_elementSize: 0.5 # Size of mesh elements. In CGAL an upper bound on the circu
 
 # Mesh settings (CGAL)
 CGAL_facetDistance: 0.01 # Surface approximation error as an upper bound for the distance between the circumcenter of a surface facet and the center of a surface Delaunay ball of this facet. Scales with the local unit cell size . [optional, default=0.01]
-#CGAL_relativeErrorBound: 1e-3 # Relative error bound used to compute intersection points between the implicit surface and query segments. The bisection is stopped when the length of the intersected segment is less than the product of relative_error_bound by the diagonal of bounding_box. [optional, default=1e-3]
+#CGAL_relativeErrorBound: 1e-3 # Relative error bound used to compute intersection points between the implicit surface and query segments. The bisection is stopped when the length of the intersected segment is less than the product of relative_error_bound by the diagonal of the mean unit cell size [optional, default=1e-3]
 #CGAL_facetAngle: 30 # Facet shape quality measure as a lower bound for the surface facets angle in degrees. [optional, default=30]
 #CGAL_cellRadiusEdgeRatio: 3.0 # Tetrahedron shape quality measure as an upper bound for the ratio between the circumradius of the tetrahedron and its shortest edge. [optional, default=3.0, only active if volumeMesh=TRUE]
 #CGAL_poissonOffset: 0.5 # Poisson reconstruction offset. Scales with the largest unit cell size in the design. [optional, default=0.5]

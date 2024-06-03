@@ -263,19 +263,19 @@ class Hybrid_domain {
 
 			if ( r_domain_.side_ == "scaffold" ) {
 				if (!implicit_subdomain_index && polyhedron_subdomain_index)
-					return 0;
+					return boost::none;
 				else
-					return r_domain_.polyhedron_domain.is_in_domain_object()(p);
+					return polyhedron_subdomain_index;
 			} else if ( r_domain_.side_ == "void" ) {
 				if(implicit_subdomain_index && polyhedron_subdomain_index)
-					return 0;
+					return boost::none;
 				else
-					return r_domain_.polyhedron_domain.is_in_domain_object()(p);
+					return polyhedron_subdomain_index;
 			} else {
 				if (!implicit_subdomain_index && polyhedron_subdomain_index)
 					return 2;
 				else 
-					return r_domain_.polyhedron_domain.is_in_domain_object()(p);
+					return polyhedron_subdomain_index;
 			}
 
 		}

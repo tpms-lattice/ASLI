@@ -76,22 +76,26 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	                                        (boundingBox.ymin()+boundingBox.ymax())/2.0,
 	                                        (boundingBox.zmin()+boundingBox.zmax())/2.0};
 
+	double BBoxDiagonal = std::sqrt(boundingBox.xmax()*boundingBox.xmax() + 
+	                                boundingBox.ymax()*boundingBox.ymax() + 
+	                                boundingBox.zmax()*boundingBox.zmax());
+	double unitCellDiagonal = std::sqrt(3)*lt_size.meanUnitCellSize;
+	double relativeErrorBound = (unitCellDiagonal/BBoxDiagonal) * me_settings.CGAL_relativeErrorBound;
+
 	// Implicit domain
 	auto myImplicitFunction = [lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter](const Point_3 &p) 
 		{ return internal::infill(p, lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter); }; // To be able to pass funciton on as a static member
-	Implicit_domain my_implicit_domain = Implicit_domain::create_implicit_mesh_domain(myImplicitFunction,
-		boundingBox, CGAL::parameters::relative_error_bound(me_settings.CGAL_relativeErrorBound));
+	Implicit_domain my_implicit_domain = Implicit_domain::create_implicit_mesh_domain(
+		myImplicitFunction,	boundingBox, CGAL::parameters::relative_error_bound(relativeErrorBound));
 
 	// Polyhedra domain
-	SurfaceMesh surface_mesh;
-
 	Polyhedron polygonSurface;
 	std::vector<std::vector<Point_3>> protected_features;
-
-	SurfaceMesh::Property_map<edge_descriptor, bool> ecmap;
 	if ( me_settings.edgeProtectionAngle > 0 ) {
 		std::cout << "  Computing edges to protect..." << std::endl;
 
+		SurfaceMesh surface_mesh;
+		SurfaceMesh::Property_map<edge_descriptor, bool> ecmap;
 		Mesh::extractEdges(shell, lt_type, lt_size, lt_feature, me_settings, surface_mesh, ecmap);
 		CGAL::copy_face_graph(surface_mesh, polygonSurface);
 
@@ -139,8 +143,7 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	TPMS_dependent_minfeaturesize_field<H_domain> facetSizeField;
 	TPMS_dependent_minfeaturesize_field<H_domain> edgeSizeField;
 	TPMS_dependent_minfeaturesize_field<H_domain> cellSizeField;
-
-	//FT scaledFacetDistance = me_facetDistance * me_cellSize;
+	
 	if (isUniform) {
 		Point point(0, 0, 0);
 		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
@@ -192,7 +195,6 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	std::cout << "... " << std::flush;
 
 	H_C3t3 c3t3;
-
 	if (me_settings.isVolumeMesh) {
 		if (isUniform) {
 			H_Edge_criteria hedge_criteria(me_edgeSize*feature_size, me_minEdgeSize*feature_size); // Edge: size, min size
@@ -227,17 +229,13 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 		}
 	}
 
-	//std::cout << " Removing facets and vertices not in complex... " << std::flush;
-	// Remove facets not beloging to the selected side
-	if ( lt_type.side=="scaffold" || lt_type.side=="void" )
+	// Remove facets not belonging to the selected side
+	if (lt_type.side=="scaffold" || lt_type.side=="void")
 		MeshCGAL::internal::remove_from_complex(1, c3t3);
 
 	c3t3.remove_isolated_vertices();
 
 	TicToc::toc("completed in ");
-
-	// Save output for DEBUG PURPOSES!!! //TEMP!!!
-	if (me_settings.verbosity > 5) { dump_c3t3(c3t3, "CGAL_STEP_1"); }
 
 	// Extract surface mesh of selected domain
 	SurfaceMesh surface_scaffold;
@@ -252,8 +250,9 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 		if (CGAL::is_closed(surface_scaffold))
 			CGAL::Polygon_mesh_processing::orient_to_bound_a_volume(surface_scaffold);
 		else
-			std::cout << "WARNING: Surface is open" << std::endl;
+			std::cerr << "\n WARNING: Surface is open!" << std::endl;
 	}
+	
 	// Mesh info
 	std::cout << "\n    Surface triangulation: " << std::endl;
 	std::cout << "      Number of vertices: " << surface_scaffold.number_of_vertices() << std::endl;
