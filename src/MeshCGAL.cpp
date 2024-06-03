@@ -526,7 +526,7 @@ void MeshCGAL::implicit2volume_old(const polygonSoup &shell, const latticeType &
 		// Compute/Recompute volume mesh (when surface was meshed and edges are to be preserved)
 		if (me_settings.isVolumeMesh == true) {
 			F_Polyhedron polygonSurface;
-			CGAL::copy_face_graph(outer_shell, polygonSurface);
+			CGAL::copy_face_graph(processedScaffold, polygonSurface);
 
 			std::vector<std::vector<Point_3>> polylines;
 			internal::ecmap2polylines(ecmap, processedScaffold, polylines);
