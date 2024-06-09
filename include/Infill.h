@@ -83,7 +83,6 @@ struct featureSize {
 
 
 template<typename CoordinateType>
-
 class ASLI_point {
 public:
 	ASLI_point() : x_val(0), y_val(0), z_val(0) {};
@@ -92,17 +91,10 @@ public:
 	ASLI_point(CoordinateType const &x, CoordinateType const &y, 
 	           CoordinateType const &z) : x_val(x), y_val(y), z_val(z) {};
 
-//	void setPoints(CoordinateType const &x, CoordinateType const &y, 
-//	               CoordinateType const &z) { x_val = x; y_val = y; z_val = z; };//Not working
-
-//	void x(CoordinateType const &x) { x_val = x; };//Not working
-//	void y(CoordinateType const &y) { y_val = y; };//Not working
-//	void z(CoordinateType const &z) { z_val = z; };//Not working
-
 	// Retrive data
-	CoordinateType const & x() { return x_val; };
-	CoordinateType const & y() { return y_val; };
-	CoordinateType const & z() { return z_val; };
+	CoordinateType const & x() const { return x_val; };
+	CoordinateType const & y() const { return y_val; };
+	CoordinateType const & z() const { return z_val; };
 
 private:
 	CoordinateType x_val, y_val, z_val;
@@ -136,17 +128,17 @@ namespace Infill {
 	};
 
 	// Signed distance functions
-	double TPMS_function(Point &p, const std::string &type,
+	double TPMS_function(const Point &p, const std::string &type,
 		const double &scaling, const double &t);
 
-	double TPMS_function(Point &p, const latticeType &lt_type,
+	double TPMS_function(const Point &p, const latticeType &lt_type,
 		const latticeSize &lt_size, const latticeFeature &lt_feature);
 
 	// Mesh sizing functions
-	double sizing_function(Point &p, const latticeSize &lt_size,
+	double sizing_function(const Point &p, const latticeSize &lt_size,
 		const std::string &mode);
 
-	featureSize featureSize_function(Point &p, const latticeType &lt_type, 
+	featureSize featureSize_function(const Point &p, const latticeType &lt_type, 
 		const latticeSize &lt_size, const latticeFeature &lt_feature);
 
 	// Parameter conversions

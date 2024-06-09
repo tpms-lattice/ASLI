@@ -535,7 +535,7 @@ double Infill::internal::userDefinedInput2vFraction(const double &userDefinedInp
 }
 
 
-double Infill::TPMS_function(Point &p, const std::string &type,
+double Infill::TPMS_function(const Point &p, const std::string &type,
 	const double &scaling, const double &t) {
 	/* Returns the signed distance at point p for the requested unit cell type.
 	 * Currently available for: gyroid, diamond, primitive and IWP in both strut
@@ -628,7 +628,7 @@ double Infill::TPMS_function(Point &p, const std::string &type,
 	}
 }
 
-double Infill::TPMS_function(Point &p, const latticeType &lt_type,
+double Infill::TPMS_function(const Point &p, const latticeType &lt_type,
 	const latticeSize &lt_size, const latticeFeature &lt_feature) {
 	/* Returns the signed distance at point p for a lattice of requested 
 	 * properties. Currently available for: gyroid, diamond, primitive and 
@@ -694,7 +694,7 @@ double Infill::TPMS_function(Point &p, const latticeType &lt_type,
 	return signedDistance;
 }
 
-double Infill::sizing_function(Point &p, const latticeSize &lt_size, const std::string &mode) {
+double Infill::sizing_function(const Point &p, const latticeSize &lt_size, const std::string &mode) {
 	/* Returns the size or scaling at point p.
 	 * Inputs:
 	 *   p       : Coordinates of point to be evaluated
@@ -721,7 +721,7 @@ double Infill::sizing_function(Point &p, const latticeSize &lt_size, const std::
 		return 2*PI/scaling;
 }
 
-featureSize Infill::featureSize_function(Point &p, const latticeType &lt_type,
+featureSize Infill::featureSize_function(const Point &p, const latticeType &lt_type,
 	const latticeSize &lt_size, const latticeFeature &lt_feature) {
 	/* Returns the feature size at point p for a lattice of requested 
 	 * properties. Currently available for: gyroid, diamond, primitive and 
