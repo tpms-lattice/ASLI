@@ -32,8 +32,9 @@
 #include <iostream>
 #include <sstream>
 #include <cstdlib>
-#include <list>
+#include <set>
 #include <unordered_map>
+#include <tuple>
 
 struct latticeType {
 	std::string type;                     // Unit cell type
@@ -82,22 +83,22 @@ struct featureSize {
 };
 
 
-template<typename CoordinateType>
+template<typename T>
 class ASLI_point {
 public:
 	ASLI_point() : x_val(0), y_val(0), z_val(0) {};
 
 	// Store data
-	ASLI_point(CoordinateType const &x, CoordinateType const &y, 
-	           CoordinateType const &z) : x_val(x), y_val(y), z_val(z) {};
+	ASLI_point(T const &x, T const &y, T const &z)
+		: x_val(x), y_val(y), z_val(z) {};
 
 	// Retrive data
-	CoordinateType const & x() const { return x_val; };
-	CoordinateType const & y() const { return y_val; };
-	CoordinateType const & z() const { return z_val; };
+	T const & x() const { return x_val; };
+	T const & y() const { return y_val; };
+	T const & z() const { return z_val; };
 
 private:
-	CoordinateType x_val, y_val, z_val;
+	T x_val, y_val, z_val;
 };
 
 
@@ -107,25 +108,21 @@ namespace Infill {
 	// Constants
 	const double PI = 4.0*std::atan(1.0);
 	
-	const std::unordered_map<std::string, std::pair<double, double>> TPMS_av = {
-		{"gyroid",          {0.05, 0.95}},
-		{"sheet_gyroid",    {0.05, 0.95}},
-		{"diamond",         {0.10, 0.90}},
-		{"sheet_diamond",   {0.05, 0.80}},
-		{"primitive",       {0.22, 0.78}},
-		{"sheet_primitive", {0.05, 0.55}},
-		{"IWP",             {0.05, 0.90}},
-		{"sheet_IWP",       {0.05, 0.85}},
-		{"cubic",           {0.05, 0.90}}
+	// Unit cell limits {abs min, scaffold min, void max, abs max}
+	const std::unordered_map<std::string, std::tuple<double, double, double, double>> UNIT_CELLS = {
+		{"gyroid",          {  -1.5,    -1.35,    1.35,   1.5}}, // 0.05, 0.95
+		{"sheet_gyroid",    {     0,  0.07730, 1.35438,   1.5}}, // 0.05, 0.90
+		{"diamond",         { -1.42, -0.93524, 0.93489,  1.42}}, // 0.10, 0.90
+		{"sheet_diamond",   {     0,  0.05229, 0.94902,  1.42}}, // 0.05, 0.80
+		{"primitive",       {    -3, -0.95501, 0.96219,  3.01}}, // 0.22, 0.78
+		{"sheet_primitive", {     0,  0.10908, 0.93971,  3.01}}, // 0.05, 0.55
+		{"IWP",             {    -3, -2.80734, 2.94762,     5}}, // 0.05, 0.90
+		{"sheet_IWP",       {     0,  0.22517, 2.86231,     5}}, // 0.05, 0.85
+		{"cubic",           {     0,  0.08546, 0.43705,  0.71}}, // 0.05, 0.90
+		{"hybrid",          {  NULL,     NULL,    NULL,  NULL}}
 	};
 
-	const std::list<std::string> feature_av = {
-		{"volumeFraction"},
-		{"isovalue"},
-		{"wallSize"},
-		{"poreSize"},
-		{"userDefined"}
-	};
+	const std::set<std::string> FEATURES = {"volumeFraction", "isovalue", "wallSize", "poreSize", "userDefined"};
 
 	// Signed distance functions
 	double TPMS_function(const Point &p, const std::string &type,

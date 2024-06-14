@@ -46,179 +46,170 @@ void ASLI::SetUp(std::string configFile) {
 		
 	// Lattice type
 	auto type = getOptional<std::string>(config, "lt_type", true, accessed_keys);
-	if ( type.has_value() ) lt_type.type = *type;
+	if (type.has_value()) lt_type.type = *type;
 	else throw std::runtime_error(ASLI_ERRMSG::INVALID_TPMS);
-	if (Infill::TPMS_av.find(lt_type.type) == Infill::TPMS_av.end())
-		throw std::runtime_error(ASLI_ERRMSG::INVALID_TPMS);
+	if (Infill::UNIT_CELLS.find(lt_type.type) == Infill::UNIT_CELLS.end()) throw std::runtime_error(ASLI_ERRMSG::INVALID_TPMS);
 
 	auto side = getOptional<std::string>(config, "lt_type_side", false, accessed_keys);
-	if ( side.has_value() ) lt_type.side = *side;
-	if ( std::find(std::begin(side_av), std::end(side_av), lt_type.side) == std::end(side_av) ) 
-		throw std::runtime_error(ASLI_ERRMSG::INVALID_SIDE);
+	if (side.has_value()) lt_type.side = *side;
+	if (SIDES.find(lt_type.side) == SIDES.end()) throw std::runtime_error(ASLI_ERRMSG::INVALID_SIDE);
 
 	if (lt_type.type == "hybrid") {
 		auto filterRadius = getOptional<double>(config, "lt_type_filterRadius", false, accessed_keys);
-		if ( filterRadius.has_value() ) lt_type.filterRadius = *filterRadius;
-		if ( lt_type.filterRadius < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_FILER_RADIUS);
+		if (filterRadius.has_value()) lt_type.filterRadius = *filterRadius;
+		if (lt_type.filterRadius < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FILER_RADIUS);
 
 		auto correctionFactor = getOptional<double>(config, "lt_type_correctionFactor", false, accessed_keys);
-		if ( correctionFactor.has_value() && *correctionFactor >= 0 ) lt_type.correctionFactor = *correctionFactor;
-		if ( lt_type.correctionFactor < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_CORRECTION_FACTOR);
+		if (correctionFactor.has_value()) lt_type.correctionFactor = *correctionFactor;
+		if (lt_type.correctionFactor < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_CORRECTION_FACTOR);
 	}
 
 	// Lattice size
 	auto size = getOptional<double>(config, "lt_size", true, accessed_keys);
-	if ( size.has_value() ) lt_size.size = *size;
+	if (size.has_value()) lt_size.size = *size;
 	else throw std::runtime_error(ASLI_ERRMSG::INVALID_UNIT_CELL_SIZE);
 
 	// Lattice features
 	auto feature = getOptional<std::string>(config, "lt_feature", true, accessed_keys);
-	if ( feature.has_value() ) lt_feature.feature = *feature;
-	if (std::find(Infill::feature_av.begin(), Infill::feature_av.end(), feature) == Infill::feature_av.end())
-		throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE);
+	if (feature.has_value()) lt_feature.feature = *feature;
+	if (Infill::FEATURES.find(lt_feature.feature) == Infill::FEATURES.end()) throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE);
 
 	auto feature_val = getOptional<double>(config, "lt_feature_val", true, accessed_keys);
-	if ( feature_val.has_value() && *feature_val >= 0 ) lt_feature.feature_val = *feature_val;
-	else throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE_VALUE);
+	if (feature_val.has_value()) lt_feature.feature_val = *feature_val;
+	if (lt_feature.feature_val < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE_VALUE);
 
-	if ( std::find(std::begin(feature_mode_av), std::end(feature_mode_av), lt_feature.mode) == std::end(feature_mode_av) ) {
+	if (FEATURES.find(lt_feature.feature) != FEATURES.end()) {
 		auto mode = getOptional<std::string>(config, "lt_feature_mode", false, accessed_keys);
-		if ( mode.has_value() ) lt_feature.mode = *mode;
-		if (std::find(std::begin(mode_av), std::end(mode_av), lt_feature.mode) == std::end(mode_av))
-			throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE_MODE);
+		if (mode.has_value()) lt_feature.mode = *mode;
+		if (MODES.find(lt_feature.mode) == MODES.end()) throw std::runtime_error(ASLI_ERRMSG::INVALID_FEATURE_MODE);
 	}
 
 	// User defined feature parameters
 	if ( lt_feature.feature == "userDefined" ) {
 		auto userDefinedFeature = getOptional<std::string>(config, "udf_feature", false, accessed_keys);
-		if ( userDefinedFeature.has_value() ) lt_feature.udf.userDefinedFeature = *userDefinedFeature;
+		if (userDefinedFeature.has_value()) lt_feature.udf.userDefinedFeature = *userDefinedFeature;
 		auto udf_A = getOptional<double>(config, "udf_A", false, accessed_keys);
-		if ( udf_A.has_value() ) lt_feature.udf.A = *udf_A;
+		if (udf_A.has_value()) lt_feature.udf.A = *udf_A;
 		auto udf_B = getOptional<double>(config, "udf_B", false, accessed_keys);
-		if ( udf_B.has_value() ) lt_feature.udf.B = *udf_B;
+		if (udf_B.has_value()) lt_feature.udf.B = *udf_B;
 		auto udf_C = getOptional<double>(config, "udf_C", false, accessed_keys);
-		if ( udf_C.has_value() ) lt_feature.udf.C = *udf_C;
+		if (udf_C.has_value()) lt_feature.udf.C = *udf_C;
 		auto udf_D = getOptional<double>(config, "udf_D", false, accessed_keys);
-		if ( udf_D.has_value() ) lt_feature.udf.D = *udf_D;
+		if (udf_D.has_value()) lt_feature.udf.D = *udf_D;
 		auto udf_E = getOptional<double>(config, "udf_E", false, accessed_keys);
-		if ( udf_E.has_value() ) lt_feature.udf.E = *udf_E;
+		if (udf_E.has_value()) lt_feature.udf.E = *udf_E;
 	}
 
 	// Mesh settings
 	auto mesher = getOptional<std::string>(config, "me_mesher", true, accessed_keys);
-	if ( mesher.has_value() ) me_settings.mesher = *mesher;
-	if ( std::find(std::begin(mesher_av), std::end(mesher_av), me_settings.mesher) == std::end(mesher_av) )
-		throw std::runtime_error(ASLI_ERRMSG::INVALID_MESHER);
+	if (mesher.has_value()) me_settings.mesher = *mesher;
+	if (MESHERS.find(me_settings.mesher) == MESHERS.end()) throw std::runtime_error(ASLI_ERRMSG::INVALID_MESHER);
 
 	auto isVolumeMesh = getOptional<bool>(config, "me_volumeMesh", false, accessed_keys);
-	if ( isVolumeMesh.has_value() ) me_settings.isVolumeMesh = *isVolumeMesh;
+	if (isVolumeMesh.has_value()) me_settings.isVolumeMesh = *isVolumeMesh;
 
 	auto n_threads = getOptional<int>(config, "me_nThreads", false, accessed_keys);
-	if ( n_threads.has_value() ) me_settings.n_threads = *n_threads;
-	if ( me_settings.n_threads <= 0 )throw std::runtime_error(ASLI_ERRMSG::INVALID_THREAD_NUMBER);
+	if (n_threads.has_value()) me_settings.n_threads = *n_threads;
+	if (me_settings.n_threads < 1) throw std::runtime_error(ASLI_ERRMSG::INVALID_THREAD_NUMBER);
 
 	auto elementSize = getOptional<double>(config, "me_elementSize", true, accessed_keys);
-	if ( elementSize.has_value() ) me_settings.elementSize = *elementSize;
-	if ( me_settings.elementSize <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_MESH_SIZE);
+	if (elementSize.has_value()) me_settings.elementSize = *elementSize;
+	if (me_settings.elementSize <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_MESH_SIZE);
 
 	auto edgeProtectionAngle = getOptional<double>(config, "me_edgeProtectionAngle", false, accessed_keys);
-	if ( edgeProtectionAngle.has_value() ) me_settings.edgeProtectionAngle = *edgeProtectionAngle;
-	if ( me_settings.edgeProtectionAngle < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_PROTECTION_ANGLE);
+	if (edgeProtectionAngle.has_value()) me_settings.edgeProtectionAngle = *edgeProtectionAngle;
+	if (me_settings.edgeProtectionAngle < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_PROTECTION_ANGLE);
 	
 	auto STLFormat = getOptional<std::string>(config, "STLFormat", false, accessed_keys);
-	if ( STLFormat.has_value() && *STLFormat == "ASCII" ) me_settings.STLFormat = *STLFormat;
+	if (STLFormat.has_value() && *STLFormat == "ASCII") me_settings.STLFormat = *STLFormat;
 
 	auto threshold = getOptional<double>(config, "threshold", false, accessed_keys);
-	if ( threshold.has_value() ) me_settings.threshold = *threshold;
-	if ( me_settings.threshold < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_THRESHOLD);
-
-
+	if (threshold.has_value()) me_settings.threshold = *threshold;
+	if (me_settings.threshold < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_THRESHOLD);
 
 	// CGAL specific settings
-	if ( me_settings.mesher == "CGAL" || me_settings.mesher == "CGAL_OLD" ) {
+	if (me_settings.mesher == "CGAL" || me_settings.mesher == "CGAL_OLD") {
 		me_settings.CGAL_cellSize = me_settings.elementSize;
 
 		auto CGAL_facetDistance = getOptional<double>(config, "CGAL_facetDistance", false, accessed_keys);
-		if ( CGAL_facetDistance.has_value() ) me_settings.CGAL_facetDistance = *CGAL_facetDistance;
-		if ( me_settings.CGAL_facetDistance <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_DISTANCE);
-
-		auto CGAL_cellRadiusEdgeRatio = getOptional<double>(config, "CGAL_cellRadiusEdgeRatio", false, accessed_keys);
-		if ( CGAL_cellRadiusEdgeRatio.has_value() ) me_settings.CGAL_cellRadiusEdgeRatio = *CGAL_cellRadiusEdgeRatio;
-		if ( me_settings.CGAL_cellRadiusEdgeRatio <= 2 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_CELL_RADIUS_EDGE_RATIO);
+		if (CGAL_facetDistance.has_value()) me_settings.CGAL_facetDistance = *CGAL_facetDistance;
+		if (me_settings.CGAL_facetDistance <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_DISTANCE);
 
 		auto CGAL_relativeErrorBound = getOptional<double>(config, "CGAL_relativeErrorBound", false, accessed_keys);
-		if ( CGAL_relativeErrorBound.has_value() ) me_settings.CGAL_relativeErrorBound = *CGAL_relativeErrorBound;
-		if ( me_settings.CGAL_relativeErrorBound <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_RELATIVE_ERROR_BOUND);
+		if (CGAL_relativeErrorBound.has_value() ) me_settings.CGAL_relativeErrorBound = *CGAL_relativeErrorBound;
+		if (me_settings.CGAL_relativeErrorBound <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_RELATIVE_ERROR_BOUND);
+
+		auto CGAL_cellRadiusEdgeRatio = getOptional<double>(config, "CGAL_cellRadiusEdgeRatio", false, accessed_keys);
+		if (CGAL_cellRadiusEdgeRatio.has_value() ) me_settings.CGAL_cellRadiusEdgeRatio = *CGAL_cellRadiusEdgeRatio;
+		if (me_settings.CGAL_cellRadiusEdgeRatio <= 2) throw std::runtime_error(ASLI_ERRMSG::INVALID_CELL_RADIUS_EDGE_RATIO);
 
 		// Aditional settings
 		auto CGAL_facetAngle = getOptional<double>(config, "CGAL_facetAngle", false, accessed_keys);
-		if ( CGAL_facetAngle.has_value() ) me_settings.CGAL_facetAngle = *CGAL_facetAngle;
-		if ( me_settings.CGAL_facetAngle <= 0 || me_settings.CGAL_facetAngle > 30 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_ANGLE);
+		if (CGAL_facetAngle.has_value()) me_settings.CGAL_facetAngle = *CGAL_facetAngle;
+		if (me_settings.CGAL_facetAngle <= 0 || me_settings.CGAL_facetAngle > 30) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_ANGLE);
 
 	} 
 	if ( me_settings.mesher == "CGAL" || me_settings.mesher == "CGAL_OLD" ) {//Separated for now to keep segmentation fault bug caused by yaml-cpp from ocurring
 		me_settings.CGAL_facetSize = me_settings.elementSize;
-		//auto CGAL_facetSize = getOptional<double>(config, "CGAL_facetSize", false, accessed_keys);
-		//if ( CGAL_facetSize.has_value() ) me_settings.CGAL_facetSize = *CGAL_facetSize;
-		//if ( me_settings.CGAL_facetSize <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_SIZE);
+		auto CGAL_facetSize = getOptional<double>(config, "CGAL_facetSize", false, accessed_keys);
+		if (CGAL_facetSize.has_value()) me_settings.CGAL_facetSize = *CGAL_facetSize;
+		if (me_settings.CGAL_facetSize <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_SIZE);
 
 		me_settings.CGAL_edgeSize = me_settings.elementSize;
-		//auto CGAL_edgeSize = getOptional<double>(config, "CGAL_edgeSize", false, accessed_keys);
-		//if ( CGAL_edgeSize.has_value() ) me_settings.CGAL_edgeSize = *CGAL_edgeSize;
-		//if ( me_settings.CGAL_edgeSize <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_SIZE);
+		auto CGAL_edgeSize = getOptional<double>(config, "CGAL_edgeSize", false, accessed_keys);
+		if (CGAL_edgeSize.has_value()) me_settings.CGAL_edgeSize = *CGAL_edgeSize;
+		if (me_settings.CGAL_edgeSize <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_SIZE);
 
-		//me_settings.CGAL_minEdgeSize = me_settings.elementSize;
 		auto CGAL_minEdgeSize = getOptional<double>(config, "CGAL_minEdgeSize", false, accessed_keys);
-		if ( CGAL_minEdgeSize.has_value() ) me_settings.CGAL_minEdgeSize = *CGAL_minEdgeSize;
-		if ( me_settings.CGAL_minEdgeSize < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_SIZE);
-
+		if (CGAL_minEdgeSize.has_value()) me_settings.CGAL_minEdgeSize = *CGAL_minEdgeSize;
+		if (me_settings.CGAL_minEdgeSize < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_EDGE_SIZE);
 
 		auto CGAL_poissonOffset = getOptional<double>(config, "CGAL_poissonOffset", false, accessed_keys);
-		if ( CGAL_poissonOffset.has_value() ) me_settings.CGAL_poissonOffset = *CGAL_poissonOffset;
-		if ( me_settings.CGAL_poissonOffset < 0.1 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_OFFSET);
+		if (CGAL_poissonOffset.has_value()) me_settings.CGAL_poissonOffset = *CGAL_poissonOffset;
+		if (me_settings.CGAL_poissonOffset < 0.1) throw std::runtime_error(ASLI_ERRMSG::INVALID_OFFSET);
 
 			// Set CGAL's workflow MMG settings
 			me_settings.MMG_hinitial = 0.2;
 			auto MMG_hinitial = getOptional<double>(config, "CGAL_hinitial", false, accessed_keys);
-			if ( MMG_hinitial.has_value() ) me_settings.MMG_hinitial = *MMG_hinitial;
-			if ( me_settings.MMG_hinitial <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_HINITIAL);
+			if (MMG_hinitial.has_value()) me_settings.MMG_hinitial = *MMG_hinitial;
+			if (me_settings.MMG_hinitial <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_HINITIAL);
 
 			me_settings.MMG_hausd = 0.01;
 			auto MMG_hausd = getOptional<double>(config, "CGAL_hausd", false, accessed_keys);
-			if ( MMG_hausd.has_value() ) me_settings.MMG_hausd = *MMG_hausd;
-			if ( me_settings.MMG_hausd <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_HAUSD);
+			if (MMG_hausd.has_value()) me_settings.MMG_hausd = *MMG_hausd;
+			if (me_settings.MMG_hausd <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_HAUSD);
 	}
 
 	// MMG specific settings
-	if ( me_settings.mesher == "MMG" ) {
+	if (me_settings.mesher == "MMG") {
 		me_settings.MMG_hsiz = me_settings.elementSize;
 
 		auto MMG_hausd = getOptional<double>(config, "MMG_hausd", false, accessed_keys);
-		if ( MMG_hausd.has_value() ) me_settings.MMG_hausd = *MMG_hausd;
-		if ( me_settings.MMG_hausd <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_HAUSD);
+		if (MMG_hausd.has_value()) me_settings.MMG_hausd = *MMG_hausd;
+		if (me_settings.MMG_hausd <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_HAUSD);
 			
 		auto MMG_hgrad = getOptional<double>(config, "MMG_hgrad", false, accessed_keys);
-		if ( MMG_hgrad.has_value() ) me_settings.MMG_hgrad = *MMG_hgrad;
-		if ( me_settings.MMG_hgrad <= 1 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_HGRAD);
+		if (MMG_hgrad.has_value()) me_settings.MMG_hgrad = *MMG_hgrad;
+		if (me_settings.MMG_hgrad <= 1) throw std::runtime_error(ASLI_ERRMSG::INVALID_HGRAD);
 
 		// Aditional settings
 		auto MMG_hinitial = getOptional<double>(config, "MMG_hinitial", false, accessed_keys);
-		if ( MMG_hinitial.has_value() ) me_settings.MMG_hinitial = *MMG_hinitial;
-		if ( me_settings.MMG_hinitial <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_HINITIAL);
+		if (MMG_hinitial.has_value()) me_settings.MMG_hinitial = *MMG_hinitial;
+		if (me_settings.MMG_hinitial <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_HINITIAL);
 
 		auto MMG_memory = getOptional<double>(config, "MMG_memory", false, accessed_keys);
-		if ( MMG_memory.has_value() ) me_settings.MMG_memory = *MMG_memory;
-		if ( me_settings.MMG_memory < 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_MAX_MEMORY);
+		if (MMG_memory.has_value()) me_settings.MMG_memory = *MMG_memory;
+		if (me_settings.MMG_memory < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_MAX_MEMORY);
 
 		auto MMG_exportLS = getOptional<bool>(config, "MMG_exportLS", false, accessed_keys);
-		if ( MMG_exportLS.has_value() ) me_settings.MMG_exportLS = *MMG_exportLS;
+		if (MMG_exportLS.has_value()) me_settings.MMG_exportLS = *MMG_exportLS;
 
 			// Set MMG's workflow CGAL settings
 			me_settings.CGAL_cellSize = me_settings.MMG_hinitial;
 			me_settings.CGAL_facetDistance = 0.1; // Scales with local mesh size
 			auto CGAL_facetDistance = getOptional<double>(config, "MMG_facetDistance", false, accessed_keys);
-			if ( CGAL_facetDistance.has_value() ) me_settings.CGAL_facetDistance = *CGAL_facetDistance;
-			if ( me_settings.CGAL_facetDistance <= 0 ) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_DISTANCE);
+			if (CGAL_facetDistance.has_value()) me_settings.CGAL_facetDistance = *CGAL_facetDistance;
+			if (me_settings.CGAL_facetDistance <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_DISTANCE);
 			me_settings.CGAL_cellRadiusEdgeRatio = 3.0;
 			me_settings.CGAL_facetAngle = 30;
 	}
@@ -234,7 +225,7 @@ void ASLI::SetUp(std::string configFile) {
 			me_settings.inputFile = *inputFile;
 		else {
 			auto internalGeometry = getOptional<std::string>(model_files, "internalGeometry", false, accessed_keys);
-			if ( internalGeometry.has_value() ) {
+			if (internalGeometry.has_value()) {
 				me_settings.internalGeometry = *internalGeometry;
 
 				std::vector<std::string> v = split (me_settings.internalGeometry, " ");
@@ -242,9 +233,7 @@ void ASLI::SetUp(std::string configFile) {
 				for (int i = 1; i < v.size(); i++)
 					me_settings.internalGeometryParameters.push_back(std::stod(v[i])); 
 
-				if (
-					std::any_of(std::begin(me_settings.internalGeometryParameters), std::end(me_settings.internalGeometryParameters), [](auto i) { return i <= 0; })
-				)
+				if (std::any_of(std::begin(me_settings.internalGeometryParameters), std::end(me_settings.internalGeometryParameters), [](auto i) { return i <= 0; }))
 					throw std::runtime_error(ASLI_ERRMSG::INTERNAL_GEOMETRY_DIMENSION_ZERO);
 
 			} else {
@@ -255,42 +244,42 @@ void ASLI::SetUp(std::string configFile) {
 		// Unit cell type data file
 		if (lt_type.type == "hybrid") {
 			auto tap = getOptional<std::string>(model_files, "tap", true, accessed_keys);
-			if ( tap.has_value() ) tapFile = *tap;
+			if (tap.has_value()) tapFile = *tap;
 			else throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_READ_TAP_KEY);
 		}
 
 		// Unit cell size data file
 		if (lt_size.size == 0) {
 			auto sap = getOptional<std::string>(model_files, "sap", true, accessed_keys);
-			if ( sap.has_value() ) sapFile = *sap;
+			if (sap.has_value()) sapFile = *sap;
 			else throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_READ_SAP_KEY);
 		}
 
 		// Unit cell feature data file
 		if (lt_feature.feature_val == 0) {
 			auto fap = getOptional<std::string>(model_files, "fap", true, accessed_keys);
-			if ( fap.has_value() ) fapFile = *fap;
+			if (fap.has_value()) fapFile = *fap;
 			else throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_READ_FAP_KEY);
 		}
 
 		// Output directory
 		std::filesystem::path output_;
 		auto output = getOptional<std::string>(model_files, "output", false, accessed_keys);
-		if ( output.has_value() ) output_ = std::filesystem::u8path(*output);
-		if ( std::filesystem::is_directory(output_.parent_path()) ) {
+		if (output.has_value()) output_ = std::filesystem::u8path(*output);
+		if (std::filesystem::is_directory(output_.parent_path())) {
 			me_settings.output = std::filesystem::u8path(*output);
 		} else {
 			if (!std::filesystem::is_directory(me_settings.output.parent_path()) || !std::filesystem::exists(me_settings.output.parent_path()))
 				std::filesystem::create_directory(me_settings.output.parent_path());
 
-			if ( output.has_value() )
+			if (output.has_value())
 				std::cout << "  WARNING: Requested output location " << *output << " was not found. Defaulting to " 
 					<< me_settings.output.parent_path() << "." << std::endl;
 		}
 
 		// Output filename
 		if (me_settings.output.has_filename()) {
-			if ( !me_settings.output.extension().compare("vtu") )
+			if (!me_settings.output.extension().compare("vtu"))
 				me_settings.output.replace_extension(".mesh");
 		} else { // Append current time to input filename and use as name for output file
 			time_t t = std::time(nullptr);
@@ -304,14 +293,14 @@ void ASLI::SetUp(std::string configFile) {
 		for (YAML::const_iterator it = model_files.begin(); it != model_files.end(); ++it) {
 				std::string key = it->first.as<std::string>();
 				if (accessed_keys.find(key) == accessed_keys.end()) {
-					std::cout << "  WARNING: Unused \"" << fileKey << ": " << key << "\" key" << std::endl;
+					std::cout << "  WARNING: Unused \"" << fileKey << " -> " << key << "\" key" << std::endl;
 				}
 		}
 	}
 
 	// Other settings
 	auto verbosity = getOptional<double>(config, "verbosity", false, accessed_keys);
-	if ( verbosity.has_value() && *verbosity >= -1 ) me_settings.verbosity = *verbosity;
+	if (verbosity.has_value() && *verbosity >= -1) me_settings.verbosity = *verbosity;
 
 	// Check for remaining unused keys
 	for (YAML::const_iterator it = config.begin(); it != config.end(); ++it) {
@@ -333,7 +322,8 @@ void ASLI::SetUpLattice() {
 	/* Setups the lattice
 	 * 
 	 */
-	
+
+	/* Setup the unit cell scaling (sizing) variables */
 	// Determine the bounding box of the outer shell 
 	std::vector<double> bounds = {HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL, HUGE_VAL, -HUGE_VAL};
 	for (size_t i=0; i<shell.points.size(); ++i) {
@@ -387,14 +377,7 @@ void ASLI::SetUpLattice() {
 		lt_size.meanUnitCellSize = lt_size.size;
 	}
 
-	// Setup the required unit cell feature variables when a .fap file is used to specify the feature information
-	if (lt_feature.feature_val == 0) {
-		std::cout << "  Setting up feature data interpolator (Linear kernel)... " << std::flush;
-		TrilinearInterpolation::setup(lt_feature.data, lt_feature.interpModel_linear);
-		std::cout << "Finished!" << std::endl;
-	}
-
-	// Setup the required unit cell type variables when a .tap file is used to specify the typing
+	/* Setup the required unit cell type variables when a .tap file is used to specify the typing */
 	if (lt_type.type == "hybrid") {
 		// Construct kd-tree for nearest neighbour serch
 		SetUpKdtree(lt_typeTree.alglib_data.alglib_type_kdtree, lt_typeTree.alglib_data.IDX, lt_typeTree.kdt);
@@ -414,8 +397,38 @@ void ASLI::SetUpLattice() {
 		std::cout << "Finished!" << std::endl;
 	}
 
-	// Print inputs used for setup to the command line
-	
+	/* Setup the required unit cell feature variables when a .fap file is used to specify the feature information */
+	if (lt_feature.feature_val == 0) {
+		// Validity check
+		int counter = 0;
+		double t;
+		for(const auto& vec : lt_feature.data) {
+			Point p;
+			p = Point(vec[0], vec[1], vec[2]);
+				
+			if (ASLI::checkFeatureFieldValidity(p, vec[3], lt_type, lt_size, lt_feature) == 1)
+				counter += 1;
+		}
+		if (counter > 0) {
+			std::string TEXT = "  Feature value outside range adviced for " + std::to_string(counter) + " unit cell " + ((counter > 1) ? " types" : " type") + " in .fap file";
+			throw ExceptionError(TEXT, nullptr);
+		}
+
+		// Interpolate data
+		std::cout << "  Setting up feature data interpolator (Linear kernel)... " << std::flush;
+		TrilinearInterpolation::setup(lt_feature.data, lt_feature.interpModel_linear);
+		std::cout << "Finished!" << std::endl;
+	} else {
+		double counter = ASLI::checkFeatureValueValidity(lt_type, lt_size, lt_feature);
+		if (counter > 0) {
+			std::string TEXT = "  Feature value outside range adviced for " + std::to_string(counter) + " unit cell " + ((counter > 1) ? " types" : " type");
+			throw ExceptionError(TEXT, nullptr);
+		}
+	}
+
+
+	/* Print inputs used for setup to the command line */
+
 	// Lattice parameters
 	std::cout << "\n  Unit cell type: " << lt_type.type 
 		        << " (" << lt_type.side << ")" << std::flush;
@@ -509,13 +522,10 @@ void ASLI::SetUpKdtree(const alglib::real_2d_array &coordinates, const alglib::i
 	try {
 		alglib::kdtreebuildtagged(coordinates, tags, 3, 1, normtype, kdt);
 	} catch (const alglib::ap_error& e) {
-		std::cerr << e.msg.c_str() << std::endl;
-		exit(EXIT_FAILURE);
+		throw ExceptionError(e.msg.c_str(), nullptr);
 	}
 
 	std::cout << "Finished!" << std::endl;
-
-	//return EXIT_SUCCESS
 }
 
 void ASLI::SetUpTypeInterpolator(const alglib::real_2d_array &coordinates, const std::vector<double> &weights, modelData &interpolationModel) {
@@ -554,7 +564,7 @@ void ASLI::SetUpTypeInterpolator(const alglib::real_2d_array &coordinates, const
 				if (nNeightboursFound == 0) { // If no radius is specified or no neighbours are found within requested radious
 					nNeightboursFound = alglib::kdtreequeryknn(lt_typeTree.kdt, x, 1);
 					if (nNeightboursFound == 0) {
-						std::cerr << "Error: No neighbours found" << std::endl;
+						throw ExceptionError("Error: No neighbours found", nullptr);
 					}
 				}
 				alglib::integer_1d_array IDX;
@@ -567,13 +577,12 @@ void ASLI::SetUpTypeInterpolator(const alglib::real_2d_array &coordinates, const
 				neighbourData neighbours;
 				for (int jj = 0; jj < IDX.length(); jj++) {
 					neighbours.IDX.push_back(IDX[jj]);
-				  neighbours.distance.push_back(distances[jj]);
+					neighbours.distance.push_back(distances[jj]);
 				}
 				filteredWeights(i) = Filter::filter(neighbours, weights, lt_type.filterType, localFilterSize);
 
 			} catch (const alglib::ap_error& e) {
-				std::cerr << e.msg.c_str() << std::endl;
-				exit(EXIT_FAILURE);
+				throw ExceptionError(e.msg.c_str(), nullptr);
 			}
 
 		} else { // Pass on the weights without filtereing
@@ -583,8 +592,6 @@ void ASLI::SetUpTypeInterpolator(const alglib::real_2d_array &coordinates, const
 
 	// Compute interpolation coefficients
 	bool out = TrilinearInterpolation::setup(dataPoints, filteredWeights, interpolationModel);
-
-	//return EXIT_SUCCESS
 }
 
 void ASLI::LoadInputFiles() {
@@ -627,36 +634,131 @@ void ASLI::LoadInputFiles() {
 
 	// Read the unit cell typing file (.tap file)
 	if (lt_type.type == "hybrid") {
-		if (ASLI_IO::read_tap(tapFile, ',', lt_typeTree.alglib_data) != EXIT_SUCCESS)
-			throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_OPEN_TAP_FILE);
+		ASLI_IO::read_tap(tapFile, ',', lt_typeTree.alglib_data);
+
+		// Validity check
+		int counter = 0;
+		for (const auto& uc : lt_typeTree.alglib_data.unitCells) {
+			if (Infill::UNIT_CELLS.find(uc.type) == Infill::UNIT_CELLS.end() || uc.type == "hybrid") { counter += 1; }
+		}
+		if (counter > 0) { throw std::runtime_error(std::to_string(counter) + ASLI_ERRMSG::INVALID_TYPE_FIELD); }
 	}
 
 	// Read the unit cell sizing file (.sap file)
 	if (lt_size.size == 0) {
-		if (ASLI_IO::read_csv(sapFile, ',', lt_size.data) != EXIT_SUCCESS)
-			throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_OPEN_SAP_FILE);
+		ASLI_IO::read_csv(sapFile, ',', lt_size.data);
+
+		// Validity check
+		int counter = 0;
+		for(const auto& vec : lt_size.data) {	if (vec[3] <= 0) { counter +=1; }	}
+		if (counter > 0) { throw std::runtime_error(std::to_string(counter) + ASLI_ERRMSG::INVALID_SIZE_FIELD); }
 	}
 
 	// Read the unit cell feature data file (.fap file)
 	if (lt_feature.feature_val == 0) {
-		if (ASLI_IO::read_csv(fapFile, ',', lt_feature.data) != EXIT_SUCCESS)
-			throw std::runtime_error(ASLI_ERRMSG::FAILED_TO_OPEN_FAP_FILE);
+		ASLI_IO::read_csv(fapFile, ',', lt_feature.data);
+
+		// Initial validity check
+		int counter = 0;
+		for(const auto& vec : lt_feature.data) {	if (vec[3] < 0) { counter +=1; }	}
+		if (counter > 0) { throw std::runtime_error(std::to_string(counter) + ASLI_ERRMSG::INVALID_FEATURE_FIELD); }
 	}
 }
 
 
-// for string delimiter
+
 std::vector<std::string> ASLI::split(const std::string &s, const std::string &delimiter) {
-    size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-    std::string token;
-    std::vector<std::string> res;
+	// for string delimiter
+	size_t pos_start = 0, pos_end, delim_len = delimiter.length();
+	std::string token;
+	std::vector<std::string> res;
 
-    while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos) {
-        token = s.substr (pos_start, pos_end - pos_start);
-        pos_start = pos_end + delim_len;
-        res.push_back (token);
-    }
+	while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos) {
+		token = s.substr (pos_start, pos_end - pos_start);
+		pos_start = pos_end + delim_len;
+		res.push_back (token);
+	}
 
-    res.push_back (s.substr (pos_start));
-    return res;
+	res.push_back (s.substr (pos_start));
+	return res;
+}
+
+double ASLI::checkFeatureValueValidity(const latticeType &lt_type, const latticeSize &lt_size, const latticeFeature &lt_feature) {
+	/* Checks if feature value is within recommended bounds
+	 * Inputs:
+	 *   lt_type    : Lattice type data
+	 *   lt_size    : Lattice size data
+	 *   lt_feature : Lattice feature data
+	 * Return:
+	 *   Number of unit cell types for which feature value is ouside recomented bounds
+	 */
+
+	double scaling = Infill::sizing_function(Point(0,0,0), lt_size, "scaling");
+
+	if (lt_type.type != "hybrid") { // If unit cell is fixed
+		double t = Infill::internal::input2level(lt_type.type, scaling, lt_feature.feature, lt_feature.feature_val, lt_feature.udf, lt_feature.mode);
+		if (lt_type.side == "scaffold") {
+			return (t < std::get<1>(Infill::UNIT_CELLS.at(lt_type.type))) ? 1 : 0;
+		}	else if (lt_type.side == "void") {
+			return (t > std::get<2>(Infill::UNIT_CELLS.at(lt_type.type))) ? 1 : 0;
+		}
+
+	} else { // If unit cell is variable
+		int counter = 0;
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
+			double t = Infill::internal::input2level(lt_type.typeVector[i], scaling, lt_feature.feature, lt_feature.feature_val, lt_feature.udf, lt_feature.mode);
+			if (lt_type.side == "scaffold") {
+				return (t < std::get<1>(Infill::UNIT_CELLS.at(lt_type.typeVector[i]))) ? counter += 1 : 0;
+			}	else if (lt_type.side == "void") {
+				return (t > std::get<2>(Infill::UNIT_CELLS.at(lt_type.typeVector[i]))) ? counter += 1 : 0;
+			}
+		}
+		if (counter > 0)
+			return counter;
+	}
+	return 0;
+}
+
+double ASLI::checkFeatureFieldValidity(const Point &p, const double &featureValue, const latticeType &lt_type,
+	const latticeSize &lt_size, const latticeFeature &lt_feature) {
+	/* Checks if feature values are within recommended bounds
+	 * Inputs:
+	 *   p            : Coordinates of point to be evaluated
+	 *   featureValue :
+	 *   lt_type      : Lattice type data
+	 *   lt_size      : Lattice size data
+	 *   lt_feature   : Lattice feature data
+	 * Return:
+	 *   ???
+	 */
+
+	double scaling = Infill::sizing_function(p, lt_size, "scaling");
+
+	if (lt_type.type != "hybrid") { // If unit cell is fixed
+		double t = Infill::internal::input2level(lt_type.type, scaling, lt_feature.feature, featureValue, 
+			lt_feature.udf, lt_feature.mode);
+		if (lt_type.side == "scaffold") {
+			return (t < std::get<1>(Infill::UNIT_CELLS.at(lt_type.type))) ? 1 : 0;
+		}	else if (lt_type.side == "void") {
+			return (t > std::get<2>(Infill::UNIT_CELLS.at(lt_type.type))) ? 1 : 0;
+		}
+
+	} else { // If unit cell is variable
+		std::vector<double> weights(lt_type.interpModel_linear.size());
+		for (size_t i = 0; i < lt_type.interpModel_linear.size(); i++) {
+			Eigen::Vector3d pEigen = Eigen::Vector3d(p.x(), p.y(), p.z());
+			weights[i] = TrilinearInterpolation::evaluate(pEigen, lt_type.interpModel_linear[i]);
+
+			if (weights[i] > 0.5) { 
+				double t = Infill::internal::input2level(lt_type.typeVector[i], scaling, lt_feature.feature, featureValue, lt_feature.udf, lt_feature.mode);
+				if (lt_type.side == "scaffold") {
+					return (t < std::get<1>(Infill::UNIT_CELLS.at(lt_type.typeVector[i]))) ? 1 : 0;
+				}	else if (lt_type.side == "void") {
+					return (t > std::get<2>(Infill::UNIT_CELLS.at(lt_type.typeVector[i]))) ? 1 : 0;
+				}
+			}
+		}
+
+	}
+	return 0;
 }

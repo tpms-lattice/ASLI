@@ -77,25 +77,25 @@ double Infill::internal::unnormalizeLevel(const double &t_normalized, const std:
 		return (t_normalized * (1.5 + 1.5)) + -1.5;
 
 	} else if (type == "sheet_gyroid") {
-		return (t_normalized * (1.55 - 0)) + 0;
+		return (t_normalized * (1.5 - 0)) + 0;
 
 	} else if (type == "diamond") {
-		return (t_normalized * (1.425 - -1.425)) + -1.425;
+		return (t_normalized * (1.42 - -1.42)) + -1.42;
 		
 	} else if (type == "sheet_diamond") {
-		return (t_normalized * (1.45 - 0)) + 0;
+		return (t_normalized * (1.42 - 0)) + 0;
 
 	} else if (type == "primitive") {
-		return (t_normalized * (3 - -3)) + -3;
+		return (t_normalized * (3.01 - -3)) + -3;
 		
 	} else if (type == "sheet_primitive") {
-		return (t_normalized * (3.05 - 0)) + 0;
+		return (t_normalized * (3.01 - 0)) + 0;
 
 	} else if (type == "IWP") {
-		return (t_normalized * (3.025 - -5.025)) + -5.025;
+		return (t_normalized * (5 - -3)) + -3;
 
 	} else if (type == "sheet_IWP") {
-		return (t_normalized * (5.05 - 0)) + 0;
+		return (t_normalized * (5 - 0)) + 0;
 
 	} else if (type == "cubic") { // Without smoothing
 		return (t_normalized * (0.71 - 0)) + 0;
@@ -128,32 +128,34 @@ double Infill::internal::vFraction2level(double volFraction, const std::string &
 		a = -1.5; b = 3.0;
 
 	} else if (type == "sheet_gyroid") {
-		if (volFraction > 0.999) { volFraction = 0.999; } // TEMP!! Check why it fails with value > 0.999...
-		a = -0.00224e-3; b = 1.59	; c = -0.117;
+		a = 0; b = 1.5486	; c = -0.0486;
 
 	} else if (type == "diamond") {
-		a = -1.36; b = 5.61; c = -19.59; d = 49.46; e = -54.60; f = 21.84;
+		a = -1.42; b = 9.5121; c = -74.9721; d = 364.3329; e = -930.7729; f = 1291.0637;
+		g = -919.0071; h = 262.6834;
 
 	} else if (type == "sheet_diamond") {
-		a = -0.0108; b = 1.82; c = -5.48; d = 17.74; e = -23.55; f = 10.88;
+		a = 0; b = 0.7912; c = 6.5983; d = -33.7214; e = 75.7986; f = -77.7199;
+		g = 29.6732;
 
 	} else if (type == "primitive") {
-		a = -2.86; b = 18.57; c = -74.78; d = 170.67; e = -181.17; f = 72.43;
+		a = -3; b = 21.9305; c = -96.7125; d = 227.6736; e = -244.8562; f = 97.9746;
 
 	} else if (type == "sheet_primitive") {
-		a = -0.0250; b = 2.83; c = -8.89; d = 26.90; e = -34.93; f = 17.03;
+		a = 0; b = 3.2223; c = -29.3794; d = 200.6042; e = -633.4513; f = 1009.5031;
+		g = -788.9678; h = 241.4790;
 
 	} else if (type == "IWP") {
-		a = 3.08; b = -6.61; c = 54.92; d = -393.14; e = 1219.46; f = -1936.45;
-		g = 1529.72; h = -475.82;
+		a = -3; b = 5.8392; c = -59.4099; d = 462.7837; e = -1495.7952; f = 2430.5479;
+		g = -1945.4597; h = 609.4940;
 
 	} else if (type == "sheet_IWP") {
-		a = -0.0343; b = 6.70; c = -48.91; d = 325.14; e = -1049.81; f = 1749.51;
-		g = -1448.85; h = 471.14;
+		a = 0; b = 6.3703; c = -53.5909; d = 383.7502; e = -1279.0549; f = 2160.0684;
+		g = -1795.0308; h = 582.4877;
 
 	} else if (type == "cubic") { // Without smoothing
-		a = 0.005943; b = 2.332; c = -21.46; d = 117.2; e = -332.8; f = 501.8;
-		g = -380.7; h = 114.3;
+		a = 0; b = 2.8402; c = -30.1344; d = 173.9104; e = -509.3130; f = 782.2430;
+		g = -600.4298; h = 181.5936;
 
 	} else {
 		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
@@ -194,41 +196,41 @@ double Infill::internal::wallSize2level(double wallSize, const double &scaling, 
 	// Set the polynomial coefficients and enforce the upper wall thickness bound
 	// (for the requested unit cell type)
 	if (type == "gyroid") {
-		a = -1.43; b = 1.05; c = 2.80; d = 19.83; e = -37.50; f = 16.70;
-		if (wallSize > 0.848) {wallSize = 0.848;}
+		a = -1.4292; b = 1.1123; c = 2.0586; d = 22.7985; e = -42.2134; f = 19.2938;
+		if (wallSize > 0.7761) {wallSize = 0.7761;}
 
 	} else if (type == "sheet_gyroid") {
-		a = -0.0350; b = 6.55; c = -6.99;
-		if (wallSize > 0.425) {wallSize = 0.425;}
+		a = -0.0018; b = 5.7957; c = -7.9287; d = 47.1949; e = -172.5956; f = 175.2846;
+		if (wallSize > 0.4769) {wallSize = 0.4769;}
 
 	} else if (type == "diamond") {
-		a = -0.984; b = 0.904; c = 10.63; d = -10.19;
-		if (wallSize > 0.71) {wallSize = 0.71;}
+		a = -1.0143; b = 1.2004; c = 9.8086; d = -9.5197;
+		if (wallSize > 0.6864) {wallSize = 0.6864;}
 
 	} else if (type == "sheet_diamond") {
-		a = -0.0396; b = 7.07; c = -13.42; d = 10.71;
-		if (wallSize > 0.48) {wallSize = 0.48;}
+		a = 0; b = 5.8008; c = -6.0142;
+		if (wallSize > 0.4365) {wallSize = 0.4365;}
 
 	} else if (type == "primitive") {
-		a = -0.999; b = 0.604; c = 3.55; d = 2.18; e = -4.21; f = 1.19;
-		if (wallSize > 1.285) {wallSize = 1.285;}
+		a = -0.9970; b = 0.1082; c = 6.3135; d = -3.1200;
+		if (wallSize > 1.2202) {wallSize = 1.2202;}
 
 	} else if (type == "sheet_primitive") {
-		a = 7.80e-05; b = 5.44; c = 0.0212; d = -3.07; e = 0.170	; f = 0.355;
-		if (wallSize > 0.86) {wallSize = 0.86;}
+		a = -0.0007; b = 5.5064; c = -0.4280; d = -2.2617;
+		if (wallSize > 0.7541) {wallSize = 0.7541;}
 
 	} else if (type == "IWP") {
-		a = 3.00; b = -0.156; c = -29.07; d = -3.51; e = 50.44; f = -24.81;
-		if (wallSize > 0.79) {wallSize = 0.79;}
+		a = -3; b = -0.9792; c = 40.0955; d = -33.0667;
+		if (wallSize > 0.7346) {wallSize = 0.7346;}
 
 	} else if (type == "sheet_IWP") {
-		a = -0.0134; b = 17.61; c = -77.60; d = 943.10; e = -5727.87; f = 15460.84;
-		g = -18974.65; h = 8707.20;
-		if (wallSize > 0.67) {wallSize = 0.67;}
+		a = 0; b = 12.9334; c = 58.1260; d =-454.0008; e = 947.9448; f = -626.0384;
+		if (wallSize > 0.6415) {wallSize = 0.6415;}
 
 	} else if (type == "cubic") { // Without smoothing
-		a = 0.01988; b = 0.4993;
-		if (wallSize > 1.356476) {wallSize = 1.356476;}
+		a = 0; b = 0.9585; c = -3.1702; d = 10.1052; e = -16.9656; f = 15.5225;
+		g = -7.3270; h = 1.3964;
+		if (wallSize > 1.3565) {wallSize = 1.3565;}
 
 	} else {
 		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
@@ -269,40 +271,41 @@ double Infill::internal::poreSize2level(double poreSize, const double &scaling, 
 	// Set the polynomial coefficients and enforce the upper pore size bound
 	// (for the requested unit cell type)
 	if (type == "gyroid") {
-		a = 1.52; b = -0.486; c = -7.57; d = -6.28; e = 21.03; f = -9.61;
-		if (poreSize > 0.848) {poreSize = 0.848;}
+		a = 1.4961; b = -0.1128; c = -9.7480; d = -0.6083; e = 14.2529; f = -6.5775;
+		if (poreSize > 0.7761) {poreSize = 0.7761;}
 
 	} else if (type == "sheet_gyroid") {
-		a = 1.47; b = -0.314; c = -6.84; d = -15.23; e = 50.37; f = -40.61;
-		if (poreSize > 0.425) {poreSize = 0.425;}
+		a = 1.4886; b = 0.1637; c = -12.3632; d = 8.9919;
+		if (poreSize > 0.4212) {poreSize = 0.4212;}
 
 	} else if (type == "diamond") {
-		a = 1.40; b = -0.497; c = -11.42; d = 9.63;
-		if (poreSize > 0.78) {poreSize = 0.78;}
+		a = 1.3822; b = -0.3794; c = -11.5654; d = 9.6452;
+		if (poreSize > 0.7601) {poreSize = 0.7601;}
 
 	} else if (type == "sheet_diamond") {
-		a = 1.41; b = -1.09; c = 3.81; d = -65.70; e = 153.92; f = -119.84;
-		if (poreSize > 0.41) {poreSize = 0.41;}
+		a = 1.3939; b = -0.4082; c = -5.9832; d = -9.7175; e = 15.3286; f = 4.1403;
+		if (poreSize > 0.4097) {poreSize = 0.4097;}
 
 	} else if (type == "primitive") {
-		a = 3.00; b = -0.504; c = -3.83; d = -1.56; e = 2.68; f = -0.619;
-		if (poreSize > 1.61) {poreSize = 1.61;}
+		a = 2.9258; b = 0.3522; c = -6.7912; d = 2.6777;
+		if (poreSize > 1.5391) {poreSize = 1.5391;}
 
 	} else if (type == "sheet_primitive") {
-		a = 3.05; b = -1.42; c = 1.23; d = -13.67; e = 15.75; f = -5.86;
-		if (poreSize > 0.84) {poreSize = 0.84;}
+		a = 2.9750; b = -0.0967; c = -5.7828; d = 2.0385;
+		if (poreSize > 0.8309) {poreSize = 0.8309;}
 
 	} else if (type == "IWP") {
-		a = -4.94; b = -0.408; c = 44.62; d = -19.91; e = -64.79; f = 50.55;
-		if (poreSize > 0.77) {poreSize = 0.77;}
+		a = 5.0085; b = -1.1781; c = -40.9767; d = 38.2058;
+		if (poreSize > 0.7098) {poreSize = 0.7098;}
 
 	} else if (type == "sheet_IWP") {
-		a = 4.96; b = -0.511; c = -33.51; d = -32.62; e = 173.24; f = -133.09;
-		if (poreSize > 0.42) {poreSize = 0.42;}
+		a = 4.9112; b = 1.1684; c = -51.6997; d = 51.0962;
+		if (poreSize > 0.4164) {poreSize = 0.4164;}
+
 
 	} else if (type == "cubic") { // Without smoothing
-		a = 0.6783; b = -0.4743;
-		if (poreSize > 1.709269) {poreSize = 1.709269;}
+		a = 0.6945; b = -0.4706; c = -0.2586; d = 0.6325; e = -0.5959; f = 0.1914;
+		if (poreSize > 1.7093) {poreSize = 1.7093;}
 
 	} else {
 		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
@@ -339,57 +342,63 @@ double Infill::internal::level2wallSize(double t, const double &scaling, const s
 		if (t < -1.5) {t = -1.5;}
 		else if (t > 1.5) {t = 1.5;}
 
-		a = 0.415; b = 0.197; c = -0.00343; d = -0.0202; e = -0.00393; f = 0.0273;
+		a = 0.4133; b = 0.1942; c = 0.0061; d = -0.0126; e = -0.0104; f = 0.0237;
 
 	} else if (type == "sheet_gyroid") {
 		if (t < 0) {t = 0;}
-		else if (t > 1.55) {t = 1.55;}
+		else if (t > 1.5) {t = 1.5;}
 
-		a = -0.00584; b = 0.387; c = -1.24; d = 2.73; e = -2.43; f = 0.767;
+		a = -0.0048; b = 0.3776; c = -2.0275; d = 8.8079; e = -18.8187; f = 20.9671;
+ 		g = -11.6445; h = 2.5463;
 
 	} else if (type == "diamond") {
-		if (t < -1.425) {t = -1.425;}
-		else if (t > 1.425) {t = 1.425;}
+		if (t < -1.42) {t = -1.42;}
+		else if (t > 1.42) {t = 1.42;}
 
-		a = 0.305; b = 0.222; c = 0.00838; d = 0.00314; e =-0.0462; f = 0.0470;
+		a = 0.3096; b = 0.2034; c = -0.0336; d = 0.0659;
 
 	} else if (type == "sheet_diamond") {
 		if (t < 0) {t = 0;}
-		else if (t > 1.45) {t = 1.45;}
+		else if (t > 1.42) {t = 1.42;}
 
-		a = -0.00219; b = 0.226; c = -0.155; d = 0.160;
+		a = 0; b = 0.2118; c = -0.1328; d = 0.1494;
 
 	} else if (type == "primitive") {
 		if (t < -3) {t = -3;}
-		else if (t > 3) {t = 3;}
+		else if (t > 3.01) {t = 3.01;}
 
-		a = 0.442; b = 0.251; c = -0.0551; d = 0.0690; e = -0.0370; f = 0.00717;
+		a = 0.4445; b = 0.2437; c = -0.0617; d = 0.0858; e = -0.0454; f = 0.0084;
 
 	} else if (type == "sheet_primitive") {
 		if (t < 0) {t = 0;}
-		else if (t > 3.05) {t = 3.05;}
+		else if (t > 3.01) {t = 3.01;}
 
-		a = -0.00488; b = 0.236; c = -0.140; d = 0.150	; e = -0.0652; f = 0.0106;
+		a = -0.0028; b = 0.2320; c = -0.1465; d = 0.1641; e = -0.0731; f = 0.0120;
 
 	} else if (type == "IWP") {
-		if (t < -5.025) {t = -5.025;}
-		else if (t > 3.025) {t = 3.025;}
+		if (t < -3) {t = -3;}
+		else if (t > 5) {t = 5;}
 
-		a = 0.339; b = -0.0668; c = 0.000523; d = -0.000707; e = -0.000660;
-		f = -0.000132;
+		a = 3.4176e-1; b = 7.1522e-2; c = -5.7481e-3; d = -1.5987e-3; e = 1.4963e-3; f = 2.0003e-4;
+		g = -1.9120e-4; h = 2.3700e-5;
 
-	} else if (type == "sheet_IWP") { // VERY ROUGH APPROXIMATION!!!
+	} else if (type == "sheet_IWP") {
 		if (t < 0) {t = 0;}
-		else if (t > 5.05) {t = 5.05;}
+		else if (t > 5) {t = 5;}
 
-		a = 0.0212; b = -0.149; c = 0.534; d = -0.518; e = 0.226; f = -0.0437;
-		g = 0.00310;
+		a = 0; b = -0.0218; c = 0.2852; d = -0.2908; e = 0.1171; f = -0.0157;
+		g = -5.8286e-4; h=1.9297e-4;
+
+
+
+
+
 
 	} else if (type == "cubic") { // Without smoothing
 		if (t < 0) {t = 0;}
 		else if (t > 0.71) {t = 0.71;}
 
-		a = -0.03956; b = 2.002;
+		a = 0; b = 0.9949; c = 7.4779; d = -23.7118; e = 33.4551; f = -17.1937;
 
 	} else {
 		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
@@ -429,58 +438,58 @@ double Infill::internal::level2poreSize(double t, const double &scaling, const s
 		if (t < -1.5) {t = -1.5;}
 		else if (t > 1.5) {t = 1.5;}
 		
-		a = 0.428; b = -0.191; c = 0.00166; d = 0.00822; e = -0.00133; f = -0.0169;
+		a = 0.4276; b = -0.1906; c = 0.0005; d = 0.0072; e = -0.0006; f = -0.0166;
 
 	} else if (type == "sheet_gyroid") {
 		if (t < 0) {t = 0;}
-		else if (t > 1.55) {t = 1.55;}
+		else if (t > 1.5) {t = 1.5;}
 
-		a = 0.432; b = -0.264; c = 0.418; d = -0.893; e = 0.782; f = -0.253;
+		a = 0.4295; b = -0.2419; c = 0.3462; d = -0.7699; e = 0.6843; f = -0.2224;
 
 	} else if (type == "diamond") {
-		if (t < -1.425) {t = -1.425;}
-		else if (t > 1.425) {t = 1.425;}
+		if (t < -1.42) {t = -1.42;}
+		else if (t > 1.42) {t = 1.42;}
 
-		a = 0.395; b = -0.208; c = 0.0180; d = 0.0144; e = -0.00916; f = -0.0251;
+		a = 0.3955; b = -0.2086; c = 0.0175; d = 0.0164; e = -0.0086; f = -0.0265;
 
 	} else if (type == "sheet_diamond") {
 		if (t < 0) {t = 0;}
-		else if (t > 1.45) {t = 1.45;}
+		else if (t > 1.42) {t = 1.42;}
 
-		a = 0.421; b = -0.288; c = 0.568; d = -1.26; e = 1.16; f = -0.397;
+		a = 0.4181; b = -0.2666; c = 0.5460; d = -1.3124; e = 1.2599; f = -0.4374;
 
 	} else if (type == "primitive") {
 		if (t < -3) {t = -3;}
-		else if (t > 3) {t = 3;}
+		else if (t > 3.01) {t = 3.01;}
 
-		a = 0.843; b = -0.193; c = 0.00123; d = 0.00326; e = -0.000306;
-		f = -0.00123;
+		a = 0.8432; b = -0.1902; c = 0.0003; d = 0.0016; e = -0.0002; f = -0.0010;
 		
 	} else if (type == "sheet_primitive") {
 		if (t < 0) {t = 0;}
-		else if (t > 3.05) {t = 3.05;}
+		else if (t > 3.01) {t = 3.01;}
 
-		a = 0.847; b = -0.225; c = 0.113; d = -0.125; e = 0.0558; f = -0.00943;
+		a = 0.8469; b = -0.2328; c = 0.1407; d = -0.1563; e = 0.0697; f = -0.0116;
 
 	} else if (type == "IWP") {
-		if (t < -5.025) {t = -5.025;}
-		else if (t > 3.025) {t = 3.025;}
+		if (t < -3) {t = -3;}
+		else if (t > 5) {t = 5;}
 
-		a = 0.426; b = 0.0662; c = 0.000860; d = 0.000956; e = 0.000764;
-		f = 0.000146;
+		a = 4.2556e-1; b = -6.6094e-2; c = 1.8489e-3; d = -1.1156e-3; e = 6.2127e-4; 
+		f = -1.1685e-4;
 
 	} else if (type == "sheet_IWP") {
 		if (t < 0) {t = 0;}
-		else if (t > 5.05) {t = 5.05;}
+		else if (t > 5) {t = 5;}
 
-		a = 0.428; b = -0.0906; c = 0.0434; d = -0.0258; e = 0.00663;
-		f = -0.000627;
+		a = 0.4264; b = -0.0862; c = 0.0395; d = -0.0245; e =0.0064; f = -6.1871e-4;
+
 
 	} else if (type == "cubic") { // Without smoothing
 		if (t < 0) {t = 0;}
 		else if (t > 0.71) {t = 0.71;}
 		
-		a = 1.42; b = -2.075;
+		a = 1.7093, b = -13.0874, c = 123.2556, d = -631.6172, e = 1690.8477, f = -2427.3976,
+		g = 1753.0583, h = -492.3583;
 
 	} else {
 		throw std::runtime_error(INFILL_ERRMSG::INVALID_TPMS);
@@ -588,7 +597,7 @@ double Infill::TPMS_function(const Point &p, const std::string &type,
 		return (cos(2*scaling*p.x())+cos(2*scaling*p.y())+cos(2*scaling*p.z())) -
 		       2*(cos(scaling*p.x())*cos(scaling*p.y()) +
 		          cos(scaling*p.y())*cos(scaling*p.z()) +
-		          cos(scaling*p.z())*cos(scaling*p.x())) +
+		          cos(scaling*p.z())*cos(scaling*p.x())) -
 		       t;
 
 	} else if (type == "sheet_IWP") {

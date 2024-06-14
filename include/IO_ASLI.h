@@ -1,6 +1,6 @@
 /* ==========================================================================
  *  This file is part of ASLI (A Simple Lattice Infiller)
- *  Copyright (C) KU Leuven, 2019-2022
+ *  Copyright (C) KU Leuven, 2019-2024
  *
  *  ASLI is free software: you can redistribute it and/or modify it under the 
  *  terms of the GNU Affero General Public License as published by the Free 
@@ -56,65 +56,53 @@ struct latticeTypeTree {
 
 namespace ASLI_IO {
 	// Declarations
-	inline bool read_csv(const std::string &csvFile, const char &separator, 
+	inline void read_csv(const std::string &csvFile, const char &separator, 
 	                     std::vector<std::vector<double>> &data);
-	inline bool read_tap(const std::string &tapFile, const char &separator, 
+	inline void read_tap(const std::string &tapFile, const char &separator, 
 	                     latticeTypeData &typeData);
 
+	// Error messages
+	const std::string FAILED_TO_OPEN_CSV_FILE = "Unable to open ";
+
 	// Definitions
-	bool read_csv(const std::string &csvFile, const char &separator,
+	void read_csv(const std::string &csvFile, const char &separator,
 		std::vector<std::vector<double>> &data) {
-		/* Simple csv reader for numeric data
-		* 
-		*/
+		/* Simple csv reader for numeric data */
 		
 		// Get in file
 		std::ifstream infile(csvFile.c_str());
-		if(!infile) {
-			std::cerr <<  "ERROR: Unable to open " << csvFile << std::endl;
-			return(EXIT_FAILURE);
-		} else {
-			std::cout << "  Opening " << csvFile << std::endl;
-		}
+		if(infile) { std::cout <<"  Opening " << csvFile << std::endl; }
+		else { throw std::runtime_error(FAILED_TO_OPEN_CSV_FILE + csvFile); }
 
 		// Read data line by line
 		std::string currentLine;
 		while(!getline_multiOS(infile, currentLine).eof()) {
-			// Create a stringstream of the current line
+			// Create stringstream of current line
 			std::istringstream ss(currentLine);
 
+			// Extract columns
 			std::vector<double> record;
-			// Extract each column
 			for (size_t i = 0; i < 4; i++) {
 				std::string currentCol;
 
 				if (!getline(ss, currentCol, separator)) break;
 				record.push_back(std::stod(currentCol));
-				//if ( record[3] <= threshold ) throw runtime_error(ASLI_ERRMSG::INVALID_INPUT);
 			}
 			data.push_back(record);
 		}
-		
-		return EXIT_SUCCESS;
 	}
 
-	//
-	bool read_tap(const std::string &tapFile, const char &separator, latticeTypeData &typeData) {
-		/* Simple .tap file reader
-		* 
-		*/
+	void read_tap(const std::string &tapFile, const char &separator,
+		latticeTypeData &typeData) {
+		/* Simple csv reader for .tap files	*/
 
 		std::vector<std::string> types;
 		std::vector<std::vector<std::string>> data;
 		
 		// Get in file
 		std::ifstream infile(tapFile.c_str());
-		if(!infile) {
-			std::cerr <<  "ERROR: Unable to open " << tapFile << std::endl;
-			return(EXIT_FAILURE);
-		} else {
-			std::cout << "  Opening " << tapFile << std::endl;
-		}
+		if(infile) { std::cout <<"  Opening " << tapFile << std::endl; }
+		else { throw std::runtime_error(FAILED_TO_OPEN_CSV_FILE + tapFile); }
 
 		// Read data line by line
 		std::string currentLine;
@@ -130,8 +118,9 @@ namespace ASLI_IO {
 				if (!getline(ss, currentCol, separator)) break;
 				record.push_back(currentCol);
 
-				if (i == 3 && std::find(types.begin(), types.end(), currentCol) == types.end()) {// Keep track of lattice types
-						types.push_back(currentCol);
+				// Keep track of lattice types
+				if (i == 3 && std::find(types.begin(), types.end(), currentCol) == types.end()) {
+					types.push_back(currentCol);
 				}
 			}
 			data.push_back(record);
@@ -175,7 +164,6 @@ namespace ASLI_IO {
 				}
 			}
 		}	
-		return EXIT_SUCCESS;
 	}
 }
 #endif

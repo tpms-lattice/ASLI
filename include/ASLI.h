@@ -48,6 +48,7 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string>//for std::stod
+#include <set>
 
 class ASLI {
 public:
@@ -72,10 +73,10 @@ public:
 	meshSettings me_settings;
 
 private:
-	const std::vector<std::string> mesher_av = {"CGAL", "MMG", "CGAL_OLD"};
-	const std::vector<std::string> side_av = {"scaffold", "void", "all"};
-	const std::vector<std::string> feature_mode_av = {"wallSize", "poreSize"};
-	const std::vector<std::string> mode_av = {"relative", "absolute"};
+	const std::set<std::string> MESHERS = {"CGAL", "MMG", "CGAL_OLD"};
+	const std::set<std::string> SIDES = {"scaffold", "void", "all"};
+	const std::set<std::string> FEATURES = {"wallSize", "poreSize"};
+	const std::set<std::string> MODES = {"relative", "absolute"};
 
 	void SetUp(std::string configFile);
 	void SetUpLattice();
@@ -85,6 +86,14 @@ private:
 	void SetUpTypeInterpolator(const alglib::real_2d_array &coordinates,
 	                           const std::vector<double> &weights, 
 	                           modelData &interpolationModel);
+
+	double checkFeatureValueValidity(const latticeType &lt_type,
+	                                 const latticeSize &lt_size,
+	                                 const latticeFeature &lt_feature);
+	double checkFeatureFieldValidity(const Point &p, const double &featureValue,
+	                                 const latticeType &lt_type,
+	                                 const latticeSize &lt_size,
+	                                 const latticeFeature &lt_feature);
 
 	std::vector<std::string> split(const std::string &s, 
 	                               const std::string &delimiter);
@@ -108,7 +117,6 @@ namespace ASLI_ERRMSG {
 	const std::string FAILED_TO_OPEN_CONFIG_FILE = "Unable to open configuration file";
 	const std::string FAILED_TO_PARSE_CONFIG_FILE = "Failed to parse configuration file";
 
-
 	const std::string FAILED_TO_OPEN_STL_FILE = "Unable to open .stl file";
 	const std::string INTERNAL_GEOMETRY_DIMENSION_ZERO = "Dimension(s) of internal geometry must be larger than zero.";
 	const std::string FAILED_TO_OPEN_TAP_FILE = "Unable to open .tap file";
@@ -122,8 +130,12 @@ namespace ASLI_ERRMSG {
 
 	const std::string INPUT_GEOMETRY_IS_NOT_CLOSED = "Input geometry does not form a closed surface";
 
+	const std::string INVALID_TYPE_FIELD = " invalid unit cell type(s) found in .tap file";
+	const std::string INVALID_SIZE_FIELD = " invalid unit cell size entry/entries in .sap file";
+	const std::string INVALID_FEATURE_FIELD = " invalid feature value entry/entries in .fap file";
+
 	// Lattice parameters
-	const std::string INVALID_TPMS = "Invalid TPMS type specified";
+	const std::string INVALID_TPMS = "Invalid lattice type specified";
 	const std::string INVALID_SIDE = "Invalid scaffold side specified";
 	const std::string INVALID_FILER_RADIUS = "Hybrid mode filter radius cannot be negative";
 	const std::string INVALID_CORRECTION_FACTOR = "Hybrid mode correction factor cannot be negative";
