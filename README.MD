@@ -158,10 +158,10 @@ To compile ASLI in parallel mode include `-DACTIVATE_CONCURRENT_MESHING=ON` when
 To compile ASLI together with its GUI include `-DASLI_GUI=ON` when calling cmake.
 
 ## Running ASLI ##
-To run ASLI from the command line you only need to type ```./ASLI config.yml``` if using Linux or ```ASLI.exe config.yml``` if using windows. The config.yml file specified points to the configuration file of ASLI.
+To run ASLI from the command line you only need to type ```./ASLI config.yml``` if using Linux or ```ASLI.exe config.yml``` if using windows. The config.yml file specified points to the configuration file that will be used by ASLI.
 
 ## Issues and questions ##
-If you find a bug please post an [issue](https://github.com/tpms-lattice/ASLI/issues). If you have questions regarding ASLI you can post them on [stackoverflow](https://stackoverflow.com/questions/tagged/ASLI) with the tag [`ASLI`](https://stackoverflow.com/questions/tagged/ASLI).
+If you find a bug please post an [issue](https://github.com/tpms-lattice/ASLI/issues). If you have questions feel free to start a [discussion](https://github.com/tpms-lattice/ASLI/discussions).
 
 ## Contact ##
 Contact: asli (at) kuleuven . be
@@ -172,4 +172,4 @@ Perez-Boerema, F., M. Barzegari and L. Geris (2022). A flexible and easy-to-use 
 ## License ##
 ASLI is licensed under the terms of the [GNU Affero General Public License ](https://www.gnu.org/licenses).
 
-Copyright © KU Leuven 2019-2022
+Copyright © KU Leuven 2019-2024

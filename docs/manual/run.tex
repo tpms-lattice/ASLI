@@ -31,45 +31,40 @@ files:
   tap: inputs/cube.tap
   sap: inputs/cube.sap
   fap: inputs/cube.fap
-output: outputs/
+  output: outputs/cube.*
 
 # Lattice settings
 lt_type: gyroid
+lt_type_side: scaffold
 lt_type_filterRadius: 1.0
 lt_type_correctionFactor: 0.25
 
 lt_size: 0.5
 
-lt_feature: isovalue
+lt_feature: volumeFraction
 lt_feature_val: 0.5
 lt_feature_mode: relative
 
 # Mesh settings
 me_mesher: CGAL
-me_side: scaffold
-me_volumeMesh: FALSE
 me_nThreads: 1
+me_elementSize: 0.5
+me_volumeMesh: FALSE
 
 # Mesh settings (CGAL)
-me_facetAngle: 0
-me_facetSize: 0
-me_facetDistance: 0.015
-me_cellRadiusEdgeRatio: 0
-me_cellSize: 0
-me_preserveEdges: TRUE
-me_poissonOffset: 0
+CGAL_facetDistance: 0.01
+CGAL_relativeErrorBound: 1e-3
+CGAL_facetAngle: 30
+CGAL_cellRadiusEdgeRatio: 3.0
 
 # Mesh settings (MMG)
-me_hvol: 0
-me_hinitial: 0
-me_hmin: 0
-me_hmax: 0
-me_hausd: 0.42
-me_hgrad: 0
+MMG_hausd: 0.3
+MMG_hgrad: 1.3
+MMG_hinitial: 0.36
 \end{lstlisting}
 \end{minipage}
 
-	\caption{YAML configuration.}
+	\caption{Example of YAML configuration file.}
 	\label{fig:config}
 \end{figure}
 
@@ -85,7 +80,7 @@ me_hgrad: 0
 \end{figure}
 
 \subsection{Demo} \label{sec:demo}
-\asli{} includes one demo problem. The files required for the demo are the \texttt{cube.stl} file, containing the $1\times1\times1$ cube shown in Fig. \ref{fig:cube}, and the \texttt{cube.tap}, \texttt{cube.sap} and \texttt{cube.fap} files, which contain the local type, size and feature (isovalue) specifications shown in Fig. \ref{fig:type_dp}-\subref{fig:feature_dp}. All four files can be found in the \texttt{inputs} folder of \asli{}.
+\asli{} includes one demo problem. The files required for the demo are the \texttt{cube.stl} file, containing the $1\times1\times1$ cube shown in Fig. \ref{fig:cube}, and the \texttt{cube.tap}, \texttt{cube.sap} and \texttt{cube.fap} files, which contain the local type, size and feature (volume fraction) specifications shown in Fig. \ref{fig:type_dp}-\subref{fig:feature_dp}. All four files can be found in the \texttt{inputs} folder of \asli{}.
 \begin{figure}[htb]
 	\centering
 	\begin{subfigure}[t]{.225\textwidth}

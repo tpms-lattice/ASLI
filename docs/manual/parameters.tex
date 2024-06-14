@@ -3,68 +3,82 @@
 \setcounter{section}{1}
 \renewcommand{\thesection}{\Alph{section}}
 
-\asli{} requires multiple parameters to be specified by the user. A description of all input parameters is found below. Some of the parameters have default values. These default values work well for many use cases and are therefore considered a good starting point. In the description of the input parameters there is also a ``Standard/Advanced'' label included. ``Advanced'' parameters are only required for specific cases and be can be ignored otherwise. For convenience all input parameters are indexed in the Section ``\hyperref[sec:index inputs full]{Index of input parameters}'' found at the end of the manual.
+\asli{} requires multiple parameters to be specified by the user. Most of these parameters have default values that work well for many use cases and are therefore considered a good starting point. The remaining parameters need to be specified by the user. A list of the different parameters including a description is found bellow. Moreover, parameters have been labelled as ``Standard'' or ``Advanced'' depending on the whether they are required relatively frequent or only in rare cases. For convenience, all input parameters are indexed in the Section ``\hyperref[sec:index inputs full]{Index of input parameters}'' found at the end of the manual.
 
 \subsection{Input/output files} \label{parameters:files}
-\begin{itemize}
+\begin{itemize}[itemsep=0.8em, parsep=0.3em]
 	% stl
-	\item {\it Parameter name:} {\tt stl}
+	\item {\it Parameter name:} {\tt stl} \hfill [Standard]
 	\phantomsection
 	\label{parameters:stl}
-	
+
 	\index[prmindex]{stl}
 	\index[prmindexfull]{IO files!stl file}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] STL file containing the object to be provided of an infill.
+	{\it Description:} STL file containing the object to be provided of an infill.
+	
+	{\it Possible values:} String value
+	
+	%internalGeometry
+	\item {\it Parameter name:} {\tt internalGeometry} \hfill [Standard]
+	\phantomsection
+	\label{parameters:internalGeometry}
+	
+	\index[prmindex]{internalGeometry}
+	\index[prmindexfull]{IO files!internal geometry}
+	
+	{\it Default:} -
+	
+	{\it Description:} String specifying the internal geometry ({\it cuboid w d h}, {\it cylinder h $r_x$ $r_y$} or {\it spheroid $r_x$ $r_y$ $r_z$}) to be provided of an infill. Parameter is only active in the absence of the {\tt stl} parameter.
 	
 	{\it Possible values:} String value
 	
 	% tap
-	\item {\it Parameter name:} {\tt tap}
+	\item {\it Parameter name:} {\tt tap} \hfill [Standard]
 	\phantomsection
 	\label{parameters:tap}
 	
 	\index[prmindex]{tap}
 	\index[prmindexfull]{IO files!tap file}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Type at point file containing local unit cell type specifications.
+	{\it Description:} Type at point file containing local unit cell type specifications.
 	
 	{\it Possible values:} String value
 	
 	% sap
-	\item {\it Parameter name:} {\tt sap}
+	\item {\it Parameter name:} {\tt sap} \hfill [Standard]
 	\phantomsection
 	\label{parameters:sap}
 	
 	\index[prmindex]{sap}
 	\index[prmindexfull]{IO files!sap file}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Size at point file containing local unit cell size specifications.
+	{\it Description:} Size at point file containing local unit cell size specifications.
 	
 	{\it Possible values:} String value
 	
 	% fap
-	\item {\it Parameter name:} {\tt fap}
+	\item {\it Parameter name:} {\tt fap} \hfill [Standard]
 	\phantomsection
 	\label{parameters:fap}
 	
 	\index[prmindex]{fap}
 	\index[prmindexfull]{IO files!fap file}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Feature at point file containing local unit cell feature specifications.
+	{\it Description:} Feature at point file containing local unit cell feature specifications.
 	
 	{\it Possible values:} String value
 	
 	% output
-	\item {\it Parameter name:} {\tt output}
+	\item {\it Parameter name:} {\tt output} \hfill [Standard]
 	\phantomsection
 	\label{parameters:output}
 	
@@ -73,29 +87,43 @@
 	
 	{\it Default:} ./outputs/
 	
-	{\it Description:} [Standard] Location were the output file(s) will be stored.
+	{\it Description:} Location were the output file(s) will be stored. If a specific output filename is desired it can be included in the string.
 	
 	{\it Possible values:} String value
 \end{itemize}
 
 \subsection{Lattice parameters} \label{parameters:lattice}
-\begin{itemize}
+\begin{itemize}[itemsep=0.8em, parsep=0.3em]
 	% lt_type
-	\item {\it Parameter name:} {\tt lt\_type}
+	\item {\it Parameter name:} {\tt lt\_type} \hfill [Standard]
 	\phantomsection
 	\label{parameters:lt_type}
 
 	\index[prmindex]{lt\_type}
 	\index[prmindexfull]{Lattice!lattice type}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Parameter specifying the unit cell type, i.e. {\it gyroid}, {\it sheet\_gyroid}, {\it diamond}, {\it sheet\_diamond}, {\it primitive}, {\it sheet\_primitive}, {\it IWP} or {\it sheet\_IWP}. To specify multiple unit cell types set to {\it hybrid} and provide a .tap file (see \hyperref[parameters:tap]{\tt tap} parameter).
+	{\it Description:} Parameter specifying the unit cell type ({\it gyroid}, {\it sheet\_gyroid}, {\it diamond}, {\it sheet\_diamond}, {\it primitive}, {\it sheet\_primitive}, {\it IWP}, {\it sheet\_IWP} or {\it cubic}). To specify multiple unit cell types set to {\it hybrid} and provide a .tap file (see \hyperref[parameters:tap]{\tt tap} parameter).
 	
 	{\it Possible values:} String value
+
+	% lt_type_side
+	\item {\it Parameter name:} {\tt lt\_type\_side} \hfill [Standard]
+	\phantomsection
+	\label{parameters:me_type_side}
 	
+	\index[prmindex]{lt\_type\_side}
+	\index[prmindexfull]{Lattice!side}
+	
+	{\it Default:} scaffold
+	
+	{\it Description:} Parameter specifying the side of the scaffold to discretize ({\it scaffold}, {\it void} or {\it all}).
+	
+	{\it Possible values:} String value
+
 	% lt_type_filterRadius
-	\item {\it Parameter name:} {\tt lt\_type\_filterRadius}
+	\item {\it Parameter name:} {\tt lt\_type\_filterRadius} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:lt_type_filterRadius}
 	
@@ -104,12 +132,12 @@
 	
 	{\it Default:} 1.0
 	
-	{\it Description:} [Advanced] Radius specifying the size of hybrid regions. The radius scales automatically with local unit cell size. Only active if {\tt lt\_type} is set to {\it hybrid}.
+	{\it Description:} Radius specifying the size of hybrid regions. The radius scales automatically with local unit cell size. Only active if {\tt lt\_type} is set to {\it hybrid}.
 	
 	{\it Possible values:} Non-negative floating point number
 	
 	% lt_type_correctionFactor
-	\item {\it Parameter name:} {\tt lt\_type\_correctionFactor}
+	\item {\it Parameter name:} {\tt lt\_type\_correctionFactor} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:lt_type_correctionFactor}
 	
@@ -118,54 +146,54 @@
 	
 	{\it Default:} 0.25
 	
-	{\it Description:} [Advanced] Correction factor to compensate for the thinning effect of hybridization. Only active if {\tt lt\_type} is set to {\it hybrid}.
+	{\it Description:} Correction factor to compensate for the thinning effect of hybridization. Only active if {\tt lt\_type} is set to {\it hybrid}.
 	
 	{\it Possible values:} Non-negative floating point number
 	
 	% lt_size
-	\item {\it Parameter name:} {\tt lt\_size}
+	\item {\it Parameter name:} {\tt lt\_size} \hfill [Standard]
 	\phantomsection
 	\label{parameters:lt_size}
 	
 	\index[prmindex]{lt\_size}
 	\index[prmindexfull]{Lattice!size}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Parameter specifying the unit cell size. Set to a value larger than 0 for a constant unit cell size. To prescribe a variable unit cell size set to 0 and provide a .sap file (see \hyperref[parameters:sap]{\tt sap} parameter).
+	{\it Description:} Parameter specifying the unit cell size. Set to a value larger than 0 for a constant unit cell size. To prescribe a variable unit cell size set to 0 and provide a .sap file (see \hyperref[parameters:sap]{\tt sap} parameter).
 	
 	{\it Possible values:} Non-negative floating point number
 	
 	% lt_feature
-	\item {\it Parameter name:} {\tt lt\_feature}
+	\item {\it Parameter name:} {\tt lt\_feature} \hfill [Standard]
 	\phantomsection
 	\label{parameters:lt_feature}
 	
 	\index[prmindex]{lt\_feature}
 	\index[prmindexfull]{Lattice!feature}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Parameter specifying the unit cell feature that will be specified, i.e. {\it isovalue}, {\it volumeFraction}, {\it wallSize} or {\it poreSize}.
+	{\it Description:} Parameter specifying the unit cell feature for which a value will be specified ({\it volumeFraction}, {\it wallSize} or {\it poreSize}).
 	
 	{\it Possible values:} String value
 	
 	% lt_feature_val
-	\item {\it Parameter name:} {\tt lt\_feature\_val}
+	\item {\it Parameter name:} {\tt lt\_feature\_val} \hfill [Standard]
 	\phantomsection
 	\label{parameters:lt_feature_val}
 	
 	\index[prmindex]{lt\_feature\_val}
 	\index[prmindexfull]{Lattice!feature value}
 	
-	{\it Default:} Should be provided
+	{\it Default:} -
 	
-	{\it Description:} [Standard] Parameter specifying the unit cell feature value. Set to a value larger than 0 for a constant feature value. To prescribe a variable feature value set to 0 and provide a .fap file (see \hyperref[parameters:fap]{\tt fap} parameter). If the feature value being provided is an isovalue, it should be specified as a normalized isovalue
+	{\it Description:} Parameter specifying the unit cell feature value. Set to a value larger than 0 for a constant feature value. To prescribe a variable feature value set to 0 and provide a .fap file (see \hyperref[parameters:fap]{\tt fap} parameter). If the feature value being provided is an isovalue, it should be specified as a normalized isovalue
 	
 	{\it Possible values:} Non-negative floating point number
 	
 	% lt_feature_mode
-	\item {\it Parameter name:} {\tt lt\_feature\_mode}
+	\item {\it Parameter name:} {\tt lt\_feature\_mode} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:lt_feature_mode}
 	
@@ -174,57 +202,29 @@
 	
 	{\it Default:} relative
 	
-	{\it Description:} [Advanced] Parameter specifying the feature size mode, i.e. {\it absolute} or {\it relative}. Only active if {\tt lt\_feature} is set to {\it wallSize} or {\it poreSize}. If set to relative, provide wall and pore sizes relative to a $1 \times 1 \times 1$ unit cell.
+	{\it Description:} Parameter specifying the feature value mode ({\it absolute} or {\it relative}). Only active if {\tt lt\_feature} is set to {\it wallSize} or {\it poreSize}. If set to {\it relative}, provide wall and pore sizes relative to a $1 \times 1 \times 1$ unit cell.
 	
 	{\it Possible values:} String value
 \end{itemize}
 
 \subsection{Mesh parameters} \label{parameters:mesh}
-\begin{itemize}
+\begin{itemize}[itemsep=0.8em, parsep=0.3em]
 	% me_mesher
-	\item {\it Parameter name:} {\tt me\_mesher}
+	\item {\it Parameter name:} {\tt me\_mesher} \hfill [Standard]
 	\phantomsection
 	\label{parameters:me_mesher}
 	
 	\index[prmindex]{me\_mesher}
 	\index[prmindexfull]{Mesh!mesher}
 	
-	{\it Description:} [Standard] Parameter specifying the mesh library to use, i.e. {\it CGAL} or {\it MMG}.
+	{\it Description:} Parameter specifying the mesh library to use ({\it CGAL} or {\it MMG}).
 	
-	{\it Default:} Should be provided
-	
-	{\it Possible values:} String value
-	
-	% me_side
-	\item {\it Parameter name:} {\tt me\_side}
-	\phantomsection
-	\label{parameters:me_side}
-	
-	\index[prmindex]{me\_side}
-	\index[prmindexfull]{Mesh!side}
-	
-	{\it Default:} scaffold
-	
-	{\it Description:} [Advanced] Parameter specifying the side of the scaffold to discretize, i.e. {\it scaffold} or {\it void}.
+	{\it Default:} -
 	
 	{\it Possible values:} String value
-	
-	% me_volumeMesh
-	\item {\it Parameter name:} {\tt me\_volumeMesh}
-	\phantomsection
-	\label{parameters:me_volumeMesh}
-	
-	\index[prmindex]{me\_volumeMesh}
-	\index[prmindexfull]{Mesh!volume mesh}
-	
-	{\it Default:} FALSE
-	
-	{\it Description:} [Advanced] Parameter specifying if the volume should also be discretized. Set to TRUE to discretize the volume, otherwise only the surface mesh will be generated.
-	
-	{\it Possible values:} Boolean value (TRUE or FALSE) 
 	
 	% me_nThreads
-	\item {\it Parameter name:} {\tt me\_nThreads}
+	\item {\it Parameter name:} {\tt me\_nThreads} \hfill [Standard]
 	\phantomsection
 	\label{parameters:me_nThreads}
 	
@@ -233,184 +233,232 @@
 	
 	{\it Default:} 1
 	
-	{\it Description:} [Standard] Number of threads to use. (Parallel mode is currently only available when {\tt me\_mesher} is set to CGAL)
+	{\it Description:} Number of threads to use. Parallel mode is only available when {\tt me\_mesher} is set to {\it CGAL}.
 	
-	{\it Possible values:} Positive integer value
+	{\it Possible values:} Positive integer
+
+	% me_elementSize
+	\item {\it Parameter name:} {\tt me\_elementSize} \hfill [Standard]
+	\phantomsection
+	\label{parameters:me_elementSize}
+	
+	\index[prmindex]{me\_elementSize}
+	\index[prmindexfull]{Mesh!element size}
+	
+	{\it Default:} 0.5 $\times$ [local wall size]
+	
+	{\it Description:} Size of elements relative to the local wall or pore size depending on the side discretized. When using the CGAL library {\tt me\_elementSize} represents an upper bound on the circumradii of the mesh tetrahedra. When using the MMG library {\tt me\_elementSize} represents the elements edge lengths.
+	
+	{\it Possible values:} Positive integer
+	
+	% me_volumeMesh
+	\item {\it Parameter name:} {\tt me\_volumeMesh} \hfill [Standard]
+	\phantomsection
+	\label{parameters:me_volumeMesh}
+	
+	\index[prmindex]{me\_volumeMesh}
+	\index[prmindexfull]{Mesh!volume mesh}
+	
+	{\it Default:} FALSE
+	
+	{\it Description:} Parameter specifying if a volume mesh is also required. Set to TRUE to obtain a volume mesh in addition to the surface triangulation, otherwise only a surface triangulation is generated.
+	
+	{\it Possible values:} Boolean value (TRUE or FALSE)
+	
+	% me_edgeProtectionAngle
+	\item {\it Parameter name:} {\tt me\_edgeProtectionAngle}  \hfill [Advanced]
+	\phantomsection
+	\label{parameters:me_edgeProtectionAngle}
+	
+	\index[prmindex]{me\_edgeProtectionAngle}
+	\index[prmindexfull]{Mesh!mesh size}
+	
+	{\it Default:} 70
+	
+	{\it Description:} Edge protection angle in degrees. If set to 0 edge protection is disabled.
+	
+	{\it Possible values:}  Non-negative floating point number
+	
+	% me_threshold
+	\item {\it Parameter name:} {\tt me\_threshold} \hfill [Advanced]
+	\phantomsection
+	\label{parameters:me_threshold}
+	
+	\index[prmindex]{me\_threshold}
+	\index[prmindexfull]{Mesh!threshold}
+	
+	{\it Default:} 0.033
+	
+	{\it Description:} Smallest permitted mesh size as a fraction of the local unit cell size.
+	
+	{\it Possible values:} Positive floating point number
+
 \end{itemize}
 
 % CGAL parameters
 \subsubsection{CGAL specific parameters} \label{parameters:cgal}
-\begin{itemize}
-	% me_facetAngle
-	\item {\it Parameter name:} {\tt me\_facetAngle}
+\begin{itemize}[itemsep=0.8em, parsep=0.3em]
+	% CGAL_facetDistance
+	\item {\it Parameter name:} {\tt CGAL\_facetDistance} \hfill [Standard]
+	\phantomsection
+	\label{parameters:me_facetDistance}
+	
+	\index[prmindex]{CGAL\_facetDistance}
+	\index[prmindexfull]{Mesh!CGAL!facet distance}
+	
+	{\it Default:} 0.1 $\times$ [local unit cell size]
+	
+	{\it Description:} Surface approximation error as an upper bound for the distance between the circumcenter of a surface facet and the center of the surface Delaunay ball of this facet. Scales with the local unit cell size.
+	
+	{\it Possible values:} Positive floating point number 
+	
+	% CGAL_relativeErrorBound
+	\item {\it Parameter name:} {\tt CGAL\_relativeErrorBound} \hfill [Advanced]
+	\phantomsection
+	\label{parameters:me_relativeErrorBound}
+	
+	\index[prmindex]{CGAL\_relativeErrorBound}
+	\index[prmindexfull]{Mesh!CGAL!relative error bound}
+	
+	{\it Default:} 1e-3
+	
+	{\it Description:} Relative error bound used to compute intersection points between the implicit surface and query segments. The bisection is stopped when the length of the intersected segment is less than the product of the relative\_error\_bound by the diagonal of the mean unit cell size.
+	
+	{\it Possible values:} Positive floating point number
+
+	% CGAL_facetAngle
+	\item {\it Parameter name:} {\tt CGAL\_facetAngle} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:me_facetAngle}
 	
-	\index[prmindex]{me\_facetAngle}
+	\index[prmindex]{CGAL\_facetAngle}
 	\index[prmindexfull]{Mesh!CGAL!facet angle}
 	
 	{\it Default:} 30
 	
-	{\it Description:} [Standard] Surface facet shape, i.e. lower bound for the surface facets angle in degrees.
+	{\it Description:} Surface facet shape quality as lower bound for the surface facets angle in degrees.
 	
-	{\it Possible values:} Positive floating point number 
+	{\it Possible values:} Positive floating point number
 	
-	% me_facetSize
-	\item {\it Parameter name:} {\tt me\_facetSize}
-	\phantomsection
-	\label{parameters:me_facetSize}
-	
-	\index[prmindex]{me\_facetSize}
-	\index[prmindexfull]{Mesh!CGAL!facet size}
-	
-	{\it Default:} [The local unit cell size]
-	
-	{\it Description:} [Standard] Surface facet size, i.e. upper bound for the radii of surface Delaunay balls. Scales with unit cell size.
-	
-	{\it Possible values:} Positive floating point number 
-	
-	% me_facetDistance
-	\item {\it Parameter name:} {\tt me\_facetDistance}
-	\phantomsection
-	\label{parameters:me_facetDistance}
-	
-	\index[prmindex]{me\_facetDistance}
-	\index[prmindexfull]{Mesh!CGAL!facet distance}
-	
-	{\it Default:} Should be provided
-	
-	{\it Description:} [Standard] Surface approximation error, i.e. upper bound for the distance between the circumcenter of a surface facet and the center of the surface Delaunay ball of this facet. Scales with the unit cell size.
-	
-	{\it Possible values:} Positive floating point number 
-	
-	% me_cellRadiusEdgeRatio
-	\item {\it Parameter name:} {\tt me\_cellRadiusEdgeRatio}
+	% CGAL_cellRadiusEdgeRatio
+	\item {\it Parameter name:} {\tt CGAL\_cellRadiusEdgeRatio} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:me_cellRadiusEdgeRatio}
 	
-	\index[prmindex]{me\_cellRadiusEdgeRatio}
+	\index[prmindex]{CGAL\_cellRadiusEdgeRatio}
 	\index[prmindexfull]{Mesh!CGAL!cell radius edge ratio}
 	
 	{\it Default:} 3.0
 	
-	{\it Description:} [Standard] Tetrahedron shape quality measure, i.e. upper bound for the ratio between the circumradius of a mesh tetrahedron and its shortest edge. Only active if {\tt  me\_volumeMesh} is set to TRUE.
+	{\it Description:} Tetrahedron shape quality measure as an upper bound for the ratio between the circumradius of a mesh tetrahedron and its shortest edge. Only active if {\tt  CGAL\_volumeMesh} is set to TRUE.
 	
-	{\it Possible values:} Positive floating point number larger than 2
+	{\it Possible values:} Floating point number larger than 2
 	
-	% me_cellSize
-	\item {\it Parameter name:} {\tt me\_cellSize}
+	% CGAL_facetSize
+	\item {\it Parameter name:} {\tt CGAL\_facetSize} \hfill [Advanced]
 	\phantomsection
-	\label{parameters:me_cellSize}
+	\label{parameters:me_facetSize}
 	
-	\index[prmindex]{me\_cellSize}
-	\index[prmindexfull]{Mesh!CGAL!cell size}
+	\index[prmindex]{CGAL\_facetSize}
+	\index[prmindexfull]{Mesh!CGAL!facet size}
 	
-	{\it Default:} [The local wall size]
+	{\it Default:} {\tt me\_elementSize}
 	
-	{\it Description:} [Standard] Tetrahedra size, i.e. upper bound on the circumradii of the mesh tetrahedra. Only active if {\tt  me\_volumeMesh} is set to TRUE. Scales with wall size and overrides {\tt me\_facetSize} if {\tt me\_volumeMesh} if set to TRUE.
-		
-	{\it Possible values:} Positive integer number
+	{\it Description:} Surface facet size as an upper bound for the radii of surface Delaunay balls. Scales with the local wall or pore size depending on the side discretized.
 	
-	% me_poissonOffset
-	\item {\it Parameter name:} {\tt me\_poissonOffset}
+	{\it Possible values:} Positive floating point number
+	
+	% CGAL_edgeSize
+	\item {\it Parameter name:} {\tt CGAL\_edgeSize} \hfill [Advanced]
 	\phantomsection
-	\label{parameters:me_poissonOffset}
+	\label{parameters:me_edgeSize}
 	
-	\index[prmindex]{me\_poissonOffset}
-	\index[prmindexfull]{Mesh!CGAL!poisson offset}
+	\index[prmindex]{CGAL\_edgeSize}
+	\index[prmindexfull]{Mesh!CGAL!edgeSize}
 	
-	{\it Default:} 0.5
+	{\it Default:} {\tt me\_elementSize}
+
+	{\it Description:} Upper protected edge length bound. Scales with the local wall or pore size depending on the side discretized.
 	
-	{\it Description:} [Advanced] Poisson reconstruction offset. Scales with largest unit cell size in the design. Only active if {\tt me\_preserveEdges} is set to TRUE.
+	{\it Possible values:} Positive floating point number 
+
+	% CGAL_minEdgeSize
+	\item {\it Parameter name:} {\tt CGAL\_minEdgeSize} \hfill [Advanced]
+	\phantomsection
+	\label{parameters:me_minEdgeSize}
 	
-	{\it Possible values:} Positive floating point number larger or equal than 0.1
+	\index[prmindex]{CGAL\_minEdgeSize}
+	\index[prmindexfull]{Mesh!CGAL!minEdgeSize}
+	
+	{\it Default:} 0
+	
+	{\it Description:} Lower edge size bound. If set to 0 the option is disabled. Use with caution!
+	
+	{\it Possible values:} Positive floating point number 
+
+%	% CGAL_poissonOffset
+%	\item {\it Parameter name:} {\tt CGAL\_poissonOffset} \hfill [Advanced]
+%	\phantomsection
+%	\label{parameters:me_poissonOffset}
+%	
+%	\index[prmindex]{CGAL\_poissonOffset}
+%	\index[prmindexfull]{Mesh!CGAL!poisson offset}
+%	
+%	{\it Default:} 0.5
+%	
+%	{\it Description:} Poisson reconstruction offset. Scales with largest unit cell size in the design. Only active if {\tt CGAL\_preserveEdges} is set to TRUE.
+%	
+%	{\it Possible values:} Floating point number larger or equal than 0.1
 \end{itemize}
 
 % MMG parameters
 \subsubsection{Mmg specific parameters} \label{parameters:mmg}
-\begin{itemize}
-	% me_hvol
-	\item {\it Parameter name:} {\tt me\_hvol}
-	\phantomsection
-	\label{parameters:me_hvol}
-	
-	\index[prmindex]{me\_hvol}
-	\index[prmindexfull]{Mesh!MMG!hvol}
-	
-	{\it Default:} 1.5
-	
-	{\it Description:} [Standard] Maximum volume constraint of the intermediate TetGen mesh. Scales with the the smallest unit cell size in the design.
-	
-	{\it Possible values:} Positive floating point number
-	
-	% me_hinitial
-	\item {\it Parameter name:} {\tt me\_hinitial}
-	\phantomsection
-	\label{parameters:me_hinitial}
-	
-	\index[prmindex]{me\_hinitial}
-	\index[prmindexfull]{Mesh!MMG!hinitial}
-	
-	{\it Default:} 0.36
-	
-	{\it Description:} [Standard] Mesh size of the mesh used to compute the level-set. Scales with the smallest feature size.
-	
-	{\it Possible values:} Positive floating point number
-	
-	% me_hmin
-	\item {\it Parameter name:} {\tt me\_hmin}
-	\phantomsection
-	\label{parameters:me_hmin}
-	
-	\index[prmindex]{me\_hmin}
-	\index[prmindexfull]{Mesh!MMG!hmin}
-	
-	{\it Default:} [Inactive]
-	
-	{\it Description:} [Standard] Minimum edge size. Scales with the smallest feature size in the design.
-	
-	{\it Possible values:} Non-negative floating point number
-	
-	% me_hmax
-	\item {\it Parameter name:} {\tt me\_hmax}
-	\phantomsection
-	\label{parameters:me_hmax}
-	
-	\index[prmindex]{me\_hmax}
-	\index[prmindexfull]{Mesh!MMG!hmax}
-	
-	{\it Default:} [Inactive]
-	
-	{\it Description:} [Advanced] Maximum edge size. Scales with the largest feature size in the design.
-	
-	{\it Possible values:} Non-negative floating point number
-	
-	% me_hausd
-	\item {\it Parameter name:} {\tt me\_hausd}
+\begin{itemize}[itemsep=0.8em, parsep=0.3em]
+	% MMG_hausd
+	\item {\it Parameter name:} {\tt MMG\_hausd} \hfill [Standard]
 	\phantomsection
 	\label{parameters:me_hausd}
 	
-	\index[prmindex]{me\_hausd}
+	\index[prmindex]{MMG\_hausd}
 	\index[prmindexfull]{Mesh!MMG!hausd}
 	
-	{\it Default:} Should be provided
+	{\it Default:} 0.3 $\times$ [mean unit cell size]
 	
-	{\it Description:} [Advanced] Maximal Hausdorff distance for the boundaries approximation. Scales with the mean feature size.
+	{\it Description:} Surface approximation error as a maximal Hausdorff distance. Scales with the mean unit cell size.
 	
 	{\it Possible values:} Positive floating point number
 	
-	% me_hgrad
-	\item {\it Parameter name:} {\tt me\_hgrad}
+	% MMG_hgrad
+	\item {\it Parameter name:} {\tt MMG\_hgrad} \hfill [Advanced]
 	\phantomsection
 	\label{parameters:me_hgrad}
 	
-	\index[prmindex]{me\_hgrad}
+	\index[prmindex]{MMG\_hgrad}
 	\index[prmindexfull]{Mesh!MMG!hgrad}
 	
 	{\it Default:} 1.3
 	
-	{\it Description:} [Advanced] Gradation value. Only active if {\tt  me\_volumeMesh} is set to TRUE.
+	{\it Description:} Gradation value. Only active if {\tt MMG\_volumeMesh} is set to TRUE.
+	
+	{\it Possible values:} Floating point number larger than 1
+	
+	% MMG_hinitial
+	\item {\it Parameter name:} {\tt MMG\_hinitial} \hfill [Advanced]
+	\phantomsection
+	\label{parameters:me_hinitial}
+	
+	\index[prmindex]{MMG\_hinitial}
+	\index[prmindexfull]{Mesh!MMG!hinitial}
+	
+	{\it Default:} 0.36 $\times$ [smallest local feature size]
+	
+	{\it Description:} Size of mesh used to compute the level-set. Scales with the smallest local feature size.
 	
 	{\it Possible values:} Positive floating point number
 	
+	%#MMG_exportLS: FALSE #Generate level-set sol file and corresponding base mesh without discretizing the level-set (MMG option)
 \end{itemize}
+
+% Other settings
+%STLFormat: binary # ASCII or binary
+%verbosity: -1
