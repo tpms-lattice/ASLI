@@ -463,7 +463,7 @@ double Infill::internal::level2poreSize(double t, const double &scaling, const s
 		else if (t > 3.01) {t = 3.01;}
 
 		a = 0.8432; b = -0.1902; c = 0.0003; d = 0.0016; e = -0.0002; f = -0.0010;
-		
+
 	} else if (type == "sheet_primitive") {
 		if (t < 0) {t = 0;}
 		else if (t > 3.01) {t = 3.01;}

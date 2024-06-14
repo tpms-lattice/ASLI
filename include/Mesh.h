@@ -52,17 +52,17 @@ struct meshSettings {
 	double verbosity                = -1;           // Value between -1 and 6
 	
 	double elementSize;
-	double threshold                = 0;            // as a fraction of the local unit cell size
+	double threshold                = 1.0/30.0;     // as a fraction of the local unit cell size
 
 	// CGAL settings
 	double CGAL_facetAngle          = 30;
 	double CGAL_facetSize;
-	double CGAL_facetDistance       = 0.1;
+	double CGAL_facetDistance       = 0.01;
 	double CGAL_cellRadiusEdgeRatio = 3.0;
 	double CGAL_relativeErrorBound  = 1e-3;
 	double CGAL_cellSize;
 	double CGAL_edgeSize;
-	double CGAL_minEdgeSize = 0;
+	double CGAL_minEdgeSize         = 0;
 	double CGAL_poissonOffset       = 0.5;
 
 	// MMG settings
@@ -76,6 +76,30 @@ struct meshSettings {
 
 /* Sizing fields */
 template <typename Domain> 
+struct TPMS_dependent_cellsize_field {
+	typedef ::FT _FT;
+	typedef Point_3 _Point_3;
+	typedef typename Domain::Index _Index;
+	
+	latticeType lt_type;
+	latticeSize lt_size;
+	latticeFeature lt_feature;
+	double threshold;
+	double parameter;
+
+	_FT operator()(const _Point_3& p, const int, const _Index&) const {
+		Point point(p.x(), p.y(), p.z());
+		double unitCellSize = Infill::sizing_function(point, lt_size, "");
+		unitCellSize *= parameter;
+
+		//if (unitCellSize > 0)
+			return unitCellSize; // Unit cell must be positive!
+		//else
+		//	throw ExceptionError("Unit cell size is less or equal to zero", nullptr);
+	}
+};
+
+template <typename Domain> 
 struct TPMS_dependent_wallsize_field {
 	typedef ::FT _FT;
 	typedef Point_3 _Point_3;
@@ -85,21 +109,56 @@ struct TPMS_dependent_wallsize_field {
 	latticeSize lt_size;
 	latticeFeature lt_feature;
 	double threshold;
-	double *parameter;
+	double parameter;
 
 	_FT operator()(const _Point_3& p, const int, const _Index&) const {
 		Point point(p.x(), p.y(), p.z());
 		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
 		double minFeature = (Infill::TPMS_function(point,lt_type,lt_size,lt_feature) <= 0) ? localSize.wallSize : localSize.poreSize;
-		minFeature *= (*parameter);
 
 		double unitCellSize = Infill::sizing_function(point, lt_size, "");
-		if (minFeature <= unitCellSize*threshold) { minFeature = unitCellSize*threshold; }
+		if (minFeature <= unitCellSize*threshold) { minFeature = unitCellSize; }
 
-		if (minFeature > 0)
-			return minFeature;
+		minFeature *= parameter;
+		//if (minFeature > 0)
+			return minFeature; // Unit cell must be positive!
+		//else
+		//	throw ExceptionError("minFeature size is less or equal to zero", nullptr);
+	}
+};
+
+template <typename Domain> 
+struct TPMS_dependent_featuresize_field {
+	typedef ::FT _FT;
+	typedef Point_3 _Point_3;
+	typedef typename Domain::Index _Index;
+	
+	latticeType lt_type;
+	latticeSize lt_size;
+	latticeFeature lt_feature;
+	double threshold;
+	double parameter;
+
+	_FT operator()(const _Point_3& p, const int, const _Index&) const {
+		Point point(p.x(), p.y(), p.z());
+		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+
+		double feature_size;
+		if (lt_type.side == "scaffold")
+			feature_size = localSize.wallSize;
+		else if (lt_type.side == "void")
+			feature_size = localSize.poreSize;
 		else
-			throw ExceptionError("minFeature size is less or equal to zero", nullptr);
+			feature_size = std::min(localSize.wallSize, localSize.wallSize);
+		
+		double unitCellSize = Infill::sizing_function(point, lt_size, "");
+		if (feature_size <= unitCellSize*threshold) { feature_size = unitCellSize; }
+		
+		feature_size *= parameter;
+		//if (feature_size > 0)
+			return feature_size; // Unit cell must be positive!
+		//else
+		//	throw ExceptionError("minFeature size is less or equal to zero", nullptr);
 	}
 };
 
@@ -113,49 +172,21 @@ struct TPMS_dependent_minfeaturesize_field {
 	latticeSize lt_size;
 	latticeFeature lt_feature;
 	double threshold;
-	double *parameter;
+	double parameter;
 
 	_FT operator()(const _Point_3& p, const int, const _Index&) const {
 		Point point(p.x(), p.y(), p.z());
 		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
 		double minFeature = std::min(localSize.wallSize, localSize.poreSize);
-		minFeature *= (*parameter);
 
 		double unitCellSize = Infill::sizing_function(point, lt_size, "");
-		if (minFeature <= unitCellSize*threshold) { minFeature = unitCellSize*threshold; }
-		
-		if (minFeature > 0)
-			return minFeature;
-		else
-			throw ExceptionError("minFeature size is less or equal to zero", nullptr);
-	}
-};
+		if (minFeature <= unitCellSize*threshold) { minFeature = unitCellSize; }
 
-template <typename Domain> 
-struct TPMS_dependent_minfeaturesize_field_ {
-	typedef ::FT _FT;
-	typedef Point_3 _Point_3;
-	typedef typename Domain::Index _Index;
-	
-	latticeType lt_type;
-	latticeSize lt_size;
-	latticeFeature lt_feature;
-	double threshold;
-	double *parameter;
-
-	_FT operator()(const _Point_3& p, const int, const _Index&) const {
-		Point point(p.x(), p.y(), p.z());
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
-		double minFeature = std::min(localSize.wallSize, localSize.poreSize);
-		minFeature *= (*parameter);
-
-		double unitCellSize = Infill::sizing_function(point, lt_size, "");
-		if (minFeature <= unitCellSize*threshold) { minFeature = unitCellSize*threshold; }
-		 
-		if (minFeature > 0)
-			return minFeature;
-		else
-			throw ExceptionError("minFeature size is less or equal to zero", nullptr);
+		minFeature *= parameter;
+		//if (minFeature > 0)
+			return minFeature; // Unit cell must be positive!
+		//else
+		//	throw ExceptionError("minFeature size is less or equal to zero", nullptr);
 	}
 };
 

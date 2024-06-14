@@ -122,13 +122,13 @@ void MeshMMG::implicit2volume(const polygonSoup &shell, const latticeType &lt_ty
 			featureSize localFeatureSize = Infill::featureSize_function(p, lt_type, lt_size, lt_feature);
 
 			double solValueMet = (isovalue > 0) ? localFeatureSize.poreSize : localFeatureSize.wallSize;
-			solValueMet *= me_settings.elementSize;
 
 			// Make non-positive element sizes (or bellow some set threshold) equal to the size
 			// of the unit cell at that location since there is no infill to capture anyway.
 			double unitCellSize = Infill::sizing_function(p, lt_size, "");
 			if (solValueMet <= unitCellSize*me_settings.threshold) {solValueMet = unitCellSize;}
-
+			solValueMet *= me_settings.elementSize;
+			
 			// Set size metric
 			if (solValueMet > 0) {
 				if ( MMG3D_Set_scalarSol(mmgMet, solValueMet, i) != 1 )
@@ -150,8 +150,7 @@ void MeshMMG::implicit2volume(const polygonSoup &shell, const latticeType &lt_ty
 	// Global size
 	double hsiz;
 	if (isUniform) {
-		Point p(0, 0, 0);
-		featureSize globalFeatureSize = Infill::featureSize_function(p, lt_type, lt_size, lt_feature);
+		featureSize globalFeatureSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 		if (lt_type.side == "scaffold") {
 			hsiz = me_settings.elementSize*globalFeatureSize.wallSize;
 		} else {
@@ -170,10 +169,6 @@ void MeshMMG::implicit2volume(const polygonSoup &shell, const latticeType &lt_ty
 
 	// Save mesh and metrics for DEBUG PURPOSES!!!
 	if (me_settings.verbosity > 5) {
-		std::string tempFile = "MMG_Step_2.mesh";
-		if ( MMG3D_saveMesh(mmgMesh, tempFile.c_str()) != 1 )
-			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_MESH, nullptr);
-
 		std::string tempFileLS = "MMG_Step_2_LS.sol";
 		if ( MMG3D_saveSol(mmgMesh, mmgLs, tempFileLS.c_str()) != 1 )
 			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SAVE_SOL, nullptr);
@@ -211,10 +206,10 @@ void MeshMMG::implicit2volume(const polygonSoup &shell, const latticeType &lt_ty
 		throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_IPARAMETER + "MMG3D_IPARAM_iso", nullptr);
 
 	if (lt_type.side == "scaffold") {
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmc, 1e-1) != 1 ) // Remove small solid parasitic components
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmc, 1e-2*lt_size.meanUnitCellSize) != 1 ) // Remove small solid parasitic components
 			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_rmc", nullptr);
 	} else if (lt_type.side == "void") {
-		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmcvoid, 1e-1) != 1 ) // Remove small void parasitic components
+		if ( MMG3D_Set_dparameter(mmgMesh, mmgLs, MMG3D_DPARAM_rmcvoid, 1e-2*lt_size.meanUnitCellSize) != 1 ) // Remove small void parasitic components
 			throw ExceptionError(MMG_ERRMSG::FAILED_TO_SET_DPARAMETER + "MMG3D_DPARAM_rmcvoid", nullptr);
 	}
 

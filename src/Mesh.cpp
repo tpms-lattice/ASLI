@@ -57,8 +57,7 @@ void Mesh::polehedral2volume(const polygonSoup &shell, const latticeType &lt_typ
 
 	// Discretize volume
 	if (lt_type.type != "hybrid" && lt_size.size > 0 && lt_feature.feature_val > 0) { // If lattice is uniform
-		Point p(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(p, lt_type, lt_size, lt_feature);
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 		double minFeature = std::min(localSize.wallSize, localSize.poreSize);
 
 		// Mesh criteria
@@ -73,20 +72,19 @@ void Mesh::polehedral2volume(const polygonSoup &shell, const latticeType &lt_typ
 		
 	} else {
 		// Sizing fields
-		TPMS_dependent_minfeaturesize_field_<F_Polyhedron_domain> cellSizeField;
+		TPMS_dependent_wallsize_field<F_Polyhedron_domain> cellSizeField;
 		cellSizeField.lt_type = lt_type;
 		cellSizeField.lt_size = lt_size;
 		cellSizeField.lt_feature = lt_feature;
 		cellSizeField.threshold = me_settings.threshold;
-		cellSizeField.parameter = &cellSize;
+		cellSizeField.parameter = cellSize;
 
-		TPMS_dependent_minfeaturesize_field_<F_Polyhedron_domain> facetDistanceField;
-		FT scaledFacetDistance = facetDistance * cellSize;
+		TPMS_dependent_cellsize_field<F_Polyhedron_domain> facetDistanceField;
 		facetDistanceField.lt_type = lt_type;
 		facetDistanceField.lt_size = lt_size;
 		facetDistanceField.lt_feature = lt_feature;
 		facetDistanceField.threshold = me_settings.threshold;
-		facetDistanceField.parameter = &scaledFacetDistance;
+		facetDistanceField.parameter = facetDistance;
 
 		// Mesh criteria
 		F_Mesh_criteria criteria(CGAL::parameters::edge_size = cellSizeField,

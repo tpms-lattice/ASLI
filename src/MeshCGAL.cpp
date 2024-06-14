@@ -49,10 +49,10 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	FT me_edgeSize = me_settings.CGAL_edgeSize;
 	FT me_minEdgeSize = me_settings.CGAL_minEdgeSize;
 
-	FT me_cellSize = me_settings.elementSize;   
+	FT me_cellSize = me_settings.elementSize;
 	FT me_cellRadiusEdgeRatio = me_settings.CGAL_cellRadiusEdgeRatio;
 
-	const bool isUniform = (lt_type.type != "hybrid" && lt_size.size != 0 && lt_feature.feature_val != 0 
+	const bool isUniform = (lt_type.type != "hybrid" && lt_size.size != 0 && lt_feature.feature_val != 0
 		&& (lt_type.side == "scaffold" || lt_type.side == "void" ));
 	std::filesystem::path outputPath = me_settings.output;
 
@@ -84,7 +84,7 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 
 	// Implicit domain
 	auto myImplicitFunction = [lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter](const Point_3 &p) 
-		{ return internal::infill(p, lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter); }; // To be able to pass funciton on as a static member
+		{ return internal::infill(p, lt_type, lt_size, lt_feature, BBoxSize, BBoxCenter); };
 	Implicit_domain my_implicit_domain = Implicit_domain::create_implicit_mesh_domain(
 		myImplicitFunction,	boundingBox, CGAL::parameters::relative_error_bound(relativeErrorBound));
 
@@ -138,15 +138,16 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	}
 
 	// Meshing criteria
-	double feature_size;
-	TPMS_dependent_minfeaturesize_field<H_domain> facetDistanceField;
-	TPMS_dependent_minfeaturesize_field<H_domain> facetSizeField;
-	TPMS_dependent_minfeaturesize_field<H_domain> edgeSizeField;
-	TPMS_dependent_minfeaturesize_field<H_domain> cellSizeField;
+	double unitCellSize, feature_size;
+	TPMS_dependent_cellsize_field<H_domain> facetDistanceField;
+	TPMS_dependent_featuresize_field<H_domain> facetSizeField;
+	TPMS_dependent_featuresize_field<H_domain> edgeSizeField;
+	TPMS_dependent_featuresize_field<H_domain> cellSizeField;
 	
 	if (isUniform) {
-		Point point(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+		unitCellSize = Infill::sizing_function(Point(0, 0, 0), lt_size, "");
+
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 		if (lt_type.side == "scaffold")
 			feature_size = localSize.wallSize;
 		else if (lt_type.side == "void")
@@ -154,6 +155,8 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 		else
 			feature_size = std::min(localSize.wallSize, localSize.wallSize);
 		
+		if (feature_size <= unitCellSize*me_settings.threshold) { feature_size = unitCellSize*me_settings.threshold; }
+
 		if ( feature_size <= 0 )
 			throw ExceptionError("Feature size is less or equal to zero", nullptr);
 
@@ -163,28 +166,28 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 		facetDistanceField.lt_size = lt_size;
 		facetDistanceField.lt_feature = lt_feature;
 		facetDistanceField.threshold = me_settings.threshold;
-		facetDistanceField.parameter = &me_facetDistance;
+		facetDistanceField.parameter = me_facetDistance;
 
 		// Sizing field for feature dependent facet size
 		facetSizeField.lt_type = lt_type;
 		facetSizeField.lt_size = lt_size;
 		facetSizeField.lt_feature = lt_feature;
 		facetSizeField.threshold = me_settings.threshold;
-		facetSizeField.parameter = &me_facetSize;
+		facetSizeField.parameter = me_facetSize;
 
 		// Sizing field for feature dependent edge size
 		edgeSizeField.lt_type = lt_type;
 		edgeSizeField.lt_size = lt_size;
 		edgeSizeField.lt_feature = lt_feature;
 		edgeSizeField.threshold = me_settings.threshold;
-		edgeSizeField.parameter = &me_edgeSize;
+		edgeSizeField.parameter = me_edgeSize;
 
 		// Sizing field for feature dependent mesh size
 		cellSizeField.lt_type = lt_type;
 		cellSizeField.lt_size = lt_size;
 		cellSizeField.lt_feature = lt_feature;
 		cellSizeField.threshold = me_settings.threshold;
-		cellSizeField.parameter = &me_cellSize;
+		cellSizeField.parameter = me_cellSize;
 	}
 
 	// 
@@ -198,15 +201,15 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	if (me_settings.isVolumeMesh) {
 		if (isUniform) {
 			H_Edge_criteria hedge_criteria(me_edgeSize*feature_size, me_minEdgeSize*feature_size); // Edge: size, min size
-			H_Facet_criteria hfacet_criteria(me_facetAngle, 0, me_facetDistance*feature_size); // Facet: angle, size, approximation
-			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, me_cellSize*feature_size); // Cell: radius-edge ratio, size
+			H_Facet_criteria hfacet_criteria(me_facetAngle, 0, me_facetDistance*unitCellSize); // Facet: angle, size, approximation
+			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, me_cellSize*feature_size); // Cell: radius-edge ratio, size, min size
 			H_Mesh_criteria criteria(hedge_criteria, hfacet_criteria, hcell_criteria);
 
 			c3t3 = CGAL::make_mesh_3<H_C3t3>(domain, criteria);
 		} else {
 			H_Edge_criteria hedge_criteria(edgeSizeField, me_minEdgeSize); // Edge: size, min size
 			H_Facet_criteria hfacet_criteria(me_facetAngle, 0, facetDistanceField); // Facet: angle, size, approximation
-			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, cellSizeField); // Cell: radius-edge ratio, size
+			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, cellSizeField); // Cell: radius-edge ratio, size, min size
 			H_Mesh_criteria criteria(hedge_criteria, hfacet_criteria, hcell_criteria);
 
 			c3t3 = CGAL::make_mesh_3<H_C3t3>(domain, criteria);
@@ -214,15 +217,15 @@ void MeshCGAL::implicit2volume(const polygonSoup &shell, const latticeType &lt_t
 	} else { // If surface mesh
 		if (isUniform) {
 			H_Edge_criteria hedge_criteria(me_edgeSize*feature_size, me_minEdgeSize*feature_size); // Edge: size, min size
-			H_Facet_criteria hfacet_criteria(me_facetAngle, me_facetSize*feature_size, me_facetDistance*feature_size); // Facet: angle, size, approximation
-			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio,0); // Cell: radius-edge ratio, size
+			H_Facet_criteria hfacet_criteria(me_facetAngle, me_facetSize*feature_size, me_facetDistance*unitCellSize); // Facet: angle, size, approximation
+			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, 0); // Cell: radius-edge ratio, size, min size
 			H_Mesh_criteria criteria(hedge_criteria, hfacet_criteria, hcell_criteria);
 
 			c3t3 = CGAL::make_mesh_3<H_C3t3>(domain, criteria, CGAL::parameters::no_perturb().no_exude().no_lloyd().no_odt());
 		} else {
 			H_Edge_criteria hedge_criteria(edgeSizeField, me_minEdgeSize); // Edge: size, min size
 			H_Facet_criteria hfacet_criteria(me_facetAngle, facetSizeField, facetDistanceField); // Facet: angle, size, approximation
-			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio,0); // Cell: radius-edge ratio, size
+			H_Cell_criteria hcell_criteria(me_cellRadiusEdgeRatio, 0); // Cell: radius-edge ratio, size, min size
 			H_Mesh_criteria criteria(hedge_criteria, hfacet_criteria, hcell_criteria);
 
 			c3t3 = CGAL::make_mesh_3<H_C3t3>(domain, criteria, CGAL::parameters::no_perturb().no_exude().no_lloyd().no_odt());
@@ -343,16 +346,16 @@ void MeshCGAL::implicit2volume_old(const polygonSoup &shell, const latticeType &
 
 	// Create mesh domain
 	auto myImplicitFunction = [poissonSurfaceReconstruction, lt_type, lt_size, lt_feature](const Point_3 &p) 
-		{ return internal::signedDistance_old(p, lt_type, lt_size, lt_feature, poissonSurfaceReconstruction); }; // To be able to pass funciton on as a static member
+		{ return internal::signedDistance_old(p, lt_type, lt_size, lt_feature, poissonSurfaceReconstruction); };
 	F_Implicit_domain domain = F_Implicit_domain::create_implicit_mesh_domain(myImplicitFunction,
 		boundingBox, CGAL::parameters::relative_error_bound(me_settings.CGAL_relativeErrorBound));
 
 	// Define meshing criteria
 	double feature_size;
-	TPMS_dependent_minfeaturesize_field<F_Implicit_domain> facetDistanceField;
-	TPMS_dependent_minfeaturesize_field<F_Implicit_domain> facetSizeField;
-	TPMS_dependent_minfeaturesize_field<F_Implicit_domain> edgeSizeField;
-	TPMS_dependent_minfeaturesize_field<F_Implicit_domain> cellSizeField;
+	TPMS_dependent_cellsize_field<F_Implicit_domain> facetDistanceField;
+	TPMS_dependent_featuresize_field<F_Implicit_domain> facetSizeField;
+	TPMS_dependent_featuresize_field<F_Implicit_domain> edgeSizeField;
+	TPMS_dependent_featuresize_field<F_Implicit_domain> cellSizeField;
 
 	FT scaledFacetDistance = me_facetDistance * me_cellSize;
 	if ( lt_type.type == "hybrid" || lt_size.size == 0 || lt_feature.feature_val == 0) {
@@ -361,32 +364,31 @@ void MeshCGAL::implicit2volume_old(const polygonSoup &shell, const latticeType &
 		facetDistanceField.lt_size = lt_size;
 		facetDistanceField.lt_feature = lt_feature;
 		facetDistanceField.threshold = me_settings.threshold;
-		facetDistanceField.parameter = &scaledFacetDistance;
+		facetDistanceField.parameter = scaledFacetDistance;
 
 		// Sizing field for feature dependent facet size
 		facetSizeField.lt_type = lt_type;
 		facetSizeField.lt_size = lt_size;
 		facetSizeField.lt_feature = lt_feature;
 		facetSizeField.threshold = me_settings.threshold;
-		facetSizeField.parameter = &me_facetSize;
+		facetSizeField.parameter = me_facetSize;
 
 		// Sizing field for feature dependent edge size
 		edgeSizeField.lt_type = lt_type;
 		edgeSizeField.lt_size = lt_size;
 		edgeSizeField.lt_feature = lt_feature;
 		edgeSizeField.threshold = me_settings.threshold;
-		edgeSizeField.parameter = &me_edgeSize;
+		edgeSizeField.parameter = me_edgeSize;
 
 		// Sizing field for feature dependent mesh size
 		cellSizeField.lt_type = lt_type;
 		cellSizeField.lt_size = lt_size;
 		cellSizeField.lt_feature = lt_feature;
 		cellSizeField.threshold = me_settings.threshold;
-		cellSizeField.parameter = &me_cellSize;
+		cellSizeField.parameter = me_cellSize;
 
 	} else {
-		Point point(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 		if ( lt_type.side == "void" )
 			feature_size = localSize.poreSize;
 		else
@@ -643,10 +645,10 @@ void MeshCGAL::polehedral2volume (const F_Polyhedron &polygonSurface,
 
 	// Define meshing criteria
 	double feature_size;
-	TPMS_dependent_minfeaturesize_field<F_Polyhedron_domain> facetDistanceField;
-	TPMS_dependent_minfeaturesize_field<F_Polyhedron_domain> facetSizeField;
-	TPMS_dependent_minfeaturesize_field<F_Polyhedron_domain> edgeSizeField;
-	TPMS_dependent_minfeaturesize_field<F_Polyhedron_domain> cellSizeField;
+	TPMS_dependent_cellsize_field<F_Polyhedron_domain> facetDistanceField;
+	TPMS_dependent_featuresize_field<F_Polyhedron_domain> facetSizeField;
+	TPMS_dependent_featuresize_field<F_Polyhedron_domain> edgeSizeField;
+	TPMS_dependent_featuresize_field<F_Polyhedron_domain> cellSizeField;
 
 	FT scaledFacetDistance = me_facetDistance * me_cellSize;
 	if ( lt_type.type == "hybrid" || lt_size.size == 0 || lt_feature.feature_val == 0) {
@@ -655,32 +657,31 @@ void MeshCGAL::polehedral2volume (const F_Polyhedron &polygonSurface,
 		facetDistanceField.lt_size = lt_size;
 		facetDistanceField.lt_feature = lt_feature;
 		facetDistanceField.threshold = me_settings.threshold;
-		facetDistanceField.parameter = &scaledFacetDistance;
+		facetDistanceField.parameter = scaledFacetDistance;
 
 		// Sizing field for feature dependent facet size
 		facetSizeField.lt_type = lt_type;
 		facetSizeField.lt_size = lt_size;
 		facetSizeField.lt_feature = lt_feature;
 		facetSizeField.threshold = me_settings.threshold;
-		facetSizeField.parameter = &me_facetSize;
+		facetSizeField.parameter = me_facetSize;
 
 		// Sizing field for feature dependent edge size
 		edgeSizeField.lt_type = lt_type;
 		edgeSizeField.lt_size = lt_size;
 		edgeSizeField.lt_feature = lt_feature;
 		edgeSizeField.threshold = me_settings.threshold;
-		edgeSizeField.parameter = &me_edgeSize;
+		edgeSizeField.parameter = me_edgeSize;
 
 		// Sizing field for feature dependent mesh size
 		cellSizeField.lt_type = lt_type;
 		cellSizeField.lt_size = lt_size;
 		cellSizeField.lt_feature = lt_feature;
 		cellSizeField.threshold = me_settings.threshold;
-		cellSizeField.parameter = &me_cellSize;
+		cellSizeField.parameter = me_cellSize;
 
 	} else {
-		Point point(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 		if ( lt_type.side == "scaffold" )
 			feature_size = localSize.wallSize;
 		else if ( lt_type.side == "void" )
@@ -704,8 +705,7 @@ void MeshCGAL::polehedral2volume (const F_Polyhedron &polygonSurface,
 		                                 //CGAL::parameters::manifold()); // Causes assertion violation errors!
 		
 	} else {
-		Point point(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 
 		// Mesh criteria
 		F_Mesh_criteria criteria(CGAL::parameters::edge_size = me_edgeSize*feature_size,
@@ -765,8 +765,7 @@ void MeshCGAL::surfaceRemesh(const polygonSoup &shell, const latticeType &lt_typ
 
 	F_C3t3 c3t3;
 	if (lt_type.type != "hybrid" && lt_size.minUnitCellSize == lt_size.maxUnitCellSize &&  lt_feature.feature_val > 0) { // If lattice is uniform
-		Point point(0, 0, 0);
-		featureSize localSize = Infill::featureSize_function(point, lt_type, lt_size, lt_feature);
+		featureSize localSize = Infill::featureSize_function(Point(0, 0, 0), lt_type, lt_size, lt_feature);
 
 		// Mesh criteria
 		F_Mesh_criteria criteria(CGAL::parameters::edge_size = me_facetSize * localSize.wallSize,
@@ -782,27 +781,27 @@ void MeshCGAL::surfaceRemesh(const polygonSoup &shell, const latticeType &lt_typ
 		                                         CGAL::parameters::no_odt(),
 		                                         CGAL::parameters::manifold());
 	} else {
-	// Define sizing field
-	TPMS_dependent_wallsize_field<F_Polyhedron_domain> facetSize;
-	facetSize.lt_type = lt_type;
-	facetSize.lt_size = lt_size;
-	facetSize.lt_feature = lt_feature;
-	facetSize.threshold = me_settings.threshold;
-	facetSize.parameter = &me_facetSize;
+		// Define sizing field
+		TPMS_dependent_wallsize_field<F_Polyhedron_domain> facetSize;
+		facetSize.lt_type = lt_type;
+		facetSize.lt_size = lt_size;
+		facetSize.lt_feature = lt_feature;
+		facetSize.threshold = me_settings.threshold;
+		facetSize.parameter = me_facetSize;
 
-	// Mesh criteria
-	F_Mesh_criteria criteria(CGAL::parameters::edge_size = facetSize,
-	                         CGAL::parameters::facet_angle = me_facetAngle,
-	                         CGAL::parameters::facet_size = facetSize,
-	                         CGAL::parameters::facet_distance = me_facet_distance);
+		// Mesh criteria
+		F_Mesh_criteria criteria(CGAL::parameters::edge_size = facetSize,
+		                         CGAL::parameters::facet_angle = me_facetAngle,
+		                         CGAL::parameters::facet_size = facetSize,
+		                         CGAL::parameters::facet_distance = me_facet_distance);
 
 	// Mesh generation
-	c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria,
-	                                 CGAL::parameters::no_exude(),
-	                                 CGAL::parameters::no_perturb(),
-	                                 CGAL::parameters::no_lloyd(),
-	                                 CGAL::parameters::no_odt(),
-	                                 CGAL::parameters::manifold());
+		c3t3 = CGAL::make_mesh_3<F_C3t3>(domain, criteria,
+		                                 CGAL::parameters::no_exude(),
+		                                 CGAL::parameters::no_perturb(),
+		                                 CGAL::parameters::no_lloyd(),
+		                                 CGAL::parameters::no_odt(),
+		                                 CGAL::parameters::manifold());
 	}
 
 	// Extract surface triangulation

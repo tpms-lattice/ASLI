@@ -123,9 +123,9 @@ void ASLI::SetUp(std::string configFile) {
 	auto STLFormat = getOptional<std::string>(config, "STLFormat", false, accessed_keys);
 	if (STLFormat.has_value() && *STLFormat == "ASCII") me_settings.STLFormat = *STLFormat;
 
-	auto threshold = getOptional<double>(config, "threshold", false, accessed_keys);
+	auto threshold = getOptional<double>(config, "me_threshold", false, accessed_keys);
 	if (threshold.has_value()) me_settings.threshold = *threshold;
-	if (me_settings.threshold < 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_THRESHOLD);
+	if (me_settings.threshold <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_THRESHOLD);
 
 	// CGAL specific settings
 	if (me_settings.mesher == "CGAL" || me_settings.mesher == "CGAL_OLD") {
@@ -206,7 +206,6 @@ void ASLI::SetUp(std::string configFile) {
 
 			// Set MMG's workflow CGAL settings
 			me_settings.CGAL_cellSize = me_settings.MMG_hinitial;
-			me_settings.CGAL_facetDistance = 0.1; // Scales with local mesh size
 			auto CGAL_facetDistance = getOptional<double>(config, "MMG_facetDistance", false, accessed_keys);
 			if (CGAL_facetDistance.has_value()) me_settings.CGAL_facetDistance = *CGAL_facetDistance;
 			if (me_settings.CGAL_facetDistance <= 0) throw std::runtime_error(ASLI_ERRMSG::INVALID_FACET_DISTANCE);

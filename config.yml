@@ -52,7 +52,6 @@ lt_feature_val: 0.5 # Unit cell feature value. To assign variable feature values
 me_mesher: CGAL # Mesh library: CGAL or MMG.
 me_nThreads: 1 # Number of threads. [optional, default=1, parallel mode only available with CGAL]
 me_elementSize: 0.5 # Size of mesh elements. In CGAL an upper bound on the circumradii of the mesh tetrahedra and radii of surface Delaunay balls, in MMG the edge size. Scales with the local wall or pore size depending on the side discretized.
-#me_edgeProtectionAngle: 70 # Edge protection angle in degrees. To disable set to 0. [optional, default=70]
 #me_volumeMesh: FALSE # Set to TRUE to obtain both, a volume mesh and a surface triangulation. Set to FALSE to obtain only a surface triangulation. [optional, default=FALSE]
 
 # Mesh settings (CGAL)
@@ -60,7 +59,6 @@ CGAL_facetDistance: 0.01 # Surface approximation error as an upper bound for the
 #CGAL_relativeErrorBound: 1e-3 # Relative error bound used to compute intersection points between the implicit surface and query segments. The bisection is stopped when the length of the intersected segment is less than the product of relative_error_bound by the diagonal of the mean unit cell size [optional, default=1e-3]
 #CGAL_facetAngle: 30 # Facet shape quality measure as a lower bound for the surface facets angle in degrees. [optional, default=30]
 #CGAL_cellRadiusEdgeRatio: 3.0 # Tetrahedron shape quality measure as an upper bound for the ratio between the circumradius of the tetrahedron and its shortest edge. [optional, default=3.0, only active if volumeMesh=TRUE]
-#CGAL_poissonOffset: 0.5 # Poisson reconstruction offset. Scales with the largest unit cell size in the design. [optional, default=0.5]
 
 # Mesh settings (MMG)
 MMG_hausd: 0.3 # Surface approximation error as a maximal Hausdorff distance. Scales with the mean unit cell [optional, default=0.3]
