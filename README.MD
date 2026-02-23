@@ -163,13 +163,11 @@ To run ASLI from the command line you only need to type ```./ASLI config.yml``` 
 ## Issues and questions ##
 If you find a bug please post an [issue](https://github.com/tpms-lattice/ASLI/issues). If you have questions feel free to start a [discussion](https://github.com/tpms-lattice/ASLI/discussions).
 
-## Contact ##
-Contact: asli (at) kuleuven . be
-
 ## Reference ##
 Perez-Boerema, F., M. Barzegari and L. Geris (2022). A flexible and easy-to-use open-source tool for building functionally graded scaffolds, *Virtual and Physical Prototyping*, 17:3, 682-699, DOI: [10.1080/17452759.2022.2048956](https://doi.org/10.1080/17452759.2022.2048956).
 
 ## License ##
 ASLI is licensed under the terms of the [GNU Affero General Public License ](https://www.gnu.org/licenses).
+
 
 Copyright © KU Leuven 2019-2024
